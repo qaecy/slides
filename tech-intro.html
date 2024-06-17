@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY tech intro</title>
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<img src="dist/img/logo.svg" alt="">
+					<p>your knowledge, accessible</p>
+				</section>
+				
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Tech challenges</li>
+						<li>The data-centric</li>
+						<li>What is a Knowledge Graph</li>
+						<li>The Open World Assumption</li>
+						<li>Making knowledge accessible</li>
+					</ul>
+				</section>
+
+				<section>
+					
+					<section>
+						<h2>Tech challenges</h2>
+						<p>Data processed by many actors, 
+							one change = unforseen consequences,
+							mostly unstructured data + industry-specific formats
+						</p>
+					</section>
+
+					<section>
+						<h2>Lots of monolith applications</h2>
+					</section>
+
+					<section>
+						<img src="./dist/img/monolith-vs-data-centric/apps-as-views.svg" alt="">
+					</section>
+
+					<section>
+						<img src="./dist/img/monolith-vs-data-centric/apps-as-views2.svg" alt="">
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>RDF vs. tables</h2>
+					</section>
+	
+					<section>
+						<p>Most of us are used to storing information in spreadsheets ⊞ <span class="note">(or relational databases ⛁ (RDBs) for the more advanced)</span>. 
+							<br>In RDF we use a graph structure 🕸️</p>
+					</section>
+	
+					<section>
+						<img data-src="./dist/img/logos/W3C.svg"></img>
+						<h2>RDF: Resource Description Framework</h2>
+					</section>
+	
+					<section data-background-image="./dist/img/triple/SPO.svg" data-background-size="120vw">
+					</section>
+					<section data-background-image="./dist/img/triple/SPO2.svg" data-background-size="120vw">
+						<aside class="notes">
+							<p>(Alex) In the context of a building, if we want to declare a relationship between a wall and a window, we can say:</p>
+							<p>Wall_002 has window Window_022</p>
+						</aside>
+					</section>
+	
+					<section>
+						<h2>But how do we get from tables to graphs?</h2>
+					</section>
+
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-01.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-02.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-03.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-04.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-05.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-06.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-07.svg">
+					</section>
+
+				</section>
+
+				<section>
+					<h2>What is a Knowledge Graph</h2>
+					<p>Explain triples + querying the graph
+					</p>
+				</section>
+
+				<section>
+					<h2>The Open World Assumption</h2>
+					<p>Means that we can support multiple truths + incomplete data from numerous sources</p>
+				</section>
+
+				<section>
+					<h2>Making knowledge accessible</h2>
+					<p>You query it with natural language, we deliver insights</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

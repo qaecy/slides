@@ -1,78 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>QAECY tech intro</title>
+    <title>QAECY tech intro</title>
 
-		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/qaecy.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div style="display: flex; flex-direction: column; gap: 0.4em;">
+            <a href="./qaecy.html">QAECY explained</a>
+            <a href="./tech-intro.html">Tech intro</a>
+            <a href="./placeholder.html">Placeholder</a>
+          </div>
+        </section>
+      </div>
+    </div>
 
-				<section>
-					<img src="dist/img/logo.svg" alt="">
-					<p>your knowledge, accessible</p>
-				</section>
-				
-				<section>
-					<h2>Agenda</h2>
-					<ul>
-						<li>Tech challenges</li>
-						<li>What is a Knowledge Graph</li>
-						<li>The Open World Assumption</li>
-						<li>Making knowledge accessible</li>
-					</ul>
-				</section>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
 
-				<section>
-					<h2>Tech challenges</h2>
-					<p>Data processed by many actors, 
-						one change = unforseen consequences,
-						mostly unstructured data + industry-specific formats
-					</p>
-				</section>
-
-				<section>
-					<h2>What is a Knowledge Graph</h2>
-					<p>Explain triples + querying the graph
-					</p>
-				</section>
-
-				<section>
-					<h2>The Open World Assumption</h2>
-					<p>Means that we can support multiple truths + incomplete data from numerous sources</p>
-				</section>
-
-				<section>
-					<h2>Making knowledge accessible</h2>
-					<p>You query it with natural language, we deliver insights</p>
-				</section>
-			</div>
-		</div>
-
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
