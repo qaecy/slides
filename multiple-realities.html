@@ -151,10 +151,21 @@ which color would you trust the door to have?
 					</section>
 
 					<section>
+						<p>Test with Gemini</p>
 						<div style="height: 100%;">
 							<video
 								data-autoplay
 								src="dist/videos/Gemini_door-color2.mov"
+							></video>
+						</div>
+					</section>
+
+					<section>
+						<p>Test with local Llama3</p>
+						<div style="height: 100%;">
+							<video
+								data-autoplay
+								src="dist/videos/Llama3_door-color2.mov"
 							></video>
 						</div>
 					</section>
@@ -190,7 +201,7 @@ which color would you trust the door to have?
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
+				scrollActivationWidth: null, // Will not work with graphs
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});

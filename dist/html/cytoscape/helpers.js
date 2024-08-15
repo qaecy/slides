@@ -28,3 +28,7 @@ export function logJSONOnDrag(cy){
     console.log(graphJSON)
     }
 }
+
+export function isMobile() {
+    return window.innerWidth <= 768;
+}

@@ -16,15 +16,14 @@
     <div id="cy"></div>
     <script type="module">
       import { style, layout } from "./style.js";
-      import { logNodePositions } from "./helpers.js";
+      import { logNodePositions, isMobile } from "./helpers.js";
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
-        zoom: 2,
         layout: {
           name: "preset",
-          padding: 200
+          padding: () => isMobile() ? 5 : 200
         },
         elements: {
           nodes: [
