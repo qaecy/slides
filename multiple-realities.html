@@ -92,6 +92,17 @@
 					</section>
 
 					<section>
+						<p>Let's test the raw information with a Large Language Model (LLM) to see if it agrees</p>
+						<pre><code data-trim class="text">
+Given the below information, 
+which color would you trust the door to have?
+
+&#60;Door&#62; hasColor "Red" .
+&#60;Door&#62; hasColor "Orange" .
+						</code></pre>
+					</section>
+
+					<section>
 						<p>Let's imagine that we had access to some provenence data about each statement</p>
 					</section>
 
@@ -102,36 +113,31 @@
 					</section>
 
 					<section>
-						<p>The "orange"-statement was made before the "red"-statement and was derived from an algorithm with a low certainty whereas the other was made by an employee of a renowned company.</p>
-					</section>
-
-					<section>
-						<p>The context might be even more valuable than the information itself when drawing conclusions!</p>
-					</section>
-
-					<section>
-						<p>With a well established context you will also be able to get better results from the LLMs!</p>
-					</section>
-
-					<section>
-						<pre><code data-trim class="text hljs" data-line-numbers="1-2|4-5|6-10|12-18">
+						<p>Let's feed the LLM with the contextual information to see if it gives us a better result</p>
+						<pre><code data-trim class="text hljs" data-line-numbers="1-5|6-14|15-23">
 Given the below information, 
 which color would you trust the door to have?
 
-<Door> hasColor "Red" .
-<Door> hasColor "Orange" .
+&#60;Door&#62; hasColor "Red" .
+&#60;Door&#62; hasColor "Orange" .
 
-<< <Door> hasColor "Orange" >> wasGeneratedBy <Algorithm_a-v2.0.1> ;
+&#60;&#60; &#60;Door&#62; hasColor "Orange" &#62;&#62; 
+	wasGeneratedBy &#60;Algorithm_a-v2.0.1&#62; ;
 	generatedAtTime "2024-01-11T12:11:28Z" .
-<Algorithm_a-v2.0.1> derivedFrom <Image-X> .
-<< <Algorithm_a-v2.0.1> derivedFrom <Image-X> >> certainty 0.4 .
+&#60;Algorithm_a-v2.0.1&#62; 
+	derivedFrom &#60;Image-X&#62; .
+&#60;&#60; &#60;Algorithm_a-v2.0.1&#62; derivedFrom &#60;Image-X&#62; &#62;&#62; 
+	certainty 0.4 .
 
-<< <Door> hasColor "Red" >> wasGeneratedBy <John> ;
+&#60;&#60; &#60;Door&#62; hasColor "Red" &#62;&#62; 
+	wasGeneratedBy &#60;John&#62; ;
 	generatedAtTime "2024-01-11T12:11:28Z" ;
 	comment "I have been on site and can confirm that the door is red." .
-<John> email "john-doe@the-company.com" ;
-	actedOnBehalfOf <TheCompany> .
-<TheCompany> wasEstablished "1908-03-1" .
+&#60;John&#62; 
+	email "john-doe@the-company.com" ;
+	actedOnBehalfOf &#60;TheCompany&#62; .
+&#60;TheCompany&#62; 
+	wasEstablished "1908-03-1" .
 						</code></pre>
 					</section>
 
@@ -139,9 +145,17 @@ which color would you trust the door to have?
 						<div style="height: 100%;">
 							<video
 								data-autoplay
-								src="dist/videos/Gemini_door-color.mov"
+								src="dist/videos/Gemini_door-color2.mov"
 							></video>
 						</div>
+					</section>
+
+					<section>
+						<p>The context might be even more valuable than the information itself when drawing conclusions!</p>
+					</section>
+
+					<section>
+						<p>The most prominent job for <img src="dist/img/logo.svg" class="inline-logo"> is to establish this context</p>
 					</section>
 
 				</section>
