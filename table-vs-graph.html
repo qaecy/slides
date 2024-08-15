@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - table vs. graph</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<img src="dist/img/logo.svg" alt="">
+					<p>your knowledge, accessible</p>
+				</section>
+				
+				<section>
+
+					<section>
+						<h2>Table vs. graph</h2>
+					</section>
+
+					<section>
+						<p>When we store data, we typically do it in tables</p>
+					</section>
+
+					<section>
+						<p>Each person or system knows how to interpret the information in these tables and how to combine the values to create meaning</p>
+					</section>
+
+					<section>
+						<p>Tables do, however have their limitations</p>
+						<ul style="font-size: 1.4rem;">
+							<li>They handle contextural information poorly</li>
+							<li>They have to be interpreted by someone who knows what the columns mean</li>
+						</ul>
+					</section>
+
+					<section>
+						<p>Contextural information is therefore better handled in graphs</p>
+					</section>
+
+					<section>
+						<p>But how to convert table data to graph data and vice versa?</p>
+					</section>
+
+					<section>
+						<p>The web follows the <b>AAA</b> principle</p>
+						<p style="font-style: italic;"><b>A</b>nyone can say <b>A</b>nything about <b>A</b>nything</p>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>From table to graph</h2>
+					</section>
+
+					<section>
+						<img data-src="./dist/img/logos/W3C.svg"></img>
+						<h2>RDF: Resource Description Framework</h2>
+					</section>
+	
+					<section data-background-image="./dist/img/triple/SPO.svg" data-background-size="120vw">
+					</section>
+					<section data-background-image="./dist/img/triple/SPO2.svg" data-background-size="120vw">
+						<aside class="notes">
+							<p>(Alex) In the context of a building, if we want to declare a relationship between a wall and a window, we can say:</p>
+							<p>Wall_002 has window Window_022</p>
+						</aside>
+					</section>
+
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-01.svg">
+					</section>
+	
+					<section>
+						<p>Each row in a table typically represents a subject.</p>
+						<img src="./dist/img/table-to-graph/RDF-en-simple-02.svg" style="transform: scale(1.5);">
+					</section>
+
+					<section>
+						<p>Each column in a table typically represents a predicate.</p>
+						<img src="./dist/img/table-to-graph/RDF-en-simple-03.svg" style="transform: scale(1.5);">
+					</section>
+
+					<section>
+						<p>Each cell in a table typically represents a object.</p>
+						<img src="./dist/img/table-to-graph/RDF-en-simple-04.svg" style="transform: scale(1.5);">
+					</section>
+	
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-05.svg">
+					</section>
+
+					<section>
+						<p>As long as the same identifiers are used, it is easy to combine multiple datasets</p>
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-06.svg">
+					</section>
+	
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-07.svg">
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>From graph to table</h2>
+					</section>
+
+					<section>
+						<p>The graph can contain the whole, but often the consumer only needs a subset</p>
+					</section>
+
+					<section>
+						<p>This subset is typically better consumed in table or JSON form</p>
+					</section>
+
+					<section>
+						<img data-src="./dist/img/logos/W3C.svg"></img>
+						<h2>SPARQL: SPARQL Protocol and RDF Query Language</h2>
+					</section>
+
+					<section>
+						<pre><code data-trim class="text">
+SELECT *
+WHERE{
+	?ID &#60;firstName&#62; ?First .
+	?ID &#60;lastName&#62; ?Last
+}
+						</code></pre>
+					</section>
+
+					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-01.svg">
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>Data becomes explorable</h2>
+					</section>
+
+					<section>
+						<p>Let's write a query on the graph version of Wikipedia.</p> 
+						<p>The request should be something so specific that no one would have intended it when initially modelling the data.</p>
+					</section>
+
+					<!-- Mads Mikkelsen -->
+				<section>
+					<p>Who co-acted in movies with Mads Mikkelsen, and how old are they today?</p>
+					<pre><code data-trim class="sparql hljs" data-line-numbers="|3-14|3-4|6|8-9|11-12|14|1">
+						SELECT DISTINCT ?coActorName ?age
+						WHERE {
+							?movie dbo:starring ?theActor . 
+							?movie dbo:starring ?otherActor . 
+
+							?theActor rdfs:label "Mads Mikkelsen"@en .
+
+							?otherActor rdfs:label ?coActorName .
+							?otherActor dbo:birthDate ?bd .
+							  
+							BIND( NOW() as ?today )
+							BIND( YEAR(?today)-YEAR(?bd) as ?age )
+						
+							FILTER(LANG(?coActorName) = "en")
+						}					
+					</code></pre>
+				</section>
+
+				<section data-background-iframe="https://bit.ly/3W2e1Pv">
+					<a href="https://bit.ly/3W2e1Pv" target="_blank">https://dbpedia.org/sparql</a>
+				</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>Learnings</h2>
+					</section>
+
+					<section>
+						<p>The data model is logically understandable from a real-world perspective rather than from a data modeling perspective</p>
+					</section>
+
+					<section>
+						<p>The graph structure is traversible and allows you to learn new things about your federated data sources</p>
+					</section>
+
+					<section>
+						<p>Your data doesn't need to be born graph data in order to be interpreted as such!</p>
+					</section>
+
+					<section>
+						<p><img src="dist/img/logo.svg" class="inline-logo"> can establish graph data from your unstructured and structured documents!</p>
+					</section>
+
+				</section>
+				
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
