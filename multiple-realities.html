@@ -109,6 +109,41 @@
 						<p>The context might be even more valuable than the information itself when drawing conclusions!</p>
 					</section>
 
+					<section>
+						<p>With a well established context you will also be able to get better results from the LLMs!</p>
+					</section>
+
+					<section>
+						<pre><code data-trim class="text hljs" data-line-numbers="1-2|4-5|6-10|12-18">
+Given the below information, 
+which color would you trust the door to have?
+
+<Door> hasColor "Red" .
+<Door> hasColor "Orange" .
+
+<< <Door> hasColor "Orange" >> wasGeneratedBy <Algorithm_a-v2.0.1> ;
+	generatedAtTime "2024-01-11T12:11:28Z" .
+<Algorithm_a-v2.0.1> derivedFrom <Image-X> .
+<< <Algorithm_a-v2.0.1> derivedFrom <Image-X> >> certainty 0.4 .
+
+<< <Door> hasColor "Red" >> wasGeneratedBy <John> ;
+	generatedAtTime "2024-01-11T12:11:28Z" ;
+	comment "I have been on site and can confirm that the door is red." .
+<John> email "john-doe@the-company.com" ;
+	actedOnBehalfOf <TheCompany> .
+<TheCompany> wasEstablished "1908-03-1" .
+						</code></pre>
+					</section>
+
+					<section>
+						<div style="height: 100%;">
+							<video
+								data-autoplay
+								src="dist/videos/Gemini_door-color.mov"
+							></video>
+						</div>
+					</section>
+
 				</section>
 				
 			</div>
