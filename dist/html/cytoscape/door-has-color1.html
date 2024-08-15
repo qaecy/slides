@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <style>
+      #cy {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { style, layout } from "./style.js";
+      import { logNodePositions } from "./helpers.js";
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        zoom: 2,
+        layout: {
+          name: "preset",
+          padding: 200
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "door",
+                label: "Door",
+              },
+              classes: "",
+              position: {
+                x: 644.7566425120773,
+                y: 513.8268417874394,
+              },
+            },
+            {
+              data: {
+                id: "red",
+                label: "Red",
+                color: "red",
+              },
+              classes: "",
+              position: {
+                x: 775.1941425120774,
+                y: 694.4802234299517,
+              },
+            },
+            {
+              data: {
+                id: "orange",
+                label: "Orange",
+                color: "orange",
+              },
+              classes: "",
+              position: {
+                x: 517.9408212560387,
+                y: 650.2957427536232,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                id: "a",
+                source: "door",
+                target: "red",
+                label: "has color",
+              },
+            },
+            {
+              data: {
+                id: "b",
+                source: "door",
+                target: "orange",
+                label: "has color",
+              },
+            },
+          ],
+        },
+      });
+
+      logNodePositions(cy);
+    </script>
+  </body>
+</html>
