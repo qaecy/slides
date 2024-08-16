@@ -16,7 +16,7 @@
     <div id="cy"></div>
     <script type="module">
       import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile } from "./helpers.js";
+      import { logNodePositions, isMobile, animateGraph } from "./helpers.js";
 
       const padding = isMobile() ? 5 : 100;
 
@@ -210,7 +210,8 @@
         },
       });
 
-      logNodePositions(cy);
+      // logNodePositions(cy);
+      animateGraph(cy);
     </script>
   </body>
 </html>

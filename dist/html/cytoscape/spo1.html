@@ -30,8 +30,6 @@
 
       const padding = isMobile() ? 5 : 200;
 
-      console.log(isMobile())
-
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
@@ -65,7 +63,7 @@
       });
 
       animateGraph(cy);
-      logNodePositions(cy);
+      // logNodePositions(cy);
     </script>
   </body>
 </html>

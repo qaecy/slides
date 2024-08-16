@@ -20,7 +20,7 @@ export const style = [
         "font-family": "Poppins",
         "font-size": "10rem",
         'text-outline-color': "black",
-        'text-outline-width': 1, // Set the outline width
+        'text-outline-width': 0.7, // Set the outline width
         color: "white",
         'curve-style': 'bezier',
         'target-arrow-shape': 'triangle',

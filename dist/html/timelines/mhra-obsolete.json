@@ -1,0 +1,27 @@
+{ 
+	"timeline":
+	{
+		"headline":"My professional journey",
+		"type":"default",
+		"startDate":"1988",
+		"text": "<p>From Architectural Engineer over HVAC Engineer to Data Engineer</p>",
+		"asset": {
+			"media":"./static/images/mhra/me.jpg",
+			"credit":"",
+			"caption":""
+		},
+		"date": [
+            {
+                "startDate":"2010,3",
+                "endDate":"2013,5",
+                "headline":"ekas consulting engineers",
+                "text":"<p>Student job at a small company (~10 employees).</p><p>Energy frame calculation for larger residential buildings.</p><p>Hacked some spreadsheets and built SketchUp models for heat transfer areas.</p>",
+                "asset":
+                {
+                    "media":"./static/images/mhra/energy-frame.png",
+                    "caption":"Energy frame calculations"
+                }
+            }
+        ]
+    }
+}

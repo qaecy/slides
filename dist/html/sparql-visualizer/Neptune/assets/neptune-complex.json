@@ -1,0 +1,14 @@
+{
+    "project": {
+        "title": "Intro-viz",
+        "creator": "Mads Holten Rasmussen"
+    },
+    "tabs": [
+      {
+        "title": "1: Knowledge Graph",
+        "query": "CONSTRUCT\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place> .\n<Paris> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/City> .\n<Bill> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .\n<Alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .\n<Bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .\n<The_Louvre> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "Data file from [Amazon Neptune](https://aws.amazon.com/neptune/)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      }
+    ]
+}

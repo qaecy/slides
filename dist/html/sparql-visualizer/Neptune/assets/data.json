@@ -1,0 +1,50 @@
+{
+    "project": {
+        "title": "Intro-viz",
+        "creator": "Mads Holten Rasmussen"
+    },
+    "tabs": [
+      {
+        "title": "1: Knowledge Graph",
+        "query": "CONSTRUCT\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> \t<is_a> \t<Place> .\n<Paris> \t\t<is_a> \t<City> .\n<Bill> \t\t\t<is_a> \t<Person> .\n<Alice> \t\t<is_a> \t<Person> .\n<Bob> \t\t\t<is_a> \t<Person> .\n<The_Louvre> \t<is_a> \t<Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> \t\t\t\t<is_located_in> \t<Paris> .\n<Alice> \t\t\t\t\t<visited> \t\t\t<Eiffel_Tower> .\n<Bill> \t\t\t\t\t\t<visited> \t\t\t<Eiffel_Tower> .\n<Bob> \t\t\t\t\t\t<is_a_friend_of> \t<Alice> .\n<Bob> \t\t\t\t\t\t<is_interested_in> \t<Mona_Lisa> .\n<Bob> \t\t\t\t\t\t<was_born_on> \t\t\"14 July 1990\" .\n<Mona_Lisa> \t\t\t\t<is_exhibited_at> \t<The_Louvre> .\n<Mona_Lisa> \t\t\t\t<was_created_by> \t<Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> \t<is_about> \t\t\t<Mona_Lisa> .",
+        "description": "Data file from [Amazon Neptune](https://aws.amazon.com/neptune/)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "1: Return all triples",
+        "query": "SELECT *\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",        
+        "description": "List all triples in the graph (there are 15)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "2: Return all unique predicates",
+        "query": "SELECT DISTINCT ?edge\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "List all unique predicates in the graph (there are 9)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "3: Return all unique subjects",
+        "query": "SELECT DISTINCT ?nodeA\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "List all unique subjects in the graph (there are 8)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "4: Return all assigned classes",
+        "query": "SELECT DISTINCT ?nodeB\nWHERE {\n\t?nodeA <is_a> ?nodeB\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "List all unique classes that are assigned to subjects in the graph (there are 4)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "5: Find persons who visited the Eiffel Tower",
+        "query": "SELECT DISTINCT ?nodeA\nWHERE {\n  \t?nodeA <is_a> <Person> .\n\t?nodeA <visited> <Eiffel_Tower>\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "List all instances of the class `<Person>` who visited the `<Eiffel_Tower>`\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "6: Return 5. as subgraph",
+        "query": "CONSTRUCT\nWHERE {\n  \t?nodeA <is_a> <Person> .\n\t?nodeA <visited> <Eiffel_Tower>\n}",
+        "triples": "# CLASSIFICATION\n<Eiffel_Tower> <is_a> <Place> .\n<Paris> <is_a> <City> .\n<Bill> <is_a> <Person> .\n<Alice> <is_a> <Person> .\n<Bob> <is_a> <Person> .\n<The_Louvre> <is_a> <Museum> .\n\n# RELATIONSHIPS\n<Eiffel_Tower> <is_located_in> <Paris> .\n<Alice> <visited> <Eiffel_Tower> .\n<Bill> <visited> <Eiffel_Tower> .\n<Bob> <is_a_friend_of> <Alice> .\n<Bob> <is_interested_in> <Mona_Lisa> .\n<Bob> <was_born_on> \"14 July 1990\" .\n<Mona_Lisa> <is_exhibited_at> <The_Louvre> .\n<Mona_Lisa> <was_created_by> <Leonardo_da_Vinci> .\n<La_Joconde_a_Washington> <is_about> <Mona_Lisa> .",
+        "description": "Return the result of tab *\"5: Find persons who visited the Eiffel Tower\"* as a subgraph.\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      }
+    ]
+}

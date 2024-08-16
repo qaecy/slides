@@ -45,115 +45,56 @@
           nodes: [
             {
               data: {
-                id: "wall",
-                label: "Wall_A",
-              },
-              position: {
-                x: 58,
-                y: 114,
-              },
-            },
-            {
-              data: {
-                id: "door",
-                label: "Door_XE",
-              },
-              position: {
-                x: 269,
-                y: 149,
-              },
-            },
-            {
-              data: {
-                id: "space",
-                label: "Space265",
-              },
-              position: {
-                x: 271,
-                y: -107,
-              },
-            },
-            {
-              data: {
-                id: "width",
-                label: "900 mm",
-              },
-              position: {
-                x: 392,
-                y: 96,
-              },
-              classes: "literal",
-            },
-            {
-              data: {
-                id: "area",
-                label: "25 m²",
-              },
-              position: {
-                x: 13,
-                y: -55,
-              },
-              classes: "literal",
-            },
-            {
-              data: {
-                id: "color",
-                label: "white",
-              },
-              position: {
-                x: -26,
-                y: 159,
-              },
-              classes: "literal",
-            },
-          ],
-          edges: [
-            {
-              data: {
                 id: "a",
-                source: "wall",
-                target: "door",
-                label: "has door",
+                label: "Wall_A",
+                parent: "g",
+              },
+              position: {
+                x: 103,
+                y: 83,
               },
             },
             {
               data: {
                 id: "b",
-                source: "space",
-                target: "wall",
-                label: "adjacent element",
+                label: "Door_XE",
+                parent: "g",
               },
+              position: {
+                x: 228,
+                y: 89,
+              },
+            },
+            {
+              data: {
+                id: "g",
+              },
+              position: {
+                x: 167,
+                y: 86,
+              },
+              classes: "triple",
             },
             {
               data: {
                 id: "c",
-                source: "space",
-                target: "door",
-                label: "adjacent element",
+                label: "2024-01-11T12:11:28Z",
               },
+              position: {
+                x: 177,
+                y: 172,
+              },
+              classes: "literal",
             },
+          ],
+          edges: [
+            { data: { id: "ab", source: "a", target: "b", label: "has door" } },
             {
               data: {
-                id: "d",
-                source: "door",
-                target: "width",
-                label: "has width",
-              },
-            },
-            {
-              data: {
-                id: "e",
-                source: "space",
-                target: "area",
-                label: "has area",
-              },
-            },
-            {
-              data: {
-                id: "f",
-                source: "wall",
-                target: "color",
-                label: "has color",
+                id: "gc",
+                source: "g",
+                target: "c",
+                label: "generated at time",
               },
             },
           ],

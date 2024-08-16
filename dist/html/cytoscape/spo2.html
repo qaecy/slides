@@ -32,9 +32,9 @@
 
       const padding = isMobile() ? 5 : 200;
 
-      console.log(isMobile())
+      console.log(isMobile());
 
-      const cy = cytoscape({
+      let cy = cytoscape({
         container: document.getElementById("cy"),
         style,
         layout: {
@@ -46,7 +46,7 @@
             {
               data: {
                 id: "a",
-                label: "Subject"
+                label: "Subject",
               },
               position: {
                 x: 73,
@@ -56,7 +56,7 @@
             {
               data: {
                 id: "b",
-                label: "Object"
+                label: "Object",
               },
               position: {
                 x: 215,
@@ -64,9 +64,102 @@
               },
             },
           ],
-          edges: [{ data: { id: "ab", source: "a", target: "b", label: "predicate" } }],
+          edges: [
+            {
+              data: { id: "ab", source: "a", target: "b", label: "predicate" },
+            },
+          ],
         },
       });
+
+      setTimeout(() => {
+        cy = cytoscape({
+          container: document.getElementById("cy"),
+          style,
+          layout: {
+            name: "preset",
+            padding,
+          },
+          elements: {
+            nodes: [
+              {
+                data: {
+                  id: "a",
+                },
+                position: {
+                  x: 161,
+                  y: 107,
+                },
+              },
+              {
+                data: {
+                  id: "b",
+                  label: "Object",
+                },
+                position: {
+                  x: 85,
+                  y: 15,
+                },
+              },
+              {
+                data: {
+                  id: "c",
+                },
+                position: {
+                  x: 95,
+                  y: 143,
+                },
+              },
+              {
+                data: {
+                  id: "d",
+                },
+                position: {
+                  x: 17,
+                  y: 126,
+                },
+              },
+              {
+                data: {
+                  id: "e",
+                  label: "Subject",
+                },
+                position: {
+                  x: 2,
+                  y: 37,
+                },
+              },
+              {
+                data: {
+                  id: "f",
+                },
+                position: {
+                  x: 100,
+                  y: 97,
+                },
+              },
+            ],
+            edges: [
+              {
+                data: {
+                  id: "ab",
+                  source: "a",
+                  target: "b",
+                },
+              },
+              { data: { id: "ba", source: "b", target: "a" } },
+              { data: { id: "ac", source: "a", target: "c" } },
+              { data: { id: "cd", source: "c", target: "d" } },
+              { data: { id: "de", source: "d", target: "e" } },
+              { data: { id: "fe", source: "f", target: "e" } },
+              { data: { id: "eb", source: "e", target: "b", 
+              label: "predicate" } },
+              { data: { id: "fc", source: "f", target: "c" } },
+            ],
+          },
+        });
+        animateGraph(cy);
+      }, 3000);
 
       animateGraph(cy);
       logNodePositions(cy);

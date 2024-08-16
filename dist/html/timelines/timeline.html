@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline</title>
+
+    <link title="timeline-styles" rel="stylesheet" 
+    href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+
+    <style>
+
+        .container{
+            display: flex;
+            height: 100vh;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+    </style>
+
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+
+</head>
+<body style="overflow-y: hidden;">
+
+    <div class="container">
+        <div id='timeline-embed' style="max-height: 85vh; min-width: 85vw"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const json_file = urlParams.get('file');
+        const initial_zoom = urlParams.get('initial_zoom') ? parseInt(urlParams.get('initial_zoom')) : 1;
+        const hash_bookmark = urlParams.get('hash_bookmark') == "false" ? false : true;
+
+        // The TL.Timeline constructor takes at least two arguments:
+        // the id of the Timeline container (no '#'), and
+        // the URL to your JSON data file or Google spreadsheet.
+        // the id must refer to an element "above" this code,
+        // and the element must have CSS styling to give it width and height
+        // optionally, a third argument with configuration options can be passed.
+        // See below for more about options.
+        const options = {
+            hash_bookmark,
+            initial_zoom
+        }
+
+        timeline = new TL.Timeline('timeline-embed', json_file, options);
+
+    </script>
+    
+</body>
+</html>

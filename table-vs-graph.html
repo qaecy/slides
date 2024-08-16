@@ -131,13 +131,13 @@
 					</section>
 
 					<section>
-						<pre><code data-trim class="text">
+						<pre><code data-trim class="text"><script type="text/template">
 SELECT *
 WHERE{
-	?ID &#60;firstName&#62; ?First .
-	?ID &#60;lastName&#62; ?Last
+	?ID <firstName> ?First .
+	?ID <lastName> ?Last
 }
-						</code></pre>
+						</script></code></pre>
 					</section>
 
 					<section data-background-image="./dist/img/table-to-graph/RDF-en-simple-01.svg">
@@ -215,7 +215,9 @@ WHERE{
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
-		<script>
+		<script type="module">
+			import { turtle } from "./plugin/highlight/turtle.js";
+			import { sparql } from "./plugin/highlight/sparql.js";
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
@@ -223,7 +225,13 @@ WHERE{
 				hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+				highlight: {
+					beforeHighlight: (hljs) => {
+						hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+						hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+					},
+				},
 			});
 		</script>
 	</body>

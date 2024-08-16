@@ -1,0 +1,545 @@
+{
+    "title": {
+        "media": {
+          "url": "../../images/mhra/me.jpg",
+          "caption": "",
+          "credit": ""
+        },
+        "text": {
+          "headline": "My professional journey",
+          "text": "<p>From Architectural Engineer over HVAC Engineer to Data Engineer</p>"
+        }
+    },
+    "events": [
+      {
+        "media": {
+            "url":"../../images/mhra/ae.jpg",
+            "thumbnail": "../../images/mhra/ae.jpg",
+            "credit":"https://www.dtu.dk/uddannelse/bachelor/uddannelsesretninger/bygningsdesign",
+            "caption":"\"Polystyrene/cardboard engineer\""
+        },
+        "start_date": {
+          "month": "9",
+          "day": "",
+          "year": "2007"
+        },
+        "end_date": {
+            "month": "3",
+            "day": "",
+            "year": "2013"
+        },
+        "text": {
+          "headline": "MSc Architectural Engineering",
+          "text": "<p>Technical University of Denmark (DTU)</p><p>Initially \"City and Building Engineer\"</p><p>The middleman between the architect and the engineer</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/bryghusgrunden.png",
+            "thumbnail": "../../images/mhra/bryghusgrunden.png",
+            "credit":"",
+            "caption":"Our proposal for an office building / kindergarden"
+        },
+        "start_date": {
+          "month": "9",
+          "day": "",
+          "year": "2008"
+        },
+        "end_date": {
+            "month": "11",
+            "day": "",
+            "year": "2008"
+        },
+        "text": {
+          "headline": "Bryghusgrunden",
+          "text": "<p>A building at the Harbour front of Copenhagen.</p><p>Mix of a building and a cityscape assignment</p><p>Where the BLOX building is now located.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/columna.png",
+            "thumbnail": "../../images/mhra/columna.png",
+            "credit":"",
+            "caption":"Our proposal for a bridge at DTU"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2009"
+        },
+        "end_date": {
+            "month": "5",
+            "day": "",
+            "year": "2009"
+        },
+        "text": {
+          "headline": "Bridge",
+          "text": "<p>Design of a pedestriant bridge at DTU</p><p>Main focus on FEM and calculations of welded joints</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/culture-house.png",
+            "thumbnail": "../../images/mhra/culture-house.png",
+            "credit":"",
+            "caption":"Our proposal for a culture house"
+        },
+        "start_date": {
+          "month": "6",
+          "day": "",
+          "year": "2009"
+        },
+        "end_date": {
+            "month": "7",
+            "day": "",
+            "year": "2009"
+        },
+        "text": {
+          "headline": "Culture House",
+          "text": "<p>Design a culture house at Utterslev Mose, Copenhagen.</p><p>Design the building + perform acoustic calculations on the concert hall.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/architect.jpg",
+            "thumbnail": "../../images/mhra/architect.jpg",
+            "credit":"https://www.inc.com/linda-naiman/what-architects-can-teach-the-rest-of-us-about-thinking-like-a-designer.html",
+            "caption":"Internship as an architect"
+        },
+        "start_date": {
+          "month": "8",
+          "day": "",
+          "year": "2009"
+        },
+        "end_date": {
+            "month": "1",
+            "day": "",
+            "year": "2010"
+        },
+        "text": {
+          "headline": "Internship at Holm & Grut Architects",
+          "text": "<p>Designing a gym for an elementary school + an arrival hall at CPH airport.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/arch-zero.png",
+            "thumbnail": "../../images/mhra/arch-zero.png",
+            "credit":"",
+            "caption":"Effect of angled window opening"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2010"
+        },
+        "end_date": {
+            "month": "6",
+            "day": "",
+            "year": "2010"
+        },
+        "text": {
+          "headline": "Archline Zero",
+          "text": "<p>A single family house that should meet the expected 2020 requirements for energy consumption.</p><p>2D heat flux and daylight calculations on special window design.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/bachelor.png",
+            "thumbnail": "../../images/mhra/bachelor.png",
+            "credit":"",
+            "caption":"Radiance-derived window shade and the effect on daylight access"
+        },
+        "start_date": {
+          "month": "9",
+          "day": "",
+          "year": "2010"
+        },
+        "end_date": {
+            "month": "1",
+            "day": "",
+            "year": "2011"
+        },
+        "text": {
+          "headline": "Diploma engineer thesis",
+          "text": "<p>Energy Efficiency Retrofit of a residential building from the fifties.</p><p>Thermal simulations, daylight simulations, CFD, ventilation design.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/aec-global-teamwork.png",
+            "thumbnail": "../../images/mhra/aec-global-teamwork.png",
+            "credit":"",
+            "caption":"Students from all over the world"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2011"
+        },
+        "end_date": {
+            "month": "5",
+            "day": "",
+            "year": "2011"
+        },
+        "text": {
+          "headline": "AEC Global Teamwork",
+          "text": "<p>Stanford course that has existed since 1993.</p><p>Main focus is communication using ICT.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/id-bim.png",
+            "thumbnail": "../../images/mhra/id-bim.png",
+            "credit":"",
+            "caption":"iD-BIM"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2012"
+        },
+        "end_date": {
+            "month": "5",
+            "day": "",
+            "year": "2012"
+        },
+        "text": {
+          "headline": "Virtual Construction from a Management Perspective",
+          "text": "<p>Location based scheduling.</p><p>Concept for a new BIM-based consultant role.</p><p>Mockup of an app for on-site planning.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/dtu-116.png",
+            "thumbnail": "../../images/mhra/dtu-116.png",
+            "credit":"",
+            "caption":"Our proposal for an educational facility at DTU"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2012"
+        },
+        "end_date": {
+            "month": "6",
+            "day": "",
+            "year": "2012"
+        },
+        "text": {
+          "headline": "Integrated Functional Project",
+          "text": "<p>Deigning an educational facility at DTU.</p><p>Parametric window design using evolutionary algorithm.</p><p>Low-preasure ventilation system.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/ventilation-course.png",
+            "thumbnail": "../../images/mhra/ventilation-course.png",
+            "credit":"",
+            "caption":"Measurement results from full-scale experiment"
+        },
+        "start_date": {
+          "month": "9",
+          "day": "",
+          "year": "2012"
+        },
+        "end_date": {
+            "month": "11",
+            "day": "",
+            "year": "2012"
+        },
+        "text": {
+          "headline": "Ventilation course",
+          "text": "<p>Practical course with 1-1 experiments in climate chambers.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/thesis.png",
+            "thumbnail": "../../images/mhra/thesis.png",
+            "credit":"",
+            "caption":"Data flow for HVAC design"
+        },
+        "start_date": {
+          "month": "11",
+          "day": "",
+          "year": "2012"
+        },
+        "end_date": {
+            "month": "5",
+            "day": "",
+            "year": "2013"
+        },
+        "text": {
+          "headline": "Master's thesis",
+          "text": "<p>An integrated data driven approach to HVAC design.</p><p>The basis of my later research.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/alectia.jpg",
+            "thumbnail": "../../images/mhra/alectia.jpg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "6",
+          "day": "",
+          "year": "2013"
+        },
+        "text": {
+          "headline": "Graduated and done with uni!",
+          "text": "<p>Consulting Engineer in HVAC department.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/at.png",
+            "thumbnail": "../../images/mhra/at.png",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "8",
+          "day": "",
+          "year": "2013"
+        },
+        "end_date": {
+            "month": "1",
+            "day": "",
+            "year": "2018"
+        },
+        "text": {
+          "headline": "Axel Towers",
+          "text": "<p>Office building in central Copenhagen.</p><p>Architect: Lundgaard & Tranberg<br>Turnkey Contractor: Züblin</p><p>- 2D project<br>- Challenging geometry and uncompromising architect<br>- Spatial database for HVAC sizing<br>- Radiant cooling/heating</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/busy.jpg",
+            "thumbnail": "../../images/mhra/busy.jpg",
+            "credit":"https://www.plays-in-business.com/too-busy-to-improve-performance-management-square-wheels/",
+            "caption":"Pretty happy with my job but tired of putting out fires"
+        },
+        "start_date": {
+          "month": "11",
+          "day": "",
+          "year": "2014"
+        },
+        "text": {
+          "headline": "Potential PhD position",
+          "text": "<p>Christian Anker Hviid:<br>\"Mads! We are applying for a PhD position and you are the perfect candidate!\"</p><br><p>Me:<br/>\"No way!\"</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/bbh.png",
+            "thumbnail": "../../images/mhra/bbh.png",
+            "credit":"",
+            "caption":"Mechanical model"
+        },
+        "start_date": {
+          "month": "4",
+          "day": "",
+          "year": "2015"
+        },
+        "end_date": {
+            "month": "2",
+            "day": "",
+            "year": "2017"
+        },
+        "text": {
+          "headline": "Bispebjerg Hospital lab&log",
+          "text": "<p>Laboratory and Logistics building.</p><p>Animal stables and GMO laboratories.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/back-to-uni.jpg",
+            "thumbnail": "../../images/mhra/back-to-uni.jpg",
+            "credit":"https://www.therange.co.uk/blog/uni-essentials/back-to-uni-essentials/",
+            "caption":"Back to uni!"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2016"
+        },
+        "text": {
+          "headline": "PhD application approved",
+          "text": "<p>Officially an Industrial PhD student and whole new challenges await.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/alectia-niras.jpg",
+            "thumbnail": "../../images/mhra/alectia-niras.jpg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "12",
+          "day": "",
+          "year": "2016"
+        },
+        "text": {
+          "headline": "NIRAS",
+          "text": "<p>ALECTIA is merged with NIRAS</p><p>From 700 colleagues to 2500 colleagues and lots of new opportunities as NIRAS.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/WeBIM.png",
+            "thumbnail": "../../images/mhra/projects/WeBIM.png",
+            "credit":"",
+            "caption":"Room history allows you to see how the layout has changed over time"
+        },
+        "start_date": {
+          "month": "8",
+          "day": "",
+          "year": "2018"
+        },
+        "end_date": {
+            "month": "6",
+            "day": "",
+            "year": "2022"
+        },
+        "text": {
+          "headline": "WeBIM",
+          "text": "<p>Web-BIM platform for providing engineers with insights.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/AU.png",
+            "thumbnail": "../../images/mhra/projects/AU.png",
+            "credit":"",
+            "caption":"Subset of the client report"
+        },
+        "start_date": {
+          "month": "5",
+          "day": "",
+          "year": "2020"
+        },
+        "end_date": {
+            "month": "7",
+            "day": "",
+            "year": "2020"
+        },
+        "text": {
+          "headline": "Aarhus University Digital Twin",
+          "text": "<p>Semantic data model of campus, buildings, spaces, sensors and mechanical system.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/science-city-map.png",
+            "thumbnail": "../../images/mhra/projects/science-city-map.png",
+            "credit":"",
+            "caption":"Map with space polygons retrieved from ScienceCity data hub"
+        },
+        "start_date": {
+          "month": "12",
+          "day": "",
+          "year": "2020"
+        },
+        "end_date": {
+            "month": "6",
+            "day": "",
+            "year": "2021"
+        },
+        "text": {
+          "headline": "ScienceCity Lyngby",
+          "text": "<p>Democratic access to data. I provide my data and we can all use and analyze a common dataset.</p><p>Querying over various data sources using Comunica</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/BART.gif",
+            "thumbnail": "../../images/mhra/projects/bartbyg.png",
+            "credit":"https://bartbyg.dk",
+            "caption":"Deliverables in the BART project"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2021"
+        },
+        "end_date": {
+            "month": "6",
+            "day": "",
+            "year": "2022"
+        },
+        "text": {
+          "headline": "BART",
+          "text": "<p>Track A: Building Solibri rule sets for checking danish building regulations</p><p>Track B: Investigating new methods (including Linked Data)</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/ConTech5.png",
+            "thumbnail": "../../images/mhra/projects/ConTech5.png",
+            "credit":"",
+            "caption":"Test model for the case study"
+        },
+        "start_date": {
+          "month": "5",
+          "day": "",
+          "year": "2021"
+        },
+        "end_date": {
+            "month": "1",
+            "day": "",
+            "year": "2022"
+        },
+        "text": {
+          "headline": "ConTech Pioneer project 5",
+          "text": "<p>Saint Gobain: \"Why do architects make detailed drawings of walls when they are bought as systems?\"<br>\"What if they could just focus on establishing the boundary conditions?\"</p>"
+        }
+      },
+      {
+        "media": {
+          "url":"../../images/mhra/projects/K4A.gif",
+          "thumbnail": "../../images/mhra/projects/K4A1.png",
+          "credit":"",
+          "caption":"Mockup of UI for Examination Declarations"
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2022"
+        },
+        "end_date": {
+            "month": "3",
+            "day": "",
+            "year": "2022"
+        },
+        "text": {
+          "headline": "K4A",
+          "text": "<p>kobl 4 architecture</p><p>Formalization of design frames and checks that are continiously checked against.</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"../../images/mhra/projects/ABP.png",
+            "thumbnail": "../../images/mhra/projects/ABP.png",
+            "credit":"",
+            "caption":"Mockup of UI for Examination Declarations"
+        },
+        "start_date": {
+          "month": "4",
+          "day": "",
+          "year": "2022"
+        },
+        "end_date": {
+            "month": "1",
+            "day": "",
+            "year": "2023"
+        },
+        "text": {
+          "headline": "Almen Byggeportal",
+          "text": "<p>Digital project delivery for all subsidized residential buildings in Denmark</p><p>- Examination declarations<br>- Document and model checking<br>- Building element documentation (Material passports, O&M material etc.)</p>"
+        }
+      }
+    ]
+}

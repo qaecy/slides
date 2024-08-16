@@ -1,82 +1,261 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>QAECY - knowledge graphs</title>
+    <title>QAECY - knowledge graphs</title>
 
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/qaecy.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <!-- <link rel="stylesheet" href="plugin/highlight/onto-hljs.css" /> -->
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- Captions -->
+      <cap
+        style="
+          position: absolute;
+          bottom: 12vh;
+          left: 0px;
+          width: 100%;
+          z-index: 500;
+          text-align: center;
+          font-size: 1.2vw;
+          font-style: italic;
+          color: #65625e;
+          font-family: 'Courier New', Courier, monospace;
+        "
+      >
+      </cap>
 
-				<section>
-					<img src="dist/img/logo.svg" alt="">
-					<p>your knowledge, accessible</p>
-				</section>
-				
-				<section>
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
 
-					<section>
-						<h2>Knowledge Graphs</h2>
-					</section>
+        <section>
+          <section>
+            <h2>Knowledge Graphs</h2>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/undirected-graph.html">
-						<p class="bg-transparent-white">A graph is a network of nodes and edges</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/undirected-graph.html"
+          >
+            <p class="bg-transparent-white">
+              A graph is a network of nodes and edges
+            </p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/directed-graph.html">
-						<p class="bg-transparent-white">In a knowledge graph, the edges are directed</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              In a knowledge graph, the edges are directed
+            </p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo1.html">
-						<p class="bg-transparent-white">One node-edge-node relationship is called a "triple" and describes a "statement" or a "fact"</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo1.html"
+          >
+            <p class="bg-transparent-white">
+              One node-edge-node relationship is called a "triple" and describes
+              a "statement" or a "fact"
+            </p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo2.html">
-						<p class="bg-transparent-white">A triple consists of a Subject, a predicate and an Object</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo2.html"
+          >
+            <p class="bg-transparent-white">
+              A triple consists of a Subject, a predicate and an Object
+            </p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo3.html">
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">An example from a BIM model</p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo4.html">
-						<p class="bg-transparent-white">As more facts are added, the object in one triple becomes the subject in another</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo4.html"
+          >
+            <p class="bg-transparent-white">
+              As more facts are added, the object in one triple becomes the
+              subject in another
+            </p>
+          </section>
 
-					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo5.html">
-						<p class="bg-transparent-white">Objects can also represent simple datatype properties</p>
-					</section>
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo5.html"
+          >
+            <p class="bg-transparent-white">
+              Objects can also represent simple datatype properties
+            </p>
+          </section>
+        </section>
 
-				</section>
-				
-			</div>
-		</div>
+        <section>
+          <section>
+            <h2>ABox and TBox</h2>
+          </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+          <section>
+            <p>
+              The graph includes both the data and the schemas that describe
+              this data
+            </p>
+          </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          <section>
+            <p>
+              We distinguish between the assertion layer (ABox) and the
+              terminology layer (TBox)
+            </p>
+          </section>
+
+          <section
+            data-background-image="./dist/img/triple/Neptune-Diagram_knowledge-graph1.svg"
+            data-background-size="90vw"
+            data-state="neptune"
+          >
+            <style>
+              .neptune cap:after {
+                content: "Amazon Neptune: https://aws.amazon.com/neptune";
+              }
+            </style>
+          </section>
+
+		  <section
+            data-background-image="./dist/img/triple/Neptune-Diagram_knowledge-graph2.svg"
+            data-background-size="90vw"
+            data-state="neptune"
+          ></section>
+
+		  <section
+            data-background-image="./dist/img/triple/Neptune-Diagram_knowledge-graph3.svg"
+            data-background-size="90vw"
+            data-state="neptune"
+          ></section>
+		  
+        </section>
+
+        <section>
+          <section>
+            <h2>Querying the graph</h2>
+          </section>
+
+		  <section>
+			<p>Querying the graph is as easy as decribing a path along its edges</p>
+		  </section>
+
+		  <section>
+			<img data-src="./dist/img/logos/W3C.svg"></img>
+			<h2>SPARQL: SPARQL Protocol and RDF Query Language</h2>
+		  </section>
+
+		  <section
+				data-background-iframe="./dist/html/sparql-visualizer/Neptune/index.html?file=./assets/neptune-simple.json&fs=true"
+				data-background-interactive>
+			</section>
+
+			<section
+				data-background-iframe="./dist/html/sparql-visualizer/Neptune/index.html?file=./assets/neptune-simple.json&fs=true&tab=5"
+				data-background-interactive>
+			</section>
+
+          <section>
+            <pre><code data-trim class="sparql"><script type="text/template">
+					SELECT *
+					WHERE { ?s ?p ?o }
+				</script></code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Advanced</h2>
+          </section>
+
+          <section>
+            <p>
+              With RDF* <span style="font-size: 0.8rem">(RDF star)</span> it is
+              posible to make a statement about another statement
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">
+              Let's imagine we would like to describe some provenance about this
+              fact
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo-star.html"
+          >
+            <p class="bg-transparent-white">In RDF* it would look like this</p>
+          </section>
+
+          <section>
+            <p>In Turtle* syntax it would look like this</p>
+            <pre><code data-trim class="turtle"><script type="text/template">
+				<< <Wall_A> ex:hasDoor <Door_XE> >> 
+					prov:generatedAtTime "2024-01-11T12:11:28Z"^^xsd:dateTime .
+			</script></code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script type="module">
+      import { turtle } from "./plugin/highlight/turtle.js";
+      import { sparql } from "./plugin/highlight/sparql.js";
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        scrollActivationWidth: null, // Will not work with graphs
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,26 @@
+{
+    "project": {
+        "title": "Intro-viz",
+        "creator": "Mads Holten Rasmussen"
+    },
+    "tabs": [
+      {
+        "title": "1: Knowledge Graph",
+        "query": "CONSTRUCT\nWHERE {\n\t?nodeA ?edge ?nodeB\n}",
+        "triples": "@prefix inst: \t<https://my-awesome-knowledge-graph.org/resources/> .\n@prefix schema: <http://schema.org/> .\n@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix xx:     <https://my-awesome-knowledge-graph.org/ontology/xx#> .\n\n# CLASSIFICATION\ninst:Eiffel_Tower   rdf:type    schema:Place .\ninst:Paris          rdf:type    schema:City .\ninst:Bill           rdf:type    schema:Person .\ninst:Alice          rdf:type    schema:Person .\ninst:Bob            rdf:type    schema:Person .\ninst:The_Louvre     rdf:type    schema:Museum .\n\n# RELATIONSHIPS\ninst:Eiffel_Tower  \n\txx:is_located_in    inst:Paris .\ninst:Alice\n\txx:visited          inst:Eiffel_Tower .\ninst:Bill\n\txx:visited          inst:Eiffel_Tower .\ninst:Bob\n\txx:is_a_friend_of   inst:Alice .\ninst:Bob\n\txx:is_interested_in inst:Mona_Lisa .\ninst:Bob\n\txx:was_born_on      \"14 July 1990\" .\ninst:Mona_Lisa\n\txx:is_exhibited_at  inst:The_Louvre .\ninst:Mona_Lisa\n\txx:was_created_by   inst:Leonardo_da_Vinci .\ninst:La_Joconde_a_Washington\n\txx:is_about         inst:Mona_Lisa .",
+        "description": "Data file from [Amazon Neptune](https://aws.amazon.com/neptune/)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "2: People",
+        "query": "PREFIX schema: <http://schema.org/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT *\nWHERE {\n\t?nodeA rdf:type schema:Person .\n}",
+        "triples": "@prefix inst: \t<https://my-awesome-knowledge-graph.org/resources/> .\n@prefix schema: <http://schema.org/> .\n@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix xx:     <https://my-awesome-knowledge-graph.org/ontology/xx#> .\n\n# CLASSIFICATION\ninst:Eiffel_Tower   rdf:type    schema:Place .\ninst:Paris          rdf:type    schema:City .\ninst:Bill           rdf:type    schema:Person .\ninst:Alice          rdf:type    schema:Person .\ninst:Bob            rdf:type    schema:Person .\ninst:The_Louvre     rdf:type    schema:Museum .\n\n# RELATIONSHIPS\ninst:Eiffel_Tower  \n\txx:is_located_in    inst:Paris .\ninst:Alice\n\txx:visited          inst:Eiffel_Tower .\ninst:Bill\n\txx:visited          inst:Eiffel_Tower .\ninst:Bob\n\txx:is_a_friend_of   inst:Alice .\ninst:Bob\n\txx:is_interested_in inst:Mona_Lisa .\ninst:Bob\n\txx:was_born_on      \"14 July 1990\" .\ninst:Mona_Lisa\n\txx:is_exhibited_at  inst:The_Louvre .\ninst:Mona_Lisa\n\txx:was_created_by   inst:Leonardo_da_Vinci .\ninst:La_Joconde_a_Washington\n\txx:is_about         inst:Mona_Lisa .",
+        "description": "Data file from [Amazon Neptune](https://aws.amazon.com/neptune/)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      },
+      {
+        "title": "2: People",
+        "query": "PREFIX inst: <https://my-awesome-knowledge-graph.org/resources/>\nPREFIX schema: <http://schema.org/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xx: <https://my-awesome-knowledge-graph.org/ontology/xx#>\n\nSELECT *\nWHERE {\n\t?nodeA rdf:type schema:Person .\n    ?nodeA xx:visited inst:Eiffel_Tower .\n}",
+        "triples": "@prefix inst: \t<https://my-awesome-knowledge-graph.org/resources/> .\n@prefix schema: <http://schema.org/> .\n@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix xx:     <https://my-awesome-knowledge-graph.org/ontology/xx#> .\n\n# CLASSIFICATION\ninst:Eiffel_Tower   rdf:type    schema:Place .\ninst:Paris          rdf:type    schema:City .\ninst:Bill           rdf:type    schema:Person .\ninst:Alice          rdf:type    schema:Person .\ninst:Bob            rdf:type    schema:Person .\ninst:The_Louvre     rdf:type    schema:Museum .\n\n# RELATIONSHIPS\ninst:Eiffel_Tower  \n\txx:is_located_in    inst:Paris .\ninst:Alice\n\txx:visited          inst:Eiffel_Tower .\ninst:Bill\n\txx:visited          inst:Eiffel_Tower .\ninst:Bob\n\txx:is_a_friend_of   inst:Alice .\ninst:Bob\n\txx:is_interested_in inst:Mona_Lisa .\ninst:Bob\n\txx:was_born_on      \"14 July 1990\" .\ninst:Mona_Lisa\n\txx:is_exhibited_at  inst:The_Louvre .\ninst:Mona_Lisa\n\txx:was_created_by   inst:Leonardo_da_Vinci .\ninst:La_Joconde_a_Washington\n\txx:is_about         inst:Mona_Lisa .",
+        "description": "Data file from [Amazon Neptune](https://aws.amazon.com/neptune/)\n\n![alt text](https://d1.awsstatic.com/product-marketing/Neptune/Neptune-Diagram_knowledge-graph.22076f2eae8aa3e7f3c6c7e7b11a181dfe1b4002.png \"Neptune Knowledge Graph example\")"
+      }
+    ]
+}
