@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <style>
+      #cy {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { style, layout } from "./style.js";
+      import { logNodePositions, isMobile, animateGraph } from "./helpers.js";
+
+      const edgeSelector = style.find((s) => s.selector === "edge");
+      edgeSelector.style["line-color"] = "#0d5be9";
+      edgeSelector.style["target-arrow-color"] = "#0d5be9";
+      edgeSelector.style["text-outline-color"] = "#0d5be9";
+
+      const nodeSelector = style.find((s) => s.selector === "node");
+      nodeSelector.style["background-color"] = "#03337a";
+      nodeSelector.style["background-opacity"] = "0.9";
+      nodeSelector.style["text-outline-color"] = "#03337a";
+      // nodeSelector.style["label"] = (node) =>
+      //   node.data("id") ? node.data("id") : "";
+
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(isMobile());
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "wall",
+                label: "Wall_A",
+              },
+              position: {
+                x: 49,
+                y: 80,
+              },
+            },
+            {
+              data: {
+                id: "door",
+                label: "Door_XE",
+              },
+              position: {
+                x: 208,
+                y: 119,
+              },
+            },
+            {
+              data: {
+                id: "space",
+                label: "Space265",
+              },
+              position: {
+                x: 166,
+                y: -35,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                id: "a",
+                source: "wall",
+                target: "door",
+                label: "has door",
+              },
+            },
+            {
+              data: {
+                id: "b",
+                source: "space",
+                target: "wall",
+                label: "adjacent element",
+              },
+            },
+            {
+              data: {
+                id: "c",
+                source: "space",
+                target: "door",
+                label: "adjacent element",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+    </script>
+  </body>
+</html>

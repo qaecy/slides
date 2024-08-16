@@ -18,12 +18,14 @@
       import { style, layout } from "./style.js";
       import { logNodePositions, isMobile } from "./helpers.js";
 
+      const padding = isMobile() ? 5 : 100;
+
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
         layout: {
           name: "preset",
-          padding: () => isMobile() ? 5 : 100,
+          padding
         },
         elements: {
           nodes: [

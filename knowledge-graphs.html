@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - knowledge graphs</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<img src="dist/img/logo.svg" alt="">
+					<p>your knowledge, accessible</p>
+				</section>
+				
+				<section>
+
+					<section>
+						<h2>Knowledge Graphs</h2>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/undirected-graph.html">
+						<p class="bg-transparent-white">A graph is a network of nodes and edges</p>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/directed-graph.html">
+						<p class="bg-transparent-white">In a knowledge graph, the edges are directed</p>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo1.html">
+						<p class="bg-transparent-white">One node-edge-node relationship is called a "triple" and describes a "statement" or a "fact"</p>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo2.html">
+						<p class="bg-transparent-white">A triple consists of a Subject, a predicate and an Object</p>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo3.html">
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo4.html">
+						<p class="bg-transparent-white">As more facts are added, the object in one triple becomes the subject in another</p>
+					</section>
+
+					<section style="pointer-events: none;" data-background-iframe="dist/html/cytoscape/spo5.html">
+						<p class="bg-transparent-white">Objects can also represent simple datatype properties</p>
+					</section>
+
+				</section>
+				
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
