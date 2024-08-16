@@ -18,14 +18,14 @@ export const style = [
         label: "data(label)",
         "text-valign": "center",
         "font-family": "Poppins",
-        "font-size": "10rem",
+        "font-size": "7rem",
         'text-outline-color': "black",
         'text-outline-width': 0.7, // Set the outline width
         color: "white",
         'curve-style': 'bezier',
         'target-arrow-shape': 'triangle',
         'target-arrow-color': "black",
-        "line-color": "black",
+        "line-color": "black"
       },
     },
     {
