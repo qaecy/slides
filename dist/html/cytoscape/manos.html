@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+
+    <style>
+      #cy {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { style, layout } from "./style.js";
+      import { logNodePositions, animateGraph } from "./helpers.js";
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding: 100,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "door",
+                label: "Door",
+              },
+              position: {
+                x: 535,
+                y: 535,
+              },
+            },
+            {
+              data: {
+                id: "red",
+                label: "Red",
+                color: "green",
+              },
+              position: {
+                x: 636,
+                y: 380,
+              },
+            },
+            {
+              data: {
+                id: "orange",
+                label: "Orange",
+                color: "orange",
+              },
+              position: {
+                x: 440,
+                y: 411,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                id: "a",
+                source: "door",
+                target: "red",
+                label: "has color",
+              },
+            },
+            {
+              data: {
+                id: "b",
+                source: "door",
+                target: "orange",
+                label: "has color",
+              },
+            },
+          ],
+        },
+      });
+
+      logNodePositions(cy);
+      animateGraph(cy);
+    </script>
+  </body>
+</html>
