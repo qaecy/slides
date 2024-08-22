@@ -12,7 +12,6 @@ export function logNodePositions(cy){
             obj.position = {x: Math.round(n.position.x), y: Math.round(n.position.y)};
             if(n.classes) obj.classes = n.classes;
             nodesSimple.push(obj);
-            console.log(nodesSimple);
         });
     }
 }

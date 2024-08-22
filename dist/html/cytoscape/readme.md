@@ -22,7 +22,7 @@
     <div id="cy"></div>
     <script type="module">
       import { style, layout } from "./style.js";
-      import { logNodePositions } from "./helpers.js";
+      import { logNodePositions } from "./helpers/helpers.js";
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
@@ -89,7 +89,7 @@
     <div id="cy"></div>
     <script type="module">
       import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile } from "./helpers.js";
+      import { logNodePositions, isMobile } from "./helpers/helpers.js";
 
       const cy = cytoscape({
         container: document.getElementById("cy"),

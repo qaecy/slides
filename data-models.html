@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY - our data models</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <!-- <link rel="stylesheet" href="plugin/highlight/onto-hljs.css" /> -->
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- Captions -->
+      <cap
+        style="
+          position: absolute;
+          bottom: 12vh;
+          left: 0px;
+          width: 100%;
+          z-index: 500;
+          text-align: center;
+          font-size: 1.2vw;
+          font-style: italic;
+          color: #65625e;
+          font-family: 'Courier New', Courier, monospace;
+        "
+      >
+      </cap>
+
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Our Data Models</h2>
+          </section>
+
+          <section>
+            <p>
+              At QAECY we don't use ONE schema. We use a combination of schemas
+              which is possible because we model all information as Linked Data.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              This slide deck provides an overview of all data models with
+              specific modeling examples
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Building topology</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Asset Properties</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Documents</h2>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-document.html"
+          >
+          </section>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script type="module">
+      import { turtle } from "./plugin/highlight/turtle.js";
+      import { sparql } from "./plugin/highlight/sparql.js";
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        scrollActivationWidth: null, // Will not work with graphs
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
