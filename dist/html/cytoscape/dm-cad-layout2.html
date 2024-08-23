@@ -35,11 +35,11 @@
                   "@id": "7b1778a8-ce7d-5f45-a7f8-615e5fa7dbda",
                   "": "+ all properties from document",
                 },
-                color: "#021229"
+                color: "#021229",
               },
               position: {
-                x: -57,
-                y: 165,
+                x: 7,
+                y: -69,
               },
             },
             {
@@ -50,11 +50,11 @@
                   "@id": "313ab2f3-5170-5b41-a57e-df657706680d",
                   "qcy:inferredType": "DXFTEXT",
                 },
-                color: "#021229"
+                color: "#021229",
               },
               position: {
-                x: -38,
-                y: -34,
+                x: -133,
+                y: -28,
               },
             },
             {
@@ -67,20 +67,20 @@
                 },
               },
               position: {
-                x: -134,
-                y: 42,
+                x: -141,
+                y: 80,
               },
             },
             {
               data: {
                 id: "a1t",
                 properties: {
-                  "@id": "not created",
-                }
+                  "@id": "y",
+                },
               },
               position: {
-                x: 13,
-                y: 76,
+                x: -32,
+                y: 23,
               },
             },
             {
@@ -94,12 +94,96 @@
                 },
               },
               position: {
-                x: 84,
-                y: 151,
+                x: -66,
+                y: 132,
+              },
+            },
+            {
+              data: {
+                id: "a2",
+                boxLabels: ["oa:Annotation"],
+                properties: {
+                  "@id": "01df04d2-37da-5d99-8923-4a20b423cae5",
+                  "qcy:inferredType": "DXFTEXT",
+                },
+                color: "#021229",
+              },
+              position: {
+                x: 152,
+                y: -22,
+              },
+            },
+            {
+              data: {
+                id: "a2b",
+                boxLabels: ["qcy:Content"],
+                properties: {
+                  "@id": "058dfae9-690d-58fa-a1e2-10ad4ab9b61a",
+                  "rdf:value": "16070 O.H. DOOR",
+                },
+              },
+              position: {
+                x: 194,
+                y: 100,
+              },
+            },
+            {
+              data: {
+                id: "a2t",
+                properties: {
+                  "@id": "x",
+                },
+              },
+              position: {
+                x: 53,
+                y: 31,
+              },
+            },
+            {
+              data: {
+                id: "a2s",
+                boxLabels: ["oa:FragmentSelector"],
+                properties: {
+                  "@id": "441df9b2-16e1-5650-b830-2bf55f9ccd7c",
+                  "rdf:value": "xywh=-88.37173930169845,-221.6234082384362,0,0",
+                  "oa:conformsTo": "http://www.w3.org/TR/media-frags/",
+                },
+              },
+              position: {
+                x: 83,
+                y: 132,
               },
             },
           ],
           edges: [
+            {
+              data: {
+                source: "a2",
+                target: "a2b",
+                label: "oa:hasBody",
+              },
+            },
+            {
+              data: {
+                source: "a2",
+                target: "a2t",
+                label: "oa:hasTarget",
+              },
+            },
+            {
+              data: {
+                source: "a2t",
+                target: "a2s",
+                label: "oa:hasSelector",
+              },
+            },
+            {
+              data: {
+                source: "a2t",
+                target: "doc",
+                label: "oa:hasSource",
+              },
+            },
             {
               data: {
                 source: "a1",

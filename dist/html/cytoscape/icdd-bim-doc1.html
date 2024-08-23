@@ -32,100 +32,71 @@
                 id: "doc",
                 boxLabels: ["qcy:Document"],
                 properties: {
-                  "@id": "7b1778a8-ce7d-5f45-a7f8-615e5fa7dbda",
+                  "@id": "47367664-ec73-5730-8d1d-0a5d2ffee10d",
                   "": "+ all properties from document",
                 },
-                color: "#021229"
               },
               position: {
-                x: -57,
-                y: 165,
+                x: -141,
+                y: -6,
               },
             },
             {
               data: {
-                id: "a1",
-                boxLabels: ["oa:Annotation"],
+                id: "doc2",
+                boxLabels: ["qcy:Document", "qcy:TextDocument"],
                 properties: {
-                  "@id": "313ab2f3-5170-5b41-a57e-df657706680d",
-                  "qcy:inferredType": "DXFTEXT",
-                },
-                color: "#021229"
-              },
-              position: {
-                x: -38,
-                y: -34,
-              },
-            },
-            {
-              data: {
-                id: "a1b",
-                boxLabels: ["qcy:Content"],
-                properties: {
-                  "@id": "760cedc2-1c49-5e7a-b9fa-04686185217c",
-                  "rdf:value": "FLOOR PLAN",
+                  "@id": "393ee8cf-32da-5419-a00c-3d204dba9cd9",
                 },
               },
               position: {
-                x: -134,
-                y: 42,
+                x: 148,
+                y: 74,
               },
             },
             {
               data: {
-                id: "a1t",
+                id: "el",
+                boxLabels: ["bot:Element", "beo:Window"],
                 properties: {
-                  "@id": "not created",
-                }
-              },
-              position: {
-                x: 13,
-                y: 76,
-              },
-            },
-            {
-              data: {
-                id: "a1s",
-                boxLabels: ["oa:FragmentSelector"],
-                properties: {
-                  "@id": "0fde3c7d-cbc6-5c14-bb33-bd3968e277e5",
-                  "rdf:value": "xywh=-282.4337515755993,-449.3217249122346,0,0",
-                  "oa:conformsTo": "http://www.w3.org/TR/media-frags/",
+                  "@id": "60f2b1f6-a6cc-5e59-b25a-32608425f1ef",
+                  "ifc:guid": "2rUEw2RD1B8AWQ14SDbXNq",
+                  "": "NB! Should be ifc:globalId",
                 },
               },
               position: {
-                x: 84,
-                y: 151,
+                x: -50,
+                y: 98,
+              },
+            },
+            {
+              data: {
+                id: "sel",
+                boxLabels: ["qcy:IdSelector"],
+                properties: {
+                  "@id": "60f2b1f6-a6cc-5e59-b25a-32608425f1ef_selector",
+                  "rdf:value": "2rUEw2RD1B8AWQ14SDbXNq",
+                },
+              },
+              position: {
+                x: -170,
+                y: 191,
               },
             },
           ],
           edges: [
             {
               data: {
-                source: "a1",
-                target: "a1b",
-                label: "oa:hasBody",
+                source: "el",
+                target: "sel",
+                label: "gcy:hasSelector",
               },
             },
             {
               data: {
-                source: "a1",
-                target: "a1t",
-                label: "oa:hasTarget",
-              },
-            },
-            {
-              data: {
-                source: "a1t",
-                target: "a1s",
-                label: "oa:hasSelector",
-              },
-            },
-            {
-              data: {
-                source: "a1t",
+                source: "el",
                 target: "doc",
-                label: "oa:hasSource",
+                label: "qcy:hasTarget",
               },
             },
           ],

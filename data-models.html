@@ -154,8 +154,10 @@
             <h2>Text document</h2>
           </section>
 
-          <section>
-
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-text-layout1.html"
+          >
           </section>
 
         </section>
@@ -172,17 +174,16 @@
           </section>
 
           <section>
-            <p>The document is considered as an activity streams <a href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">as:Collection</a> which in the case of a CAD document holds an unordered list of items.</p>
+            <p>Each <a href="https://www.w3.org/TR/annotation-vocab/#annotation">Annotation</a> has a body and a target</p>
           </section>
 
           <section>
-            <p>Each item is an <a href="https://www.w3.org/TR/annotation-vocab/#annotation">oa:Annotation</a> that has a body and a target</p>
+            <p>The body holds the annotation content which in the case of a CAD document is the text entitiy</p>
           </section>
 
-          <section
-            style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-cad-layout1-current.html"
-          >
+          <section>
+            <p>The target holds a reference to the source <span style="font-size: 1.2rem;">(the Document)</span> and a selector with instructions on where the annotation belongs</p>
+            <p>QAECY uses <a href="https://www.w3.org/TR/annotation-vocab/#fragmentselector">oa:FragmentSelectora</a> and XYWH-boxes</p>
           </section>
 
           <section
@@ -191,7 +192,44 @@
           >
           </section>
 
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-cad-layout2.html"
+          >
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-cad-layout1-current.html"
+          >
+          <p style="color: red;">NB! Currently we use the following modeling which is not correct</p>
+          </section>
+
         </section>
+
+        <section>
+          <section>
+            <h2>ICDD Links</h2>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/icdd-bim-doc1.html"
+          >
+          </section>
+
+          <section>
+            <p>Question: Who to link the document to the BIM element?</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/icdd-bim-doc2.html"
+          >
+          </section>
+
+        </section>
+
       </div>
     </div>
 
