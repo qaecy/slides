@@ -5,11 +5,20 @@ const labelPropsSettings = {
         displayOnlyOnHover: true
     },
     boxLabels: {
-        className: "box-label",
         distanceBetween: 35,
         displayOnlyOnHover: false
     }
 }
+
+// Appends the following DOM elements to each node:
+// - div (Host container, placed right in middle of node)
+//     - div .box-label (Optional box-label container if there are box labels in the node data)
+//        - div .entry (One appended for each box label)
+//     - div .property (Optional property container if there are properties in the node data)
+//        - div .entry (One appended for each property)
+//           - span .key (For the property key)
+//           - span .value (For the property value)
+
 export function appendLabelsAndProps(cy, parent, settings = labelPropsSettings){
 
     // First append the host containers
@@ -28,24 +37,22 @@ export function appendLabelsAndProps(cy, parent, settings = labelPropsSettings){
                 if(!labelsBox){
                     labelsBox = document.createElement("div");
                     labelsBox.id = `labels-box-${node.id()}`;
+                    labelsBox.className = "box-label";
+                    labelsBox.style.bottom = `${size/2-10}px`;
                     if(settings.boxLabels.displayOnlyOnHover) labelsBox.style.display = "none";
                     host.appendChild(labelsBox);
         
                     labels.forEach((label, i) => {
                         const boxChild = document.createElement('div');
                         boxChild.id = `labels-box-${node.id()}-${i}`;
-                        boxChild.className = settings.boxLabels.className;
+                        boxChild.className = "entry";
                         boxChild.innerHTML = label;
-                        boxChild.style.bottom = `${size/2-10+(i*settings.boxLabels.distanceBetween)}px`;
                         labelsBox.appendChild(boxChild);
                     })
                 }
 
                 else{
-                    labels.forEach((_label, i) => {
-                        const boxChild = document.getElementById(`labels-box-${node.id()}-${i}`);
-                        boxChild.style.bottom = `${size/2-10+(i*settings.boxLabels.distanceBetween)}px`;
-                    })
+                    labelsBox.style.bottom = `${size/2-10}px`;
                 }
             }
     
@@ -57,23 +64,21 @@ export function appendLabelsAndProps(cy, parent, settings = labelPropsSettings){
                     const propsBox = document.createElement("div");
                     propsBox.id = `props-box-${node.id()}`;
                     propsBox.style.right = "0px";
+                    propsBox.className = "property";
+                    propsBox.style.top = `${size/2-10}px`;
                     if(settings.props.displayOnlyOnHover) propsBox.style.display = "none";
                     host.appendChild(propsBox);
         
                     Object.keys(properties).forEach((key, i) => {
                         const propChild = document.createElement('div');
                         propChild.id = `props-box-${node.id()}-${i}`;
-                        propChild.className = settings.props.className;
-                        propChild.innerHTML = `<span>${key}</span><span>${properties[key]}</span>`;
-                        propChild.style.top = `${size/2-10+(i*settings.props.distanceBetween)}px`;
+                        propChild.className = "entry";
+                        propChild.innerHTML = `<span class="key">${key}</span><span class="value">${properties[key]}</span>`;
                         propsBox.appendChild(propChild);
                     });
                 }
                 else{
-                    Object.keys(properties).forEach((key, i) => {
-                        const propChild = document.getElementById(`props-box-${node.id()}-${i}`);
-                        propChild.style.top = `${size/2-10+(i*settings.props.distanceBetween)}px`;
-                    })
+                    propsBox.style.top = `${size/2-10}px`;
                 }
                 
             }
@@ -91,11 +96,11 @@ export function appendLabelsAndProps(cy, parent, settings = labelPropsSettings){
         const node = ev.target;
         if(settings.props.displayOnlyOnHover){
             const propsBox = document.getElementById(`props-box-${node.id()}`);
-            if(propsBox) propsBox.style.display = "block";
+            if(propsBox) propsBox.style.display = "flex";
         }
         if(settings.boxLabels.displayOnlyOnHover){
             const labelsBox = document.getElementById(`labels-box-${node.id()}`);
-            if(labelsBox) labelsBox.style.display = "block";
+            if(labelsBox) labelsBox.style.display = "flex";
         }
     });
 

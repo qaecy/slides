@@ -85,9 +85,38 @@
             <h2>Documents</h2>
           </section>
 
+          <section>
+            <p>We have mechanisms to make sure that a project only has one physical copy of each document</p>
+          </section>
+
+          <section>
+            <p>If uploaded through the portal, a document is stored in a raw file bucket on the project and named <code>{UUID}.{ext}</code></p>
+            <p><code>UUID</code> is generated from the file's MD5 hash.</p>
+            <p><code>ext</code> is the original file's extension.</p>
+          </section>
+
+          <section>
+            <p>If the file is coming from a 3rd party DMS we only need to store a copy of it temporarily while the processing is being executed.</p>
+          </section>
+
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-document.html"
+            data-background-iframe="dist/html/cytoscape/dm-document-1.html"
+          >
+          </section>
+
+          <section>
+            <p>If the same document is uploaded again with another name, we will not store another copy.</p>
+            <p>We simply add another file reference.</p>
+          </section>
+
+          <section>
+            <p>Let's imagine that the same file also exists on a Sharepoint site under another folder.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-document-2.html"
           >
           </section>
 

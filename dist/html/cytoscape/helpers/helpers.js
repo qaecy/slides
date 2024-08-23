@@ -13,6 +13,7 @@ export function logNodePositions(cy){
             if(n.classes) obj.classes = n.classes;
             nodesSimple.push(obj);
         });
+        console.log(nodesSimple)
     }
 }
 
@@ -38,7 +39,9 @@ export function isMobile() {
  * @param {*} frequency Adjust this value for faster/slower waves
  * @param {*} amplitude Adjust this value for larger/smaller waves
  */
-export function animateGraph(cy, frequency = 0.0001, amplitude = 0.02){
+export function animateGraph(cy, stopAfterFirstNodeHover = true, frequency = 0.0001, amplitude = 0.02){
+
+    let requestId;
     function animateNodes() {
       
         cy.nodes().forEach((node, i) => {
@@ -53,8 +56,17 @@ export function animateGraph(cy, frequency = 0.0001, amplitude = 0.02){
           });
         });
       
-        requestAnimationFrame(animateNodes); // Continue the animation
-      }
-      
-      requestAnimationFrame(animateNodes); // Start the animation
+        requestId = requestAnimationFrame(animateNodes); // Continue the animation
+    }
+    
+    requestId = requestAnimationFrame(animateNodes); // Start the animation
+    let animationRunning = true;
+
+    if(stopAfterFirstNodeHover && animationRunning){
+        cy.on('mouseover', 'node', () => {
+            cancelAnimationFrame(requestId)
+            animationRunning = false;
+        });
+    }
+    
 }

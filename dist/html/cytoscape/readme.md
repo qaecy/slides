@@ -7,16 +7,7 @@
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-
-    <style>
-      #cy {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="./default-styles.css">
   </head>
   <body>
     <div id="cy"></div>
@@ -49,7 +40,6 @@
           edges: [
             {
               data: {
-                id: "a",
                 source: "door",
                 target: "red",
                 label: "has color",
@@ -74,16 +64,7 @@
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-
-    <style>
-      #cy {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="./default-styles.css">
   </head>
   <body>
     <div id="cy"></div>
@@ -127,7 +108,6 @@
           edges: [
             {
               data: {
-                id: "a",
                 source: "door",
                 target: "red",
                 label: "has color",

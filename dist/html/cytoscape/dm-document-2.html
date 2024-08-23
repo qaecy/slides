@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { style, layout } from "./style.js";
+      import {
+        logNodePositions,
+        isMobile,
+        animateGraph,
+      } from "./helpers/helpers.js";
+      import { appendLabelsAndProps } from "./helpers/html-labels.js";
+
+      const edgeSelector = style.find((s) => s.selector === "edge");
+      edgeSelector.style["line-color"] = "#0d5be9";
+      edgeSelector.style["target-arrow-color"] = "#0d5be9";
+      edgeSelector.style["text-outline-color"] = "#0d5be9";
+
+      const nodeSelector = style.find((s) => s.selector === "node");
+      nodeSelector.style["background-color"] = "#03337a";
+      nodeSelector.style["background-opacity"] = "0.9";
+      nodeSelector.style["text-outline-color"] = "#03337a";
+      // nodeSelector.style["label"] = (node) =>
+      //   node.data("id") ? node.data("id") : "";
+
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(isMobile());
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:Document"],
+                properties: {
+                  "@id": "b3a8fc9d-38f8-52c4-9db3-58e491ef2b52",
+                  "qcy:md5hash": "e939b0e66904941741696befc4e36f01",
+                  "qcy:mime": "application/octet-stream",
+                  "qcy:resourceType": "bim",
+                  "qcy:resourceOpen": true,
+                  "schema:encodingFormat": "application/octet-stream",
+                  "schema:size": "248501871",
+                },
+              },
+              position: {
+                x: 135,
+                y: -16,
+              },
+            },
+            {
+              data: {
+                id: "file1",
+                boxLabels: ["qcy:File"],
+                properties: {
+                  "@id": "5583df12-07e4-54a4-9710-40a2b75c02fc",
+                  "qcy:suffix": ".ifc",
+                  "qcy:name": "Model.ifc",
+                  "qcy:foldername": "Models/Model.ifc",
+                  "qcy:relativeRemotePath":
+                    "30432f25-9bb1-4130-9114-052baf19accf/b3a8fc9d-38f8-52c4-9db3-58e491ef2b52.ifc",
+                  "qcy:remoteProvider": "portal_upload",
+                  "schema:dateCreated": "2024-08-23 07:23:11Z",
+                  "schema:dateModified": "2024-08-23 07:23:11Z",
+                },
+              },
+              position: {
+                x: 205,
+                y: 76,
+              },
+            },
+            {
+              data: {
+                id: "file2",
+                boxLabels: ["qcy:File"],
+                properties: {
+                  "@id": "4bbe6a86-f75e-48e8-98ce-4eadae3d429f",
+                  "qcy:suffix": ".ifc",
+                  "qcy:name": "Model.ifc",
+                  "qcy:foldername": "BIM-files/Model.ifc",
+                  "qcy:relativeRemotePath": "00670/BIM-files/Model.ifc",
+                  "qcy:remoteProvider": "sharepoint",
+                  "schema:dateCreated": "2024-08-24 09:21:17Z",
+                  "schema:dateModified": "2024-08-24 09:21:17Z",
+                },
+              },
+              position: {
+                x: 72,
+                y: 77,
+              },
+            },
+            {
+              data: {
+                id: "folder1",
+                boxLabels: ["qcy:Folder"],
+                properties: {
+                  "@id": "87b8168e-99fb-59ae-9a56-51ba0860c7fe",
+                  "qcy:name": "Models",
+                  "qcy:foldername": "Models",
+                },
+              },
+              position: {
+                x: 177,
+                y: 142,
+              },
+            },
+            {
+              data: {
+                id: "folder2",
+                boxLabels: ["qcy:Folder"],
+                properties: {
+                  "@id": "a0cac18c-4d74-4b79-9827-2f50ae0dd75b",
+                  "qcy:name": "BIM-files",
+                  "qcy:foldername": "BIM-files",
+                },
+              },
+              position: {
+                x: 101,
+                y: 160,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc",
+                target: "file1",
+                label: "qcy:hasLocation",
+              },
+            },
+            {
+              data: {
+                source: "folder1",
+                target: "file1",
+                label: "qcy:contains",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "file2",
+                label: "qcy:hasLocation",
+              },
+            },
+            {
+              data: {
+                source: "folder2",
+                target: "file2",
+                label: "qcy:contains",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendLabelsAndProps(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
