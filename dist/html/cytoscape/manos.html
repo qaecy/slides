@@ -8,7 +8,7 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
+      import { buildStyles, layout } from "./helpers/graph-styles.js";
       import { logNodePositions, animateGraph } from "./helpers/helpers.js";
 
       const cy = cytoscape({

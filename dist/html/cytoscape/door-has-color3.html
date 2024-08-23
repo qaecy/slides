@@ -7,9 +7,12 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
+      import { buildStyles, layout, defaultSettings } from "./helpers/graph-styles.js";
       import { logNodePositions, isMobile, animateGraph } from "./helpers/helpers.js";
 
+      const settings = defaultSettings;
+      settings.edgeColor = "#666";
+      const style = buildStyles(settings);
       const padding = isMobile() ? 5 : 100;
 
       const cy = cytoscape({

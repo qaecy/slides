@@ -12,8 +12,12 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
+      import { buildStyles, layout, defaultSettings } from "./helpers/graph-styles.js";
       import { logNodePositions } from "./helpers/helpers.js";
+
+      const settings = defaultSettings;
+      // MAKE CHANGES TO SETTINGS IF YOU WISH
+      const style = buildStyles(settings);
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
@@ -69,8 +73,12 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile } from "./helpers/helpers.js";
+      import { buildStyles, layout, defaultSettings } from "./helpers/graph-styles.js";
+      import { logNodePositions } from "./helpers/helpers.js";
+
+      const settings = defaultSettings;
+      // MAKE CHANGES TO SETTINGS IF YOU WISH
+      const style = buildStyles(settings);
 
       const cy = cytoscape({
         container: document.getElementById("cy"),

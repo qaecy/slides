@@ -7,7 +7,7 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
+      import { buildStyles, layout } from "./helpers/graph-styles.js";
       import {
         logNodePositions,
         isMobile,
@@ -16,9 +16,9 @@
       import { appendLabelsAndProps } from "./helpers/html-labels.js";
 
       const edgeSelector = style.find((s) => s.selector === "edge");
-      edgeSelector.style["line-color"] = "#0d5be9";
-      edgeSelector.style["target-arrow-color"] = "#0d5be9";
-      edgeSelector.style["text-outline-color"] = "#0d5be9";
+      // edgeSelector.style["line-color"] = "#0d5be9";
+      // edgeSelector.style["target-arrow-color"] = "#0d5be9";
+      // edgeSelector.style["text-color"] = "#0d5be9";
 
       const nodeSelector = style.find((s) => s.selector === "node");
       nodeSelector.style["background-color"] = "#03337a";

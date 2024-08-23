@@ -2,29 +2,20 @@
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-    <link rel="stylesheet" href="./default-styles.css">
+    <link rel="stylesheet" href="./default-styles.css" />
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile, animateGraph } from "./helpers/helpers.js";
+      import { buildStyles, layout } from "./helpers/graph-styles.js";
+      import {
+        logNodePositions,
+        isMobile,
+        animateGraph,
+      } from "./helpers/helpers.js";
 
-      const edgeSelector = style.find((s) => s.selector === "edge");
-      edgeSelector.style["line-color"] = "#0d5be9";
-      edgeSelector.style["target-arrow-color"] = "#0d5be9";
-      edgeSelector.style["text-outline-color"] = "#0d5be9";
-
-      const nodeSelector = style.find((s) => s.selector === "node");
-      nodeSelector.style["background-color"] = "#03337a";
-      nodeSelector.style["background-opacity"] = "0.9";
-      nodeSelector.style["text-outline-color"] = "#03337a";
-      // nodeSelector.style["label"] = (node) =>
-      //   node.data("id") ? node.data("id") : "";
-
+      const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
-
-      console.log(isMobile());
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
@@ -43,7 +34,7 @@
               },
               position: {
                 x: 103,
-                y: 83,
+                y: 27,
               },
             },
             {
@@ -53,8 +44,8 @@
                 parent: "g",
               },
               position: {
-                x: 228,
-                y: 89,
+                x: 234,
+                y: 29,
               },
             },
             {
@@ -62,8 +53,8 @@
                 id: "g",
               },
               position: {
-                x: 167,
-                y: 86,
+                x: 170,
+                y: 28,
               },
               classes: "triple",
             },
@@ -73,8 +64,8 @@
                 label: "2024-01-11T12:11:28Z",
               },
               position: {
-                x: 177,
-                y: 172,
+                x: 207,
+                y: 155,
               },
               classes: "literal",
             },
