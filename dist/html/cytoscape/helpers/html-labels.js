@@ -127,8 +127,9 @@ function appendHostContainers(cy, parent){
             const position = node.renderedPosition();
 
             const bl = node.data().boxLabels;
+            const pp = node.data().properties;
             
-            if(bl?.length){
+            if(bl !== undefined || pp !== undefined){
                 let box = document.getElementById(`box-${node.id()}`);
             
                 if (!box) {
