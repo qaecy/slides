@@ -7,7 +7,11 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { buildStyles, layout } from "./helpers/graph-styles.js";
+      import {
+        buildStyles,
+        layout,
+        defaultSettings,
+      } from "./helpers/graph-styles.js";
       import {
         logNodePositions,
         isMobile,
@@ -15,7 +19,10 @@
       } from "./helpers/helpers.js";
       import { appendLabelsAndProps } from "./helpers/html-labels.js";
 
-      const style = buildStyles();
+      const settings = defaultSettings;
+      settings.edgeFontSize = "8rem";
+      settings.edgeWidth = "5rem";
+      const style = buildStyles(settings);
       const padding = isMobile() ? 5 : 200;
 
       const cy = cytoscape({
@@ -37,8 +44,8 @@
                 },
               },
               position: {
-                x: -141,
-                y: -6,
+                x: -70,
+                y: 9,
               },
             },
             {
@@ -50,8 +57,8 @@
                 },
               },
               position: {
-                x: 148,
-                y: 74,
+                x: 208,
+                y: 71,
               },
             },
             {
@@ -65,33 +72,12 @@
                 },
               },
               position: {
-                x: -50,
-                y: 98,
-              },
-            },
-            {
-              data: {
-                id: "sel",
-                boxLabels: ["qcy:IdSelector"],
-                properties: {
-                  "@id": "60f2b1f6-a6cc-5e59-b25a-32608425f1ef_selector",
-                  "rdf:value": "2rUEw2RD1B8AWQ14SDbXNq",
-                },
-              },
-              position: {
-                x: -170,
-                y: 191,
+                x: -166,
+                y: 178,
               },
             },
           ],
           edges: [
-            {
-              data: {
-                source: "el",
-                target: "sel",
-                label: "gcy:hasSelector",
-              },
-            },
             {
               data: {
                 source: "el",

@@ -44,8 +44,8 @@
                 },
               },
               position: {
-                x: -70,
-                y: 9,
+                x: -148,
+                y: -38,
               },
             },
             {
@@ -57,8 +57,8 @@
                 },
               },
               position: {
-                x: 208,
-                y: 71,
+                x: 203,
+                y: 133,
               },
             },
             {
@@ -72,28 +72,18 @@
                 },
               },
               position: {
-                x: -166,
-                y: 178,
+                x: -149,
+                y: 171,
               },
             },
             {
               data: {
-                id: "lel",
-                boxLabels: ["ls:LinkElement"],
+                id: "a",
+                boxLabels: ["oa:Annotation"],
               },
               position: {
-                x: 61,
-                y: 70,
-              },
-            },
-            {
-              data: {
-                id: "dbl",
-                boxLabels: ["ls:DirectedBinaryLink"],
-              },
-              position: {
-                x: 41,
-                y: 226,
+                x: 49,
+                y: 46,
               },
             },
           ],
@@ -107,23 +97,23 @@
             },
             {
               data: {
-                source: "lel",
-                target: "doc2",
-                label: "ls:hasDocument",
+                source: "el",
+                target: "doc",
+                label: "oa:hasSource",
               },
             },
             {
               data: {
-                source: "dbl",
-                target: "lel",
-                label: "ls:hasToLinkElement",
-              },
-            },
-            {
-              data: {
-                source: "dbl",
+                source: "a",
                 target: "el",
-                label: "ls:hasFromLinkElement",
+                label: "oa:hasTarget",
+              },
+            },
+            {
+              data: {
+                source: "a",
+                target: "doc2",
+                label: "oa:hasBody",
               },
             },
           ],
