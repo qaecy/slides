@@ -7,17 +7,8 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import {
-        buildStyles,
-        layout,
-        defaultSettings,
-      } from "./helpers/graph-styles.js";
-      import {
-        logNodePositions,
-        isMobile,
-        animateGraph,
-      } from "./helpers/helpers.js";
-      import { appendLabelsAndProps } from "./helpers/html-labels.js";
+      import { isMobile } from "./helpers.js";
+      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
 
       const settings = defaultSettings;
       settings.edgeFontSize = "8rem";
@@ -122,7 +113,7 @@
 
       animateGraph(cy);
       logNodePositions(cy);
-      appendLabelsAndProps(cy, document.getElementById("cy"));
+      appendHTMLLabels(cy, document.getElementById("cy"));
     </script>
   </body>
 </html>

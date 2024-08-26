@@ -7,8 +7,8 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { buildStyles, layout, defaultSettings } from "./helpers/graph-styles.js";
-      import { logNodePositions, isMobile, animateGraph } from "./helpers/helpers.js";
+      import { isMobile } from "./helpers.js";
+      import { logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
 
       const settings = defaultSettings;
       settings.edgeColor = "#666";
