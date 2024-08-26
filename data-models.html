@@ -86,42 +86,58 @@
           </section>
 
           <section>
-            <p>We have mechanisms to make sure that a project only has one physical copy of each document</p>
+            <p>
+              We have mechanisms to make sure that a project only has one
+              physical copy of each document
+            </p>
           </section>
 
           <section>
-            <p>If uploaded through the portal, a document is stored in a raw file bucket on the project and named <code>{UUID}.{ext}</code></p>
+            <p>
+              If uploaded through the portal, a document is stored in a raw file
+              bucket on the project and named <code>{UUID}.{ext}</code>
+            </p>
             <p><code>UUID</code> is generated from the file's MD5 hash.</p>
             <p><code>ext</code> is the original file's extension.</p>
           </section>
 
           <section>
-            <p>If the file is coming from a 3rd party DMS we only need to store a copy of it temporarily while the processing is being executed.</p>
+            <p>
+              If the file is coming from a 3rd party DMS we only need to store a
+              copy of it temporarily while the processing is being executed.
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-document-1.html"
-          >
-          </section>
+          ></section>
 
           <section>
-            <p>If the same document is uploaded again with another name, we will not store another copy.</p>
+            <p>
+              If the same document is uploaded again with another name, we will
+              not store another copy.
+            </p>
             <p>We simply add another file reference.</p>
           </section>
 
           <section>
-            <p>Let's imagine that the same file also exists on a Sharepoint site under another folder.</p>
+            <p>
+              Let's imagine that the same file also exists on a Sharepoint site
+              under another folder.
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-document-2.html"
-          >
-          </section>
+          ></section>
 
           <section>
-            <p>Document UUIDs are generated as the UUIDv5 of the MD5 hash of the document</p>
+            <p>
+              Document UUIDs are generated as the UUIDv5 of the MD5 hash of the
+              document
+            </p>
           </section>
 
           <section>
@@ -130,7 +146,7 @@
           </section>
 
           <section>
-            <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 20px">
               <div>
                 <p>Raw file content</p>
                 <code><pre>hello</pre></code>
@@ -145,11 +161,9 @@
               </div>
             </div>
           </section>
-
         </section>
 
         <section>
-
           <section>
             <h2>Text document</h2>
           </section>
@@ -157,54 +171,74 @@
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-text-layout1.html"
-          >
-          </section>
-
+          ></section>
         </section>
 
         <section>
-
           <section>
             <h2>CAD document</h2>
           </section>
 
           <section>
-            <p>All text content in the CAD file is saved as Annotations in accordance with the</p>
-            <a href="https://www.w3.org/TR/annotation-vocab/">Web Annotation Vocabulary</a>
+            <p>
+              All text content in the CAD file is saved as Annotations in
+              accordance with the
+            </p>
+            <a href="https://www.w3.org/TR/annotation-vocab/"
+              >Web Annotation Vocabulary</a
+            >
           </section>
 
           <section>
-            <p>Each <a href="https://www.w3.org/TR/annotation-vocab/#annotation">Annotation</a> has a body and a target</p>
+            <p>
+              Each
+              <a href="https://www.w3.org/TR/annotation-vocab/#annotation"
+                >Annotation</a
+              >
+              has a body and a target
+            </p>
           </section>
 
           <section>
-            <p>The body holds the annotation content which in the case of a CAD document is the text entitiy</p>
+            <p>
+              The body holds the annotation content which in the case of a CAD
+              document is the text entitiy
+            </p>
           </section>
 
           <section>
-            <p>The target holds a reference to the source <span style="font-size: 1.2rem;">(the Document)</span> and a selector with instructions on where the annotation belongs</p>
-            <p>QAECY uses <a href="https://www.w3.org/TR/annotation-vocab/#fragmentselector">oa:FragmentSelectora</a> and XYWH-boxes</p>
+            <p>
+              The target holds a reference to the source
+              <span style="font-size: 1.2rem">(the Document)</span> and a
+              selector with instructions on where the annotation belongs
+            </p>
+            <p>
+              QAECY uses
+              <a href="https://www.w3.org/TR/annotation-vocab/#fragmentselector"
+                >oa:FragmentSelectora</a
+              >
+              and XYWH-boxes
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-cad-layout1.html"
-          >
-          </section>
+          ></section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-cad-layout2.html"
-          >
-          </section>
+          ></section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/dm-cad-layout1-current.html"
           >
-          <p style="color: red;">NB! Currently we use the following modeling which is not correct</p>
+            <p style="color: red">
+              NB! Currently we use the following modeling which is not correct
+            </p>
           </section>
-
         </section>
 
         <section>
@@ -215,8 +249,7 @@
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/icdd-bim-doc1.html"
-          >
-          </section>
+          ></section>
 
           <section>
             <p>Question: Who to link the document to the BIM element?</p>
@@ -230,20 +263,39 @@
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/icdd-bim-doc2.html"
           >
+            <div
+              style="
+                display: flex;
+                height: 80vh;
+                flex-direction: column;
+                justify-content: flex-end;
+              "
+            >
+              <a href="https://ceur-ws.org/Vol-3633/paper3.pdf"
+                >Example from paper</a
+              >
+            </div>
           </section>
 
           <section>
             <p>With the Web Annotation Ontology, it could look like this</p>
           </section>
 
-          <section
-            style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/oa-bim-doc.html"
-          >
+          <section data-background-iframe="dist/html/cytoscape/oa-bim-doc.html">
+            <div
+              style="
+                display: flex;
+                height: 80vh;
+                flex-direction: column;
+                justify-content: flex-end;
+              "
+            >
+              <a href="https://www.w3.org/TR/annotation-vocab/#hasselector"
+                >Example from documentation</a
+              >
+            </div>
           </section>
-
         </section>
-
       </div>
     </div>
 
