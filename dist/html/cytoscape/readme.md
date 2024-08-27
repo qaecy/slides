@@ -7,22 +7,16 @@
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-
-    <style>
-      #cy {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="./default-styles.css">
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
-      import { logNodePositions } from "./helpers.js";
+      import { logNodePositions, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const settings = defaultSettings;
+      // MAKE CHANGES TO SETTINGS IF YOU WISH
+      const style = buildStyles(settings);
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
@@ -49,7 +43,6 @@
           edges: [
             {
               data: {
-                id: "a",
                 source: "door",
                 target: "red",
                 label: "has color",
@@ -67,36 +60,32 @@
 
 2. Adjust nodes and edges to create the graph you wish
 
-3. You might not be satisfied with the layout as it looks per default, but you will notice that the `logJSONOnDrag()`-function will take care of logging the nodes' positions every time you drag a node. You can simply copy this and replace your nodes-section of the elements. In order for this to work you also need to adjust the layout-settings name must be set to "preset" (`name: "preset"`) and if the graph content is minimal, you might need to adjust the padding. For example:
+3. You might not be satisfied with the layout as it looks per default, but you will notice that the `logJSONOnDrag()`-function will take care of logging the nodes' positions every time you drag a node. You can simply copy this and replace your nodes-section of the elements. In order for this to work you also need to adjust the layout-settings name must be set to "preset" (`name: "preset"`) and if the graph content is minimal, you might need to adjust the padding. For example using the isMobile helper:
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-
-    <style>
-      #cy {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="./default-styles.css">
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile } from "./helpers.js";
+      import { isMobile } from "./helpers.js";
+      import { logNodePositions, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const settings = defaultSettings;
+      // MAKE CHANGES TO SETTINGS IF YOU WISH
+      const style = buildStyles(settings);
+      const padding = isMobile() ? 5 : 200;
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
         layout: {
           name: "preset",
-          padding: padding: () => isMobile() ? 5 : 300,
+          padding,
         },
         elements: {
           nodes: [
@@ -127,7 +116,6 @@
           edges: [
             {
               data: {
-                id: "a",
                 source: "door",
                 target: "red",
                 label: "has color",

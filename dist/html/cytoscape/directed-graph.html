@@ -15,19 +15,10 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { style, layout } from "./style.js";
-      import { logNodePositions, isMobile, animateGraph } from "./helpers.js";
+      import { isMobile } from "./helpers.js";
+      import { logNodePositions, animateGraph, buildStyles, layout } from '../../js/cytoscape-helpers/index.mjs';
 
-      const edgeSelector = style.find((s) => s.selector === "edge");
-      edgeSelector.style["line-color"] = "#0d5be9";
-      edgeSelector.style["target-arrow-color"] = "#0d5be9";
-
-      const nodeSelector = style.find((s) => s.selector === "node");
-      nodeSelector.style["background-color"] = "#03337a";
-      nodeSelector.style["background-opacity"] = "0.9";
-      // nodeSelector.style["label"] = (node) =>
-      //   node.data("id") ? node.data("id") : "";
-
+      const style = buildStyles();
       const padding = isMobile() ? 5 : 100;
 
       const cy = cytoscape({

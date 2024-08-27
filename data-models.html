@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY - our data models</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <!-- <link rel="stylesheet" href="plugin/highlight/onto-hljs.css" /> -->
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- Captions -->
+      <cap
+        style="
+          position: absolute;
+          bottom: 12vh;
+          left: 0px;
+          width: 100%;
+          z-index: 500;
+          text-align: center;
+          font-size: 1.2vw;
+          font-style: italic;
+          color: #65625e;
+          font-family: 'Courier New', Courier, monospace;
+        "
+      >
+      </cap>
+
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Our Data Models</h2>
+          </section>
+
+          <section>
+            <p>
+              At QAECY we don't use ONE schema. We use a combination of schemas
+              which is possible because we model all information as Linked Data.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              This slide deck provides an overview of all data models with
+              specific modeling examples
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Building topology</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Asset Properties</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Documents</h2>
+          </section>
+
+          <section>
+            <p>
+              We have mechanisms to make sure that a project only has one
+              physical copy of each document
+            </p>
+          </section>
+
+          <section>
+            <p>
+              If uploaded through the portal, a document is stored in a raw file
+              bucket on the project and named <code>{UUID}.{ext}</code>
+            </p>
+            <p><code>UUID</code> is generated from the file's MD5 hash.</p>
+            <p><code>ext</code> is the original file's extension.</p>
+          </section>
+
+          <section>
+            <p>
+              If the file is coming from a 3rd party DMS we only need to store a
+              copy of it temporarily while the processing is being executed.
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-document-1.html"
+          ></section>
+
+          <section>
+            <p>
+              If the same document is uploaded again with another name, we will
+              not store another copy.
+            </p>
+            <p>We simply add another file reference.</p>
+          </section>
+
+          <section>
+            <p>
+              Let's imagine that the same file also exists on a Sharepoint site
+              under another folder.
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-document-2.html"
+          ></section>
+
+          <section>
+            <p>
+              Document UUIDs are generated as the UUIDv5 of the MD5 hash of the
+              document
+            </p>
+          </section>
+
+          <section>
+            <p>We always use the same namespace</p>
+            <code>daca0510-72b5-48ba-9091-b918ca18136b</code>
+          </section>
+
+          <section>
+            <div style="display: flex; flex-direction: column; gap: 20px">
+              <div>
+                <p>Raw file content</p>
+                <code><pre>hello</pre></code>
+              </div>
+              <div>
+                <p>MD5</p>
+                <code><pre>5d41402abc4b2a76b9719d911017c592</pre></code>
+              </div>
+              <div>
+                <p>File UUID</p>
+                <code><pre>ee0b4760-cbc2-565e-99ff-e1852103c30c</pre></code>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Text document</h2>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-text-layout1.html"
+          ></section>
+        </section>
+
+        <section>
+          <section>
+            <h2>CAD document</h2>
+          </section>
+
+          <section>
+            <p>
+              All text content in the CAD file is saved as Annotations in
+              accordance with the
+            </p>
+            <a href="https://www.w3.org/TR/annotation-vocab/"
+              >Web Annotation Vocabulary</a
+            >
+          </section>
+
+          <section>
+            <p>
+              Each
+              <a href="https://www.w3.org/TR/annotation-vocab/#annotation"
+                >Annotation</a
+              >
+              has a body and a target
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The body holds the annotation content which in the case of a CAD
+              document is the text entitiy
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The target holds a reference to the source
+              <span style="font-size: 1.2rem">(the Document)</span> and a
+              selector with instructions on where the annotation belongs
+            </p>
+            <p>
+              QAECY uses
+              <a href="https://www.w3.org/TR/annotation-vocab/#fragmentselector"
+                >oa:FragmentSelectora</a
+              >
+              and XYWH-boxes
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-cad-layout1.html"
+          ></section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-cad-layout2.html"
+          ></section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-cad-layout1-current.html"
+          >
+            <p style="color: red">
+              NB! Currently we use the following modeling which is not correct
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Document linking approaches</h2>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/icdd-bim-doc1.html"
+          ></section>
+
+          <section>
+            <p>Question: Who to link the document to the BIM element?</p>
+          </section>
+
+          <section>
+            <p>With ICDD, it could look like this</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/icdd-bim-doc2.html"
+          >
+            <div
+              style="
+                display: flex;
+                height: 80vh;
+                flex-direction: column;
+                justify-content: flex-end;
+              "
+            >
+              <a href="https://ceur-ws.org/Vol-3633/paper3.pdf"
+                >Example from paper</a
+              >
+            </div>
+          </section>
+
+          <section>
+            <p>With the Web Annotation Ontology, it could look like this</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/oa-bim-doc.html">
+            <div
+              style="
+                display: flex;
+                height: 80vh;
+                flex-direction: column;
+                justify-content: flex-end;
+              "
+            >
+              <a href="https://www.w3.org/TR/annotation-vocab/#hasselector"
+                >Example from documentation</a
+              >
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script type="module">
+      import { turtle } from "./plugin/highlight/turtle.js";
+      import { sparql } from "./plugin/highlight/sparql.js";
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        scrollActivationWidth: null, // Will not work with graphs
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

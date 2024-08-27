@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:Document", "as:Collection"],
+                properties: {
+                  "@id": "7b1778a8-ce7d-5f45-a7f8-615e5fa7dbda",
+                  "qcy:resourceType": "cad",
+                  "": "+ all properties from document"
+                },
+              },
+              position: {
+                x: 29,
+                y: -49,
+              },
+            },
+            {
+              data: {
+                id: "a1",
+                boxLabels: ["oa:Annotation"],
+                properties: {
+                  "@id": "313ab2f3-5170-5b41-a57e-df657706680d",
+                  "qcy:inferredType": "DXFTEXT"
+                },
+              },
+              position: {
+                x: 11,
+                y: 50,
+              },
+            },
+            {
+              data: {
+                id: "a1b",
+                boxLabels: ["qcy:Content"],
+                properties: {
+                  "@id": "760cedc2-1c49-5e7a-b9fa-04686185217c",
+                  "rdf:value": "FLOOR PLAN",
+                },
+              },
+              position: {
+                x: -89,
+                y: 141,
+              },
+            },
+            {
+              data: {
+                id: "a1s",
+                boxLabels: ["oa:FragmentSelector"],
+                properties: {
+                  "@id": "0fde3c7d-cbc6-5c14-bb33-bd3968e277e5",
+                  "rdf:value": "xywh=-282.4337515755993,-449.3217249122346,0,0",
+                  "oa:conformsTo": "http://www.w3.org/TR/media-frags/"
+                },
+              },
+              position: {
+                x: 43,
+                y: 166,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc",
+                target: "a1",
+                label: "as:items",
+              },
+            },
+            {
+              data: {
+                source: "a1",
+                target: "a1b",
+                label: "oa:hasBody",
+              },
+            },
+            {
+              data: {
+                source: "a1",
+                target: "a1s",
+                label: "oa:hasSelector",
+              },
+            }
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

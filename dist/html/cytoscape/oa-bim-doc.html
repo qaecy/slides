@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const settings = defaultSettings;
+      settings.edgeFontSize = "8rem";
+      settings.edgeWidth = "5rem";
+      const style = buildStyles(settings);
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:Document"],
+                properties: {
+                  "@id": "47367664-ec73-5730-8d1d-0a5d2ffee10d",
+                  "": "+ all properties from document",
+                },
+              },
+              position: {
+                x: -148,
+                y: -38,
+              },
+            },
+            {
+              data: {
+                id: "doc2",
+                boxLabels: ["qcy:Document", "qcy:TextDocument"],
+                properties: {
+                  "@id": "393ee8cf-32da-5419-a00c-3d204dba9cd9",
+                },
+              },
+              position: {
+                x: 203,
+                y: 133,
+              },
+            },
+            {
+              data: {
+                id: "el",
+                boxLabels: ["bot:Element", "beo:Window"],
+                properties: {
+                  "@id": "60f2b1f6-a6cc-5e59-b25a-32608425f1ef",
+                  "ifc:guid": "2rUEw2RD1B8AWQ14SDbXNq",
+                  "": "NB! Should be ifc:globalId",
+                },
+              },
+              position: {
+                x: -149,
+                y: 171,
+              },
+            },
+            {
+              data: {
+                id: "a",
+                boxLabels: ["oa:Annotation"],
+              },
+              position: {
+                x: 49,
+                y: 46,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "el",
+                target: "doc",
+                label: "qcy:hasTarget",
+              },
+            },
+            {
+              data: {
+                source: "el",
+                target: "doc",
+                label: "oa:hasSource",
+              },
+            },
+            {
+              data: {
+                source: "a",
+                target: "el",
+                label: "oa:hasTarget",
+              },
+            },
+            {
+              data: {
+                source: "a",
+                target: "doc2",
+                label: "oa:hasBody",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
