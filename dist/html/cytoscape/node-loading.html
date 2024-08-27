@@ -2,67 +2,83 @@
 <html>
   <head>
     <script src="../../js/cytoscape.min.js"></script>
-    <link rel="stylesheet" href="./default-styles.css">
+    <link rel="stylesheet" href="./default-styles.css" />
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
       import { isMobile, nodeLoading } from "./helpers.js";
-      import { logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layout,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
 
       const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
+
+      const nodes = [
+        {
+          data: {
+            id: "a",
+          },
+        },
+      ];
+      const edges = [];
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
         layout: {
-          name: "preset",
           padding,
         },
         elements: {
-          nodes: [
-            {
-              data: {
-                id: "a",
-                pct: 10
-              },
-              position: {
-                x: 73,
-                y: 25,
-              },
-              classes: "loading"
-            },
-            {
-              data: {
-                id: "b",
-              },
-              position: {
-                x: 215,
-                y: 92,
-              },
-            },
-          ],
-          edges: [{ data: { id: "ab", source: "a", target: "b" } }],
+          nodes,
+          edges,
         },
       });
 
       // Animate pct
       let pct = 10;
       const timer = setInterval(() => {
-        pct+=10;
-        const node = cy.nodes().find(n => n.id() === "a");
-        node.data("pct", pct);
-        console.log(node.classes())
-        if(pct === 100){
-          clearInterval(timer);
-          node.data("pct", undefined);
-          node.removeClass("loading");
+        // First add the new node
+        if (pct === 10) {
+          cy.add(
+            {
+              group: "nodes",
+              data: {
+                id: "b",
+                pct: 10,
+              },
+              classes: "loading",
+            }
+          );
+          cy.add({
+              group: "edges",
+              data: { id: "ab", source: "a", target: "b" },
+          })
+          cy.layout({
+            name: 'cose',
+            padding
+          }).run();
+          console.log(cy.edges())
         }
-      }, 1000)
+
+        // Then start animating the pct
+        pct += 10;
+        const nodeB = cy.nodes().find((n) => n.id() === "b");
+        nodeB.data("pct", pct);
+        if (pct === 100) {
+          clearInterval(timer);
+          nodeB.data("pct", undefined);
+          nodeB.removeClass("loading");
+        }
+      }, 1000);
 
       // animateGraph(cy);
-      nodeLoading(cy)
+      nodeLoading(cy);
       // logNodePositions(cy);
     </script>
   </body>
