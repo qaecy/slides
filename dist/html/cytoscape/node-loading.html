@@ -40,42 +40,50 @@
         },
       });
 
-      // Animate pct
-      let pct = 10;
-      const timer = setInterval(() => {
-        // First add the new node
-        if (pct === 10) {
-          cy.add(
-            {
-              group: "nodes",
-              data: {
-                id: "b",
-                pct: 10,
-              },
-              classes: "loading",
-            }
-          );
-          cy.add({
-              group: "edges",
-              data: { id: "ab", source: "a", target: "b" },
-          })
-          cy.layout({
-            name: 'cose',
-            padding
-          }).run();
-          console.log(cy.edges())
-        }
+      // Append new node after 1 second
+      setTimeout(() => appendNewNode(), 1000);
 
-        // Then start animating the pct
-        pct += 10;
-        const nodeB = cy.nodes().find((n) => n.id() === "b");
-        nodeB.data("pct", pct);
-        if (pct === 100) {
-          clearInterval(timer);
-          nodeB.data("pct", undefined);
-          nodeB.removeClass("loading");
-        }
-      }, 1000);
+      function appendNewNode() {
+        // Add node
+        cy.add({
+          group: "nodes",
+          data: {
+            id: "b",
+            pct: 10,
+          },
+          classes: "loading",
+        });
+
+        // Add edge
+        cy.add({
+          group: "edges",
+          data: { id: "ab", source: "a", target: "b" },
+        });
+
+        // Update layout
+        cy.layout({
+          name: "cose",
+          padding,
+        }).run();
+
+        // Start animating pct
+        animatePct();
+      }
+
+      function animatePct() {
+        let pct = 10;
+        const timer = setInterval(() => {
+          // Then start animating the pct
+          pct += 10;
+          const nodeB = cy.nodes().find((n) => n.id() === "b");
+          nodeB.data("pct", pct);
+          if (pct === 100) {
+            clearInterval(timer);
+            nodeB.data("pct", undefined);
+            nodeB.removeClass("loading");
+          }
+        }, 1000);
+      }
 
       // animateGraph(cy);
       nodeLoading(cy);
