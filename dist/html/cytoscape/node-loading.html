@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css">
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile, nodeLoading } from "./helpers.js";
+      import { logNodePositions, animateGraph, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "a",
+                pct: 10
+              },
+              position: {
+                x: 73,
+                y: 25,
+              },
+              classes: "loading"
+            },
+            {
+              data: {
+                id: "b",
+              },
+              position: {
+                x: 215,
+                y: 92,
+              },
+            },
+          ],
+          edges: [{ data: { id: "ab", source: "a", target: "b" } }],
+        },
+      });
+
+      // Animate pct
+      let pct = 10;
+      const timer = setInterval(() => {
+        pct+=10;
+        const node = cy.nodes().find(n => n.id() === "a");
+        node.data("pct", pct);
+        console.log(node.classes())
+        if(pct === 100){
+          clearInterval(timer);
+          node.data("pct", undefined);
+          node.removeClass("loading");
+        }
+      }, 1000)
+
+      // animateGraph(cy);
+      nodeLoading(cy)
+      // logNodePositions(cy);
+    </script>
+  </body>
+</html>
