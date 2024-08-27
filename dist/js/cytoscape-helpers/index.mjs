@@ -15,13 +15,13 @@ function O(s, e = !0, t = 1e-4, n = 0.02) {
     cancelAnimationFrame(o), i = !1;
   }), o;
 }
-var v = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, m = {}, f = {};
-Object.defineProperty(f, "__esModule", { value: !0 });
-function y(s) {
+var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, y = {}, h = {};
+Object.defineProperty(h, "__esModule", { value: !0 });
+function b(s) {
   return s;
 }
-f.asTypedEventEmitter = y;
-var h = {}, b = v && v.__spreadArrays || function() {
+h.asTypedEventEmitter = b;
+var v = {}, g = m && m.__spreadArrays || function() {
   for (var s = 0, e = 0, t = arguments.length; e < t; e++)
     s += arguments[e].length;
   for (var n = Array(s), o = 0, e = 0; e < t; e++)
@@ -29,8 +29,8 @@ var h = {}, b = v && v.__spreadArrays || function() {
       n[o] = r[i];
   return n;
 };
-Object.defineProperty(h, "__esModule", { value: !0 });
-var g = (
+Object.defineProperty(v, "__esModule", { value: !0 });
+var x = (
   /** @class */
   function() {
     function s() {
@@ -83,7 +83,7 @@ var g = (
       }, this.getMaxListeners = function() {
         return e.maxListeners;
       }, this.listeners = function(t) {
-        return b(e.events[t]);
+        return g(e.events[t]);
       }, this.rawListeners = function(t) {
         return e.events[t];
       }, this.eventNames = function() {
@@ -95,17 +95,17 @@ var g = (
     return s;
   }()
 );
-h.EventEmitter = g;
+v.EventEmitter = x;
 (function(s) {
   function e(t) {
     for (var n in t)
       s.hasOwnProperty(n) || (s[n] = t[n]);
   }
-  Object.defineProperty(s, "__esModule", { value: !0 }), e(f), e(h);
-})(m);
+  Object.defineProperty(s, "__esModule", { value: !0 }), e(h), e(v);
+})(y);
 class w {
   constructor(e) {
-    this._cy = e, this.events = new m.EventEmitter(), this._initEventListeners();
+    this._cy = e, this.events = new y.EventEmitter(), this._initEventListeners();
   }
   _initEventListeners() {
     var e, t;
@@ -139,7 +139,7 @@ class w {
     return Math.sqrt(n * n + o * o);
   }
 }
-const x = {
+const f = {
   backgroundColor: "#fff",
   edgeColor: "#0d5be9",
   edgeFontSize: "5rem",
@@ -148,7 +148,7 @@ const x = {
   nodeOpacity: "0.9",
   font: "Poppins",
   directed: !0
-}, $ = (s = x) => [
+}, $ = (s = f) => [
   {
     selector: "node",
     style: {
@@ -161,7 +161,9 @@ const x = {
       "text-outline-color": (e) => e.data("color") ? e.data("color") : s.nodeColor,
       "text-outline-width": 1,
       // Set the outline width
-      "background-color": (e) => e.data("color") ? e.data("color") : s.nodeColor
+      "background-color": (e) => e.data("color") ? e.data("color") : s.nodeColor,
+      width: (e) => e.data("size") ? e.data("size") : "",
+      height: (e) => e.data("size") ? e.data("size") : ""
     }
   },
   {
@@ -176,7 +178,7 @@ const x = {
       "curve-style": "bezier",
       "target-arrow-shape": s.directed ? "triangle" : "none",
       "line-color": s.edgeColor,
-      width: s.edgeWidth,
+      width: (e) => e.data("width") ? e.data("width") : s.edgeWidth,
       "text-rotation": "autorotate",
       // Rotate label with the edge.
       "text-background-opacity": 1,
@@ -212,6 +214,20 @@ const x = {
       // 'background-color': "red",
       // "background-color": "white",
       // "border-color": node => node.data('color') ? 'data(color)' : '#0d5be9'
+    }
+  },
+  {
+    selector: ".loading",
+    style: {
+      "pie-size": "100%",
+      "pie-1-background-color": f.nodeColor,
+      // Color A
+      "pie-1-background-size": (e) => `${e.data("pct")}%`,
+      "pie-2-background-color": f.edgeColor,
+      // Color B
+      "pie-2-background-size": (e) => `${100 - parseInt(e.data("pct"))}%`,
+      label: (e) => `${e.data("pct")}%`,
+      "font-size": "5rem"
     }
   }
 ], C = {
@@ -307,7 +323,7 @@ export {
   B as appendHTMLLabels,
   E as appendHostContainers,
   $ as buildStyles,
-  x as defaultSettings,
+  f as defaultSettings,
   C as layout,
   N as logNodePositions
 };

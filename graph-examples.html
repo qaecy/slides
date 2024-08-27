@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Test</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section
+          style="pointer-events: none"
+          data-background-iframe="dist/html/cytoscape/node-loading.html"
+        >
+          <p>Node loading</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // Also available as an ES module, see:
+      // https://revealjs.com/initialization/
+      Reveal.initialize({
+        hash: true,
+        scrollActivationWidth: null, // Will not work with graphs
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile, nodeLoading } from "./helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layout,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const nodes = [
+        {
+          data: {
+            id: "a",
+          },
+        },
+      ];
+      const edges = [];
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          padding,
+        },
+        elements: {
+          nodes,
+          edges,
+        },
+      });
+
+      // Append new node after 1 second
+      setTimeout(() => appendNewNode(), 1000);
+
+      function appendNewNode() {
+        // Add node
+        cy.add({
+          group: "nodes",
+          data: {
+            id: "b",
+            pct: 10,
+          },
+          classes: "loading",
+        });
+
+        // Add edge
+        cy.add({
+          group: "edges",
+          data: { id: "ab", source: "a", target: "b" },
+        });
+
+        // Update layout
+        cy.layout({
+          name: "cose",
+          padding,
+        }).run();
+
+        // Start animating pct
+        animatePct();
+      }
+
+      function animatePct() {
+        let pct = 10;
+        const timer = setInterval(() => {
+          // Then start animating the pct
+          pct += 10;
+          const nodeB = cy.nodes().find((n) => n.id() === "b");
+          nodeB.data("pct", pct);
+          if (pct === 100) {
+            clearInterval(timer);
+            nodeB.data("pct", undefined);
+            nodeB.removeClass("loading");
+          }
+        }, 1000);
+      }
+
+      // animateGraph(cy);
+      nodeLoading(cy);
+      // logNodePositions(cy);
+    </script>
+  </body>
+</html>
