@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>   
+    
+    <style>
+      #matrixContainer {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="matrixContainer"></div>
+    <script type="module">
+    // Function to generate a random 2D matrix
+    function generateMatrix(rows, cols) {
+      const matrix = [];
+      for (let i = 0; i < rows; i++) {
+        let row = [];
+        if (i === Math.floor(rows/2)) {
+            for (let j = 0; j < cols; j++) {
+                let x = " . . . .";
+                row.push( x );   
+            }             
+        } else {
+            for (let j = 0; j < cols; j++) {
+                if (j === Math.floor(cols/2)) {
+                    let x = " . . . .";
+                    row.push( x );
+                } else {
+                    let x = generateRandomNormalNumber();
+                    row.push( Math.abs(x) );
+                }
+            }
+        }
+        matrix.push(row);
+        }
+      return matrix;
+    }
+    function generateRandomNormalNumber() {
+        let u = 0, v = 0;
+        while(u === 0) u = Math.random(); 
+        while(v === 0) v = Math.random();
+        let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+        return num.toFixed(3); 
+    }
+    // Function to display the matrix in the HTML
+    function displayMatrix(matrix) {
+      const container = document.getElementById('matrixContainer');
+      container.innerHTML = ''; // Clear previous content
+
+      const table = document.createElement('table');
+      for (const row of matrix) {
+        const tr = document.createElement('tr');
+        for (const value of row) {
+          const td = document.createElement('td');
+          td.textContent = value;
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+      container.appendChild(table);
+    }
+    // Example usage: Generate and display a mxn matrix
+    const matrix = generateMatrix(5, 5);
+    displayMatrix(matrix);
+    </script>
+  </body>
+</html>

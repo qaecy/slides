@@ -28,3 +28,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, main, menu, nav, section {
   display: block;
 }
+
+section[data-background-iframe] {
+  display: flex; /* or display: grid */
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+}

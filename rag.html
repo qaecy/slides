@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - Retrieval Augmented Generation</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	</head>
+	<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <img src="dist/img/logo.svg" alt="">
+        <p>your knowledge, accessible</p>
+      </section>
+
+       <!-- page 1 -->
+
+      <section>
+
+        <section>
+          <h2>LLMs & Retrieval Augmented Generation</h2>
+        </section>
+
+        <section>
+          <h3>LLMs</h3>
+          <ul>
+            <li>Public LLMs (like GPT-4) are very big Neural Networks, consisting of billions of parameters, that have been trained on vast amounts of data.</li>
+            <li>However they <b>haven't been trained on</b> and <b>don't have direct access</b> to private (unseen) data.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>3 Ways to Expose LLMs to Unseen Data</h3>
+          <ol>
+            <li>Training a new LLM.</li>
+            <li>Fine-Tuning an existing LLM.</li>
+            <li>Performing Retrieval Augmented Generation (RAG).</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>LLM Training & Fine-Tuning Challenges</h3>
+          <ul>
+            <li>Costs.</li>
+            <li>Complexity.</li>
+            <li>Upating problem.</li>
+            <li>Poor/no information access control.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Retrieval Augmented Generation</h3>
+          <p>In simple terms, RAG describes a setup through which an LLM is provided direct access to information relevant to the user's question, which is not part of the training data.</p>
+        </section>
+
+        <section>
+          <h3>RAG Benefits</h3>
+          <ul>
+            <li>Splits <b>information retrieval</b> from <b>text generation</b>.</li>
+            <li>Very cheap and fast to update.</li>
+            <li>Allows more explicit control on information access.</li>
+            <li>Scales efficiently.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Training & RAG</h3>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Fine-Tuning</p>
+              <img src="dist/img/neural-networks/llm_ft.pdf" alt="" style="height: 150px;">
+            </div>
+            <div>
+              <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">RAG</p>
+              <img src="dist/img/neural-networks/llm_rag.pdf" alt="" style="height: 220px;">
+            </div>
+          </div>
+        </section>
+
+
+      </section>
+
+      <!-- page 2 -->
+
+      <section>
+
+        <section>
+          <h2>Base RAG</h2>
+        </section>
+
+        <section>
+          <h3>Basic RAG Architecture</h3>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <div style="text-align: center;">
+              <img src="dist/img/neural-networks/rag_base.pdf" alt="" style="height: 500px;">
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+       <!-- page 3 -->
+
+      <section>
+        <section>
+          <h2>Advanced RAG</h2>
+        </section>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script type="module">
+    import { turtle } from "./plugin/highlight/turtle.js";
+    import { sparql } from "./plugin/highlight/sparql.js";
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      highlight: {
+        beforeHighlight: (hljs) => {
+          hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+          hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+        },
+      },
+    });
+  </script>
+</body>
+</html>

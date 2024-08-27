@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - Vectors Embeddings</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	</head>
+	<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <img src="dist/img/logo.svg" alt="">
+        <p>your knowledge, accessible</p>
+      </section>
+
+      <section>
+
+        <!-- page 1 -->
+
+        <section>
+          <h2>Search & Vector Embeddings</h2>
+        </section>
+
+        <section>
+          <h3>Accessing Information can be Complex</h3>
+          <ul>
+            <li>Multiple data types</li>
+            <li>Various sources</li>
+            <li>Different file formats</li>
+            <li>Arbitrary or no structure</li>
+            <li>Challenging questions</li>
+          </ul>
+        </section>
+
+        <section>
+          <p><h5 style="display: inline;">Traditional approaches</h5> that rely on <h5 style="display: inline;">manually curated metadata</h5> and <h5 style="display: inline;">full-text indexing</h5>
+          come with certain limitations that can be a bottleneck for easy, rich and reliable infromation access.</p>
+        </section>
+
+        <section>
+          <h3>Mitigating</h3>
+          <ul>
+            <li>Unified data representations</li>
+            <li>Meaningful encodings</li>
+            <li>Contextual awareness</li>
+            <li>Flexible searching</li>
+            <li>Intention capturing</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Turning Different Inputs into Searchable Information</h3>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Images</p>
+              <img src="dist/img/neural-networks/image.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Texts</p>
+              <img src="dist/img/neural-networks/text.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Tables</p>
+              <img src="dist/img/neural-networks/table.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Audio</p>
+              <img src="dist/img/neural-networks/audio.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">Graphs</p>
+              <img src="dist/img/neural-networks/graph.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+            <div style="text-align: center;">
+              <p style="margin-bottom: 5px;">3d Models</p>
+              <img src="dist/img/neural-networks/box.svg" alt="" style="width: 100px; height: 100px;">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Similarity Space</h3>
+          <p>It all starts with establishing a continuous space to measure similarity meaningfully!</p>
+        </section>
+
+        <section>
+          <h3>Vector Embeddings as Latent Representations</h3>
+        </section>
+
+        <section>
+          <h3>Documents -> Vectors</h3>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <h3 style="display: inline; color: black;">\( x_{1} : \)</h3>
+            <img src="dist/img/neural-networks/text.svg" alt="" style="width: 150px; height: 150px; display: inline;">
+            <h3 style="display: inline; color: black;">\( , f(x_{1}) \rightarrow [0.1, -0.3, \dots, 0.4, -0.2] \)</h3>
+          </div>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <h3 style="display: inline; color: black;">\( x_{2} : \)</h3>
+            <img src="dist/img/neural-networks/text.svg" alt="" style="width: 150px; height: 150px; display: inline;">
+            <h3 style="display: inline; color: black;">\( , f(x_{2}) \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)</h3>
+          </div>
+        </section>
+
+        <section>
+          <h3>How Similar?</h3>
+          <h3 style="display: inline; color: black;">\( f(x_{1}) \cdot f(x_{2}) = 0.14 \)</h3>
+        </section>
+
+        <section>
+          <h3>Why would this work?</h3>
+          <ul>
+            <li>How are those vectors produced?</li>
+            <li>Why does their numerical comparison make sense?</li>
+          </ul>
+        </section>
+
+      </section>
+
+      <!-- page 2 -->
+
+      <section>
+
+        <section>
+          <h2>Word2Vec: A Basic Example</h2>
+        </section>
+
+        <section>
+          <h3>w2v (skip-gram)</h3>
+          <p style="text-align: left; font-style: italic; font-size: 30px;">
+            Neural Network trained to predict the total probabilty of a word \( w_{j} \) being in the neighboring context \( C \) (with size \( N \)) of a target word \( w_{i} \) given a text corpus.
+          </p>
+          <h6 style="color: black;">\( \prod_{i \in C} Pr(w_j : j \in N + i | w_i) \)</h6>
+        </section>
+
+        <section>
+          <h3>Dummy w2v</h3>
+          <ul>
+            <li>Corpus of 12 words</li>
+            <li>Input: 1-hot vector \( x_i = [0, 0, \dots, 1, 0]_{\in} R^{12} \)</li>
+            <li>Output: approximate probability distribution \( {p_{i}}_{\in} R^{12} \)</li>
+          </ul>
+          <img src="dist/img/neural-networks/w2v.svg" alt="" style="width: 80%; height: 70%; display: block;">
+        </section>
+
+        <section>
+          <h3>Dense Embeddings</h3>
+          <p style="font-size: 30px; text-align: left; font-style: italic;">
+            After training, the values of the middle layer converge to dense embeddings which capture the semantic similarity of the words.
+          </p>
+          <img src="dist/img/neural-networks/w2v_emb.svg" alt="" style="width: 80%; height: 70%; display: block;">
+        </section>
+
+        <section>
+          <h3>Embeddings Matrix</h3>
+          <p style="font-size: 30px; text-align: left; font-style: italic;">
+            Each row corresponds to a word and each column to one dimension of the embedding layer.
+          </p>
+          \[
+          \begin{bmatrix}
+          0.125 & -2.103 & \dots &  -2.005 & 0.012 \\
+          0.615 & -1.142 & \dots & 1.945 & -2.113 \\
+          \vdots & \vdots & \ddots & \vdots & \vdots \\
+          0.712 & 1.153 & \dots &  -1.721 & -0.852 \\
+          -0.925 & -0.903 & \dots &  1.044 & -1.412 
+          \end{bmatrix}
+          \]
+        </section>
+
+        <section>
+          <h3>Algebraic Operations on Words!</h3>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="dist/img/neural-networks/kingqueen.png" alt="" style="width: 40%; height: 40%; display: block;">
+          </div>
+          <p style="font-size: 16px; font-style: italic; text-align: center;">
+            reduced to 2-dimensional vectors for visualisation purposes.
+          </p>
+          <p style="text-align: left;">
+            Vector embeddings are expected to capture the semantic and syntactic similarity of words expressed in numerical form.
+          </p>
+        </section>
+
+        <section>
+          <h3>Documents</h3>
+          <p style="display: inline;">
+            By modifying the input of the model we can follow the same principles to produce embeddings of sentences or paragraphs of texts (eg 
+          </p>
+          <h5 style="display: inline;">Doc2Vec</h5>).
+          <p>
+            Now we can also compare <b>whole texts</b> to each other.
+          </p>
+        </section>
+
+      </section>
+
+       <!-- page 3 -->
+
+      <section>
+
+        <section>
+          <h2>Limitations and Generalisation</h2>
+        </section>
+
+        <section>
+          <h3>Common Limitations of Simple Language Models</h3>
+          <ul>
+            <li>They have to be retrained when an unseen word/document appears.</li>
+            <li>The embedding of a word is single and static.</li>
+            <li>They could only capture short-range dependencies.</li>
+            <li>They are relatively small models with low expressivity.</li>
+          </ul>
+        </section>
+        
+        <section>
+          <h3>Large Language Models</h3>
+          <ul style="text-align: left;">
+            <li>More complex and expressive models.</li>
+            <li>Here, embeddings are senistive to context.</li>
+            <li>Not constrained by corpus.</li>
+            <li>Richer and more nuanced representations.</li>
+            <li>Long-range dependencies.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Generalisation</h3>
+          <p style="text-align: left;">Similar to other data types like images, audio etc.</p>
+          <ul style="text-align: left;">
+            <li>Training a model on a specific objective.</li>
+            <li>Accessing (a) hidden layer(s) on some level of the model.</li>
+            <li>Using the layer's weights as a dense vector to make comparisons between differen inputs.</li>
+            <li>Use a distance metric to find matches.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Some General Observations</h3>
+          <ul>
+            <!-- <li>The produced embeddings are <b>not</b> global representations of the inputs, but depend on the provided data.</li>
+            <li>They also depend on the training objective of the Neural Network.</li> -->
+            <li>It's important to know the <b>training objective</b> and the <b>data</b> used to produce the embeddings.</li>
+            <li>Comparing embeddings from <b>different models</b> is <b>senseless</b>.</li>
+            <li>Different <b>types of vector distances</b> express slightly different similarity interpretations.</li>
+          </ul>
+        </section>
+
+        <!-- <section
+          style="pointer-events: none"
+          data-background-iframe="dist/html/cytoscape/manos.html"
+        >
+          <p class="bg-transparent-white">
+            My title
+          </p>
+        </section> -->
+
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script type="module">
+    import { turtle } from "./plugin/highlight/turtle.js";
+    import { sparql } from "./plugin/highlight/sparql.js";
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      highlight: {
+        beforeHighlight: (hljs) => {
+          hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+          hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+        },
+      },
+    });
+  </script>
+</body>
+</html>
