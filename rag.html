@@ -16,6 +16,7 @@
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
 	</head>
 	<body>
   <div class="reveal">
@@ -31,13 +32,14 @@
       <section>
 
         <section>
-          <h2>LLMs & Retrieval Augmented Generation</h2>
+          <h2>Large Language Models & Retrieval Augmented Generation</h2>
         </section>
 
         <section>
           <h3>LLMs</h3>
           <ul>
             <li>Public LLMs (like GPT-4) are very big Neural Networks, consisting of billions of parameters, that have been trained on vast amounts of data.</li>
+            <br>
             <li>However they <b>haven't been trained on</b> and <b>don't have direct access</b> to private (unseen) data.</li>
           </ul>
         </section>
@@ -45,19 +47,19 @@
         <section>
           <h3>3 Ways to Expose LLMs to Unseen Data</h3>
           <ol>
-            <li>Training a new LLM.</li>
-            <li>Fine-Tuning an existing LLM.</li>
-            <li>Performing Retrieval Augmented Generation (RAG).</li>
+            <li>Training a new LLM</li>
+            <li>Fine-Tuning an existing LLM</li>
+            <li>Performing Retrieval Augmented Generation (RAG)</li>
           </ol>
         </section>
 
         <section>
           <h3>LLM Training & Fine-Tuning Challenges</h3>
           <ul>
-            <li>Costs.</li>
-            <li>Complexity.</li>
-            <li>Upating problem.</li>
-            <li>Poor/no information access control.</li>
+            <li>Costs</li>
+            <li>Complexity</li>
+            <li>Upating problem</li>
+            <li>Poor/No information access control</li>
           </ul>
         </section>
 
@@ -69,10 +71,10 @@
         <section>
           <h3>RAG Benefits</h3>
           <ul>
-            <li>Splits <b>information retrieval</b> from <b>text generation</b>.</li>
-            <li>Very cheap and fast to update.</li>
-            <li>Allows more explicit control on information access.</li>
-            <li>Scales efficiently.</li>
+            <li>Splits <b>information retrieval</b> from <b>text generation</b></li>
+            <li>Very cheap and fast to update</li>
+            <li>Allows more explicit control on information access</li>
+            <li>Scales efficiently</li>
           </ul>
         </section>
 
@@ -80,13 +82,13 @@
           <h3>Training & RAG</h3>
           <div style="display: flex; justify-content: space-around; align-items: center;">
             <div style="text-align: center;">
-              <p style="margin-bottom: 5px;">Fine-Tuning</p>
-              <img src="dist/img/neural-networks/llm_ft.svg" alt="" style="height: 150px;">
+              <p style="margin-bottom: 5px;">Training / Fine-Tuning</p>
+              <img src="dist/img/rag/llm_ft.svg" alt="" style="height: 150px;">
             </div>
             <div>
               <div style="text-align: center;">
               <p style="margin-bottom: 5px;">RAG</p>
-              <img src="dist/img/neural-networks/llm_rag.svg" alt="" style="height: 220px;">
+              <img src="dist/img/rag/llm_rag.svg" alt="" style="height: 220px;">
             </div>
           </div>
         </section>
@@ -103,14 +105,180 @@
         </section>
 
         <section>
-          <h3>Basic RAG Architecture</h3>
+          <h3>Base RAG Architecture</h3>
           <div style="display: flex; justify-content: space-around; align-items: center;">
             <div>
               <div style="text-align: center;">
-              <img src="dist/img/neural-networks/rag_base.svg" alt="" style="height: 500px;">
+              <img src="dist/img/rag/rag.svg" alt="" style="height: 520px;">
             </div>
           </div>
         </section>
+
+        <section>
+          <h3>Processing</h3>
+          <h6 style="color: black;">Text Heavy Documents</h6>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+              <img src="dist/img/rag/doc_transform.svg" alt="" style="height: 300px;">
+            </div>
+          </div>
+        
+        </section>
+
+        <section>
+          <h3>Processing</h3>
+          <h6 style="color: black;">Multimodal Documents</h6>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+              <img src="dist/img/rag/docx_transform.svg" alt="" style="height: 300px;">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Processing</h3>
+          <h6 style="color: black;">Basic Principle</h6>
+          <div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div>
+                  <img src="dist/img/rag/f_split.svg" alt="" style="height: 280px;">
+                </div>
+                <div>
+                  <h3 style="color: black;">\(  \rightarrow  \)</h3>
+                </div>
+                <div>
+                  <img src="dist/img/rag/docx_f.svg" alt="" style="height: 200px;">
+                </div>
+            </div>
+          </div>
+          <div class="fragment">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <h3 style="color: black; margin-right: 20px;">\(  f  : \)</h3>
+              <p style="color: black; font-size: 30px; text-align: left; font-style: italic;">simple chunking function ...or a deep neural network </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Embeddings</h3>
+          <div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <div>
+                <img src="dist/img/rag/f_embedding.svg" alt="" style="height: 200px;">
+              </div>
+              <div>
+                <h3 style="color: black;">\(   \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)</h3>
+              </div>
+            </div>
+          </div>
+          <div class="fragment">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <h3 style="color: black; margin-right: 20px;">\(  f  : \)</h3>
+              <p style="color: black; font-size: 30px; text-align: left; font-style: italic;">deep neural network trained to produce vector representations of the input data</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Vector Database</h3>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <div>
+              <p style="font-size: 26px;">
+                \[
+                \begin{bmatrix}
+                0.125 & -2.103 & \dots &  -2.005 & 0.012 \\
+                0.615 & -1.142 & \dots & 1.945 & -2.113 \\
+                \vdots & \vdots & \ddots & \vdots & \vdots \\
+                0.712 & 1.153 & \dots &  -1.721 & -0.852 \\
+                -0.925 & -0.903 & \dots &  1.044 & -1.412 
+                \end{bmatrix} \rightarrow
+                \] 
+              </p>
+            </div>
+            <div>
+              <img src="dist/img/rag/db.svg" style="height: 200px;" >
+            </div>
+          </div>
+          <div class="fragment">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <p style="text-align: left">
+                Storing vectors along with metadata and optionally content
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Searching</h3>
+          <p style="text-align: center;">
+            Embedding a query and calculating its distance (eg <b>cosine</b>) to the other data points.
+          </p>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <img src="dist/img/rag/vectors_distance.svg" style="height: 350px;" >
+          </div>
+          <p style="text-align: center;">
+            <b>K Nearest Neighbors</b> (KNN) as the search result
+          </p>
+        </section>
+
+        <section>
+          <h3>Indexing</h3>
+          <p style="text-align: center;">
+            Speeding up retrieval by pre-calculating communities.
+          </p>
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <img src="dist/img/rag/vectors_clusters.svg" style="height: 350px;" >
+          </div>
+          <p style="text-align: center;">
+            <b>Approximate Nearest Neighbor</b> (ANN)
+          </p>
+        </section>
+
+        <section>
+          <h3>Response</h3>
+          <p style="text-align: left;">
+            The LLM is now provided with the search results as additional <b>context</b> to produce a response to the user's question.
+          </p>
+          <div style="stroke: gray; stroke-width: 4px; text-align: left;">
+            <div>
+              <h6 style="font-size: 30px;  color: black; margin-bottom: 0px;">Instructions</h6>
+              <p style="font-size: 25px; font-style: italic; margin-left: 45px;">"Given the context provided answer the question as an assistant that..."</p>
+            </div>
+            <div>
+              <h4 style="font-size: 30px;  color: black; margin-bottom: 0px;">Question</h4>
+              <p style="font-size: 25px; font-style: italic; margin-left: 45px;">"What is the main entrance's corridor width?"</p>
+            </div>
+            <div>
+              <h4 style="font-size: 30px;  color: black; margin-bottom: 0px;">Context</h4>
+              <ul style="font-size: 25px; font-style: italic; margin-left: 105px;">
+                <li>"search result 1"</li>
+                <li>"search result 2"</li>
+                <li>"..."</li>
+              </ul>
+            </div>
+            <h4 style="font-size: 30px;  color: black;">Response</h4>
+          </div>
+        </section>
+
+        <section>
+          <h3>Wins of Base RAG</h3>
+          <ul>
+            <li>Search is much more flexible and relaxed than traditional approaches.</li>
+            <li>Great at answering specific/narrow questions.</li>
+            <li>The sources used to answer a question are directly accessible.</li>
+            <li>Straighforward and not complicated to maintain.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Limitations</h3>
+          <ul>
+            <li>Not so great at answering questions that require a <b>combination</b> of different sources.</li>
+            <li>Misses a <b>global</b> view on the data.</li>
+            <li>Might miss <b>exact</b> matches.</li>
+          </ul>
+        </section>
+
 
       </section>
 
@@ -120,6 +288,138 @@
         <section>
           <h2>Advanced RAG</h2>
         </section>
+
+        <section>
+          <h3>Overcoming Base RAG Limitations</h3>
+          <ul>
+            <li>Advanced Data Processing</li>
+            <li>Hybrid Search</li>
+            <li>Search Results Reranking</li>
+            <li>Query Rewriting & Routing</li>
+            <li>Agents</li>
+            <li>Knowledge Graph</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Advanced Data Processing</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Respecting structure</p>
+                <p style="margin-bottom: 20px;">✅ Identifying elements</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_processing.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+
+        <section>
+          <h3>Hybrid Search</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Exact matches</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_fts.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+
+        <section>
+          <h3>Reranking</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Search results quality control</p>
+                <p style="margin-bottom: 20px;">✅ Filtering based on relevance</p>
+                <p style="margin-bottom: 20px;">✅ Less noise for the LLM</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_rerank.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Rewriting</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Match embeddings' model similarity logic</p>
+                <p style="margin-bottom: 20px;">✅ Enrich with additional content</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_rewrite.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Agents</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Query decomposition</p>
+                <p style="margin-bottom: 20px;">✅ Error corrections</p>
+                <p style="margin-bottom: 20px;">✅ Additional quality control</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_agents.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Knowledge Graph</h3>
+          <div style="display: flex; justify-content: center; align-items: center; ">
+            <div style="align-items: left; width: 300px;">
+              <ul style="font-size: 20px;">
+                <p style="margin-bottom: 20px;">✅ Higher context awareness</p>
+                <p style="margin-bottom: 20px;">✅ Global view on data</p>
+                <p style="margin-bottom: 20px;">✅ Entities-based search</p>
+                <p style="margin-bottom: 20px;">✅ Combinatorial flexibility</p>
+              </ul>
+            </div>
+            <div>
+              <img src="dist/img/rag/rag_graph.svg" alt="" style="height: 520px;">
+            </div>
+          </div>
+        </section>
+
+  
+        <section>
+          <h3>Combined Modules</h3>
+          <div>
+            <div style="display: flex; justify-content: space-around; align-items: center;">
+              <div>
+                <div style="text-align: center;">
+                <img src="dist/img/rag/rag_advanced.svg" alt="" style="height: 520px;">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>General Observations</h3>
+          <ul>
+            <li>Increased breadth and depth of the results.</li>
+            <li class="fragment">More quality gates introduced.</li>
+            <li class="fragment">Richer and more reliable results.</li>
+            <li class="fragment">There is a speed trade-off.</li>
+            <li class="fragment">Higher complexity.</li>
+          </ul>
+        </section>
+
       </section>
 
     </div>
