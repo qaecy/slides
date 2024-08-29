@@ -5,3 +5,4 @@ export * from './lib/log-node-positions';
 export * from './lib/models';
 export * from './lib/node-html-containers';
 export * from './lib/node-html-labels';
+export * from './lib/node-menu';

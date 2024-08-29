@@ -23,3 +23,7 @@ export interface NodeData {
     color?: string;
     size?: number;
 }
+export interface MenuItem {
+    icon: string;
+    click: (node: any) => void;
+}

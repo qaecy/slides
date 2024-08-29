@@ -3,29 +3,31 @@
   <head>
     <script src="../../../js/cytoscape.min.js"></script>
     <link rel="stylesheet" href="../default-styles.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <style>
-        #click-event-container{
-          position: absolute;
-          bottom: 30px;
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          pointer-events: none;
-        }
-        #click-event{
-          box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
-          border-radius: 5px;
-          background-color: rgba(255, 255, 255, .15);
-          backdrop-filter: blur(5px);
-          padding: 10px;
-          font-size: 1rem;
-          font-family: Poppins;
-          display: none;
-        }
-      </style>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      #click-event-container {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        pointer-events: none;
+      }
+      #click-event {
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        font-size: 1rem;
+        font-family: Poppins;
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="cy"></div>
@@ -40,7 +42,8 @@
         buildStyles,
         layout,
         defaultSettings,
-        appendHostContainers
+        appendHostContainers,
+        appendNodeMenu
       } from "../../../js/cytoscape-helpers/index.mjs";
 
       const style = buildStyles();
@@ -85,83 +88,29 @@
       nodeLoading(cy);
       logNodePositions(cy);
 
-      // Build the node menu
-      const nodeMenu = document.createElement("div");
-      nodeMenu.id = "node-menu";
-      nodeMenu.classList.add("node-menu");
-
-      function setClickEvent(nodeId, id){
+      function setClickEvent(nodeId, id) {
         const el = document.getElementById("click-event");
         el.innerHTML = `Node id: ${nodeId}, item: ${id}`;
         el.style.display = "flex";
       }
 
-      const menuItems = [{
-        icon: "face",
-        click: (node) => setClickEvent(node.id(), "1")
-      },{
-        icon: "close",
-        click: (node) => setClickEvent(node.id(), "2")
-      },{
-        icon: "home",
-        click: (node) => setClickEvent(node.id(), "3")
-      }];
-      menuItems.forEach(mi => {
-        const menuItem = document.createElement("div");
-        nodeMenu.appendChild(menuItem);
-        menuItem.innerText = mi.icon;
-        menuItem.click = mi.click;
-        menuItem.classList.add("entry");
-        menuItem.classList.add("material-icons");
-      })
+      const menuItems = [
+        {
+          icon: "face",
+          click: (node) => setClickEvent(node.id(), "1"),
+        },
+        {
+          icon: "close",
+          click: (node) => setClickEvent(node.id(), "2"),
+        },
+        {
+          icon: "home",
+          click: (node) => setClickEvent(node.id(), "3"),
+        },
+      ];
 
       // Append the node menu when a user hovers a node
-      appendNodeMenu(cy, document.getElementById("cy"), nodeMenu);
-
-      function appendNodeMenu(cy, parent, nodeMenu){
-        appendHostContainers(cy, parent);
-
-        // Monitor menu hover
-        let menuIsBeingHovered = undefined;
-        nodeMenu.addEventListener("mouseover", () => menuIsBeingHovered = true);
-        nodeMenu.addEventListener("mouseout", () => menuIsBeingHovered = false);
-
-        function updateMenu(node){
-          const size = node.renderedBoundingBox().h;
-          const r = size/2;
-          const l = Math.sin(Math.PI/4)*r;
-          let box = document.getElementById(`box-${node.id()}`);
-          nodeMenu.style.bottom = `${l}px`;
-          nodeMenu.style.left = `${l}px`;
-          box.appendChild(nodeMenu);
-
-          // Monitor and emit menu item click
-          Array.from(nodeMenu.children).forEach(menuItem => {
-            menuItem.addEventListener("click", (ev) => {
-              ev.preventDefault();
-              ev.stopImmediatePropagation();
-              menuItem.click(node);
-            });
-          })
-        }
-
-        function removeNodeMenu(node){
-          const box = document.getElementById(`box-${node.id()}`);
-          box.removeChild(nodeMenu);
-        }
-
-        cy.on('mouseover', 'node', (ev) => {
-          updateMenu(ev.target);
-
-          // Keep open untill menu is not being hovered
-          const timer = setInterval(() => {
-            if(!menuIsBeingHovered){
-              removeNodeMenu(ev.target);
-              clearInterval(timer);
-            }
-          }, 2000)
-        });
-      }
+      appendNodeMenu(cy, document.getElementById("cy"), menuItems);
     </script>
   </body>
 </html>
