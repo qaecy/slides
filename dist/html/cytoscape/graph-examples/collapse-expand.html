@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <span id="click-event-container">
+      <span id="click-event"></span>
+    </span>
+    <script type="module">
+      import { isMobile, nodeLoading } from "../helpers.js";
+      import { elements } from "./file-elements.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layout,
+        defaultSettings,
+        appendHostContainers,
+        appendNodeMenu,
+        NodeMenuSettings,
+        appendHTMLLabels,
+        collapseGraph
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "cose",
+          padding,
+        },
+        elements,
+      });
+
+      // animateGraph(cy);
+      nodeLoading(cy);
+      // logNodePositions(cy);
+      collapseGraph(cy, "category", { type: "folder" });
+      
+    </script>
+  </body>
+</html>

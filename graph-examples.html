@@ -223,7 +223,28 @@
           >
             <p>Animated menu</p>
           </section>
+        </section>
 
+        <section>
+          <section>
+            <h2>Collapse/expand</h2>
+          </section>
+
+          <section>
+            <p>Graph collapse</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              const groupByField = "category";
+              const groupFor = { type: "folder" };
+              collapseGraph(cy, groupByField, groupFor);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/collapse-expand.html"
+          >
+            <p>Graph collapse</p>
+          </section>
         </section>
       </div>
     </div>
