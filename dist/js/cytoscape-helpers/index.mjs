@@ -1,81 +1,81 @@
-function C(s, e = !0, t = 1e-4, o = 0.02) {
-  let n = 0;
-  function r() {
-    s.nodes().forEach((d, a) => {
-      const l = d.position(), u = Math.sin(performance.now() * t + a) * o, p = Math.cos(performance.now() * t + a) * o;
+function $(s, e = !0, t = 1e-4, n = 0.02) {
+  let o = 0;
+  function i() {
+    s.nodes().forEach((d, l) => {
+      const a = d.position(), c = Math.sin(performance.now() * t + l) * n, p = Math.cos(performance.now() * t + l) * n;
       d.position({
-        x: l.x + u,
-        y: l.y + p
+        x: a.x + c,
+        y: a.y + p
       });
-    }), n = requestAnimationFrame(r);
+    }), o = requestAnimationFrame(i);
   }
-  n = requestAnimationFrame(r);
-  let i = !0;
-  return e && i && s.on("mouseover", "node", () => {
-    cancelAnimationFrame(n), i = !1;
-  }), n;
+  o = requestAnimationFrame(i);
+  let r = !0;
+  return e && r && s.on("mouseover", "node", () => {
+    cancelAnimationFrame(o), r = !1;
+  }), o;
 }
-var b = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, x = {}, h = {};
-Object.defineProperty(h, "__esModule", { value: !0 });
-function L(s) {
+var v = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, y = {}, m = {};
+Object.defineProperty(m, "__esModule", { value: !0 });
+function g(s) {
   return s;
 }
-h.asTypedEventEmitter = L;
-var v = {}, $ = b && b.__spreadArrays || function() {
+m.asTypedEventEmitter = g;
+var h = {}, x = v && v.__spreadArrays || function() {
   for (var s = 0, e = 0, t = arguments.length; e < t; e++)
     s += arguments[e].length;
-  for (var o = Array(s), n = 0, e = 0; e < t; e++)
-    for (var r = arguments[e], i = 0, d = r.length; i < d; i++, n++)
-      o[n] = r[i];
-  return o;
+  for (var n = Array(s), o = 0, e = 0; e < t; e++)
+    for (var i = arguments[e], r = 0, d = i.length; r < d; r++, o++)
+      n[o] = i[r];
+  return n;
 };
-Object.defineProperty(v, "__esModule", { value: !0 });
-var O = (
+Object.defineProperty(h, "__esModule", { value: !0 });
+var E = (
   /** @class */
   function() {
     function s() {
       var e = this;
       this.events = {}, this.maxListeners = 1 / 0, this.emit = function(t) {
-        for (var o = [], n = 1; n < arguments.length; n++)
-          o[n - 1] = arguments[n];
+        for (var n = [], o = 1; o < arguments.length; o++)
+          n[o - 1] = arguments[o];
         if (e.events[t]) {
-          for (var r = e.events[t].length, i = Array.from(e.events[t]), d = 0, a = i; d < a.length; d++) {
-            var l = a[d];
-            l.apply(void 0, o);
+          for (var i = e.events[t].length, r = Array.from(e.events[t]), d = 0, l = r; d < l.length; d++) {
+            var a = l[d];
+            a.apply(void 0, n);
           }
-          return !!r;
+          return !!i;
         }
         return !1;
-      }, this.on = function(t, o) {
-        return e.addListener(t, o), e;
-      }, this.once = function(t, o) {
-        var n = function() {
-          for (var r = [], i = 0; i < arguments.length; i++)
-            r[i] = arguments[i];
-          o.apply(void 0, r), e.removeListener(t, n);
-        };
+      }, this.on = function(t, n) {
         return e.addListener(t, n), e;
-      }, this.addListener = function(t, o) {
-        return t in e.events ? e.events[t].push(o) : e.events[t] = [o], e.maxListeners !== 1 / 0 && e.maxListeners <= e.events[t].length && console.warn('Maximum event listeners for "' + t + '" event!'), e;
-      }, this.removeListener = function(t, o) {
+      }, this.once = function(t, n) {
+        var o = function() {
+          for (var i = [], r = 0; r < arguments.length; r++)
+            i[r] = arguments[r];
+          n.apply(void 0, i), e.removeListener(t, o);
+        };
+        return e.addListener(t, o), e;
+      }, this.addListener = function(t, n) {
+        return t in e.events ? e.events[t].push(n) : e.events[t] = [n], e.maxListeners !== 1 / 0 && e.maxListeners <= e.events[t].length && console.warn('Maximum event listeners for "' + t + '" event!'), e;
+      }, this.removeListener = function(t, n) {
         if (t in e.events) {
-          var n = e.events[t].indexOf(o);
-          n !== -1 && e.events[t].splice(n, 1);
+          var o = e.events[t].indexOf(n);
+          o !== -1 && e.events[t].splice(o, 1);
         }
         return e;
       }, this.hasListeners = function(t) {
         return e.events[t] && !!e.events[t].length;
-      }, this.prependListener = function(t, o) {
-        return t in e.events ? e.events[t].unshift(o) : e.events[t] = [o], e;
-      }, this.prependOnceListener = function(t, o) {
-        var n = function() {
-          for (var r = [], i = 0; i < arguments.length; i++)
-            r[i] = arguments[i];
-          o.apply(void 0, r), e.removeListener(t, n);
+      }, this.prependListener = function(t, n) {
+        return t in e.events ? e.events[t].unshift(n) : e.events[t] = [n], e;
+      }, this.prependOnceListener = function(t, n) {
+        var o = function() {
+          for (var i = [], r = 0; r < arguments.length; r++)
+            i[r] = arguments[r];
+          n.apply(void 0, i), e.removeListener(t, o);
         };
-        return e.prependListener(t, n), e;
-      }, this.off = function(t, o) {
-        return e.removeListener(t, o);
+        return e.prependListener(t, o), e;
+      }, this.off = function(t, n) {
+        return e.removeListener(t, n);
       }, this.removeAllListeners = function(t) {
         return delete e.events[t], e;
       }, this.setMaxListeners = function(t) {
@@ -83,7 +83,7 @@ var O = (
       }, this.getMaxListeners = function() {
         return e.maxListeners;
       }, this.listeners = function(t) {
-        return $(e.events[t]);
+        return x(e.events[t]);
       }, this.rawListeners = function(t) {
         return e.events[t];
       }, this.eventNames = function() {
@@ -95,51 +95,51 @@ var O = (
     return s;
   }()
 );
-v.EventEmitter = O;
+h.EventEmitter = E;
 (function(s) {
   function e(t) {
-    for (var o in t)
-      s.hasOwnProperty(o) || (s[o] = t[o]);
+    for (var n in t)
+      s.hasOwnProperty(n) || (s[n] = t[n]);
   }
-  Object.defineProperty(s, "__esModule", { value: !0 }), e(h), e(v);
-})(x);
-class B {
+  Object.defineProperty(s, "__esModule", { value: !0 }), e(m), e(h);
+})(y);
+class O {
   constructor(e) {
-    this._cy = e, this.events = new x.EventEmitter(), this._initEventListeners();
+    this._cy = e, this.events = new y.EventEmitter(), this._initEventListeners();
   }
   _initEventListeners() {
     var e, t;
-    (e = this._cy.container()) == null || e.addEventListener("dragover", (o) => {
-      o.preventDefault(), o.stopPropagation();
-      const n = this._getClosestNode(o);
-      n === void 0 && this._lastHoveredNode !== void 0 ? this.events.emit("fileOverNodeEnd", this._lastHoveredNode) : this._lastHoveredNode !== n && n !== void 0 && this.events.emit("fileOverNodeStart", n), this._lastHoveredNode = n;
-    }), (t = this._cy.container()) == null || t.addEventListener("drop", (o) => {
-      var r;
-      o.preventDefault(), o.stopPropagation();
-      const n = this._getClosestNode(o);
-      if (n !== void 0) {
-        const i = (r = o.dataTransfer) == null ? void 0 : r.files;
-        i !== void 0 && this.events.emit("filesDroppedOnNode", n, i);
+    (e = this._cy.container()) == null || e.addEventListener("dragover", (n) => {
+      n.preventDefault(), n.stopPropagation();
+      const o = this._getClosestNode(n);
+      o === void 0 && this._lastHoveredNode !== void 0 ? this.events.emit("fileOverNodeEnd", this._lastHoveredNode) : this._lastHoveredNode !== o && o !== void 0 && this.events.emit("fileOverNodeStart", o), this._lastHoveredNode = o;
+    }), (t = this._cy.container()) == null || t.addEventListener("drop", (n) => {
+      var i;
+      n.preventDefault(), n.stopPropagation();
+      const o = this._getClosestNode(n);
+      if (o !== void 0) {
+        const r = (i = n.dataTransfer) == null ? void 0 : i.files;
+        r !== void 0 && this.events.emit("filesDroppedOnNode", o, r);
       }
     });
   }
   _getClosestNode(e, t = 20) {
-    var d, a;
+    var d, l;
     if (((d = this._cy) == null ? void 0 : d.nodes()) === void 0)
       return;
-    const n = { x: e.offsetX, y: e.offsetY };
-    let r, i = t;
-    return (a = this._cy) == null || a.nodes().forEach((l) => {
-      const u = this._distance(n, l.renderedPosition());
-      u < i && (i = u, r = l);
-    }), r;
+    const o = { x: e.offsetX, y: e.offsetY };
+    let i, r = t;
+    return (l = this._cy) == null || l.nodes().forEach((a) => {
+      const c = this._distance(o, a.renderedPosition());
+      c < r && (r = c, i = a);
+    }), i;
   }
   _distance(e, t) {
-    const o = t.x - e.x, n = t.y - e.y;
-    return Math.sqrt(o * o + n * n);
+    const n = t.x - e.x, o = t.y - e.y;
+    return Math.sqrt(n * n + o * o);
   }
 }
-const m = {
+const f = {
   backgroundColor: "#fff",
   edgeColor: "#0d5be9",
   edgeFontSize: "5rem",
@@ -148,7 +148,7 @@ const m = {
   nodeOpacity: "0.9",
   font: "Poppins",
   directed: !0
-}, M = (s = m) => [
+}, w = (s = f) => [
   {
     selector: "node",
     style: {
@@ -220,41 +220,49 @@ const m = {
     selector: ".loading",
     style: {
       "pie-size": "100%",
-      "pie-1-background-color": m.nodeColor,
+      "pie-1-background-color": f.nodeColor,
       // Color A
       "pie-1-background-size": (e) => `${e.data("pct")}%`,
-      "pie-2-background-color": m.edgeColor,
+      "pie-2-background-color": f.edgeColor,
       // Color B
       "pie-2-background-size": (e) => `${100 - parseInt(e.data("pct"))}%`,
       label: (e) => `${e.data("pct")}%`,
       "font-size": "5rem"
     }
   }
-], N = {
+], C = {
   name: "grid",
   padding: 100
 };
-function I(s) {
+function B(s) {
   s.on("dragfree", "node", e), s.on("viewport", e);
   function e() {
-    const t = s.json(), o = [];
-    t.elements.nodes.forEach((n) => {
-      const r = {};
-      r.data = n.data, r.position = { x: Math.round(n.position.x), y: Math.round(n.position.y) }, n.classes && (r.classes = n.classes), o.push(r);
-    }), console.log(o);
+    const t = s.json(), n = [];
+    t.elements.nodes.forEach((o) => {
+      const i = {};
+      i.data = o.data, i.position = { x: Math.round(o.position.x), y: Math.round(o.position.y) }, o.classes && (i.classes = o.classes), n.push(i);
+    }), console.log(n);
   }
 }
-function E(s, e) {
+class M {
+  constructor(e = "node-menu") {
+    this.id = e, this.items = [], this.hideAfter = 2e3, this.sticky = !1, this.conditionalDisplay = (t) => !0, this.positionDef = (t, n) => {
+      const i = t.renderedBoundingBox().h / 2, r = Math.sin(Math.PI / 4) * i;
+      n.bottom = `${r}px`, n.left = `${r}px`;
+    };
+  }
+}
+function b(s, e) {
   function t() {
-    s.nodes().forEach((o) => {
-      const n = o.renderedPosition();
-      let r = document.getElementById(`box-${o.id()}`);
-      r || (r = document.createElement("div"), r.id = `box-${o.id()}`, r.style.position = "absolute", e.appendChild(r)), r.style.left = `${n.x}px`, r.style.top = `${n.y}px`;
+    s.nodes().forEach((n) => {
+      const o = n.renderedPosition();
+      let i = document.getElementById(`box-${n.id()}`);
+      i || (i = document.createElement("div"), i.id = `box-${n.id()}`, i.style.position = "absolute", e.appendChild(i)), i.style.left = `${o.x}px`, i.style.top = `${o.y}px`;
     });
   }
   t(), s.on("position", "node", t), s.on("pan zoom", t), window.addEventListener("resize", t);
 }
-const w = {
+const L = {
   props: {
     displayOnlyOnHover: !0
   },
@@ -262,99 +270,103 @@ const w = {
     displayOnlyOnHover: !1
   }
 };
-function z(s, e, t = w) {
-  E(s, e);
-  function o() {
-    s.nodes().forEach((n) => {
-      const r = n.renderedBoundingBox().h, i = document.getElementById(`box-${n.id()}`);
-      if (!i)
+function N(s, e, t = L) {
+  b(s, e);
+  function n() {
+    s.nodes().forEach((o) => {
+      const i = o.renderedBoundingBox().h, r = document.getElementById(`box-${o.id()}`);
+      if (!r)
         return;
-      const d = n.data().boxLabels;
+      const d = o.data().boxLabels;
       if (d !== void 0) {
-        let l = document.getElementById(
-          `labels-box-${n.id()}`
+        let a = document.getElementById(
+          `labels-box-${o.id()}`
         );
-        l ? l.style.bottom = `${r / 2 - 10}px` : (l = document.createElement("div"), l.id = `labels-box-${n.id()}`, l.className = "box-label", l.style.bottom = `${r / 2 - 10}px`, t.boxLabels.displayOnlyOnHover && (l.style.display = "none"), i.appendChild(l), d.forEach((u, p) => {
-          if (!l)
+        a ? a.style.bottom = `${i / 2 - 10}px` : (a = document.createElement("div"), a.id = `labels-box-${o.id()}`, a.className = "box-label", a.style.bottom = `${i / 2 - 10}px`, t.boxLabels.displayOnlyOnHover && (a.style.display = "none"), r.appendChild(a), d.forEach((c, p) => {
+          if (!a)
             return;
-          const c = document.createElement("div");
-          c.id = `labels-box-${n.id()}-${p}`, c.className = "entry", c.innerHTML = u, l.appendChild(c);
+          const u = document.createElement("div");
+          u.id = `labels-box-${o.id()}-${p}`, u.className = "entry", u.innerHTML = c, a.appendChild(u);
         }));
       }
-      const a = n.data().properties;
-      if (a !== void 0) {
-        let l = document.getElementById(
-          `props-box-${n.id()}`
+      const l = o.data().properties;
+      if (l !== void 0) {
+        let a = document.getElementById(
+          `props-box-${o.id()}`
         );
-        l ? l.style.top = `${r / 2 - 10}px` : (l = document.createElement("div"), l.id = `props-box-${n.id()}`, l.style.right = "0px", l.className = "property", l.style.top = `${r / 2 - 10}px`, t.props.displayOnlyOnHover && (l.style.display = "none"), i.appendChild(l), Object.keys(a).forEach((u, p) => {
-          if (!l)
+        a ? a.style.top = `${i / 2 - 10}px` : (a = document.createElement("div"), a.id = `props-box-${o.id()}`, a.style.right = "0px", a.className = "property", a.style.top = `${i / 2 - 10}px`, t.props.displayOnlyOnHover && (a.style.display = "none"), r.appendChild(a), Object.keys(l).forEach((c, p) => {
+          if (!a)
             return;
-          const c = document.createElement("div");
-          c.id = `props-box-${n.id()}-${p}`, c.className = "entry", c.innerHTML = `<span class="key">${u}</span><span class="value">${a[u]}</span>`, l.appendChild(c);
+          const u = document.createElement("div");
+          u.id = `props-box-${o.id()}-${p}`, u.className = "entry", u.innerHTML = `<span class="key">${c}</span><span class="value">${l[c]}</span>`, a.appendChild(u);
         }));
       }
     });
   }
-  o(), s.on("zoom", o), s.on("mouseover", "node", (n) => {
-    const r = n.target;
+  n(), s.on("zoom", n), s.on("mouseover", "node", (o) => {
+    const i = o.target;
     if (t.props.displayOnlyOnHover) {
-      const i = document.getElementById(`props-box-${r.id()}`);
-      i && (i.style.display = "flex");
+      const r = document.getElementById(`props-box-${i.id()}`);
+      r && (r.style.display = "flex");
     }
     if (t.boxLabels.displayOnlyOnHover) {
-      const i = document.getElementById(`labels-box-${r.id()}`);
-      i && (i.style.display = "flex");
+      const r = document.getElementById(`labels-box-${i.id()}`);
+      r && (r.style.display = "flex");
     }
-  }), s.on("mouseout", "node", (n) => {
-    const r = n.target;
+  }), s.on("mouseout", "node", (o) => {
+    const i = o.target;
     if (t.props.displayOnlyOnHover) {
-      const i = document.getElementById(`props-box-${r.id()}`);
-      i && (i.style.display = "none");
+      const r = document.getElementById(`props-box-${i.id()}`);
+      r && (r.style.display = "none");
     }
     if (t.boxLabels.displayOnlyOnHover) {
-      const i = document.getElementById(`labels-box-${r.id()}`);
-      i && (i.style.display = "none");
+      const r = document.getElementById(`labels-box-${i.id()}`);
+      r && (r.style.display = "none");
     }
   });
 }
-function H(s, e, t) {
-  E(s, e);
-  let o = !1;
-  function n(d) {
-    const a = document.createElement("div");
-    a.id = `node-menu-${d.id()}`, a.classList.add("node-menu"), a.addEventListener("mouseover", () => o = !0), a.addEventListener("mouseout", () => o = !1), t.forEach((y) => {
-      const f = document.createElement("div");
-      a.appendChild(f), f.innerText = y.icon, f.addEventListener("click", (g) => {
-        g.preventDefault(), g.stopImmediatePropagation(), y.click(d);
-      }), f.classList.add("entry"), f.classList.add("material-icons");
+function I(s, e, t) {
+  b(s, e);
+  let n = !1;
+  function o(d) {
+    const l = document.createElement("div");
+    l.id = `${t.id}-${d.id()}`, l.classList.add("node-menu"), l.classList.add(t.id), l.addEventListener("mouseover", () => n = !0), l.addEventListener("mouseout", () => n = !1), t.items.forEach((c) => {
+      const p = document.createElement("div");
+      l.appendChild(p), p.innerText = c.icon, p.addEventListener("click", (u) => {
+        u.preventDefault(), u.stopImmediatePropagation(), c.click(d);
+      }), p.classList.add("entry"), p.classList.add("material-icons");
     });
-    const u = d.renderedBoundingBox().h / 2, p = Math.sin(Math.PI / 4) * u, c = document.getElementById(`box-${d.id()}`);
-    return a.style.bottom = `${p}px`, a.style.left = `${p}px`, c && c.appendChild(a), a;
-  }
-  function r(d) {
-    console.log(d);
-    let a = document.getElementById(`node-menu-${d.id()}`);
-    a || (a = n(d)), a.style.display = "flex";
+    const a = document.getElementById(`box-${d.id()}`);
+    return t.positionDef(d, l.style), a && a.appendChild(l), l;
   }
   function i(d) {
-    const a = document.getElementById(`node-menu-${d.id()}`);
-    a && (a.style.display = "none");
+    let l = document.getElementById(`${t.id}-${d.id()}`);
+    l || (l = o(d)), l.style.display = "flex";
   }
-  s.on("mouseover", "node", (d) => {
-    console.log(d), r(d.target);
-    const a = setInterval(() => {
-      o || (i(d.target), clearInterval(a));
-    }, 2e3);
+  function r(d) {
+    const l = document.getElementById(`${t.id}-${d.id()}`);
+    l && (l.style.display = "none");
+  }
+  t.sticky ? s.nodes().forEach((d) => {
+    t.conditionalDisplay(d) && i(d);
+  }) : s.on("mouseover", "node", (d) => {
+    if (!t.conditionalDisplay(d.target))
+      return;
+    i(d.target);
+    const l = setInterval(() => {
+      n || (r(d.target), clearInterval(l));
+    }, t.hideAfter);
   });
 }
 export {
-  B as FileDropHandler,
-  C as animateGraph,
-  z as appendHTMLLabels,
-  E as appendHostContainers,
-  H as appendNodeMenu,
-  M as buildStyles,
-  m as defaultSettings,
-  N as layout,
-  I as logNodePositions
+  O as FileDropHandler,
+  M as NodeMenuSettings,
+  $ as animateGraph,
+  N as appendHTMLLabels,
+  b as appendHostContainers,
+  I as appendNodeMenu,
+  w as buildStyles,
+  f as defaultSettings,
+  C as layout,
+  B as logNodePositions
 };

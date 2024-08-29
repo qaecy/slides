@@ -53,7 +53,8 @@
       const nodes = [
         {
           data: {
-            id: "a"
+            id: "a",
+            displayMenu: true
           },
           position: {
             x: 382,
@@ -62,7 +63,8 @@
         },
         {
           data: {
-            id: "b"
+            id: "b",
+            displayMenu: false
           },
           position: {
             x: 792,
@@ -110,6 +112,9 @@
           click: (node) => setClickEvent(node.id(), "3"),
         },
       ];
+
+      // Only display if data point displayMenu is true
+      settings.conditionalDisplay = (node) => node.data("displayMenu");
 
       // Append the node menu when a user hovers a node
       appendNodeMenu(cy, document.getElementById("cy"), settings);

@@ -34,11 +34,160 @@
           <p>Node loading</p>
         </section>
 
-        <section
-          style="pointer-events: none"
-          data-background-iframe="dist/html/cytoscape/graph-examples/node-menu.html"
-        >
-          <p>Node menu</p>
+        <section>
+          <section>
+            <h2>Node menus</h2>
+          </section>
+
+          <section>
+            <p>Node menu default</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              const settings = new NodeMenuSettings();
+              settings.items = [
+                {
+                  icon: "face",
+                  click: (node) => setClickEvent(node.id(), "1"),
+                },
+                {
+                  icon: "close",
+                  click: (node) => setClickEvent(node.id(), "2"),
+                },
+                {
+                  icon: "home",
+                  click: (node) => setClickEvent(node.id(), "3"),
+                },
+              ];
+
+              appendNodeMenu(cy, document.getElementById("cy"), settings);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/node-menu.html"
+          >
+            <p>Node menu default</p>
+          </section>
+
+          <section>
+            <p>Node menu sticky</p>
+            <pre><code data-trim class="typescript" data-line-numbers="|16"><script type="text/template">
+              const settings = new NodeMenuSettings();
+              settings.items = [
+                {
+                  icon: "face",
+                  click: (node) => setClickEvent(node.id(), "1"),
+                },
+                {
+                  icon: "close",
+                  click: (node) => setClickEvent(node.id(), "2"),
+                },
+                {
+                  icon: "home",
+                  click: (node) => setClickEvent(node.id(), "3"),
+                },
+              ];
+              settings.sticky = true;
+
+              appendNodeMenu(cy, document.getElementById("cy"), settings);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/node-menu-sticky.html"
+          >
+            <p>Node menu sticky</p>
+          </section>
+
+          <section>
+            <p>Conditional node menus</p>
+            <pre><code data-trim class="typescript" data-line-numbers="|16"><script type="text/template">
+              const settings = new NodeMenuSettings();
+              settings.items = [
+                {
+                  icon: "face",
+                  click: (node) => setClickEvent(node.id(), "1"),
+                },
+                {
+                  icon: "close",
+                  click: (node) => setClickEvent(node.id(), "2"),
+                },
+                {
+                  icon: "home",
+                  click: (node) => setClickEvent(node.id(), "3"),
+                },
+              ];
+              settings.conditionalDisplay = (node) => node.data("displayMenu");
+
+              appendNodeMenu(cy, document.getElementById("cy"), settings);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/node-menu-conditional.html"
+          >
+            <p>Conditional node menus</p>
+          </section>
+
+          <section>
+            <p>Multiple node menus</p>
+            <pre><code data-trim class="typescript" data-line-numbers="1-15|16-33"><script type="text/template">
+              const menuASettings = new NodeMenuSettings("menu-a");
+              menuASettings.items = [
+                {
+                  icon: "face",
+                  click: (node) => setClickEvent(node.id(), "1"),
+                },
+                {
+                  icon: "close",
+                  click: (node) => setClickEvent(node.id(), "2"),
+                },
+              ];
+              menuASettings.conditionalDisplay = (node) => 
+                node.data("menus").includes("menu-a");
+              appendNodeMenu(cy, document.getElementById("cy"), menuASettings);
+
+              const menuBSettings = new NodeMenuSettings("menu-b");
+              menuBSettings.items = [
+                {
+                  icon: "add",
+                  click: (node) => setClickEvent(node.id(), "3"),
+                },
+              ];
+              menuBSettings.conditionalDisplay = (node) => 
+                node.data("menus").includes("menu-b");
+              menuBSettings.positionDef = (node, style) => {
+                const size = node.renderedBoundingBox().h;
+                const r = size / 2;
+                const l = Math.sin(Math.PI / 4) * r - 8;
+                style.top = `${l}px`;
+                style.right = `${l}px`;
+              };
+              menuBSettings.sticky = true;
+              appendNodeMenu(cy, document.getElementById("cy"), menuBSettings);
+            </script></code></pre>
+          </section>
+
+          <section>
+            <p>Multiple node menus styling</p>
+            <pre><code data-trim class="css" data-line-numbers="1-15|16-33"><script type="text/template">
+              .menu-b .entry{
+                background-color: red;
+                height: 15px;
+                width: 15px;
+                border-radius: 7.5px;
+              }
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/node-menu-multiple.html"
+          >
+            <p>Multiple node menus</p>
+          </section>
         </section>
       </div>
     </div>

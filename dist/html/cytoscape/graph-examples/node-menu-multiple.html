@@ -27,6 +27,13 @@
         font-family: Poppins;
         display: none;
       }
+
+      .menu-b .entry{
+        background-color: red;
+        height: 15px;
+        width: 15px;
+        border-radius: 7.5px;
+      }
     </style>
   </head>
   <body>
@@ -53,7 +60,8 @@
       const nodes = [
         {
           data: {
-            id: "a"
+            id: "a",
+            menus: ["menu-a"]
           },
           position: {
             x: 382,
@@ -62,7 +70,8 @@
         },
         {
           data: {
-            id: "b"
+            id: "b",
+            menus: ["menu-a", "menu-b"]
           },
           position: {
             x: 792,
@@ -95,8 +104,8 @@
         el.style.display = "flex";
       }
 
-      const settings = new NodeMenuSettings();
-      settings.items = [
+      const menuASettings = new NodeMenuSettings("menu-a");
+      menuASettings.items = [
         {
           icon: "face",
           click: (node) => setClickEvent(node.id(), "1"),
@@ -105,14 +114,29 @@
           icon: "close",
           click: (node) => setClickEvent(node.id(), "2"),
         },
+      ];
+      menuASettings.conditionalDisplay = (node) => node.data("menus").includes("menu-a");
+
+      const menuBSettings = new NodeMenuSettings("menu-b");
+      menuBSettings.items = [
         {
-          icon: "home",
+          icon: "add",
           click: (node) => setClickEvent(node.id(), "3"),
         },
       ];
+      menuBSettings.conditionalDisplay = (node) => node.data("menus").includes("menu-b");
+      menuBSettings.positionDef = (node, style) => {
+        const size = node.renderedBoundingBox().h;
+        const r = size / 2;
+        const l = Math.sin(Math.PI / 4) * r - 8;
+        style.top = `${l}px`;
+        style.right = `${l}px`;
+      };
+      menuBSettings.sticky = true;
 
       // Append the node menu when a user hovers a node
-      appendNodeMenu(cy, document.getElementById("cy"), settings);
+      appendNodeMenu(cy, document.getElementById("cy"), menuASettings);
+      appendNodeMenu(cy, document.getElementById("cy"), menuBSettings);
     </script>
   </body>
 </html>
