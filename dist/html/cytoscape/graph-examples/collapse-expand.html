@@ -30,6 +30,10 @@
       } from "../../../js/cytoscape-helpers/index.mjs";
 
       const style = buildStyles();
+
+      const nodeStyle = style.find(s => s.selector === "node");
+      nodeStyle.style["label"] = (node) => node.data("type") !== "file" ? node.data("label") : "";
+
       const padding = isMobile() ? 5 : 200;
 
       const cy = cytoscape({
@@ -46,6 +50,22 @@
       nodeLoading(cy);
       // logNodePositions(cy);
       collapseGraph(cy, "category", { type: "folder" });
+
+      showNodeLabelOnHover();
+      function showNodeLabelOnHover(){
+        // Event listener for mouseover
+        cy.on('mouseover', 'node', function(event){
+          const node = event.target;
+          node.style('label', node.data('label')); // Show the label
+        });
+
+        // Event listener for mouseout
+        cy.on('mouseout', 'node', function(event){
+          const node = event.target;
+          node.style('label', ''); // Hide the label
+        });
+
+      }
       
     </script>
   </body>

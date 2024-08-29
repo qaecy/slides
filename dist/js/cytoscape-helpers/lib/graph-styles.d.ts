@@ -7,6 +7,9 @@ export declare const defaultSettings: {
     nodeOpacity: string;
     font: string;
     directed: boolean;
+    labelSelector: string;
+    showNodeLabels: boolean;
+    showEdgeLabels: boolean;
 };
 export declare const buildStyles: (s?: {
     backgroundColor: string;
@@ -17,6 +20,9 @@ export declare const buildStyles: (s?: {
     nodeOpacity: string;
     font: string;
     directed: boolean;
+    labelSelector: string;
+    showNodeLabels: boolean;
+    showEdgeLabels: boolean;
 }) => any[];
 export declare const layout: {
     name: string;
