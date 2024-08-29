@@ -29,9 +29,16 @@
       <div class="slides">
         <section
           style="pointer-events: none"
-          data-background-iframe="dist/html/cytoscape/node-loading.html"
+          data-background-iframe="dist/html/cytoscape/graph-examples/node-loading.html"
         >
           <p>Node loading</p>
+        </section>
+
+        <section
+          style="pointer-events: none"
+          data-background-iframe="dist/html/cytoscape/graph-examples/node-menu.html"
+        >
+          <p>Node menu</p>
         </section>
       </div>
     </div>
@@ -50,12 +57,6 @@
         scrollActivationWidth: null, // Will not work with graphs
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-        highlight: {
-          beforeHighlight: (hljs) => {
-            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
-            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
-          },
-        },
       });
     </script>
   </body>
