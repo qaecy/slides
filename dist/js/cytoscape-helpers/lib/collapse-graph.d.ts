@@ -1,3 +1,3 @@
-import { Core } from 'cytoscape';
+import { Core, LayoutOptions } from 'cytoscape';
 
-export declare function collapseGraph(cy: Core, groupByField: string, groupFor: object): void;
+export declare function collapseGraph(cy: Core, groupByField: string, groupFor: object, layoutOptions: LayoutOptions): void;

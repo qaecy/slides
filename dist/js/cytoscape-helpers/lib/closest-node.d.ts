@@ -1,3 +1,6 @@
 import { Core, NodeSingular } from 'cytoscape';
 
-export declare function getClosestNode(cy: Core, event: DragEvent): NodeSingular | undefined;
+export declare function closestNode(cy: Core, position: {
+    x: number;
+    y: number;
+}): NodeSingular | undefined;

@@ -1,3 +1,5 @@
+import { LayoutOptions } from 'cytoscape';
+
 export declare const defaultSettings: {
     backgroundColor: string;
     edgeColor: string;
@@ -26,7 +28,4 @@ export declare const buildStyles: (s?: {
     showEdgeLabels: boolean;
     hoverBorderColor: string;
 }) => any[];
-export declare const layout: {
-    name: string;
-    padding: number;
-};
+export declare const layoutOptions: LayoutOptions;

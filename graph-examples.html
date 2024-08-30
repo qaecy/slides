@@ -27,11 +27,20 @@
     <div class="reveal">
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        <section
+        
+        <section>
+
+          <section>
+            <h2>Node loading</h2>
+          </section>
+
+          <section
           style="pointer-events: none"
           data-background-iframe="dist/html/cytoscape/graph-examples/node-loading.html"
         >
           <p>Node loading</p>
+        </section>
+
         </section>
 
         <section>
@@ -233,9 +242,16 @@
           <section>
             <p>Graph collapse</p>
             <pre><code data-trim class="typescript"><script type="text/template">
+              const cy = cytoscape({
+                container: document.getElementById("cy"),
+                style,
+                layout: layoutOptions,
+                elements,
+              });
+
               const groupByField = "category";
               const groupFor = { type: "folder" };
-              collapseGraph(cy, groupByField, groupFor);
+              collapseGraph(cy, "category", { type: "folder" }, layoutOptions);
             </script></code></pre>
           </section>
 

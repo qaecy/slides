@@ -20,8 +20,8 @@
         logNodePositions,
         animateGraph,
         buildStyles,
-        layout,
         defaultSettings,
+        layoutOptions,
         appendHostContainers,
         appendNodeMenu,
         NodeMenuSettings,
@@ -34,22 +34,19 @@
       const nodeStyle = style.find(s => s.selector === "node");
       nodeStyle.style["label"] = (node) => node.data("type") !== "file" ? node.data("label") : "";
 
-      const padding = isMobile() ? 5 : 200;
+      layoutOptions.padding = isMobile() ? 5 : 200;
 
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
-        layout: {
-          name: "cose",
-          padding,
-        },
+        layout: layoutOptions,
         elements,
       });
 
       // animateGraph(cy);
       nodeLoading(cy);
       // logNodePositions(cy);
-      collapseGraph(cy, "category", { type: "folder" });
+      collapseGraph(cy, "category", { type: "folder" }, layoutOptions);
 
       showNodeLabelOnHover();
       function showNodeLabelOnHover(){
