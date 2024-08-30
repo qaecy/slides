@@ -246,6 +246,72 @@
             <p>Graph collapse</p>
           </section>
         </section>
+
+        <section>
+
+          <section>
+            <h2>File drop</h2>
+          </section>
+
+          <section>
+            <p>File drop</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              appendNodeFileDrop(cy);
+        
+              cy.on('nodeFileDropHoverStart', (event, data) => {
+                console.log(`Files hovered on node ${data.node.id()}`);
+              });
+        
+              cy.on('nodeFileDropHoverEnd', (event, data) => {
+                console.log(`Files no longer hovered on node ${data.node.id()}`);
+              });
+
+              cy.on('nodeFileDropDropped', (event, data) => {
+                const fileNames = Array.from(data.files).map(f => f.name).join(", ");
+                console.log(`Files dropped on node ${data.node.id()}: ${fileNames}`);
+              });
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/drop-file-global.html"
+          >
+            <p>File drop</p>
+          </section>
+
+          <section>
+            <p>File drop on specific node</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              appendNodeFileDrop(cy);
+
+              // Get node A and start listening to events on this node
+              const nodeA = cy.nodes().find(n => n.id("a"));
+
+              nodeA.on('filesDropped', (event, files) => {
+                const fileNames = Array.from(files).map(f => f.name).join(", ");
+                console.log(`Files dropped: ${fileNames}`);
+              });
+
+              nodeA.on('filesHoverStart', (event, files) => {
+                console.log("Files hovered on node A");
+              });
+
+              nodeA.on('filesHoverEnd', (event) => {
+                console.log("Files no longer hovered on node A");
+              });
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/drop-file-node.html"
+          >
+            <p>File drop on specific node</p>
+          </section>
+
+        </section>
+
       </div>
     </div>
 

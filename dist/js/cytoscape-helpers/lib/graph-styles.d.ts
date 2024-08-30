@@ -10,6 +10,7 @@ export declare const defaultSettings: {
     labelSelector: string;
     showNodeLabels: boolean;
     showEdgeLabels: boolean;
+    hoverBorderColor: string;
 };
 export declare const buildStyles: (s?: {
     backgroundColor: string;
@@ -23,6 +24,7 @@ export declare const buildStyles: (s?: {
     labelSelector: string;
     showNodeLabels: boolean;
     showEdgeLabels: boolean;
+    hoverBorderColor: string;
 }) => any[];
 export declare const layout: {
     name: string;
