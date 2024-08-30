@@ -297,6 +297,21 @@
           </section>
 
           <section>
+            <p>File drop conditional</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              const dropCondition = (node) => node.data("allowDrop");
+              appendNodeFileDrop(cy, dropCondition);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/drop-file-conditional.html"
+          >
+            <p>File drop conditional</p>
+          </section>
+
+          <section>
             <p>File drop on specific node</p>
             <pre><code data-trim class="typescript"><script type="text/template">
               appendNodeFileDrop(cy);

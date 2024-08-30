@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      #drop-event-container {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        pointer-events: none;
+      }
+      #drop-event {
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        font-size: 1rem;
+        font-family: Poppins;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cy"></div>
+    <span id="drop-event-container">
+      <span id="drop-event"></span>
+    </span>
+    <script type="module">
+      import { isMobile, nodeLoading } from "../helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+        appendNodeFileDrop
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 300;
+
+      const nodes = [
+        {
+          data: {
+            id: "a"
+          },
+          position: {
+            x: 382,
+            y: 481,
+          },
+        },
+        {
+          data: {
+            id: "b",
+            allowDrop: true
+          },
+          position: {
+            x: 792,
+            y: 252,
+          },
+        },
+      ];
+      const edges = [{ data: { id: "ab", source: "a", target: "b" } }];
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes,
+          edges,
+        },
+      });
+
+      // animateGraph(cy);
+      nodeLoading(cy);
+      logNodePositions(cy);
+      
+      const dropCondition = (node) => node.data("allowDrop");
+      appendNodeFileDrop(cy, dropCondition);
+
+      const el = document.getElementById("drop-event");
+
+      // Global files dropped event
+      cy.on('nodeFileDropDropped', (event, data) => {
+        const fileNames = Array.from(data.files).map(f => f.name).join(", ");
+        el.innerHTML = `Files dropped on node ${data.node.id()}: ${fileNames}`;
+        el.style.display = "flex";
+      });
+
+      cy.on('nodeFileDropHoverStart', (event, data) => {
+        el.innerHTML = `Files hovered on node ${data.node.id()}`;
+        el.style.display = "flex";
+      });
+
+      cy.on('nodeFileDropHoverEnd', (event, data) => {
+        el.innerHTML = `Files no longer hovered on node ${data.node.id()}`;
+        el.style.display = "flex";
+      });
+
+      
+    </script>
+  </body>
+</html>
