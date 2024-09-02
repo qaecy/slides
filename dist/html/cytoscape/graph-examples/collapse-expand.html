@@ -46,7 +46,15 @@
       // animateGraph(cy);
       nodeLoading(cy);
       // logNodePositions(cy);
-      collapseGraph(cy, "category", { type: "folder" }, layoutOptions);
+      const parent = document.getElementById('cy');
+
+      const collapseSettings = {
+        groupByField: "category",
+        groupFor: { type: "folder" },
+        layoutOptions,
+        collapseThreshold: 1
+      }
+      collapseGraph(cy, collapseSettings);
 
       showNodeLabelOnHover();
       function showNodeLabelOnHover(){

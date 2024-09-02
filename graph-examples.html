@@ -249,9 +249,13 @@
                 elements,
               });
 
-              const groupByField = "category";
-              const groupFor = { type: "folder" };
-              collapseGraph(cy, "category", { type: "folder" }, layoutOptions);
+              const collapseSettings = {
+                groupByField: "category",
+                groupFor: { type: "folder" },
+                layoutOptions,
+                collapseThreshold: 1
+              }
+              collapseGraph(cy, collapseSettings);
             </script></code></pre>
           </section>
 

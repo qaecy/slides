@@ -12,7 +12,7 @@
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { logNodePositions, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+      import { logNodePositions, buildStyles, layoutOptions, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
 
       const settings = defaultSettings;
       // MAKE CHANGES TO SETTINGS IF YOU WISH
@@ -73,7 +73,7 @@
     <div id="cy"></div>
     <script type="module">
       import { isMobile } from "./helpers.js";
-      import { logNodePositions, buildStyles, layout, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+      import { logNodePositions, buildStyles, layoutOptions, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
 
       const settings = defaultSettings;
       // MAKE CHANGES TO SETTINGS IF YOU WISH

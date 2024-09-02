@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(style);
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "ne",
+                boxLabels: ["qcy:NamedEntity", "schema:Person"],
+              },
+              position: {
+                x: 19,
+                y: 209,
+              },
+            },
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:Document"],
+              },
+              position: {
+                x: -85,
+                y: -136,
+              },
+            },
+            {
+              data: {
+                id: "page",
+                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
+              },
+              position: {
+                x: 7,
+                y: -4,
+              },
+            },
+            {
+              data: {
+                id: "img",
+                boxLabels: ["qcy:Image", "qcy:Fragment"],
+                properties: {
+                  "qcy:relativeRemotePath":
+                    "30432f25-9bb1-4130-9114-052baf19accf/img/b3a8fc9d-38f8-52c4-9db3-58e491ef2b52.png",
+                  "qcy:textContent": "Carlsberg",
+                  "qcy:generatedCaption": "Albert Einstein holding a beer",
+                },
+              },
+              position: {
+                x: -139,
+                y: 104,
+              },
+            },
+            {
+              data: {
+                id: "frag",
+                boxLabels: ["qcy:Fragment", "qcy:Text"],
+                properties: {
+                  "qcy:textContent": "A. Einstein grew up in...",
+                },
+              },
+              position: {
+                x: 158,
+                y: 42,
+              },
+            },
+            {
+              data: {
+                id: "frags",
+                boxLabels: ["qcy:FragmentSelector", "oa:FragmentSelector"],
+                properties: {
+                  "rdf:value": "xywh=-282,-449,200,30",
+                  "oa:conformsTo": "http://www.w3.org/TR/media-frags/",
+                },
+              },
+              position: {
+                x: 300,
+                y: -38,
+              },
+            },
+            {
+              data: {
+                id: "neo",
+                boxLabels: ["qcy:NamedEntityOccurence"],
+                properties: {
+                  "qcy:textContent": "A. Einstein",
+                },
+              },
+              position: {
+                x: 185,
+                y: 168,
+              },
+            },
+            {
+              data: {
+                id: "neos",
+                boxLabels: ["qcy:FragmentSelector", "oa:TextPositionSelector"],
+                properties: {
+                  "oa:start": 0,
+                  "oa:end": 11,
+                },
+              },
+              position: {
+                x: 286,
+                y: 256,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc",
+                target: "page",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "img",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "frag",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "ne",
+                label: "qcy:indirectlyMentions",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "page",
+                target: "ne",
+                label: "qcy:indirectlyMentions",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "frag",
+                target: "ne",
+                label: "qcy:directlyMentions",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "img",
+                target: "ne",
+                label: "qcy:directlyMentions",
+              },
+            },
+            {
+              data: {
+                source: "frag",
+                target: "frags",
+                label: "qcy:hasSelector",
+              },
+            },
+            {
+              data: {
+                source: "neo",
+                target: "ne",
+                label: "qcy:relatedEntity",
+              },
+            },
+            {
+              data: {
+                source: "neo",
+                target: "frag",
+                label: "qcy:relatedFragment",
+              },
+            },
+            {
+              data: {
+                source: "neo",
+                target: "neos",
+                label: "qcy:hasSelector",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

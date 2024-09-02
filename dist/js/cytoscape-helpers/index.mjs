@@ -1,94 +1,94 @@
-function z(e, t = !0, n = 1e-4, r = 0.02) {
+function w(o, t = !0, n = 1e-4, l = 0.02) {
   let a = 0;
-  function d() {
-    e.nodes().forEach((p, l) => {
-      const o = p.position(), u = Math.sin(performance.now() * n + l) * r, i = Math.cos(performance.now() * n + l) * r;
-      p.position({
-        x: o.x + u,
-        y: o.y + i
+  function s() {
+    o.nodes().forEach((u, i) => {
+      const e = u.position(), c = Math.sin(performance.now() * n + i) * l, p = Math.cos(performance.now() * n + i) * l;
+      u.position({
+        x: e.x + c,
+        y: e.y + p
       });
-    }), a = requestAnimationFrame(d);
+    }), a = requestAnimationFrame(s);
   }
-  a = requestAnimationFrame(d);
-  let s = !0;
-  return t && s && e.on("mouseover", "node", () => {
-    cancelAnimationFrame(a), s = !1;
+  a = requestAnimationFrame(s);
+  let d = !0;
+  return t && d && o.on("mouseover", "node", () => {
+    cancelAnimationFrame(a), d = !1;
   }), a;
 }
-function y(e, t) {
-  if (e.nodes() === void 0)
+function g(o, t) {
+  if (o.nodes() === void 0)
     return;
-  let r, a = 1 / 0;
-  return e.nodes().forEach((d) => {
-    a = d.renderedBoundingBox().h;
-    const s = v(t, d.renderedPosition());
-    s < a && (a = s, r = d);
-  }), r;
+  let l, a = 1 / 0;
+  return o.nodes().forEach((s) => {
+    a = s.renderedBoundingBox().h;
+    const d = x(t, s.renderedPosition());
+    d < a && (a = d, l = s);
+  }), l;
 }
-function v(e, t) {
-  const n = t.x - e.x, r = t.y - e.y;
-  return Math.sqrt(n * n + r * r);
+function x(o, t) {
+  const n = t.x - o.x, l = t.y - o.y;
+  return Math.sqrt(n * n + l * l);
 }
-class $ {
+class E {
   constructor(t = "node-menu") {
-    this.id = t, this.items = [], this.hideAfter = 2e3, this.sticky = !1, this.conditionalDisplay = (n) => !0, this.positionDef = (n, r) => {
-      const d = n.renderedBoundingBox().h / 2, s = Math.sin(Math.PI / 4) * d;
-      r.bottom = `${s}px`, r.left = `${s}px`;
+    this.id = t, this.items = [], this.hideAfter = 2e3, this.sticky = !1, this.conditionalDisplay = (n) => !0, this.positionDef = (n, l) => {
+      const s = n.renderedBoundingBox().h / 2, d = Math.sin(Math.PI / 4) * s;
+      l.bottom = `${d}px`, l.left = `${d}px`;
     };
   }
 }
-function E(e, t) {
+function y(o, t) {
   function n() {
-    e.nodes().forEach((r) => {
-      const a = r.renderedPosition();
-      let d = document.getElementById(`box-${r.id()}`);
-      d || (d = document.createElement("div"), d.id = `box-${r.id()}`, d.style.position = "absolute", t.appendChild(d)), d.style.left = `${a.x}px`, d.style.top = `${a.y}px`;
+    o.nodes().forEach((l) => {
+      const a = l.renderedPosition();
+      let s = document.getElementById(`box-${l.id()}`);
+      s || (s = document.createElement("div"), s.id = `box-${l.id()}`, s.style.position = "absolute", t.appendChild(s)), s.style.left = `${a.x}px`, s.style.top = `${a.y}px`;
     });
   }
-  n(), e.on("position", "node", n), e.on("pan zoom", n), window.addEventListener("resize", n);
+  n(), o.on("position", "node", n), o.on("pan zoom", n), window.addEventListener("resize", n);
 }
-function B(e, t, n) {
-  E(e, t);
-  let r = !1;
-  function a(l) {
-    const o = document.createElement("div");
-    o.id = `${n.id}-${l.id()}`, o.classList.add("node-menu"), o.classList.add(n.id), o.addEventListener("mouseover", () => r = !0), o.addEventListener("mouseout", () => r = !1), n.items.forEach((i) => {
-      const c = document.createElement("div");
-      o.appendChild(c), c.innerText = i.icon, c.addEventListener("click", (f) => {
-        f.preventDefault(), f.stopImmediatePropagation(), i.click(l);
-      }), c.addEventListener("touchstart", (f) => {
-        f.preventDefault(), f.stopImmediatePropagation(), i.click(l);
-      }), c.classList.add("entry"), c.classList.add("material-icons");
+function v(o, t, n) {
+  y(o, t);
+  let l = !1;
+  function a(i) {
+    const e = document.createElement("div");
+    e.id = `${n.id}-${i.id()}`, e.classList.add("node-menu"), e.classList.add(n.id), e.addEventListener("mouseover", () => l = !0), e.addEventListener("mouseout", () => l = !1), n.items.forEach((p) => {
+      const r = document.createElement("div");
+      e.appendChild(r), r.innerText = p.icon, r.addEventListener("click", (f) => {
+        f.preventDefault(), f.stopImmediatePropagation(), p.click(i);
+      }), r.addEventListener("touchstart", (f) => {
+        f.preventDefault(), f.stopImmediatePropagation(), p.click(i);
+      }), r.classList.add("entry"), r.classList.add("material-icons");
     });
-    const u = document.getElementById(`box-${l.id()}`);
-    return n.positionDef(l, o.style), u && u.appendChild(o), o;
+    const c = document.getElementById(`box-${i.id()}`);
+    return n.positionDef(i, e.style), c && c.appendChild(e), e;
   }
-  function d(l) {
-    let o = document.getElementById(`${n.id}-${l.id()}`);
-    o || (o = a(l)), o.style.display = "flex";
+  function s(i) {
+    let e = document.getElementById(`${n.id}-${i.id()}`);
+    e || (e = a(i)), e.style.display = "flex";
   }
-  function s(l) {
-    const o = document.getElementById(`${n.id}-${l.id()}`);
-    o && (o.style.display = "none");
+  function d(i) {
+    const e = document.getElementById(`${n.id}-${i.id()}`);
+    e && (e.style.display = "none");
   }
-  function p() {
-    e.nodes().forEach((l) => {
-      const o = document.getElementById(`${n.id}-${l.id()}`);
-      o && n.positionDef(l, o.style);
+  function u() {
+    o.nodes().forEach((i) => {
+      const e = document.getElementById(`${n.id}-${i.id()}`);
+      e && n.positionDef(i, e.style);
     });
   }
-  n.sticky ? e.nodes().forEach((l) => {
-    n.conditionalDisplay(l) && d(l);
-  }) : e.on("mouseover", "node", (l) => {
-    if (!n.conditionalDisplay(l.target))
+  n.sticky ? o.nodes().forEach((i) => {
+    n.conditionalDisplay(i) && s(i);
+  }) : o.on("mouseover", "node", (i) => {
+    if (!n.conditionalDisplay(i.target))
       return;
-    d(l.target);
-    const o = setInterval(() => {
-      r || (s(l.target), clearInterval(o));
+    s(i.target);
+    const e = setInterval(() => {
+      l || (d(i.target), clearInterval(e));
     }, n.hideAfter);
-  }), e.on("pan zoom", p), window.addEventListener("resize", p);
+  }), o.on("pan zoom", u), window.addEventListener("resize", u);
 }
-const w = {
+const $ = {
   props: {
     displayOnlyOnHover: !0
   },
@@ -96,119 +96,128 @@ const w = {
     displayOnlyOnHover: !1
   }
 };
-function C(e, t, n = w) {
-  E(e, t);
-  function r() {
-    e.nodes().forEach((a) => {
-      const d = a.renderedBoundingBox().h, s = document.getElementById(`box-${a.id()}`);
-      if (!s)
+function B(o, t, n = $) {
+  y(o, t);
+  function l() {
+    o.nodes().forEach((a) => {
+      const s = a.renderedBoundingBox().h, d = document.getElementById(`box-${a.id()}`);
+      if (!d)
         return;
-      const p = a.data().boxLabels;
-      if (p !== void 0) {
-        let o = document.getElementById(
+      const u = a.data().boxLabels;
+      if (u !== void 0) {
+        let e = document.getElementById(
           `labels-box-${a.id()}`
         );
-        o ? o.style.bottom = `${d / 2 - 10}px` : (o = document.createElement("div"), o.id = `labels-box-${a.id()}`, o.className = "box-label", o.style.bottom = `${d / 2 - 10}px`, n.boxLabels.displayOnlyOnHover && (o.style.display = "none"), s.appendChild(o), p.forEach((u, i) => {
-          if (!o)
+        e ? e.style.bottom = `${s / 2 - 10}px` : (e = document.createElement("div"), e.id = `labels-box-${a.id()}`, e.className = "box-label", e.style.bottom = `${s / 2 - 10}px`, n.boxLabels.displayOnlyOnHover && (e.style.display = "none"), d.appendChild(e), u.forEach((c, p) => {
+          if (!e)
             return;
-          const c = document.createElement("div");
-          c.id = `labels-box-${a.id()}-${i}`, c.className = "entry", c.innerHTML = u, o.appendChild(c);
+          const r = document.createElement("div");
+          r.id = `labels-box-${a.id()}-${p}`, r.className = "entry", r.innerHTML = c, e.appendChild(r);
         }));
       }
-      const l = a.data().properties;
-      if (l !== void 0) {
-        let o = document.getElementById(
+      const i = a.data().properties;
+      if (i !== void 0) {
+        let e = document.getElementById(
           `props-box-${a.id()}`
         );
-        o ? o.style.top = `${d / 2 - 10}px` : (o = document.createElement("div"), o.id = `props-box-${a.id()}`, o.style.right = "0px", o.className = "property", o.style.top = `${d / 2 - 10}px`, n.props.displayOnlyOnHover && (o.style.display = "none"), s.appendChild(o), Object.keys(l).forEach((u, i) => {
-          if (!o)
+        e ? e.style.top = `${s / 2 - 10}px` : (e = document.createElement("div"), e.id = `props-box-${a.id()}`, e.style.right = "0px", e.className = "property", e.style.top = `${s / 2 - 10}px`, n.props.displayOnlyOnHover && (e.style.display = "none"), d.appendChild(e), Object.keys(i).forEach((c, p) => {
+          if (!e)
             return;
-          const c = document.createElement("div");
-          c.id = `props-box-${a.id()}-${i}`, c.className = "entry", c.innerHTML = `<span class="key">${u}</span><span class="value">${l[u]}</span>`, o.appendChild(c);
+          const r = document.createElement("div");
+          r.id = `props-box-${a.id()}-${p}`, r.className = "entry", r.innerHTML = `<span class="key">${c}</span><span class="value">${i[c]}</span>`, e.appendChild(r);
         }));
       }
     });
   }
-  r(), e.on("zoom", r), e.on("mouseover", "node", (a) => {
-    const d = a.target;
+  l(), o.on("zoom", l), o.on("mouseover", "node", (a) => {
+    const s = a.target;
     if (n.props.displayOnlyOnHover) {
-      const s = document.getElementById(`props-box-${d.id()}`);
-      s && (s.style.display = "flex");
+      const d = document.getElementById(`props-box-${s.id()}`);
+      d && (d.style.display = "flex");
     }
     if (n.boxLabels.displayOnlyOnHover) {
-      const s = document.getElementById(`labels-box-${d.id()}`);
-      s && (s.style.display = "flex");
+      const d = document.getElementById(`labels-box-${s.id()}`);
+      d && (d.style.display = "flex");
     }
-  }), e.on("mouseout", "node", (a) => {
-    const d = a.target;
+  }), o.on("mouseout", "node", (a) => {
+    const s = a.target;
     if (n.props.displayOnlyOnHover) {
-      const s = document.getElementById(`props-box-${d.id()}`);
-      s && (s.style.display = "none");
+      const d = document.getElementById(`props-box-${s.id()}`);
+      d && (d.style.display = "none");
     }
     if (n.boxLabels.displayOnlyOnHover) {
-      const s = document.getElementById(`labels-box-${d.id()}`);
-      s && (s.style.display = "none");
+      const d = document.getElementById(`labels-box-${s.id()}`);
+      d && (d.style.display = "none");
     }
   });
 }
-function L(e, t, n, r) {
-  const a = Object.keys(n)[0], d = Object.values(n)[0], s = new $("expand-menu");
-  s.items = [
+class C {
+  constructor() {
+    this.groupByField = "category", this.groupFor = { type: "folder" }, this.layoutOptions = { name: "cose" }, this.collapseThreshold = 1;
+  }
+  // How many outgoing relationships should there be befor it collapses?
+}
+function O(o, t) {
+  const n = Object.keys(t.groupFor)[0], l = Object.values(t.groupFor)[0], a = new E("expand-menu");
+  a.items = [
     {
       icon: "add",
-      click: (i) => o(i)
+      click: (e) => u(e)
     }
-  ], s.sticky = !0, s.positionDef = (i, c) => {
-    const m = i.renderedBoundingBox().h / 2, g = Math.sin(Math.PI / 4) * m - 8;
-    c.top = `${g}px`, c.right = `${g}px`;
-  }, s.conditionalDisplay = (i) => i.data("canExpand");
-  const p = [], l = [];
-  e.nodes().filter((i) => i.data(a) === d).forEach((i) => {
-    p.push(i), l.push(i.id());
-  }), p.forEach((i) => {
-    const c = i.neighborhood(), f = /* @__PURE__ */ new Set(), m = {};
-    c.filter((b) => !l.includes(b.id())).forEach((b) => {
-      const h = b.data(t);
-      h !== void 0 && (f.add(h), Object.keys(m).includes(h) || (m[h] = []), m[h].push(b), b.hide());
+  ], a.sticky = !0, a.positionDef = (e, c) => {
+    const r = e.renderedBoundingBox().h / 2, f = Math.sin(Math.PI / 4) * r - 8;
+    c.top = `${f}px`, c.right = `${f}px`;
+  }, a.conditionalDisplay = (e) => e.data("canExpand");
+  const s = [], d = [];
+  o.nodes().filter((e) => e.data(n) === l).forEach((e) => {
+    s.push(e), d.push(e.id());
+  }), s.forEach((e) => {
+    const c = e.neighborhood().filter((h) => h.isNode() && !d.includes(h.id()));
+    if (c.length <= t.collapseThreshold)
+      return;
+    const p = /* @__PURE__ */ new Set(), r = {};
+    c.forEach((h) => {
+      const m = h.data(t.groupByField);
+      m !== void 0 && (p.add(m), Object.keys(r).includes(m) || (r[m] = []), r[m].push(h), h.hide());
     });
-    const g = [];
-    f.forEach((b) => {
-      const h = `${i.id()}-${b}`;
-      g.push(
+    const f = [];
+    p.forEach((h) => {
+      const m = `${e.id()}-${h}`;
+      f.push(
         {
           group: "nodes",
           data: {
-            id: h,
-            label: b,
-            collapsedNodes: m[b],
+            id: m,
+            label: h,
+            collapsedNodes: r[h],
             canExpand: !0,
-            boxLabels: [m[b].length]
+            boxLabels: [r[h].length]
           }
         },
         {
           group: "edges",
-          data: { source: i.id(), target: h }
+          data: { source: e.id(), target: m }
         }
       );
-    }), e.add(g);
+    }), o.add(f);
   });
-  function o(i) {
-    const c = i.data();
+  function u(e) {
+    const c = e.data();
     if (!Object.keys(c).includes("collapsedNodes"))
       return;
-    c.collapsedNodes.forEach((m) => {
-      m.show();
-    }), i.hide();
-    const f = document.getElementById(`box-${i.id()}`);
-    f && Array.from(f.children).forEach(
-      (m) => m.style.display = "none"
-    ), e.layout(r).run();
+    c.collapsedNodes.forEach((r) => {
+      r.show();
+    }), e.hide();
+    const p = document.getElementById(`box-${e.id()}`);
+    p && Array.from(p.children).forEach(
+      (r) => r.style.display = "none"
+    ), o.layout(t.layoutOptions).run();
   }
-  e.layout(r).run();
-  const u = document.getElementById("cy");
-  u && (B(e, u, s), C(e, u));
+  o.layout(t.layoutOptions).run();
+  const i = o.container();
+  i && (v(o, i, a), B(o, i));
 }
-const x = {
+const b = {
   backgroundColor: "#fff",
   edgeColor: "#0d5be9",
   edgeFontSize: "5rem",
@@ -221,20 +230,20 @@ const x = {
   showNodeLabels: !0,
   showEdgeLabels: !0,
   hoverBorderColor: "#0d5be9"
-}, I = (e = x) => [
+}, L = (o = b) => [
   {
     selector: "node",
     style: {
-      label: (t) => t.data(e.labelSelector) && e.showNodeLabels ? t.data(e.labelSelector) : "",
+      label: (t) => t.data(o.labelSelector) && o.showNodeLabels ? t.data(o.labelSelector) : "",
       "text-valign": "center",
-      "font-family": e.font,
+      "font-family": o.font,
       "font-size": "10rem",
-      opacity: e.nodeOpacity,
+      opacity: o.nodeOpacity,
       color: "white",
-      "text-outline-color": (t) => t.data("color") ? t.data("color") : e.nodeColor,
+      "text-outline-color": (t) => t.data("color") ? t.data("color") : o.nodeColor,
       "text-outline-width": 1,
       // Set the outline width
-      "background-color": (t) => t.data("color") ? t.data("color") : e.nodeColor,
+      "background-color": (t) => t.data("color") ? t.data("color") : o.nodeColor,
       width: (t) => t.data("size") ? t.data("size") : "",
       height: (t) => t.data("size") ? t.data("size") : ""
     }
@@ -242,21 +251,21 @@ const x = {
   {
     selector: "edge",
     style: {
-      label: (t) => t.data(e.labelSelector) && e.showEdgeLabels ? t.data(e.labelSelector) : "",
+      label: (t) => t.data(o.labelSelector) && o.showEdgeLabels ? t.data(o.labelSelector) : "",
       "text-valign": "center",
-      "font-family": e.font,
-      "font-size": e.edgeFontSize,
-      color: e.edgeColor,
-      "target-arrow-color": e.edgeColor,
+      "font-family": o.font,
+      "font-size": o.edgeFontSize,
+      color: o.edgeColor,
+      "target-arrow-color": o.edgeColor,
       "curve-style": "bezier",
-      "target-arrow-shape": e.directed ? "triangle" : "none",
-      "line-color": e.edgeColor,
-      width: (t) => t.data("width") ? t.data("width") : e.edgeWidth,
+      "target-arrow-shape": o.directed ? "triangle" : "none",
+      "line-color": o.edgeColor,
+      width: (t) => t.data("width") ? t.data("width") : o.edgeWidth,
       "text-rotation": "autorotate",
       // Rotate label with the edge.
       "text-background-opacity": 1,
       // Make the background fully opaque.
-      "text-background-color": e.backgroundColor,
+      "text-background-color": o.backgroundColor,
       // Use the same color as your background to "break" the edge.
       "text-background-padding": 4
       // Padding around the label text.
@@ -266,7 +275,7 @@ const x = {
     selector: ".triple",
     style: {
       "background-color": "white",
-      "border-color": (t) => t.data("color") ? t.data("color") : e.nodeColor
+      "border-color": (t) => t.data("color") ? t.data("color") : o.nodeColor
     }
   },
   {
@@ -277,7 +286,7 @@ const x = {
       // Set width to match label
       height: "label",
       // Set height to match label
-      label: (t) => t.data(e.labelSelector) ? t.data(e.labelSelector) : "",
+      label: (t) => t.data(o.labelSelector) ? t.data(o.labelSelector) : "",
       padding: "2rem",
       "border-color": "black",
       "border-width": 0.3,
@@ -293,10 +302,10 @@ const x = {
     selector: ".loading",
     style: {
       "pie-size": "100%",
-      "pie-1-background-color": x.nodeColor,
+      "pie-1-background-color": b.nodeColor,
       // Color A
       "pie-1-background-size": (t) => `${t.data("pct")}%`,
-      "pie-2-background-color": x.edgeColor,
+      "pie-2-background-color": b.edgeColor,
       // Color B
       "pie-2-background-size": (t) => `${100 - parseInt(t.data("pct"))}%`,
       label: (t) => `${t.data("pct")}%`,
@@ -306,83 +315,93 @@ const x = {
   {
     selector: ".dropzone",
     style: {
-      "border-color": e.hoverBorderColor,
+      "border-color": o.hoverBorderColor,
       "border-width": 6,
       "border-opacity": 1
     }
   }
-], k = {
+], z = {
   name: "cose",
   padding: 100
 };
-function O(e) {
-  e.on("dragfree", "node", t), e.on("viewport", t);
+function I(o) {
+  o.on("dragfree", "node", t), o.on("viewport", t);
   function t() {
-    const n = e.json(), r = [];
+    const n = o.json(), l = [];
     n.elements.nodes.forEach((a) => {
-      const d = {};
-      d.data = a.data, d.position = { x: Math.round(a.position.x), y: Math.round(a.position.y) }, a.classes && (d.classes = a.classes), r.push(d);
-    }), console.log(r);
+      const s = {};
+      s.data = a.data, s.position = { x: Math.round(a.position.x), y: Math.round(a.position.y) }, a.classes && (s.classes = a.classes), l.push(s);
+    }), console.log(l);
   }
 }
-function N(e) {
-  e.on("dragfree", "node", t), e.on("viewport", t);
+function N(o) {
+  o.on("dragfree", "node", t), o.on("viewport", t);
   function t() {
-    const n = e.json(), r = [], a = [];
-    n.elements.nodes.forEach((d) => {
-      const s = {};
-      s.data = d.data, d.classes && (s.classes = d.classes), r.push(s);
-    }), n.elements.edges.forEach((d) => {
-      const s = {};
-      s.data = d.data, d.classes && (s.classes = d.classes), a.push(s);
-    }), console.log({ nodes: r, edges: a });
+    const n = o.json(), l = [], a = [];
+    n.elements.nodes.forEach((s) => {
+      const d = {};
+      d.data = s.data, s.classes && (d.classes = s.classes), l.push(d);
+    }), n.elements.edges.forEach((s) => {
+      const d = {};
+      d.data = s.data, s.classes && (d.classes = s.classes), a.push(d);
+    }), console.log({ nodes: l, edges: a });
   }
 }
-function M(e, t = (n) => !0) {
+function k(o, t = (n) => !0) {
   let n;
-  r(e);
-  function r(a) {
-    var d, s;
-    (d = a.container()) == null || d.addEventListener("dragover", (p) => {
-      var u;
-      p.preventDefault(), p.stopPropagation();
-      const l = { x: p.offsetX, y: p.offsetY }, o = y(a, l);
-      if (o === void 0 && n !== void 0)
+  l(o);
+  function l(a) {
+    var s, d;
+    (s = a.container()) == null || s.addEventListener("dragover", (u) => {
+      var c;
+      u.preventDefault(), u.stopPropagation();
+      const i = { x: u.offsetX, y: u.offsetY }, e = g(a, i);
+      if (e === void 0 && n !== void 0)
         n.removeClass("dropzone"), a.emit("nodeFileDropHoverEnd", { node: n }), n.emit("filesHoverEnd");
-      else if (n !== o && o !== void 0) {
-        if (!t(o))
+      else if (n !== e && e !== void 0) {
+        if (!t(e))
           return;
-        o.addClass("dropzone");
-        const i = (u = p.dataTransfer) == null ? void 0 : u.files;
-        a.emit("nodeFileDropHoverStart", { node: o, files: i }), o.emit("filesHoverStart", i);
+        e.addClass("dropzone");
+        const p = (c = u.dataTransfer) == null ? void 0 : c.files;
+        a.emit("nodeFileDropHoverStart", { node: e, files: p }), e.emit("filesHoverStart", p);
       }
-      n = o;
-    }), (s = a.container()) == null || s.addEventListener("drop", (p) => {
-      var u;
-      p.preventDefault(), p.stopPropagation();
-      const l = { x: p.offsetX, y: p.offsetY }, o = y(a, l);
-      if (o !== void 0) {
-        if (!t(o))
+      n = e;
+    }), (d = a.container()) == null || d.addEventListener("drop", (u) => {
+      var c;
+      u.preventDefault(), u.stopPropagation();
+      const i = { x: u.offsetX, y: u.offsetY }, e = g(a, i);
+      if (e !== void 0) {
+        if (!t(e))
           return;
-        o.removeClass("dropzone");
-        const i = (u = p.dataTransfer) == null ? void 0 : u.files;
-        i !== void 0 && o.emit("filesDropped", i), a.emit("nodeFileDropDropped", { node: o, files: i });
+        e.removeClass("dropzone");
+        const p = (c = u.dataTransfer) == null ? void 0 : c.files;
+        p !== void 0 && e.emit("filesDropped", p), a.emit("nodeFileDropDropped", { node: e, files: p });
       }
     });
   }
 }
+function S(o) {
+  o.on("mouseover", "node", (t) => {
+    const n = t.target;
+    n.style("label", n.data("label"));
+  }), o.on("mouseout", "node", (t) => {
+    t.target.style("label", "");
+  });
+}
 export {
-  $ as NodeMenuSettings,
-  z as animateGraph,
-  C as appendHTMLLabels,
-  E as appendHostContainers,
-  M as appendNodeFileDrop,
-  B as appendNodeMenu,
-  I as buildStyles,
-  y as closestNode,
-  L as collapseGraph,
-  x as defaultSettings,
-  k as layoutOptions,
-  O as logNodePositions,
-  N as logNodesEdges
+  C as CollapseSettings,
+  E as NodeMenuSettings,
+  w as animateGraph,
+  B as appendHTMLLabels,
+  y as appendHostContainers,
+  k as appendNodeFileDrop,
+  v as appendNodeMenu,
+  L as buildStyles,
+  g as closestNode,
+  O as collapseGraph,
+  b as defaultSettings,
+  z as layoutOptions,
+  I as logNodePositions,
+  N as logNodesEdges,
+  S as showNodeLabelOnHover
 };
