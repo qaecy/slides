@@ -179,10 +179,59 @@
             <h2>Named entities</h2>
           </section>
 
+          <section>
+            <p>Here we demonstrate how QAECY maps document content (fragments) to named entities.</p>
+          </section>
+
+          <section>
+            <p>The particular document is a PDF document and it contains some text and an image on the first page.</p>
+          </section>
+
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities.html"
+            data-background-iframe="dist/html/cytoscape/dm-entities-1.html"
           ></section>
+
+          <section>
+            <p>We have performed some processing of the image and found that it is an image of a specific entity of a person: Albert Einstein.</p>
+          </section>
+
+          <section>
+            <p>We use the <code>qcy:directlyMentions</code> relationship to indicate that there is a mentioning of the particular named entity (NE) in that fragment of the document.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-entities-2.html"
+          ></section>
+
+          <section>
+            <p>Since a fragment of the page mentions the NE the page also implicitly mentions it, and since the page is a fragment of the document, so does the document.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-entities-3.html"
+          ></section>
+
+          <section>
+            <p>The text part also mentions the NE, and in order to explicitly state what part of the text content that mentions him, we make use of the more expressive <code>qcy:NamedEntityOccurence</code>.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-entities-4.html"
+          ></section>
+
+          <section>
+            <p>The <code>qcy:NamedEntityOccurence</code> has a related entity/fragment, and knowing this also entails that there is a direct relationship present.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/dm-entities-5.html"
+          ></section>
+
         </section>
 
         <section>
