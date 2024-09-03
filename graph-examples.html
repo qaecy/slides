@@ -27,20 +27,17 @@
     <div class="reveal">
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        
         <section>
-
           <section>
             <h2>Node loading</h2>
           </section>
 
           <section
-          style="pointer-events: none"
-          data-background-iframe="dist/html/cytoscape/graph-examples/node-loading.html"
-        >
-          <p>Node loading</p>
-        </section>
-
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/node-loading.html"
+          >
+            <p>Node loading</p>
+          </section>
         </section>
 
         <section>
@@ -55,14 +52,17 @@
               settings.items = [
                 {
                   icon: "face",
+                  tooltip: "Profile",
                   click: (node) => setClickEvent(node.id(), "1"),
                 },
                 {
                   icon: "close",
+                  tooltip: "Close",
                   click: (node) => setClickEvent(node.id(), "2"),
                 },
                 {
                   icon: "home",
+                  tooltip: "Home",
                   click: (node) => setClickEvent(node.id(), "3"),
                 },
               ];
@@ -268,7 +268,6 @@
         </section>
 
         <section>
-
           <section>
             <h2>File drop</h2>
           </section>
@@ -344,9 +343,7 @@
           >
             <p>File drop on specific node</p>
           </section>
-
         </section>
-
       </div>
     </div>
 

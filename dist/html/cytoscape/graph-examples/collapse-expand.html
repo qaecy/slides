@@ -14,7 +14,7 @@
       <span id="click-event"></span>
     </span>
     <script type="module">
-      import { isMobile, nodeLoading } from "../helpers.js";
+      import { isMobile } from "../helpers.js";
       import { elements } from "./file-elements.js";
       import {
         logNodePositions,
@@ -44,7 +44,6 @@
       });
 
       // animateGraph(cy);
-      nodeLoading(cy);
       // logNodePositions(cy);
       const parent = document.getElementById('cy');
 

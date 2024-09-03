@@ -34,5 +34,6 @@ export declare class NodeMenuSettings {
 }
 export interface MenuItem {
     icon: string;
+    tooltip?: string;
     click: (node: any) => void;
 }

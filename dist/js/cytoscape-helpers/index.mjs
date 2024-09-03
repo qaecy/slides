@@ -1,94 +1,99 @@
-function w(o, t = !0, n = 1e-4, l = 0.02) {
-  let a = 0;
-  function s() {
-    o.nodes().forEach((u, i) => {
-      const e = u.position(), c = Math.sin(performance.now() * n + i) * l, p = Math.cos(performance.now() * n + i) * l;
-      u.position({
-        x: e.x + c,
+function C(o, t = !0, s = 1e-4, r = 0.02) {
+  let n = 0;
+  function a() {
+    o.nodes().forEach((c, d) => {
+      const e = c.position(), f = Math.sin(performance.now() * s + d) * r, p = Math.cos(performance.now() * s + d) * r;
+      c.position({
+        x: e.x + f,
         y: e.y + p
       });
-    }), a = requestAnimationFrame(s);
+    }), n = requestAnimationFrame(a);
   }
-  a = requestAnimationFrame(s);
-  let d = !0;
-  return t && d && o.on("mouseover", "node", () => {
-    cancelAnimationFrame(a), d = !1;
-  }), a;
+  n = requestAnimationFrame(a);
+  let i = !0;
+  return t && i && o.on("mouseover", "node", () => {
+    cancelAnimationFrame(n), i = !1;
+  }), n;
 }
-function g(o, t) {
+function y(o, t) {
   if (o.nodes() === void 0)
     return;
-  let l, a = 1 / 0;
-  return o.nodes().forEach((s) => {
-    a = s.renderedBoundingBox().h;
-    const d = x(t, s.renderedPosition());
-    d < a && (a = d, l = s);
-  }), l;
+  let r, n = 1 / 0;
+  return o.nodes().forEach((a) => {
+    n = a.renderedBoundingBox().h;
+    const i = v(t, a.renderedPosition());
+    i < n && (n = i, r = a);
+  }), r;
 }
-function x(o, t) {
-  const n = t.x - o.x, l = t.y - o.y;
-  return Math.sqrt(n * n + l * l);
+function v(o, t) {
+  const s = t.x - o.x, r = t.y - o.y;
+  return Math.sqrt(s * s + r * r);
 }
 class E {
   constructor(t = "node-menu") {
-    this.id = t, this.items = [], this.hideAfter = 2e3, this.sticky = !1, this.conditionalDisplay = (n) => !0, this.positionDef = (n, l) => {
-      const s = n.renderedBoundingBox().h / 2, d = Math.sin(Math.PI / 4) * s;
-      l.bottom = `${d}px`, l.left = `${d}px`;
+    this.id = t, this.items = [], this.hideAfter = 2e3, this.sticky = !1, this.conditionalDisplay = (s) => !0, this.positionDef = (s, r) => {
+      const a = s.renderedBoundingBox().h / 2, i = Math.sin(Math.PI / 4) * a;
+      r.bottom = `${i}px`, r.left = `${i}px`;
     };
   }
 }
-function y(o, t) {
-  function n() {
-    o.nodes().forEach((l) => {
-      const a = l.renderedPosition();
-      let s = document.getElementById(`box-${l.id()}`);
-      s || (s = document.createElement("div"), s.id = `box-${l.id()}`, s.style.position = "absolute", t.appendChild(s)), s.style.left = `${a.x}px`, s.style.top = `${a.y}px`;
+function g(o, t) {
+  function s() {
+    o.nodes().forEach((r) => {
+      const n = r.renderedPosition();
+      let a = document.getElementById(`box-${r.id()}`);
+      a || (a = document.createElement("div"), a.id = `box-${r.id()}`, a.style.position = "absolute", t.appendChild(a)), a.style.left = `${n.x}px`, a.style.top = `${n.y}px`;
     });
   }
-  n(), o.on("position", "node", n), o.on("pan zoom", n), window.addEventListener("resize", n);
+  s(), o.on("position", "node", s), o.on("pan zoom", s), window.addEventListener("resize", s);
 }
-function v(o, t, n) {
-  y(o, t);
-  let l = !1;
-  function a(i) {
+function $(o, t, s) {
+  g(o, t);
+  let r = !1;
+  function n(d) {
     const e = document.createElement("div");
-    e.id = `${n.id}-${i.id()}`, e.classList.add("node-menu"), e.classList.add(n.id), e.addEventListener("mouseover", () => l = !0), e.addEventListener("mouseout", () => l = !1), n.items.forEach((p) => {
-      const r = document.createElement("div");
-      e.appendChild(r), r.innerText = p.icon, r.addEventListener("click", (f) => {
-        f.preventDefault(), f.stopImmediatePropagation(), p.click(i);
-      }), r.addEventListener("touchstart", (f) => {
-        f.preventDefault(), f.stopImmediatePropagation(), p.click(i);
-      }), r.classList.add("entry"), r.classList.add("material-icons");
+    e.id = `${s.id}-${d.id()}`, e.classList.add("node-menu"), e.classList.add(s.id), e.addEventListener("mouseover", () => r = !0), e.addEventListener("mouseout", () => r = !1), s.items.forEach((p) => {
+      const l = document.createElement("div");
+      if (l.style.position = "relative", e.appendChild(l), l.innerText = p.icon, l.addEventListener("click", (h) => {
+        h.preventDefault(), h.stopImmediatePropagation(), p.click(d);
+      }), l.addEventListener("touchstart", (h) => {
+        h.preventDefault(), h.stopImmediatePropagation(), p.click(d);
+      }), l.classList.add("entry"), l.classList.add("material-icons"), p.tooltip !== void 0) {
+        const h = document.createElement("div");
+        h.innerText = p.tooltip;
+        const u = h.style;
+        u.position = "absolute", u.display = "none", u.bottom = "100%", u.left = "50%", u.transform = "translate(-50%)", h.classList.add("tooltip"), l.appendChild(h), l.addEventListener("mouseover", () => u.display = "block"), l.addEventListener("mouseleave", () => u.display = "none");
+      }
     });
-    const c = document.getElementById(`box-${i.id()}`);
-    return n.positionDef(i, e.style), c && c.appendChild(e), e;
+    const f = document.getElementById(`box-${d.id()}`);
+    return s.positionDef(d, e.style), f && f.appendChild(e), e;
   }
-  function s(i) {
-    let e = document.getElementById(`${n.id}-${i.id()}`);
-    e || (e = a(i)), e.style.display = "flex";
+  function a(d) {
+    let e = document.getElementById(`${s.id}-${d.id()}`);
+    e || (e = n(d)), e.style.display = "flex";
   }
-  function d(i) {
-    const e = document.getElementById(`${n.id}-${i.id()}`);
+  function i(d) {
+    const e = document.getElementById(`${s.id}-${d.id()}`);
     e && (e.style.display = "none");
   }
-  function u() {
-    o.nodes().forEach((i) => {
-      const e = document.getElementById(`${n.id}-${i.id()}`);
-      e && n.positionDef(i, e.style);
+  function c() {
+    o.nodes().forEach((d) => {
+      const e = document.getElementById(`${s.id}-${d.id()}`);
+      e && s.positionDef(d, e.style);
     });
   }
-  n.sticky ? o.nodes().forEach((i) => {
-    n.conditionalDisplay(i) && s(i);
-  }) : o.on("mouseover", "node", (i) => {
-    if (!n.conditionalDisplay(i.target))
+  s.sticky ? o.nodes().forEach((d) => {
+    s.conditionalDisplay(d) && a(d);
+  }) : o.on("mouseover", "node", (d) => {
+    if (!s.conditionalDisplay(d.target))
       return;
-    s(i.target);
+    a(d.target);
     const e = setInterval(() => {
-      l || (d(i.target), clearInterval(e));
-    }, n.hideAfter);
-  }), o.on("pan zoom", u), window.addEventListener("resize", u);
+      r || (i(d.target), clearInterval(e));
+    }, s.hideAfter);
+  }), o.on("pan zoom", c), window.addEventListener("resize", c);
 }
-const $ = {
+const w = {
   props: {
     displayOnlyOnHover: !0
   },
@@ -96,102 +101,103 @@ const $ = {
     displayOnlyOnHover: !1
   }
 };
-function B(o, t, n = $) {
-  y(o, t);
-  function l() {
-    o.nodes().forEach((a) => {
-      const s = a.renderedBoundingBox().h, d = document.getElementById(`box-${a.id()}`);
-      if (!d)
+function B(o, t, s = w) {
+  g(o, t);
+  function r() {
+    o.nodes().forEach((n) => {
+      const a = n.renderedBoundingBox().h, i = document.getElementById(`box-${n.id()}`);
+      if (!i)
         return;
-      const u = a.data().boxLabels;
-      if (u !== void 0) {
+      const c = n.data().boxLabels;
+      if (c !== void 0) {
         let e = document.getElementById(
-          `labels-box-${a.id()}`
+          `labels-box-${n.id()}`
         );
-        e ? e.style.bottom = `${s / 2 - 10}px` : (e = document.createElement("div"), e.id = `labels-box-${a.id()}`, e.className = "box-label", e.style.bottom = `${s / 2 - 10}px`, n.boxLabels.displayOnlyOnHover && (e.style.display = "none"), d.appendChild(e), u.forEach((c, p) => {
+        e ? e.style.bottom = `${a / 2 - 10}px` : (e = document.createElement("div"), e.id = `labels-box-${n.id()}`, e.className = "box-label", e.style.bottom = `${a / 2 - 10}px`, s.boxLabels.displayOnlyOnHover && (e.style.display = "none"), i.appendChild(e), c.forEach((f, p) => {
           if (!e)
             return;
-          const r = document.createElement("div");
-          r.id = `labels-box-${a.id()}-${p}`, r.className = "entry", r.innerHTML = c, e.appendChild(r);
+          const l = document.createElement("div");
+          l.id = `labels-box-${n.id()}-${p}`, l.className = "entry", l.innerHTML = f, e.appendChild(l);
         }));
       }
-      const i = a.data().properties;
-      if (i !== void 0) {
+      const d = n.data().properties;
+      if (d !== void 0) {
         let e = document.getElementById(
-          `props-box-${a.id()}`
+          `props-box-${n.id()}`
         );
-        e ? e.style.top = `${s / 2 - 10}px` : (e = document.createElement("div"), e.id = `props-box-${a.id()}`, e.style.right = "0px", e.className = "property", e.style.top = `${s / 2 - 10}px`, n.props.displayOnlyOnHover && (e.style.display = "none"), d.appendChild(e), Object.keys(i).forEach((c, p) => {
+        e ? e.style.top = `${a / 2 - 10}px` : (e = document.createElement("div"), e.id = `props-box-${n.id()}`, e.style.right = "0px", e.className = "property", e.style.top = `${a / 2 - 10}px`, s.props.displayOnlyOnHover && (e.style.display = "none"), i.appendChild(e), Object.keys(d).forEach((f, p) => {
           if (!e)
             return;
-          const r = document.createElement("div");
-          r.id = `props-box-${a.id()}-${p}`, r.className = "entry", r.innerHTML = `<span class="key">${c}</span><span class="value">${i[c]}</span>`, e.appendChild(r);
+          const l = document.createElement("div");
+          l.id = `props-box-${n.id()}-${p}`, l.className = "entry", l.innerHTML = `<span class="key">${f}</span><span class="value">${d[f]}</span>`, e.appendChild(l);
         }));
       }
     });
   }
-  l(), o.on("zoom", l), o.on("mouseover", "node", (a) => {
-    const s = a.target;
-    if (n.props.displayOnlyOnHover) {
-      const d = document.getElementById(`props-box-${s.id()}`);
-      d && (d.style.display = "flex");
+  r(), o.on("zoom", r), o.on("mouseover", "node", (n) => {
+    const a = n.target;
+    if (s.props.displayOnlyOnHover) {
+      const i = document.getElementById(`props-box-${a.id()}`);
+      i && (i.style.display = "flex");
     }
-    if (n.boxLabels.displayOnlyOnHover) {
-      const d = document.getElementById(`labels-box-${s.id()}`);
-      d && (d.style.display = "flex");
+    if (s.boxLabels.displayOnlyOnHover) {
+      const i = document.getElementById(`labels-box-${a.id()}`);
+      i && (i.style.display = "flex");
     }
-  }), o.on("mouseout", "node", (a) => {
-    const s = a.target;
-    if (n.props.displayOnlyOnHover) {
-      const d = document.getElementById(`props-box-${s.id()}`);
-      d && (d.style.display = "none");
+  }), o.on("mouseout", "node", (n) => {
+    const a = n.target;
+    if (s.props.displayOnlyOnHover) {
+      const i = document.getElementById(`props-box-${a.id()}`);
+      i && (i.style.display = "none");
     }
-    if (n.boxLabels.displayOnlyOnHover) {
-      const d = document.getElementById(`labels-box-${s.id()}`);
-      d && (d.style.display = "none");
+    if (s.boxLabels.displayOnlyOnHover) {
+      const i = document.getElementById(`labels-box-${a.id()}`);
+      i && (i.style.display = "none");
     }
   });
 }
-class C {
+class O {
   constructor() {
     this.groupByField = "category", this.groupFor = { type: "folder" }, this.layoutOptions = { name: "cose" }, this.collapseThreshold = 1;
   }
   // How many outgoing relationships should there be befor it collapses?
 }
-function O(o, t) {
-  const n = Object.keys(t.groupFor)[0], l = Object.values(t.groupFor)[0], a = new E("expand-menu");
-  a.items = [
+function z(o, t) {
+  const s = Object.keys(t.groupFor)[0], r = Object.values(t.groupFor)[0], n = new E("expand-menu");
+  n.items = [
     {
       icon: "add",
-      click: (e) => u(e)
+      click: (e) => c(e)
     }
-  ], a.sticky = !0, a.positionDef = (e, c) => {
-    const r = e.renderedBoundingBox().h / 2, f = Math.sin(Math.PI / 4) * r - 8;
-    c.top = `${f}px`, c.right = `${f}px`;
-  }, a.conditionalDisplay = (e) => e.data("canExpand");
-  const s = [], d = [];
-  o.nodes().filter((e) => e.data(n) === l).forEach((e) => {
-    s.push(e), d.push(e.id());
-  }), s.forEach((e) => {
-    const c = e.neighborhood().filter((h) => h.isNode() && !d.includes(h.id()));
-    if (c.length <= t.collapseThreshold)
-      return;
-    const p = /* @__PURE__ */ new Set(), r = {};
-    c.forEach((h) => {
-      const m = h.data(t.groupByField);
-      m !== void 0 && (p.add(m), Object.keys(r).includes(m) || (r[m] = []), r[m].push(h), h.hide());
+  ], n.sticky = !0, n.positionDef = (e, f) => {
+    const l = e.renderedBoundingBox().h / 2, h = Math.sin(Math.PI / 4) * l - 8;
+    f.top = `${h}px`, f.right = `${h}px`;
+  }, n.conditionalDisplay = (e) => e.data("canExpand");
+  const a = [], i = [];
+  o.nodes().filter((e) => e.data(s) === r).forEach((e) => {
+    a.push(e), i.push(e.id());
+  }), a.forEach((e) => {
+    const f = e.neighborhood().filter((u) => u.isNode() && !i.includes(u.id())), p = /* @__PURE__ */ new Set(), l = {};
+    f.forEach((u) => {
+      const m = u.data(t.groupByField);
+      m !== void 0 && (p.add(m), Object.keys(l).includes(m) || (l[m] = []), l[m].push(u), u.hide());
     });
-    const f = [];
-    p.forEach((h) => {
-      const m = `${e.id()}-${h}`;
-      f.push(
+    const h = [];
+    p.forEach((u) => {
+      if (l[u].length <= t.collapseThreshold) {
+        l[u].forEach((x) => x.show());
+        return;
+      }
+      const m = `${e.id()}-${u}`;
+      h.push(
         {
           group: "nodes",
           data: {
             id: m,
-            label: h,
-            collapsedNodes: r[h],
+            label: u,
+            collapsedNodes: l[u],
             canExpand: !0,
-            boxLabels: [r[h].length]
+            boxLabels: [l[u].length]
           }
         },
         {
@@ -199,23 +205,23 @@ function O(o, t) {
           data: { source: e.id(), target: m }
         }
       );
-    }), o.add(f);
+    }), o.add(h);
   });
-  function u(e) {
-    const c = e.data();
-    if (!Object.keys(c).includes("collapsedNodes"))
+  function c(e) {
+    const f = e.data();
+    if (!Object.keys(f).includes("collapsedNodes"))
       return;
-    c.collapsedNodes.forEach((r) => {
-      r.show();
+    f.collapsedNodes.forEach((l) => {
+      l.show();
     }), e.hide();
     const p = document.getElementById(`box-${e.id()}`);
     p && Array.from(p.children).forEach(
-      (r) => r.style.display = "none"
+      (l) => l.style.display = "none"
     ), o.layout(t.layoutOptions).run();
   }
   o.layout(t.layoutOptions).run();
-  const i = o.container();
-  i && (v(o, i, a), B(o, i));
+  const d = o.container();
+  d && ($(o, d, n), B(o, d));
 }
 const b = {
   backgroundColor: "#fff",
@@ -230,7 +236,7 @@ const b = {
   showNodeLabels: !0,
   showEdgeLabels: !0,
   hoverBorderColor: "#0d5be9"
-}, L = (o = b) => [
+}, k = (o = b) => [
   {
     selector: "node",
     style: {
@@ -244,8 +250,8 @@ const b = {
       "text-outline-width": 1,
       // Set the outline width
       "background-color": (t) => t.data("color") ? t.data("color") : o.nodeColor,
-      width: (t) => t.data("size") ? t.data("size") : "",
-      height: (t) => t.data("size") ? t.data("size") : ""
+      width: (t) => t.data("size") ? t.data("size") : "20",
+      height: (t) => t.data("size") ? t.data("size") : "20"
     }
   },
   {
@@ -308,7 +314,7 @@ const b = {
       "pie-2-background-color": b.edgeColor,
       // Color B
       "pie-2-background-size": (t) => `${100 - parseInt(t.data("pct"))}%`,
-      label: (t) => `${t.data("pct")}%`,
+      label: (t) => t.data("pct") !== void 0 && t.data("pct") !== 100 ? `${parseInt(t.data("pct"))}%` : "",
       "font-size": "5rem"
     }
   },
@@ -320,88 +326,108 @@ const b = {
       "border-opacity": 1
     }
   }
-], z = {
+], I = {
   name: "cose",
   padding: 100
 };
-function I(o) {
-  o.on("dragfree", "node", t), o.on("viewport", t);
-  function t() {
-    const n = o.json(), l = [];
-    n.elements.nodes.forEach((a) => {
-      const s = {};
-      s.data = a.data, s.position = { x: Math.round(a.position.x), y: Math.round(a.position.y) }, a.classes && (s.classes = a.classes), l.push(s);
-    }), console.log(l);
-  }
-}
 function N(o) {
   o.on("dragfree", "node", t), o.on("viewport", t);
   function t() {
-    const n = o.json(), l = [], a = [];
-    n.elements.nodes.forEach((s) => {
-      const d = {};
-      d.data = s.data, s.classes && (d.classes = s.classes), l.push(d);
-    }), n.elements.edges.forEach((s) => {
-      const d = {};
-      d.data = s.data, s.classes && (d.classes = s.classes), a.push(d);
-    }), console.log({ nodes: l, edges: a });
+    const s = o.json(), r = [];
+    s.elements.nodes.forEach((n) => {
+      const a = {};
+      a.data = n.data, a.position = { x: Math.round(n.position.x), y: Math.round(n.position.y) }, n.classes && (a.classes = n.classes), r.push(a);
+    }), console.log(r);
   }
 }
-function k(o, t = (n) => !0) {
-  let n;
-  l(o);
-  function l(a) {
-    var s, d;
-    (s = a.container()) == null || s.addEventListener("dragover", (u) => {
-      var c;
-      u.preventDefault(), u.stopPropagation();
-      const i = { x: u.offsetX, y: u.offsetY }, e = g(a, i);
-      if (e === void 0 && n !== void 0)
-        n.removeClass("dropzone"), a.emit("nodeFileDropHoverEnd", { node: n }), n.emit("filesHoverEnd");
-      else if (n !== e && e !== void 0) {
+function S(o) {
+  o.on("dragfree", "node", t), o.on("viewport", t);
+  function t() {
+    const s = o.json(), r = [], n = [];
+    s.elements.nodes.forEach((a) => {
+      const i = {};
+      i.data = a.data, a.classes && (i.classes = a.classes), r.push(i);
+    }), s.elements.edges.forEach((a) => {
+      const i = {};
+      i.data = a.data, a.classes && (i.classes = a.classes), n.push(i);
+    }), console.log({ nodes: r, edges: n });
+  }
+}
+function L(o) {
+  function t(r, n = "") {
+    return new Promise((a) => {
+      r && (r.isFile ? r.file((i) => {
+        i.filepath = n + i.name, s.push(i), a(i);
+      }) : r.isDirectory && r.createReader().readEntries((c) => {
+        const d = [];
+        for (const e of c)
+          d.push(t(e, n + r.name + "/"));
+        a(Promise.all(d));
+      }));
+    });
+  }
+  const s = [];
+  return new Promise((r) => {
+    const n = [];
+    for (const a of o)
+      n.push(t(a.webkitGetAsEntry()));
+    Promise.all(n).then(() => {
+      r(s);
+    });
+  });
+}
+function D(o, t = (s) => !0) {
+  let s;
+  r(o);
+  function r(n) {
+    var a, i;
+    (a = n.container()) == null || a.addEventListener("dragover", async (c) => {
+      c.preventDefault(), c.stopPropagation();
+      const d = { x: c.offsetX, y: c.offsetY }, e = y(n, d);
+      if (e === void 0 && s !== void 0)
+        s.removeClass("dropzone"), n.emit("nodeFileDropHoverEnd", { node: s }), s.emit("filesHoverEnd");
+      else if (s !== e && e !== void 0) {
         if (!t(e))
           return;
-        e.addClass("dropzone");
-        const p = (c = u.dataTransfer) == null ? void 0 : c.files;
-        a.emit("nodeFileDropHoverStart", { node: e, files: p }), e.emit("filesHoverStart", p);
+        e.addClass("dropzone"), n.emit("nodeFileDropHoverStart", { node: e }), e.emit("filesHoverStart");
       }
-      n = e;
-    }), (d = a.container()) == null || d.addEventListener("drop", (u) => {
-      var c;
-      u.preventDefault(), u.stopPropagation();
-      const i = { x: u.offsetX, y: u.offsetY }, e = g(a, i);
+      s = e;
+    }), (i = n.container()) == null || i.addEventListener("drop", async (c) => {
+      var f;
+      c.preventDefault(), c.stopPropagation();
+      const d = { x: c.offsetX, y: c.offsetY }, e = y(n, d);
       if (e !== void 0) {
         if (!t(e))
           return;
         e.removeClass("dropzone");
-        const p = (c = u.dataTransfer) == null ? void 0 : c.files;
-        p !== void 0 && e.emit("filesDropped", p), a.emit("nodeFileDropDropped", { node: e, files: p });
+        const p = await L((f = c.dataTransfer) == null ? void 0 : f.items);
+        p !== void 0 && e.emit("filesDropped", p), n.emit("nodeFileDropDropped", { node: e, files: p });
       }
     });
   }
 }
-function S(o) {
+function M(o) {
   o.on("mouseover", "node", (t) => {
-    const n = t.target;
-    n.style("label", n.data("label"));
+    const s = t.target;
+    s.style("label", s.data("label"));
   }), o.on("mouseout", "node", (t) => {
     t.target.style("label", "");
   });
 }
 export {
-  C as CollapseSettings,
+  O as CollapseSettings,
   E as NodeMenuSettings,
-  w as animateGraph,
+  C as animateGraph,
   B as appendHTMLLabels,
-  y as appendHostContainers,
-  k as appendNodeFileDrop,
-  v as appendNodeMenu,
-  L as buildStyles,
-  g as closestNode,
-  O as collapseGraph,
+  g as appendHostContainers,
+  D as appendNodeFileDrop,
+  $ as appendNodeMenu,
+  k as buildStyles,
+  y as closestNode,
+  z as collapseGraph,
   b as defaultSettings,
-  z as layoutOptions,
-  I as logNodePositions,
-  N as logNodesEdges,
-  S as showNodeLabelOnHover
+  I as layoutOptions,
+  N as logNodePositions,
+  S as logNodesEdges,
+  M as showNodeLabelOnHover
 };

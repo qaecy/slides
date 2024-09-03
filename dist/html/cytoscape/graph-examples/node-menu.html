@@ -35,7 +35,7 @@
       <span id="click-event"></span>
     </span>
     <script type="module">
-      import { isMobile, nodeLoading } from "../helpers.js";
+      import { isMobile } from "../helpers.js";
       import {
         logNodePositions,
         animateGraph,
@@ -85,7 +85,6 @@
       });
 
       // animateGraph(cy);
-      nodeLoading(cy);
       logNodePositions(cy);
 
       function setClickEvent(nodeId, id) {
@@ -98,14 +97,17 @@
       settings.items = [
         {
           icon: "face",
+          tooltip: "Profile",
           click: (node) => setClickEvent(node.id(), "1"),
         },
         {
           icon: "close",
+          tooltip: "Close",
           click: (node) => setClickEvent(node.id(), "2"),
         },
         {
           icon: "home",
+          tooltip: "Home",
           click: (node) => setClickEvent(node.id(), "3"),
         },
       ];
