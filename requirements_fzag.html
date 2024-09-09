@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - Requirements FZAG</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+	</head>
+	<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <img src="dist/img/logo.svg" alt="">
+        <p>your knowledge, accessible</p>
+      </section>
+
+      <section>
+
+        <section
+          data-background-iframe="dist/html/cytoscape/requirements_fzag.html"
+          data-background-interactive>
+        </section>
+
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script type="module">
+    import { turtle } from "./plugin/highlight/turtle.js";
+    import { sparql } from "./plugin/highlight/sparql.js";
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      highlight: {
+        beforeHighlight: (hljs) => {
+          hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+          hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+        },
+      },
+    });
+  </script>
+</body>
+</html>

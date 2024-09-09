@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <span id="click-event-container">
+      <span id="click-event"></span>
+    </span>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+        layoutOptions,
+        appendHostContainers,
+        appendNodeMenu,
+        NodeMenuSettings,
+        appendHTMLLabels,
+        collapseGraph,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+
+      const nodeStyle = style.find((s) => s.selector === "node");
+      // nodeStyle.style["label"] = (node) => node.data("type") !== "file" ? node.data("label") : "";
+
+      layoutOptions.padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: layoutOptions,
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "reqs",
+                label: "Requirements FZAG",
+                type: "cat",
+                category: "",
+              },
+            },
+            {
+              data: {
+                id: "HB1",
+                label: "..",
+                type: "ent",
+                category: "Hochbau",
+              },
+            },
+            {
+              data: {
+                id: "HB2",
+                label: "..",
+                type: "ent",
+                category: "Hochbau",
+              },
+            },
+            {
+              data: {
+                id: "SH1",
+                label: "..",
+                type: "ent",
+                category: "Sicherheit",
+              },
+            },
+            {
+              data: {
+                id: "SH2",
+                label: "..",
+                type: "ent",
+                category: "Sicherheit",
+              },
+            },
+            {
+              data: {
+                id: "ICT1",
+                label: "..",
+                type: "ent",
+                category: "ICT",
+              },
+            },
+            {
+              data: {
+                id: "ICT2",
+                label: "..",
+                type: "ent",
+                category: "ICT",
+              },
+            },
+            {
+              data: {
+                id: "HR1",
+                label: "..",
+                type: "ent",
+                category: "HR",
+              },
+            },
+            {
+              data: {
+                id: "HR2",
+                label: "..",
+                type: "ent",
+                category: "HR",
+              },
+            },
+            {
+              data: {
+                id: "FM1",
+                label: "..",
+                type: "ent",
+                category: "FM",
+              },
+            },
+            {
+              data: {
+                id: "FM2",
+                label: "..",
+                type: "ent",
+                category: "FM",
+              },
+            },
+            {
+              data: {
+                id: "T1",
+                label: "Gebäudetechnik",
+                type: "ent",
+                category: "Technik",
+              },
+            },
+            {
+              data: {
+                id: "TB1",
+                label: "..",
+                type: "ent",
+                category: "Tiefbau",
+              },
+            },
+            {
+              data: {
+                id: "TB2",
+                label: "..",
+                type: "ent",
+                category: "Tiefbau",
+              },
+            },
+            {
+              data: {
+                id: "ET",
+                label: "Elektrotechnik",
+                type: "ent",
+                category: "Technik",
+              },
+            },
+            {
+              data: {
+                id: "BFS",
+                label: "Befestigung",
+                type: "ent",
+                category: "Technik",
+              },
+            },
+            {
+              data: {
+                id: "TR",
+                label: "Trassen",
+                type: "ent",
+                category: "Technik",
+              },
+            },
+            {
+              data: {
+                id: "G",
+                label: "Geometrie",
+                type: "ent",
+                category: "Technik",
+                properties: {
+                  text: "Kabeltrassen müssen mit einer Reserve von mindestens 40% dimensioniert werden. Die Standardbreite für Hauptkabelrinnen beträgt 400 mm, während Abzweigkabelrinnen mindestens 200 mm breit sein sollten. Die Seitenhöhe der Rinne beträgt 60 mm. Außerdem sollte das verwendete Kabelträgersystem E90 sein, und die Mindestblechstärke für das Material beträgt 1,5 mm."
+                }
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "reqs",
+                target: "HB1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "HB2",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "SH1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "SH2",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "ICT1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "ICT2",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "HR1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "HR2",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "FM1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "FM2",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "T1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "TB1",
+              },
+            },
+            {
+              data: {
+                source: "reqs",
+                target: "TB2",
+              },
+            },
+            {
+              data: {
+                source: "T1",
+                target: "ET",
+              },
+            },
+            {
+              data: {
+                source: "ET",
+                target: "BFS",
+              },
+            },
+            {
+              data: {
+                source: "BFS",
+                target: "TR",
+              },
+            },
+            {
+              data: {
+                source: "TR",
+                target: "G"
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      // // logNodePositions(cy);
+      // const parent = document.getElementById('cy');
+
+      const collapseSettings = {
+        groupByField: "category",
+        groupFor: { type: "cat" },
+        layoutOptions,
+        collapseThreshold: 1
+      }
+      collapseGraph(cy, collapseSettings);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+
+
+      // showNodeLabelOnHover();
+      // function showNodeLabelOnHover(){
+      //   // Event listener for mouseover
+      //   cy.on('mouseover', 'node', function(event){
+      //     const node = event.target;
+      //     node.style('label', node.data('label')); // Show the label
+      //   });
+
+      //   // Event listener for mouseout
+      //   cy.on('mouseout', 'node', function(event){
+      //     const node = event.target;
+      //     node.style('label', ''); // Hide the label
+      //   });
+
+      // }
+    </script>
+  </body>
+</html>
