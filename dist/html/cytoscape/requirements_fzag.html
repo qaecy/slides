@@ -15,6 +15,7 @@
     </span>
     <script type="module">
       import { isMobile } from "./helpers.js";
+      import stringToColor from "https://cdn.jsdelivr.net/npm/string-to-color@2.2.2/+esm";
       import {
         logNodePositions,
         animateGraph,
@@ -28,7 +29,9 @@
         collapseGraph,
       } from "../../js/cytoscape-helpers/index.mjs";
 
-      const style = buildStyles();
+      const settings = defaultSettings;
+      settings.edgeColor = "#888";
+      const style = buildStyles(settings);
 
       const nodeStyle = style.find((s) => s.selector === "node");
       // nodeStyle.style["label"] = (node) => node.data("type") !== "file" ? node.data("label") : "";
@@ -51,10 +54,20 @@
             },
             {
               data: {
+                id: "HB",
+                label: "Hochbau",
+                type: "ent",
+                category: "Hochbau",
+                color: stringToColor("Hochbau")
+              },
+            },
+            {
+              data: {
                 id: "HB1",
                 label: "..",
                 type: "ent",
                 category: "Hochbau",
+                color: stringToColor("Hochbau")
               },
             },
             {
@@ -63,6 +76,16 @@
                 label: "..",
                 type: "ent",
                 category: "Hochbau",
+                color: stringToColor("Hochbau")
+              },
+            },
+            {
+              data: {
+                id: "SH",
+                label: "Sicherheit",
+                type: "ent",
+                category: "Sicherheit",
+                color: stringToColor("Sicherheit")
               },
             },
             {
@@ -71,6 +94,7 @@
                 label: "..",
                 type: "ent",
                 category: "Sicherheit",
+                color: stringToColor("Sicherheit")
               },
             },
             {
@@ -79,6 +103,16 @@
                 label: "..",
                 type: "ent",
                 category: "Sicherheit",
+                color: stringToColor("Sicherheit")
+              },
+            },
+            {
+              data: {
+                id: "ICT",
+                label: "ICT",
+                type: "ent",
+                category: "ICT",
+                color: stringToColor("ICT")
               },
             },
             {
@@ -87,6 +121,7 @@
                 label: "..",
                 type: "ent",
                 category: "ICT",
+                color: stringToColor("ICT")
               },
             },
             {
@@ -95,6 +130,16 @@
                 label: "..",
                 type: "ent",
                 category: "ICT",
+                color: stringToColor("ICT")
+              },
+            },
+            {
+              data: {
+                id: "HR",
+                label: "HR",
+                type: "ent",
+                category: "HR",
+                color: stringToColor("HR")
               },
             },
             {
@@ -103,6 +148,7 @@
                 label: "..",
                 type: "ent",
                 category: "HR",
+                color: stringToColor("HR")
               },
             },
             {
@@ -111,6 +157,16 @@
                 label: "..",
                 type: "ent",
                 category: "HR",
+                color: stringToColor("HR")
+              },
+            },
+            {
+              data: {
+                id: "FM",
+                label: "FM",
+                type: "ent",
+                category: "FM",
+                color: stringToColor("FM")
               },
             },
             {
@@ -119,6 +175,7 @@
                 label: "..",
                 type: "ent",
                 category: "FM",
+                color: stringToColor("FM")
               },
             },
             {
@@ -127,6 +184,16 @@
                 label: "..",
                 type: "ent",
                 category: "FM",
+                color: stringToColor("FM")
+              },
+            },
+            {
+              data: {
+                id: "T",
+                label: "Technik",
+                type: "ent",
+                category: "Technik",
+                color: stringToColor("Technik")
               },
             },
             {
@@ -135,6 +202,16 @@
                 label: "Gebäudetechnik",
                 type: "ent",
                 category: "Technik",
+                color: stringToColor("Technik")
+              },
+            },
+            {
+              data: {
+                id: "TB",
+                label: "Tiefbau",
+                type: "ent",
+                category: "Tiefbau",
+                color: stringToColor("Tiefbau")
               },
             },
             {
@@ -143,6 +220,7 @@
                 label: "..",
                 type: "ent",
                 category: "Tiefbau",
+                color: stringToColor("Tiefbau")
               },
             },
             {
@@ -151,6 +229,7 @@
                 label: "..",
                 type: "ent",
                 category: "Tiefbau",
+                color: stringToColor("Tiefbau")
               },
             },
             {
@@ -159,6 +238,7 @@
                 label: "Elektrotechnik",
                 type: "ent",
                 category: "Technik",
+                color: stringToColor("Technik")
               },
             },
             {
@@ -167,6 +247,7 @@
                 label: "Befestigung",
                 type: "ent",
                 category: "Technik",
+                color: stringToColor("Technik")
               },
             },
             {
@@ -175,6 +256,7 @@
                 label: "Trassen",
                 type: "ent",
                 category: "Technik",
+                color: stringToColor("Technik")
               },
             },
             {
@@ -183,9 +265,10 @@
                 label: "Geometrie",
                 type: "ent",
                 category: "Technik",
+                color: stringToColor("Technik"),
                 properties: {
-                  text: "Kabeltrassen müssen mit einer Reserve von mindestens 40% dimensioniert werden. Die Standardbreite für Hauptkabelrinnen beträgt 400 mm, während Abzweigkabelrinnen mindestens 200 mm breit sein sollten. Die Seitenhöhe der Rinne beträgt 60 mm. Außerdem sollte das verwendete Kabelträgersystem E90 sein, und die Mindestblechstärke für das Material beträgt 1,5 mm."
-                }
+                  text: "Kabeltrassen müssen mit einer Reserve von mindestens 40% dimensioniert werden. Die Standardbreite für Hauptkabelrinnen beträgt 400 mm, während Abzweigkabelrinnen mindestens 200 mm breit sein sollten. Die Seitenhöhe der Rinne beträgt 60 mm. Außerdem sollte das verwendete Kabelträgersystem E90 sein, und die Mindestblechstärke für das Material beträgt 1,5 mm.",
+                },
               },
             },
           ],
@@ -193,78 +276,120 @@
             {
               data: {
                 source: "reqs",
+                target: "HB",
+              },
+            },
+            {
+              data: {
+                source: "HB",
                 target: "HB1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "HB",
                 target: "HB2",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "SH",
+              },
+            },
+            {
+              data: {
+                source: "SH",
                 target: "SH1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "SH",
                 target: "SH2",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "ICT",
+              },
+            },
+            {
+              data: {
+                source: "ICT",
                 target: "ICT1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "ICT",
                 target: "ICT2",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "HR",
+              },
+            },
+            {
+              data: {
+                source: "HR",
                 target: "HR1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "HR",
                 target: "HR2",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "FM",
+              },
+            },
+            {
+              data: {
+                source: "FM",
                 target: "FM1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "FM",
                 target: "FM2",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "T",
+              },
+            },
+            {
+              data: {
+                source: "T",
                 target: "T1",
               },
             },
             {
               data: {
                 source: "reqs",
+                target: "TB",
+              },
+            },
+            {
+              data: {
+                source: "TB",
                 target: "TB1",
               },
             },
             {
               data: {
-                source: "reqs",
+                source: "TB",
                 target: "TB2",
               },
             },
@@ -289,7 +414,7 @@
             {
               data: {
                 source: "TR",
-                target: "G"
+                target: "G",
               },
             },
           ],
@@ -304,11 +429,10 @@
         groupByField: "category",
         groupFor: { type: "cat" },
         layoutOptions,
-        collapseThreshold: 1
-      }
+        collapseThreshold: 1,
+      };
       collapseGraph(cy, collapseSettings);
       appendHTMLLabels(cy, document.getElementById("cy"));
-
 
       // showNodeLabelOnHover();
       // function showNodeLabelOnHover(){
