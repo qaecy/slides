@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc1",
+                boxLabels: ["qcy:Document"],
+                properties: {
+                  "@id": "edd7e623-412f-538c-b5d6-1a7914d52d32",
+                  "qcy:md5hash": "f958cb2aae5f7e93450adb36ea017245",
+                  "qcy:mime": "application/acad",
+                  "qcy:resourceType": "cad",
+                  "qcy:resourceOpen": false,
+                  "schema:encodingFormat": "application/acad",
+                  "schema:size": 2145882,
+                },
+              },
+              position: {
+                x: 95,
+                y: -2,
+              },
+            },
+            {
+              data: {
+                id: "doc2",
+                boxLabels: ["qcy:Document"],
+                properties: {
+                  "@id": "5583df12-07e4-54a4-9710-40a2b75c02fc",
+                  "qcy:md5hash": "c35e7ca47477f0e94808713ee6ff2e99",
+                  "qcy:mime": "drawing/x-dxf",
+                  "qcy:resourceType": "cad",
+                  "qcy:resourceOpen": true,
+                  "schema:encodingFormat": "drawing/x-dxf",
+                  "schema:size": 17946195,
+                },
+              },
+              position: {
+                x: 178,
+                y: 110,
+              },
+            },
+            {
+              data: {
+                id: "doc3",
+                boxLabels: ["qcy:Document"],
+                properties: {
+                  "@id": "62a53aad-5a9a-592a-82da-f07824579821",
+                  "qcy:md5hash": "2568a24aa1c77383258f42d4b2065cbd",
+                  "qcy:mime": "application/pdf",
+                  "qcy:resourceType": "text",
+                  "qcy:resourceOpen": true,
+                  "schema:encodingFormat": "application/pdf",
+                  "schema:size": 7333655,
+                },
+              },
+              position: {
+                x: 33,
+                y: 120,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc1",
+                target: "doc2",
+                label: "qcy:alternativeRepresentation",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "doc3",
+                label: "qcy:alternativeRepresentation",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
