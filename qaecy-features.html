@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY Features</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
+
+        <section>
+          <p><img src="dist/img/logo.svg" class="inline-logo" /> features</p>
+        </section>
+
+		<section>
+			<section data-background-image="dist/img/portal/CAD_viewer.png">
+				<p style="color: white;">CAD Document viewer</p>
+			</section>
+	
+			<section>
+				<p>The CAD viewer shows DXF and DWG (through conversion). Layers can be toggled on/off and document fragments can be marked</p>
+			</section>
+	
+			<section data-background-video="dist/videos/portal/CAD_fragment.mp4">
+			</section>
+		</section>
+
+		<section>
+			<section data-background-image="dist/img/portal/BIM_viewer.png">
+				<p style="color: white;">BIM Document viewer</p>
+			</section>
+
+			<section>
+				<p>The BIM viewer shows IFC models using That Open Company's IFC viewer</p>
+			</section>
+
+			<section>
+				<p>Our viewer includes features that utilize the underlying knowledge graph.</p>
+				<p>It will for example list all models available in the project.</p>
+			</section>
+
+			<section data-background-video="dist/videos/portal/Model_on_off.mp4" data-background-size="contain">
+				<p style="color: white;">Toggle models on/off</p>
+			</section>
+
+			<section>
+				<p>You can also visualize any breeakdown structure you have in your project</p>
+			</section>
+
+			<section data-background-video="dist/videos/portal/Model_decomposition.mp4" data-background-size="contain">
+			</section>
+
+			<section>
+				<p>You can also view documents that are related to an element in the model</p>
+			</section>
+
+			<section data-background-video="dist/videos/portal/Model_PDF.mp4" data-background-size="contain">
+			</section>
+
+			<section>
+				<p>Specific semantics such as those in flow systems are also available</p>
+			</section>
+
+			<section data-background-video="dist/videos/portal/Model_flow_sys_semantics.mp4" data-background-size="contain">
+			</section>
+
+		</section>
+
+		<section>
+			<section data-background-video="dist/videos/portal/Graph_upload.mp4">
+				<p style="color: white;">Interactive graph view of files</p>
+			</section>
+		</section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
