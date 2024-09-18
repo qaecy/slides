@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "door1",
+                boxLabels: ["qcy:Fragment", "beo:Door"],
+                properties: {
+                  "qcy:name": "Door A",
+                },
+              },
+              position: {
+                x: -3,
+                y: -8,
+              },
+            },
+            {
+              data: {
+                id: "door2",
+                boxLabels: ["qcy:Fragment", "beo:Door"],
+                properties: {
+                  "qcy:name": "Door B",
+                },
+              },
+              position: {
+                x: -161,
+                y: -34,
+              },
+            },
+            {
+              data: {
+                id: "doorType",
+                boxLabels: ["qcy:BIMObjectType"],
+                properties: {
+                  "qcy:name": "2100x900 Interior door",
+                },
+              },
+              position: {
+                x: -63,
+                y: -182,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doorType",
+                target: "door1",
+                label: "qcy:typeInstance",
+              },
+            },
+            {
+              data: {
+                source: "doorType",
+                target: "door2",
+                label: "qcy:typeInstance",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

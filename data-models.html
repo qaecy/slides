@@ -69,9 +69,116 @@
         </section>
 
         <section>
+
+          <section>
+            <h2>BIM</h2>
+          </section>
+
+          <section>
+            <p>All elements in a BIM model are treated as fragments just like parts of any other document</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bim-1.html"
+          ></section>
+
           <section>
             <h2>Building topology</h2>
           </section>
+
+          <section data-background-iframe="https://w3id.org/bot">
+            <p>Building Topology relationships are described with <a href="https://w3id.org/bot">BOT</a></p>
+            <p>I addition, we extract some QAECY specific relationships that are described in the next slides</p>
+          </section>
+
+          <section>
+            <h2>Entities, products and their elements</h2>
+          </section>
+
+          <section>
+            <p>BIM models consist of multiple entities of the same product. For example multiple entities of the same kind of door.</p>
+          </section>
+
+          <section data-background-iframe="https://w3id.org/bpo">
+            <p>QAECY uses the Building Product Ontology to model these</p>
+          </section>
+
+          <section>
+            <p>In BPO, each insert of a product is described as a realisation of that object</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bpo1.html"
+          ></section>
+
+          <section>
+            <p>Attributes such as price, materials etc. are valid for all entities, and therefore these are described at product level rather than at entity level</p>
+          </section>
+
+          <section>
+            <p>BPO distinguishes between <b>elements</b> and <b>assemblies</b>. Elements are the smallest decomposition of the product and therefore an assembly will always consist of at least two sub-components (elements or assemblies).</p>
+          </section>
+
+          <section>
+            <p>QAECY processes the 3D geometries and calculates what proportion of a volume is made up by each component</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bpo2.html"
+          ></section>
+
+          <section>
+            <p>For every depth of sub-components of a product, the total volume must always be 100 %</p>
+          </section>
+
+          <section>
+            <p>So if a window consists of a frame and a pane, the proportions might be 30 % and 70 % respectively</p>
+          </section>
+
+          <section>
+            <p>If we further break down the pane into its glass, plastic, metal and gas fragments, their volumes must add up to 100 %</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bpo3.html"
+          ></section>
+
+          <!-- <section>
+            <h2>Special datatype properties</h2>
+          </section>
+
+          <section>
+            <p>For elements, zones, element types and materials, we extact the <code>qcy:name</code></p>
+            <p>For spaces, we extact the <code>qcy:number</code></p>
+            <p>For storeys, we extact the <code>qcy:elevation</code></p>
+          </section>
+
+          <section>
+            <h2>Element types</h2>
+          </section>
+
+          <section>
+            <p>BIM elements are typically instances of some type and some properties like materials are assigned to the type rather than the individual</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bim-2.html"
+          ></section>
+
+          <section>
+            <p>Materials are modelled at the BIM object type level.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bim-3.html"
+          ></section> -->
+
         </section>
 
         <section>
@@ -110,7 +217,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-document-1.html"
+            data-background-iframe="dist/html/cytoscape/data-models/document-1.html"
           ></section>
 
           <section>
@@ -130,7 +237,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-document-2.html"
+            data-background-iframe="dist/html/cytoscape/data-models/document-2.html"
           ></section>
 
           <section>
@@ -189,7 +296,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-alternative-representation.html"
+            data-background-iframe="dist/html/cytoscape/data-models/alternative-representation.html"
           ></section>
 
         </section>
@@ -201,7 +308,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-text-layout1.html"
+            data-background-iframe="dist/html/cytoscape/data-models/text-layout1.html"
           ></section>
         </section>
 
@@ -220,7 +327,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities-1.html"
+            data-background-iframe="dist/html/cytoscape/data-models/entities-1.html"
           ></section>
 
           <section>
@@ -233,7 +340,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities-2.html"
+            data-background-iframe="dist/html/cytoscape/data-models/entities-2.html"
           ></section>
 
           <section>
@@ -242,7 +349,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities-3.html"
+            data-background-iframe="dist/html/cytoscape/data-models/entities-3.html"
           ></section>
 
           <section>
@@ -251,7 +358,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities-4.html"
+            data-background-iframe="dist/html/cytoscape/data-models/entities-4.html"
           ></section>
 
           <section>
@@ -260,7 +367,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-entities-5.html"
+            data-background-iframe="dist/html/cytoscape/data-models/entities-5.html"
           ></section>
 
         </section>
@@ -272,7 +379,7 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-cad-1.html"
+            data-background-iframe="dist/html/cytoscape/data-models/cad-1.html"
           ></section>
 
           <!-- <section>
@@ -319,17 +426,17 @@
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-cad-layout1.html"
+            data-background-iframe="dist/html/cytoscape/data-models/cad-layout1.html"
           ></section>
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-cad-layout2.html"
+            data-background-iframe="dist/html/cytoscape/data-models/cad-layout2.html"
           ></section>
 
           <section
             style="pointer-events: none"
-            data-background-iframe="dist/html/cytoscape/dm-cad-layout1-current.html"
+            data-background-iframe="dist/html/cytoscape/data-models/cad-layout1-current.html"
           >
             <p style="color: red">
               NB! Currently we use the following modeling which is not correct

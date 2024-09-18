@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="../../js/cytoscape.min.js"></script>
-    <link rel="stylesheet" href="./default-styles.css" />
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { isMobile } from "./helpers.js";
+      import { isMobile } from "../helpers.js";
       import {
         appendHTMLLabels,
         logNodePositions,
         animateGraph,
         buildStyles,
         defaultSettings,
-      } from "../../js/cytoscape-helpers/index.mjs";
+      } from "../../../js/cytoscape-helpers/index.mjs";
 
       const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
@@ -113,7 +113,34 @@
                 x: 300,
                 y: -38,
               },
-            }
+            },
+            {
+              data: {
+                id: "neo",
+                boxLabels: ["qcy:NamedEntityOccurence"],
+                properties: {
+                  "qcy:textContent": "A. Einstein",
+                },
+              },
+              position: {
+                x: 185,
+                y: 168,
+              },
+            },
+            {
+              data: {
+                id: "neos",
+                boxLabels: ["qcy:FragmentSelector", "oa:TextPositionSelector"],
+                properties: {
+                  "oa:start": 0,
+                  "oa:end": 11,
+                },
+              },
+              position: {
+                x: 286,
+                y: 256,
+              },
+            },
           ],
           edges: [
             {
@@ -139,6 +166,22 @@
             },
             {
               data: {
+                source: "doc",
+                target: "ne",
+                label: "qcy:indirectlyMentions",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "page",
+                target: "ne",
+                label: "qcy:indirectlyMentions",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
                 source: "img",
                 target: "ne",
                 label: "qcy:directlyMentions",
@@ -150,7 +193,28 @@
                 target: "frags",
                 label: "qcy:hasSelector",
               },
-            }
+            },
+            {
+              data: {
+                source: "neo",
+                target: "ne",
+                label: "qcy:relatedEntity",
+              },
+            },
+            {
+              data: {
+                source: "neo",
+                target: "frag",
+                label: "qcy:relatedFragment",
+              },
+            },
+            {
+              data: {
+                source: "neo",
+                target: "neos",
+                label: "qcy:hasSelector",
+              },
+            },
           ],
         },
       });

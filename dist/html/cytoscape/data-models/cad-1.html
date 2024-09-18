@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="../../js/cytoscape.min.js"></script>
-    <link rel="stylesheet" href="./default-styles.css" />
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { isMobile } from "./helpers.js";
+      import { isMobile } from "../helpers.js";
       import {
         appendHTMLLabels,
         logNodePositions,
         animateGraph,
         buildStyles,
         defaultSettings,
-      } from "../../js/cytoscape-helpers/index.mjs";
+      } from "../../../js/cytoscape-helpers/index.mjs";
 
       const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
@@ -44,62 +44,39 @@
             {
               data: {
                 id: "doc",
-                boxLabels: ["qcy:Document"],
+                boxLabels: ["qcy:Document", "qcy:CADDrawing"],
               },
               position: {
-                x: 21,
-                y: -185,
+                x: -84,
+                y: -132,
               },
             },
             {
               data: {
-                id: "page",
-                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
-              },
-              position: {
-                x: 23,
-                y: -22,
-              },
-            },
-            {
-              data: {
-                id: "img",
-                boxLabels: ["qcy:Image", "qcy:Fragment"],
+                id: "text",
+                boxLabels: ["qcy:Fragment", "qcy:CADText"],
                 properties: {
-                  "qcy:relativeRemotePath":
-                    "30432f25-9bb1-4130-9114-052baf19accf/img/b3a8fc9d-38f8-52c4-9db3-58e491ef2b52.png",
+                  "qcy:textContent": "Hello DXF",
+                  "qcy:inferredType": "Uncategorizedtext"
                 },
               },
               position: {
-                x: -103,
-                y: 87,
+                x: -17,
+                y: 13,
               },
             },
             {
               data: {
-                id: "frag",
-                boxLabels: ["qcy:Fragment", "qcy:Text"],
-                properties: {
-                  "qcy:textContent": "A. Einstein grew up in...",
-                },
-              },
-              position: {
-                x: 111,
-                y: 81,
-              },
-            },
-            {
-              data: {
-                id: "frags",
+                id: "sel",
                 boxLabels: ["qcy:FragmentSelector", "oa:FragmentSelector"],
                 properties: {
-                  "rdf:value": "xywh=-282,-449,200,30",
+                  "rdf:value": "xywh=100,200,0,0",
                   "oa:conformsTo": "http://www.w3.org/TR/media-frags/",
                 },
               },
               position: {
-                x: 240,
-                y: 82,
+                x: 93,
+                y: 63,
               },
             },
           ],
@@ -107,28 +84,14 @@
             {
               data: {
                 source: "doc",
-                target: "page",
+                target: "text",
                 label: "qcy:hasFragment",
               },
             },
             {
               data: {
-                source: "page",
-                target: "img",
-                label: "qcy:hasFragment",
-              },
-            },
-            {
-              data: {
-                source: "page",
-                target: "frag",
-                label: "qcy:hasFragment",
-              },
-            },
-            {
-              data: {
-                source: "frag",
-                target: "frags",
+                source: "text",
+                target: "sel",
                 label: "qcy:hasSelector",
               },
             },

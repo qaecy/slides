@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "window1",
+                boxLabels: ["qcy:Fragment", "beo:Window", "bot:Element"],
+                properties: {
+                  "qcy:name": "Window A",
+                },
+              },
+              position: {
+                x: -46,
+                y: -37,
+              },
+            },
+            {
+              data: {
+                id: "window2",
+                boxLabels: ["qcy:Fragment", "beo:Window", "bot:Element"],
+                properties: {
+                  "qcy:name": "Window B",
+                },
+              },
+              position: {
+                x: -150,
+                y: -56,
+              },
+            },
+            {
+              data: {
+                id: "windowProduct",
+                boxLabels: ["bpo:Assembly", "bpo:Product"],
+                properties: {
+                  "qcy:name": "900x900 triple-pane window",
+                  "qcy:width": 0.9,
+                  "qcy:height": 0.9,
+                  "qcy:volume": 0.12,
+                },
+              },
+              position: {
+                x: -58,
+                y: -183,
+              },
+            },
+            {
+              data: {
+                id: "pane",
+                boxLabels: ["bpo:Assembly"],
+                properties: {
+                  "qcy:volumeProportion": 0.7,
+                  "qcy:material": "Glass",
+                  "qcy:name": "Pane",
+                },
+              },
+              position: {
+                x: 53,
+                y: -99,
+              },
+            },
+            {
+              data: {
+                id: "paneGlass",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "qcy:volumeProportion": 0.4,
+                  "qcy:material": "Glass",
+                  "qcy:name": "3x glass layer",
+                },
+              },
+              position: {
+                x: 175,
+                y: 17,
+              },
+            },
+            {
+              data: {
+                id: "panePlastic",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "qcy:volumeProportion": 0.05,
+                  "qcy:material": "Plastic",
+                  "qcy:name": "Spacer",
+                },
+              },
+              position: {
+                x: 224,
+                y: -125,
+              },
+            },
+            {
+              data: {
+                id: "paneArgon",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "qcy:volumeProportion": 0.5,
+                  "qcy:material": "Argon",
+                  "qcy:name": "Argon fill",
+                },
+              },
+              position: {
+                x: 209,
+                y: -52,
+              },
+            },
+            {
+              data: {
+                id: "paneMetal",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "qcy:volumeProportion": 0.05,
+                  "qcy:material": "Metal",
+                  "qcy:name": "Screws",
+                },
+              },
+              position: {
+                x: 68,
+                y: 78,
+              },
+            },
+            {
+              data: {
+                id: "frame",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "qcy:volumeProportion": 0.3,
+                  "qcy:material": "Wood",
+                  "qcy:name": "Frame",
+                },
+              },
+              position: {
+                x: 104,
+                y: -177,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "window1",
+                target: "windowProduct",
+                label: "bpo:realisesObject",
+              },
+            },
+            {
+              data: {
+                source: "window2",
+                target: "windowProduct",
+                label: "bpo:realisesObject",
+              },
+            },
+            {
+              data: {
+                source: "windowProduct",
+                target: "frame",
+                label: "bpo:consistsOf",
+              },
+            },
+            {
+              data: {
+                source: "windowProduct",
+                target: "pane",
+                label: "bpo:consistsOf",
+              },
+            },
+            {
+              data: {
+                source: "frame",
+                target: "windowProduct",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "pane",
+                target: "windowProduct",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "pane",
+                target: "paneGlass",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "paneGlass",
+                target: "pane",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "pane",
+                target: "paneMetal",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "paneMetal",
+                target: "pane",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "pane",
+                target: "panePlastic",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "panePlastic",
+                target: "pane",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "pane",
+                target: "paneArgon",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "paneArgon",
+                target: "pane",
+                label: "bpo:isPartOf",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

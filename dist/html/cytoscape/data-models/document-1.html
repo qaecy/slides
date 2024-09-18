@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="../../js/cytoscape.min.js"></script>
-    <link rel="stylesheet" href="./default-styles.css">
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css">
   </head>
   <body>
     <div id="cy"></div>
     <script type="module">
-      import { isMobile } from "./helpers.js";
-      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layoutOptions, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+      import { isMobile } from "../helpers.js";
+      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layoutOptions, defaultSettings } from '../../../js/cytoscape-helpers/index.mjs';
 
       const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
