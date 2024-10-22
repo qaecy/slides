@@ -69,13 +69,15 @@
         </section>
 
         <section>
-
           <section>
             <h2>BIM</h2>
           </section>
 
           <section>
-            <p>All elements in a BIM model are treated as fragments just like parts of any other document</p>
+            <p>
+              All elements in a BIM model are treated as fragments just like
+              parts of any other document
+            </p>
           </section>
 
           <section
@@ -88,8 +90,14 @@
           </section>
 
           <section data-background-iframe="https://w3id.org/bot">
-            <p>Building Topology relationships are described with <a href="https://w3id.org/bot">BOT</a></p>
-            <p>I addition, we extract some QAECY specific relationships that are described in the next slides</p>
+            <p>
+              Building Topology relationships are described with
+              <a href="https://w3id.org/bot">BOT</a>
+            </p>
+            <p>
+              I addition, we extract some QAECY specific relationships that are
+              described in the next slides
+            </p>
           </section>
 
           <section>
@@ -97,7 +105,10 @@
           </section>
 
           <section>
-            <p>BIM models consist of multiple entities of the same product. For example multiple entities of the same kind of door.</p>
+            <p>
+              BIM models consist of multiple entities of the same product. For
+              example multiple entities of the same kind of door.
+            </p>
           </section>
 
           <section data-background-iframe="https://w3id.org/bpo">
@@ -105,7 +116,10 @@
           </section>
 
           <section>
-            <p>In BPO, each insert of a product is described as a realisation of that object</p>
+            <p>
+              In BPO, each insert of a product is described as a realisation of
+              that object
+            </p>
           </section>
 
           <section
@@ -114,15 +128,27 @@
           ></section>
 
           <section>
-            <p>Attributes such as price, materials etc. are valid for all entities, and therefore these are described at product level rather than at entity level</p>
+            <p>
+              Attributes such as price, materials etc. are valid for all
+              entities, and therefore these are described at product level
+              rather than at entity level
+            </p>
           </section>
 
           <section>
-            <p>BPO distinguishes between <b>elements</b> and <b>assemblies</b>. Elements are the smallest decomposition of the product and therefore an assembly will always consist of at least two sub-components (elements or assemblies).</p>
+            <p>
+              BPO distinguishes between <b>elements</b> and <b>assemblies</b>.
+              Elements are the smallest decomposition of the product and
+              therefore an assembly will always consist of at least two
+              sub-components (elements or assemblies).
+            </p>
           </section>
 
           <section>
-            <p>QAECY processes the 3D geometries and calculates what proportion of a volume is made up by each component</p>
+            <p>
+              QAECY processes the 3D geometries and calculates what proportion
+              of a volume is made up by each component
+            </p>
           </section>
 
           <section
@@ -131,21 +157,65 @@
           ></section>
 
           <section>
-            <p>For every depth of sub-components of a product, the total volume must always be 100 %</p>
+            <p>
+              For every depth of sub-components of a product, the total volume
+              must always be 100 %
+            </p>
           </section>
 
           <section>
-            <p>So if a window consists of a frame and a pane, the proportions might be 30 % and 70 % respectively</p>
+            <p>
+              So if a window consists of a frame and a pane, the proportions
+              might be 30 % and 70 % respectively
+            </p>
           </section>
 
           <section>
-            <p>If we further break down the pane into its glass, plastic, metal and gas fragments, their volumes must add up to 100 %</p>
+            <p>
+              If we further break down the pane into its glass, plastic, metal
+              and gas fragments, their volumes must add up to 100 %
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/data-models/bpo3.html"
           ></section>
+
+          <section>
+            <h2>Connections between material layers</h2>
+          </section>
+
+          <section>
+            <p>A Material layer set from IFC is consiedered a <code>bpo:Product</code> since it provides the recipe for all walls, slabs etc. of this type</p>
+          </section>
+
+          <section>
+            <p>A layer set not only describes the material layers but also the order between them</p>
+            <img src="./dist/img/data-models/ifcmateriallayerset-01.png" alt="">
+            <p>In BPO we can also model these connections</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/bpo4.html"
+          ></section>
+
+          <section>
+            <p>Layered products are slightly different from other products like windows and doors since we don't knonw the volume before we have an actual insertion that realises the product.</p>
+          </section>
+
+          <section>
+            <p>
+              We might also want to take a look at
+              <a href="https://schema.org/Product">schema:Product</a>
+              <a href="https://schema.org/IndividualProduct"
+                >schema:IndividualProduct</a
+              > and <a href="https://schema.org/ProductModel"
+              >schema:ProductModel</a
+            >
+            </p>
+          </section>
 
           <!-- <section>
             <h2>Special datatype properties</h2>
@@ -178,7 +248,6 @@
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/data-models/bim-3.html"
           ></section> -->
-
         </section>
 
         <section>
@@ -276,29 +345,41 @@
           </section>
 
           <section>
-            <p>We might encounter situations where multiple formats of the same document exists.</p>
+            <p>
+              We might encounter situations where multiple formats of the same
+              document exists.
+            </p>
             <p>For example the same image in PNG and JPEG</p>
           </section>
 
           <section>
-            <p>In this case, the documents are not the same from a data perspective</p>
+            <p>
+              In this case, the documents are not the same from a data
+              perspective
+            </p>
             <p>They do, however, represent the exact same content.</p>
           </section>
 
           <section>
-            <p>In cases where the original document is in a proprietary format like DWG, AI or RVT we might want to convert it to an open counterpart.</p>
+            <p>
+              In cases where the original document is in a proprietary format
+              like DWG, AI or RVT we might want to convert it to an open
+              counterpart.
+            </p>
             <p>For example DXF, SVG and IFC respectively.</p>
           </section>
 
           <section>
-            <p>We model alternative representations of a document as <code>qcy:alternativeRepresentation</code></p>
+            <p>
+              We model alternative representations of a document as
+              <code>qcy:alternativeRepresentation</code>
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/data-models/alternative-representation.html"
           ></section>
-
         </section>
 
         <section>
@@ -318,11 +399,17 @@
           </section>
 
           <section>
-            <p>Here we demonstrate how QAECY maps document content (fragments) to named entities.</p>
+            <p>
+              Here we demonstrate how QAECY maps document content (fragments) to
+              named entities.
+            </p>
           </section>
 
           <section>
-            <p>The particular document is a PDF document and it contains some text and an image on the first page.</p>
+            <p>
+              The particular document is a PDF document and it contains some
+              text and an image on the first page.
+            </p>
           </section>
 
           <section
@@ -331,11 +418,18 @@
           ></section>
 
           <section>
-            <p>We have performed some processing of the image and found that it is an image of a specific entity of a person: Albert Einstein.</p>
+            <p>
+              We have performed some processing of the image and found that it
+              is an image of a specific entity of a person: Albert Einstein.
+            </p>
           </section>
 
           <section>
-            <p>We use the <code>qcy:directlyMentions</code> relationship to indicate that there is a mentioning of the particular named entity (NE) in that fragment of the document.</p>
+            <p>
+              We use the <code>qcy:directlyMentions</code> relationship to
+              indicate that there is a mentioning of the particular named entity
+              (NE) in that fragment of the document.
+            </p>
           </section>
 
           <section
@@ -344,7 +438,11 @@
           ></section>
 
           <section>
-            <p>Since a fragment of the page mentions the NE the page also implicitly mentions it, and since the page is a fragment of the document, so does the document.</p>
+            <p>
+              Since a fragment of the page mentions the NE the page also
+              implicitly mentions it, and since the page is a fragment of the
+              document, so does the document.
+            </p>
           </section>
 
           <section
@@ -353,7 +451,11 @@
           ></section>
 
           <section>
-            <p>The text part also mentions the NE, and in order to explicitly state what part of the text content that mentions him, we make use of the more expressive <code>qcy:NamedEntityOccurence</code>.</p>
+            <p>
+              The text part also mentions the NE, and in order to explicitly
+              state what part of the text content that mentions him, we make use
+              of the more expressive <code>qcy:NamedEntityOccurence</code>.
+            </p>
           </section>
 
           <section
@@ -362,14 +464,17 @@
           ></section>
 
           <section>
-            <p>The <code>qcy:NamedEntityOccurence</code> has a related entity/fragment, and knowing this also entails that there is a direct relationship present.</p>
+            <p>
+              The <code>qcy:NamedEntityOccurence</code> has a related
+              entity/fragment, and knowing this also entails that there is a
+              direct relationship present.
+            </p>
           </section>
 
           <section
             style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/data-models/entities-5.html"
           ></section>
-
         </section>
 
         <section>

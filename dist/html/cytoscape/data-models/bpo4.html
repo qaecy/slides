@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "wall1",
+                boxLabels: [
+                  "qcy:Fragment",
+                  "beo:Wall",
+                  "bot:Element",
+                  "bpo:Entity",
+                ],
+                properties: {
+                  "schema:name": "Wall 124",
+                },
+              },
+              position: {
+                x: -195,
+                y: -220,
+              },
+            },
+            {
+              data: {
+                id: "l1",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "schema:name": "Prefab concrete element",
+                  "schema:depth": 0.12,
+                  "qcy:volumeProportion": 0.251,
+                  "schema:material": "Concrete",
+                },
+              },
+              position: {
+                x: -202,
+                y: -56,
+              },
+            },
+            {
+              data: {
+                id: "l2",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "schema:name": "Insulation",
+                  "schema:depth": 0.25,
+                  "qcy:volumeProportion": 0.523,
+                  "schema:material": "Mineral wool lambda 34",
+                },
+              },
+              position: {
+                x: -92,
+                y: -44,
+              },
+            },
+            {
+              data: {
+                id: "l3",
+                boxLabels: ["bpo:Element"],
+                properties: {
+                  "schema:name": "Facade",
+                  "schema:depth": 0.108,
+                  "qcy:volumeProportion": 0.225,
+                  "schema:material": "Brick",
+                },
+              },
+              position: {
+                x: 23,
+                y: -59,
+              },
+            },
+            {
+              data: {
+                id: "wallProduct",
+                boxLabels: ["bpo:Assembly", "bpo:Product"],
+                properties: {
+                  "schema:name": "Exterior wall",
+                  "schema:depth": 0.478,
+                },
+              },
+              position: {
+                x: -93,
+                y: -168,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "wall1",
+                target: "wallProduct",
+                label: "bpo:realisesObject",
+              },
+            },
+            {
+              data: {
+                source: "wallProduct",
+                target: "l1",
+                label: "bpo:consistsOf",
+              },
+            },
+            {
+              data: {
+                source: "wallProduct",
+                target: "l2",
+                label: "bpo:consistsOf",
+              },
+            },
+            {
+              data: {
+                source: "wallProduct",
+                target: "l3",
+                label: "bpo:consistsOf",
+              },
+            },
+            {
+              data: {
+                source: "l1",
+                target: "wallProduct",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "l2",
+                target: "wallProduct",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "l3",
+                target: "wallProduct",
+                label: "bpo:isPartOf",
+              },
+            },
+            {
+              data: {
+                source: "l1",
+                target: "l2",
+                label: "bpo:connectedTo",
+              },
+            },
+            {
+              data: {
+                source: "l2",
+                target: "l1",
+                label: "bpo:connectedFrom",
+              },
+            },
+            {
+              data: {
+                source: "l2",
+                target: "l3",
+                label: "bpo:connectedTo",
+              },
+            },
+            {
+              data: {
+                source: "l3",
+                target: "l2",
+                label: "bpo:connectedFrom",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

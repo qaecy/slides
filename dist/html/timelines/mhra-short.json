@@ -1,0 +1,142 @@
+{
+    "title": {
+        "media": {
+          "url": "../../img/mads.jpg",
+          "caption": "",
+          "credit": ""
+        },
+        "text": {
+          "headline": "Short background",
+          "text": "<p>From Architectural Engineer over HVAC Engineer to Data Engineer</p>"
+        }
+    },
+    "events": [
+      {
+        "media": {
+            "url": "../../img/mhra/DTU_Stanford.png",
+            "thumbnail": "../../img/logos/DTU-small.svg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "9",
+          "day": "",
+          "year": "2007"
+        },
+        "end_date": {
+            "month": "3",
+            "day": "",
+            "year": "2013"
+        },
+        "text": {
+          "headline": "MSc Architectural Engineering",
+          "text": "<br>"
+        }
+      },
+      {
+        "media": {
+            "url":"https://b1952038.smushcdn.com/1952038/wp-content/uploads/2020/08/muusfoto_img_1184-1-2048x1365.jpg?lossy=0&strip=1&webp=1",
+            "thumbnail": "../../img/logos/niras.svg",
+            "credit":"Credit: ATP Ejendomme",
+            "caption":"Axel Towers"
+        },
+        "start_date": {
+          "month": "6",
+          "day": "",
+          "year": "2013"
+        },
+        "end_date": {
+          "month": "6",
+          "day": "",
+          "year": "2019"
+        },
+        "text": {
+          "headline": "HVAC Engineer",
+          "text": "<p>Consulting Engineer in HVAC department.</p><p>Axel Towers, Bispebjerg Hospital lab&log</p>"
+        }
+      },
+      {
+        "media": {
+            "url": "../../img/mhra/DTU_UGent.png",
+            "thumbnail": "../../img/logos/DTU-small.svg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "1",
+          "day": "",
+          "year": "2016"
+        },
+        "end_date": {
+          "month": "6",
+          "day": "",
+          "year": "2019"
+        },
+        "text": {
+          "headline": "Industrial PhD",
+          "text": "<p>Digital Infrastructure and Building Information Modeling in the Design and Planning of Building Services</p>"
+        }
+      },
+      {
+        "media": {
+            "url": "https://bsf.dk/media/etuk0fac/illustration-bygherre-bla-baggrund-bygalment-dk-ea260423.png",
+            "thumbnail": "../../img/logos/niras.svg",
+            "credit":"Credit: Byggeskadefonden",
+            "caption":"BygAlment"
+        },
+        "start_date": {
+          "month": "6",
+          "day": "",
+          "year": "2019"
+        },
+        "end_date": {
+          "month": "10",
+          "day": "",
+          "year": "2022"
+        },
+        "text": {
+          "headline": "Data Engineer",
+          "text": "<p>WeBIM, BART, ConTech Pioneer project, Blockchain in Construction, BygAlment</p>"
+        }
+      },
+      {
+        "media": {
+            "url":"https://www.niras.com/media/d41fghnl/niras-alectia-foundation.jpg?center=0.3609448634162078,0.8959760468175838&mode=crop&width=2000&height=1200&rnd=132614817557500000",
+            "thumbnail": "../../img/logos/niras.svg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "10",
+          "day": "",
+          "year": "2022"
+        },
+        "end_date": {
+          "month": "3",
+          "day": "",
+          "year": "2024"
+        },
+        "text": {
+          "headline": "Business Development Director",
+          "text": "<br>"
+        }
+      },
+      {
+        "media": {
+            "url": "../../img/logo.svg",
+            "thumbnail": "../../img/logo.svg",
+            "credit":"",
+            "caption":""
+        },
+        "start_date": {
+          "month": "3",
+          "day": "",
+          "year": "2024"
+        },
+        "text": {
+          "headline": "Co-Founder and Data Engineer",
+          "text": "<br>"
+        }
+      }
+    ]
+}

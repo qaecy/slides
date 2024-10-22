@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <span id="click-event-container">
+      <span id="click-event"></span>
+    </span>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import { elements } from "./file-elements.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+        layoutOptions,
+        appendHostContainers,
+        appendNodeMenu,
+        NodeMenuSettings,
+        appendHTMLLabels,
+        collapseGraph
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+
+      const nodeStyle = style.find(s => s.selector === "node");
+      nodeStyle.style["label"] = (node) => node.data("type") !== "file" ? node.data("label") : "";
+
+      layoutOptions.padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: layoutOptions,
+        elements,
+      });
+
+      // animateGraph(cy);
+      // logNodePositions(cy);
+      const parent = document.getElementById('cy');
+
+      const collapseSettings = {
+        groupByField: "category",
+        groupFor: { type: "folder" },
+        layoutOptions,
+        collapseThreshold: 1
+      }
+      collapseGraph(cy, collapseSettings);
+
+      showNodeLabelOnHover();
+      function showNodeLabelOnHover(){
+        // Event listener for mouseover
+        cy.on('mouseover', 'node', function(event){
+          const node = event.target;
+          node.style('label', node.data('label')); // Show the label
+        });
+
+        // Event listener for mouseout
+        cy.on('mouseout', 'node', function(event){
+          const node = event.target;
+          node.style('label', ''); // Hide the label
+        });
+
+      }
+      
+    </script>
+  </body>
+</html>

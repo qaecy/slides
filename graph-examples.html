@@ -344,6 +344,39 @@
             <p>File drop on specific node</p>
           </section>
         </section>
+
+        <section>
+          <section>
+            <h2>Highlight</h2>
+          </section>
+
+          <section>
+            <p>Graph collapse</p>
+            <pre><code data-trim class="typescript"><script type="text/template">
+              const cy = cytoscape({
+                container: document.getElementById("cy"),
+                style,
+                layout: layoutOptions,
+                elements,
+              });
+
+              const collapseSettings = {
+                groupByField: "category",
+                groupFor: { type: "folder" },
+                layoutOptions,
+                collapseThreshold: 1
+              }
+              setHighlightedCategory(cy, collapseSettings);
+            </script></code></pre>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/graph-examples/collapse-expand.html"
+          >
+            <p>Graph collapse</p>
+          </section>
+        </section>
       </div>
     </div>
 
