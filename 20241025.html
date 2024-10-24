@@ -1,119 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta http-equiv='cache-control' content='no-cache'> 
-		<meta http-equiv='expires' content='0'> 
-		<meta http-equiv='pragma' content='no-cache'>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
 
-		<title>QAECY</title>
+    <title>QAECY</title>
 
-		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/qaecy.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
 
-				<section>
-					<img src="dist/img/logo.svg" alt="" />
-					<p>your knowledge, accessible</p>
-				</section>
+    <!-- For Math -->
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
 
-				<!-- Who -->
-				<section>
+        <!-- Important messages:
+				1. Not one AI tool to rule them all - what to choose
+				2. How to use it with my own data?
+				3. AEC data is special and requires custom solutions
+				4. We have to deal with material that evolves over time / multiple truths / invalid data
+				5. Information is spread across multiple systems -->
 
-					<section>
-						<h4>Who am I?</h4>
-					</section>
+        <!-- Who -->
+        <section>
+          <section>
+            <h4>Who am I?</h4>
+          </section>
 
-					<section data-background-iframe="./dist/html/timelines/timeline.html?file=mhra-short.json">
-					</section>
+          <section
+            data-background-iframe="./dist/html/timelines/timeline.html?file=mhra-short.json"
+          ></section>
 
-					<section data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17201010611025">
-						<h4>Who are we?</h4>
-					</section>
+          <section
+            data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17201010611025"
+          >
+            <h4>Who are we?</h4>
+          </section>
+        </section>
 
-				</section>
+        <!-- Why -->
+        <section>
+          <section>
+            <h4>Why am I here?</h4>
+          </section>
 
-				<!-- Why -->
-				<section>
-					
-					<section>
-						<h4>Why am I here?</h4>
-					</section>
+          <section data-background-image="dist/img/misc/archive.png">
+            <h4 style="color: #fff">The problem:</h4>
+            <p style="color: #fff">
+              Information is trapped in silos, it's incomplete
+              <span style="font-size: 1.5rem"
+                >(or in multiple incompatible versions)</span
+              >
+              and therefore hardly accessible
+            </p>
+          </section>
 
-					<section data-background-image="dist/img/misc/archive.png">
-						<h4 style="color: #fff;">The problem:</h4>
-						<p style="color: #fff;">Information is trapped in silos, it's incomplete <span style="font-size: 1.5rem;">(or in multiple incompatible versions)</span> and therefore hardly accessible</p>
-					</section>
+          <section data-background-image="dist/img/misc/trinity-library.png">
+            <p style="color: #fff">Library of</p>
+            <p style="color: #fff">Trinity College Dublin</p>
+            <aside class="notes">
+              In a library we add structure to books so we can easily find them,
+              but how should they be organised? By author? subject? color? At
+              Trinity College Dublin they are organised by size.
+            </aside>
+          </section>
 
-					<section data-background-image="dist/img/misc/trinity-library.png">
-						<p style="color: #fff;">Library of</p>
-						<p style="color: #fff;">Trinity College Dublin</p>
-					</section>
+          <section
+            data-background-image="dist/img/misc/tim-berners-lee.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>1991</p>
+              <p>World Wide Web</p>
+            </div>
+            <aside class="notes">
+              With the WWW we suddenly had a common language to publish
+              documents and create hyperlinks to other documents published by
+              other people
+            </aside>
+          </section>
 
-					<section data-background-image="dist/img/misc/tim-berners-lee.png" style="height: 100%;">
-						<div style="position: absolute; right: 0; bottom: 0; text-align: end;">
-							<p>1991</p>
-							<p>World Wide Web</p>
-						</div>
-					</section>
+          <section
+            data-background-image="dist/img/misc/yahoo.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                bottom: 20vh;
+                text-align: start;
+                color: #fff;
+                width: 20vw;
+              "
+            >
+              <p>We need structure. Let's order the web by category!</p>
+            </div>
+            <aside class="notes">
+              As people started publishing content, we needed a way to search
+              this information. Yahoo initially tried to do this like a phone
+              book. By topic.
+            </aside>
+          </section>
 
-					<section data-background-image="dist/img/misc/yahoo.png" style="height: 100%;">
-						<div style="position: absolute; left: 0; bottom: 20vh; text-align: start; color: #fff; width: 20vw">
-							<p>We need structure. Let's order the web by category!</p>
-						</div>
-					</section>
+          <section
+            data-background-image="dist/img/misc/google.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                text-align: left;
+                top: 10vh;
+                color: #fff;
+                width: 220px;
+              "
+            >
+              <p>All we need is a search bar!</p>
+            </div>
+            <aside class="notes">
+              As people started publishing content, we needed a way to search
+              this information. Yahoo initially tried to do this like a phone
+              book. By topic.
+            </aside>
+          </section>
 
-					<section data-background-image="dist/img/misc/google.png" style="height: 100%;">
-						<div style="position: absolute; left: 0; text-align: left; top: 10vh; color: #fff; width: 220px">
-							<p>All we need is a search bar!</p>
-						</div>
-					</section>
+          <section
+            data-background-image="dist/img/misc/semantic-results.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />results</p>
+            </div>
+          </section>
 
-					<section data-background-image="dist/img/misc/semantic-results.png" style="height: 100%;">
-						<div style="position: absolute; right: 0; bottom: 0; text-align: end;">
-							<p>Semantic<br>>results</p>
-						</div>
-					</section>
+          <section
+            data-background-image="dist/img/misc/semantic-search.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />search</p>
+            </div>
+          </section>
 
-					<section data-background-image="dist/img/misc/semantic-search.png" style="height: 100%;">
-						<div style="position: absolute; right: 0; bottom: 0; text-align: end;">
-							<p>Semantic<br>search</p>
-						</div>
-					</section>
+          <section
+            data-background-image="dist/img/misc/postit-classify.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 10vh;
+                text-align: end;
+                color: #fff;
+                width: 40vw;
+              "
+            >
+              <p>The construction industry is still in the Yahoo age</p>
+            </div>
+            <aside class="notes">
+              We think we can solve everything with classification and tidy
+              systems. One of the challenges with this strategy is that things
+              can typically only belong to one type/class.
+            </aside>
+          </section>
 
-					<section data-background-image="dist/img/misc/postit-classify.png" style="height: 100%;">
-						<div style="position: absolute; right: 0; bottom: 10vh; text-align: end; color: #fff; width: 40vw;">
-							<p>Why do we <span style="font-size: 1.5rem;">(in the construction industry)</span> think that we can solve everything with classification and tidy systems?</p>
-						</div>
-					</section>
-				</section>
+          <section
+            data-background-video="dist/videos/misc/LLM_search_algae.mp4"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Large Language Models<br />are changing the way we search</p>
+            </div>
+          </section>
+        </section>
 
-			</div>
-		</div>
+        <section>
+          <section>
+            <h4>But what if I wish to search my own documents?</h4>
+          </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+          <section
+            data-background-video="dist/videos/misc/PDF_chat.mp4"
+            data-preload
+            data-autoplay
+          >
+            <aside class="notes">
+              There are free services that allow you to chat with a PDF and
+              these are great for a quick Q&A with your document
+            </aside>
+          </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          <section>
+            <h4>RAG</h4>
+            <p>Retrieval-Augmented Generation</p>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple.svg"
+            data-background-size="40%"
+          ></section>
+
+          <section>
+            <h4>And what if I wish to search across multiple documents?</h4>
+          </section>
+
+          <section>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <img
+                    src="dist/img/rag/f_embedding.svg"
+                    alt=""
+                    style="height: 200px"
+                  />
+                </div>
+                <div>
+                  <h3 style="color: black">
+                    \( \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div>
+                <p style="font-size: 26px">
+                  \[ \begin{bmatrix} 0.125 & -2.103 & \dots & -2.005 & 0.012 \\
+                  0.615 & -1.142 & \dots & 1.945 & -2.113 \\ \vdots & \vdots &
+                  \ddots & \vdots & \vdots \\ 0.712 & 1.153 & \dots & -1.721 &
+                  -0.852 \\ -0.925 & -0.903 & \dots & 1.044 & -1.412
+                  \end{bmatrix} \rightarrow \]
+                </p>
+              </div>
+              <div>
+                <img src="dist/img/rag/db.svg" style="height: 200px" />
+              </div>
+            </div>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple2.svg"
+            data-background-size="40%"
+          ></section>
+
+          <section data-background-image="dist/img/misc/copilot.jpg"></section>
+
+          <section>
+            <h4>
+              And if I want to also include results from my CAD files, BIM
+              models and tasks in my FM-system?
+            </h4>
+            <h4>And what about information that constantly changes?</h4>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/take-it-easy.jpeg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              This is were it gets harder and where you can no longer depend on
+              the generic tools
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>A combination of technologies</h4>
+          </section>
+
+          <section>
+            <p>
+              <img src="dist/img/logo.svg" class="inline-logo" /> uses Knowledge
+              Graphs to capture facts that are not easily expressed in text
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/undirected-graph.html"
+          >
+            <p class="bg-transparent-white">
+              A graph is a network of nodes and edges
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              In a knowledge graph, the edges are directed
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo1.html"
+          >
+            <p class="bg-transparent-white">
+              One node-edge-node relationship is called a "triple" and describes
+              a "statement" or a "fact"
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo2.html"
+          >
+            <p class="bg-transparent-white">
+              A triple consists of a Subject, a predicate and an Object
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">An example from a BIM model</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo4.html"
+          >
+            <p class="bg-transparent-white">
+              As more facts are added, the object in one triple becomes the
+              subject in another
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo5.html"
+          >
+            <p class="bg-transparent-white">
+              Objects can also represent simple data properties
+            </p>
+          </section>
+
+          <section>
+            <p>
+              These graphs can grow to unbelievable sizes. DBPedia consists of
+              9.5 billion triples!
+            </p>
+          </section>
+
+          <!-- Mads Mikkelsen -->
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
+          ></section>
+
+          <section data-background-iframe="https://bit.ly/48kp6l0">
+            <a href="https://bit.ly/48kp6l0" target="_blank"
+              >https://dbpedia.org/sparql</a
+            >
+          </section>
+
+          <section>
+            <h4>Should I learn to write SPARQL queries?</h4>
+            <p>No! The LLMs already know 😎</p>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
+          ></section>
+
+          <section>
+            <h4>Other examples of contextual questions</h4>
+            <ul>
+              <li class="fragment">
+                How many windows are there on the northern facade?
+              </li>
+              <li class="fragment">
+                Where is the mixing plant that feeds this radiator?
+              </li>
+              <li class="fragment">When was this filter last replaced?</li>
+              <li class="fragment">
+                In what facilities do we use Company X for cleaning?
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+
+          <section>
+            <h4>
+              The <img src="dist/img/logo.svg" class="inline-logo" /> product
+            </h4>
+          </section>
+
+          <section data-background-image="dist/img/qaecy/data_funnel.png" data-background-size="50%">
+          </section>
+
+          <section data-background-video="dist/videos/portal/Search_misc.mp4" data-background-size="50%">
+          </section>
+
+          <section data-background-video="dist/videos/portal/Elevator.mp4" data-background-size="50%">
+          </section>
+
+          <section data-background-video="dist/videos/portal/Model_PDF.mp4" data-background-size="50%">
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>How to take part in it?</h4>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/lego-warriors-2.png"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              We are of course on a mission to conquer the world but we are also
+              a small team that need a strong focus. Therefore we carefully
+              choose projects that we can learn from in collaboration with our
+              client.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/evaluation_process.svg"
+            data-background-size="70%"
+          ></section>
+
+          <section
+            data-background-image="dist/img/evaluation_process2.svg"
+            data-background-size="70%"
+          ></section>
+
+          <section>
+            <h4>Key takeaways</h4>
+            <ul>
+              <li class="fragment">
+                We gather tons of important information around our build assets
+              </li>
+              <li class="fragment">
+                This information is not easily accessible
+              </li>
+              <li class="fragment">
+                AI can provide knowledge so you can make proper decisions
+              </li>
+              <li class="fragment">
+                AI is not one tool but a myriad of tools for specific purpuses
+              </li>
+              <li class="fragment">
+                <img src="dist/img/logo.svg" class="inline-logo" /> wants to
+                deliver the best AI for knowledge retrival in AEC
+              </li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>

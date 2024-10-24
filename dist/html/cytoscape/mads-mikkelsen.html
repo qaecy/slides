@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(isMobile());
+
+      let cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "mads",
+                label: "?theActor",
+              },
+              position: {
+                x: 663,
+                y: 239,
+              },
+            },
+            {
+              data: {
+                id: "madsL",
+                label: "Mads Mikkelsen",
+              },
+              position: {
+                x: 599,
+                y: 174,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "movie",
+                label: "?movie",
+                color: "#00C8CC",
+              },
+              position: {
+                x: 737,
+                y: 318,
+              },
+            },
+            {
+              data: {
+                id: "actor",
+                label: "?otherActor",
+                color: "#CEE602",
+              },
+              position: {
+                x: 817,
+                y: 256,
+              },
+            },
+            {
+              data: {
+                id: "actorL",
+                label: "?coActorName",
+              },
+              position: {
+                x: 857,
+                y: 172,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "actorBD",
+                label: "?coActorBirthDate",
+              },
+              position: {
+                x: 933,
+                y: 299,
+              },
+              classes: "literal",
+            },
+          ],
+          edges: [
+            {
+              data: { source: "movie", target: "mads", label: "starring" },
+            },
+            {
+              data: { source: "movie", target: "actor", label: "starring" },
+            },
+            {
+              data: { source: "mads", target: "madsL", label: "label" },
+            },
+            {
+              data: { source: "actor", target: "actorL", label: "label" },
+            },
+            {
+              data: { source: "actor", target: "actorBD", label: "birthDate" },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+    </script>
+  </body>
+</html>
