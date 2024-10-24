@@ -434,6 +434,135 @@
         </section>
 
         <section>
+          <section>
+            <h4>Multiple realities</h4>
+          </section>
+
+          <section>
+						<p>Is the earth round or flat?</p>
+						<p>Was the 2020 US election rigged?</p>
+						<!-- <p>Will the building's carbon footprint be lower if we use timber over concrete?</p> -->
+					</section>
+
+					<section>
+						<p>The web follows the <b>AAA</b> principle</p>
+						<p style="font-style: italic;"><b>A</b>nyone can say <b>A</b>nything about <b>A</b>nything</p>
+					</section>
+
+					<section>
+						<p>It is up to you as a <b>reflective individual</b> to form your own opinion</p>
+					</section>
+
+					<section>
+						<p>This can be good or bad, but most importantly it lets us <b>deal with the fact that reality is complex</b></p>
+					</section>
+
+					<section>
+						<p style="padding-bottom: 1rem;">Construction projects are also complex and there will exist more realities simultaniously</p>
+					</section>
+
+					<section>
+						<p style="padding-bottom: 1rem;">Drawing conclusions requires gathering information from multiple sources and always includes a multitude of assumptions</p>
+						<p style="font-size: 1.5rem;">"Would the carbon footprint be reduced if we switch to a wooden structure?"</p>
+						<p style="font-size: 1.5rem; font-style: italic;">- It depends on how you calculate it!</p>
+					</section>
+
+					<section>
+						<p style="padding-bottom: 1rem;">Furthermore, the reality rapidly changes during the design stages making it hard to gather the current state of truth</p>
+						<p style="font-size: 1.5rem;">"Is the door red or orange?"</p>
+						<p style="font-size: 1.5rem; font-style: italic;">- It depends on when you ask!</p>
+					</section>
+
+					<section>
+						<p style="padding-bottom: 1rem;">Over the years we gather so much information that multiple realities will inevitably exist</p>
+						<p style="font-size: 1.5rem;">"Was this wall removed?"</p>
+						<p style="font-size: 1.5rem; font-style: italic;">- It depends on which document you look at!</p>
+					</section>
+
+					<section>
+						<p>The single truth is often complicated.</p>
+						<p><img src="dist/img/logo.svg" class="inline-logo"> gives you the insights needed to draw your own qualified conclusion.</p>
+					</section>
+
+					<section>
+						<p>How many times have you experienced a Single <span style="font-style: oblique;">Source</span> of Truth in your construction projects?</p>
+					</section>
+
+					<section>
+						<p><img src="dist/img/logo.svg" class="inline-logo"> provides a Single <span style="font-style: oblique;">View</span> of Truth that spans across the knowledge repositories provided.</p>
+					</section>
+
+          <section>
+            <p>Let's take a look at how we achieve this using the knowledge graph representation</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/door-has-color1.html">
+					</section>
+
+					<section>
+						<p>It is obvious that one of the statements must be invalid unless the door has multiple colors</p>
+					</section>
+
+          <section>
+						<div style="height: 100%;">
+							<video
+								data-autoplay
+								src="dist/videos/Gemini_door-color1.mov"
+							></video>
+						</div>
+					</section>
+
+          <section>
+						<p>Let's imagine that we had access to some provenence data about each statement</p>
+					</section>
+
+					<section data-background-iframe="dist/html/cytoscape/door-has-color2.html">
+					</section>
+
+					<section data-background-iframe="dist/html/cytoscape/door-has-color3.html">
+					</section>
+
+          <section>
+						<div style="height: 100%;">
+							<video
+								data-autoplay
+								src="dist/videos/Gemini_door-color2.mov"
+							></video>
+						</div>
+					</section>
+
+          <section>
+						<p>Full prompt for you to try</p>
+						<pre><code data-trim class="text hljs" data-line-numbers="1-5|6-14|15-23"><script type="text/template">
+Given the below information, 
+which color would you trust the door to have?
+
+<Door> hasColor "Red" .
+<Door> hasColor "Orange" .
+
+<< <Door> hasColor "Orange" >> 
+	wasGeneratedBy <Algorithm_a-v2.0.1> ;
+	generatedAtTime "2024-01-11T12:11:28Z" .
+<Algorithm_a-v2.0.1> 
+	derivedFrom <Image-X> .
+<< <Algorithm_a-v2.0.1> derivedFrom <Image-X> >> 
+	certainty 0.4 .
+
+<< <Door> hasColor "Red" >> 
+	wasGeneratedBy <John> ;
+	generatedAtTime "2024-01-11T12:11:28Z" ;
+	comment "I have been on site and can confirm that the door is red." .
+<John> 
+	email "john-doe@the-company.com" ;
+	actedOnBehalfOf <TheCompany> .
+<TheCompany> 
+	wasEstablished "1908-03-1" .
+						</script></code></pre>
+					</section>
+
+        </section>
+
+        <section>
 
           <section>
             <h4>
@@ -444,6 +573,9 @@
           <section data-background-image="dist/img/qaecy/data_funnel.png" data-background-size="50%">
           </section>
 
+          <section data-background-video="dist/videos/portal/document_graph.mp4" data-background-size="50%">
+          </section>
+
           <section data-background-video="dist/videos/portal/Search_misc.mp4" data-background-size="50%">
           </section>
 
@@ -452,6 +584,7 @@
 
           <section data-background-video="dist/videos/portal/Model_PDF.mp4" data-background-size="50%">
           </section>
+
         </section>
 
         <section>
