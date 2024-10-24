@@ -38,13 +38,6 @@
           <p>your knowledge, accessible</p>
         </section>
 
-        <!-- Important messages:
-				1. Not one AI tool to rule them all - what to choose
-				2. How to use it with my own data?
-				3. AEC data is special and requires custom solutions
-				4. We have to deal with material that evolves over time / multiple truths / invalid data
-				5. Information is spread across multiple systems -->
-
         <!-- Who -->
         <section>
           <section>
@@ -59,6 +52,17 @@
             data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17201010611025"
           >
             <h4>Who are we?</h4>
+            <aside class="notes">
+              QAECY was founded by Philipp, Manos and me. I met Philipp at a bSI
+              Summit in Paris in 2018 (or London 2018 - hard to remember).<br /><br />
+              I met Manos in 2019 at LDAC Lisbon.<br /><br />
+              When I was at NIRAS we finally got the chance to do a project
+              together for a danish ofshore wind farm company. That involved
+              developing a minimal PoC that we are now turning into a
+              product.<br /><br />
+              We have quite different competences that compliment each other
+              well.
+            </aside>
           </section>
         </section>
 
@@ -77,6 +81,14 @@
               >
               and therefore hardly accessible
             </p>
+            <aside class="notes">
+              We do store data in document management systems and assign
+              metadata like revision letters, but often there are duplicates of
+              a file and metadata might not be up to date.<br /><br />
+              Some files are even scanned copies that are not searchable. And
+              even if they are, it typically requires an expert to read through
+              the files in order to deduce the requested information.
+            </aside>
           </section>
 
           <section data-background-image="dist/img/misc/trinity-library.png">
@@ -85,7 +97,9 @@
             <aside class="notes">
               In a library we add structure to books so we can easily find them,
               but how should they be organised? By author? subject? color? At
-              Trinity College Dublin they are organised by size.
+              Trinity College Dublin they are organised by size. The limitation
+              is that they can only be put in one place, just like the files in
+              your file explorer.
             </aside>
           </section>
 
@@ -94,7 +108,7 @@
             style="height: 100%"
           >
             <div
-              style="position: absolute; right: 0; bottom: 0; text-align: end"
+              style="position: absolute; right: 0; bottom: 0; text-align: end; background-color: rgba(255,255,255,0.2);"
             >
               <p>1991</p>
               <p>World Wide Web</p>
@@ -117,7 +131,7 @@
                 bottom: 20vh;
                 text-align: start;
                 color: #fff;
-                width: 20vw;
+                width: 200px;
               "
             >
               <p>We need structure. Let's order the web by category!</p>
@@ -141,14 +155,19 @@
                 top: 10vh;
                 color: #fff;
                 width: 220px;
+                background-color: rgba(0,0,0,0.1);
+                padding: 0 1rem;
               "
             >
               <p>All we need is a search bar!</p>
             </div>
             <aside class="notes">
-              As people started publishing content, we needed a way to search
-              this information. Yahoo initially tried to do this like a phone
-              book. By topic.
+              Then came Google who invented a smart page ranking algorithm.<br /><br />
+              More incoming links = higher score.<br /><br />
+              In the beginnig it was simple keyword search, so if you wanted to
+              find the a contry's population you would search for the page that
+              would be likely to have this information
+              ("Population+europe+2012")
             </aside>
           </section>
 
@@ -161,6 +180,11 @@
             >
               <p>Semantic<br />results</p>
             </div>
+            <aside class="notes">
+              Since 2012, Google has been working on displaying semantic
+              results. This particular entity recognition feature was probably
+              added around 2015.
+            </aside>
           </section>
 
           <section
@@ -171,6 +195,12 @@
               style="position: absolute; right: 0; bottom: 0; text-align: end"
             >
               <p>Semantic<br />search</p>
+              <aside class="notes">
+                With semantic search, you can now search more like you would ask
+                the question to a person.<br /><br />
+                The algorithm understands the intent of your question and finds
+                the information in a knowledge graph (more on that later).
+              </aside>
             </div>
           </section>
 
@@ -206,6 +236,13 @@
             >
               <p>Large Language Models<br />are changing the way we search</p>
             </div>
+            <aside class="notes">
+              Perplexity is a serious competitor to Google and with ChatGPT and
+              Gemini we are getting used to basically have a conversation with
+              the AI.<br /><br />
+              I will not go much into details on the technology behind, but it's
+              all about probability and math.
+            </aside>
           </section>
         </section>
 
@@ -228,12 +265,19 @@
           <section>
             <h4>RAG</h4>
             <p>Retrieval-Augmented Generation</p>
+            <aside class="notes">They would typically use a RAG approach</aside>
           </section>
 
           <section
             data-background-image="dist/img/rag/rag_simple.svg"
             data-background-size="40%"
-          ></section>
+          >
+            <aside class="notes">
+              Very simply speaking, the app will extract the text from your PDF
+              and add it to the prompt along with your question and some
+              instructions on what to do with the information in the text.
+            </aside>
+          </section>
 
           <section>
             <h4>And what if I wish to search across multiple documents?</h4>
@@ -262,6 +306,12 @@
                 </div>
               </div>
             </div>
+            <aside class="notes">
+              If you wish to search across multiple documents the text body
+              becomes too big for the query.<br /><br />
+              In this case, there is a pre step in converting all the text
+              fragments into so-called vector embeddings.
+            </aside>
           </section>
 
           <section>
@@ -285,14 +335,30 @@
                 <img src="dist/img/rag/db.svg" style="height: 200px" />
               </div>
             </div>
+            <aside class="notes">
+              The vector embeddings are put in a special type of database called
+              a vector database, and based on your search term, these databases
+              will give you the text fragments that are most related.<br /><br />
+              It's al based on mathematical similarities between the vectors and
+              it is kind of mind blowing how well it actually works.
+            </aside>
           </section>
 
           <section
             data-background-image="dist/img/rag/rag_simple2.svg"
             data-background-size="40%"
-          ></section>
+          >
+            <aside class="notes">
+              Only the relevant  text fragments from the vector database are then added to the prompt.
+            </aside>
+          </section>
 
-          <section data-background-image="dist/img/misc/copilot.jpg"></section>
+          <section data-background-image="dist/img/misc/copilot.jpg">
+            <aside class="notes">
+              With the technologies available this is also getting quite common now, and you will find generic non-industry specific solutions that support it.<br><br>
+              For example Microsoft Co-pilot that works with Microsoft 365
+            </aside>
+          </section>
 
           <section>
             <h4>
@@ -397,14 +463,18 @@
 
           <!-- Mads Mikkelsen -->
           <section
-            style="pointer-events: none"
+            style="pointer-events: none; position: relative; height: 100vh;"
             data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
-          ></section>
+          >
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+          </section>
 
-          <section data-background-iframe="https://bit.ly/48kp6l0">
+          <section data-background-iframe="https://bit.ly/48kp6l0" style="position: relative; height: 100vh;">
             <a href="https://bit.ly/48kp6l0" target="_blank"
               >https://dbpedia.org/sparql</a
             >
+            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
           </section>
 
           <section>
@@ -523,6 +593,8 @@
               construction projects?
             </p>
           </section>
+
+          <section data-background-image="dist/img/misc/no-ssot.png"></section>
 
           <section>
             <p>
