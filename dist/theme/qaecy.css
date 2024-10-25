@@ -375,16 +375,30 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 
 .print-fallback {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Shift back by half of its own width and height */
   display: none;
 }
 
-@media print {  
+@media print {
+
+  iframe{
+    display: none;
+  }
+
+  /* section:has(> .print-fallback){
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: inherit;
+  } */
+  
   /* Show fallback image or text */
   .print-fallback {
     display: block;
+  }
+
+  img.print-fallback {
+    display: block;
+    background-color: red;
   }
 }
