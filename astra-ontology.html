@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <title>ASTRA</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <!-- For Math -->
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 2rem;
+            "
+          >
+            <img src="dist/img/logos/astra.png" alt="" width="350px" />
+          </div>
+          <h4>Ontology</h4>
+        </section>
+
+        <section>
+          <section>
+            <h4>What identifiers?</h4>
+          </section>
+
+          <section>
+            <h4>Bild-Planregister nummer</h4>
+            <p></p>
+          </section>
+
+          <section>
+            <h4>IB-Obj.-Nr. (UBK)</h4>
+            <p>Ex. <em>1</em></p>
+          </section>
+
+          <section>
+            <h4>TBA-Obj.-Nr.</h4>
+            <p>Ex. <em>506</em> or <em>301.27</em></p>
+          </section>
+
+          <section>
+            <h4>N2-Obj.-Nr. (Kt.-Nr.)</h4>
+            <p>Ex. <em>323</em> or <em>268.1</em></p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>Classification code</h4>
+          </section>
+
+          <section>
+            <img src="dist/img/astra/classification1.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/astra/classification2.svg" alt="" />
+          </section>
+
+          <section>
+            <p>Example: The Gruyère viaduct on the N12</p>
+            <img src="dist/img/astra/classification_ex.svg" alt="" />
+            <p style="font-size: 0.8rem; color: red;">Why not 4C for "Unterführung"?</p>
+          </section>
+
+          <section>
+            <h4>Cantons</h4>
+            <ol style="font-size: 1rem; line-height: 1.1rem;">
+              <li>Zürich</li>
+              <li>Bern</li>
+              <li>Luzern</li>
+              <li>Uri</li>
+              <li>Schwyz</li>
+              <li>Obwalden</li>
+              <li>Nidwalden</li>
+              <li>Glarus</li>
+              <li>Zug</li>
+              <li>Freiburg</li>
+              <li>Solothurn</li>
+              <li>Basel-Stadt</li>
+              <li>Basel-Landschaft</li>
+              <li>Schaffhausen</li>
+              <li>Appenzell Ausserrhoden</li>
+              <li>Appenzell Innerrhoden</li>
+              <li>St. Gallen</li>
+              <li>Graubünden</li>
+              <li>Aargau</li>
+              <li>Thurgau</li>
+              <li>Tessin</li>
+              <li>Waadt</li>
+              <li>Wallis</li>
+              <li>Neuenburg</li>
+              <li>Genf</li>
+              <li>Jura</li>
+            </ol>
+          </section>
+        </section>
+
+        <section>
+
+            <section>
+                <h4>Modeling examples</h4>
+            </section>
+
+            <section>
+                <p>Starting with the following document</p>
+                <p style="font-size: 1.2rem;">12.02.08_Osttangente_Basel/20 Kunstbauten/<hlr>12.02.08.430.10</hlr>_<hly>929</hly> C__UNF FG am St. Alban-Ring beim AS Basel-City/Rückvergrüsserungen/929_statische Berechnung_<hly>2_635</hly>/Fiche-0012/Greyscale/Scan_001.pdf</p>
+                <img class="fragment" src="dist/img/astra/929.png" alt="">
+            </section>
+
+            <section data-background-iframe="dist/html/cytoscape/astra/12.02.08.430.10.html"></section>
+
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        // showNotes: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          // name: "cose",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                label: "Scan_001.pdf",
+                boxLabels: ["Document"],
+                properties: {
+                  path: "/Scan_001.pdf",
+                },
+              },
+              position: {
+                x: 73,
+                y: 71,
+              },
+            },
+            {
+              data: {
+                id: "ne",
+                label: "10.12.76.406.01",
+                boxLabels: ["NamedEntity"],
+                properties: {
+                  code: "10.12.76.406.01",
+                  description:
+                    '"Das Viadukt Gruyère auf der N12"@de,<br>"The Gruyère viaduct on the N12"@en',
+                },
+              },
+              position: {
+                x: 73,
+                y: 71,
+              },
+            },
+            {
+              data: {
+                id: "cfr",
+                label: "Freiburg",
+                boxLabels: ["Canton"],
+                properties: {
+                  code: "10",
+                  name: "Freiburg",
+                },
+              },
+              position: {
+                x: -15,
+                y: -32,
+              },
+            },
+            {
+              data: {
+                id: "n12",
+                boxLabels: ["National Highway"],
+                label: "N12",
+                properties: {
+                  code: "12",
+                  name: '"Nationalstrasse N12"@de<br>"National highway N12"@en',
+                },
+              },
+              position: {
+                x: 102,
+                y: -54,
+              },
+            },
+            {
+              data: {
+                id: "s76",
+                label: "76",
+                boxLabels: ["Section"],
+                properties: {
+                  code: "76",
+                  name: '"Border VD/FR - Rossens"@en,<br>"Grenze VD/FR - Rossens"@de',
+                },
+              },
+              position: {
+                x: 199,
+                y: -13,
+              },
+            },
+            {
+              data: {
+                id: "og400",
+                label: "400 Civil Structure",
+                boxLabels: ["Object Group"],
+                properties: {
+                  code: "76",
+                  name: '"Border VD/FR - Rossens"@en,<br>"Grenze VD/FR - Rossens"@de',
+                },
+              },
+              position: {
+                x: 2,
+                y: 167,
+              },
+            },
+            {
+              data: {
+                id: "406.01",
+                label: "406.01",
+                boxLabels: ["Object Definition Number"],
+                properties: {
+                  code: "406.01",
+                },
+              },
+              position: {
+                x: 162,
+                y: 155,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "ne",
+                target: "cfr",
+                label: "canton",
+              },
+            },
+            {
+              data: {
+                source: "cfr",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "n12",
+                label: "road",
+              },
+            },
+            {
+              data: {
+                source: "n12",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "s76",
+                label: "sectionNumber",
+              },
+            },
+            {
+              data: {
+                source: "s76",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "og400",
+                label: "objectGroup",
+              },
+            },
+            {
+              data: {
+                source: "ne",
+                target: "406.01",
+                label: "objectDefinitionNumber",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "ne",
+                label: "about",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

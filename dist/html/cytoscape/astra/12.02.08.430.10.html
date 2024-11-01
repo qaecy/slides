@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          // name: "cose",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                label: "Scan_001.pdf",
+                boxLabels: ["Document"],
+                properties: {
+                  path: "12.02.08_Osttangente_Basel/20 Kunstbauten/12.02.08.430.10_929 C__UNF FG am St. Alban-Ring beim AS Basel-City/Rückvergrüsserungen/929_statische Berechnung_2_635/Fiche-0012/Greyscale/Scan_001.pdf",
+                },
+              },
+              position: {
+                x: -130,
+                y: 15,
+              },
+            },
+            {
+              data: {
+                id: "sar",
+                label:
+                  "St. Alban-Ring N2 Gellertdreieck Etappe 2B: Anschluss St. Alban-Ring, Galerie",
+                boxLabels: ["NamedEntity", "Asset"],
+                properties: {
+                  planRegNo: "245",
+                  ibObjNo: "929",
+                  n2ObjNo: "2.635",
+                  date: "1983-87",
+                },
+              },
+              position: {
+                x: -279,
+                y: 141,
+              },
+            },
+            {
+              data: {
+                id: "ne",
+                label: "12.02.08.430.10",
+                boxLabels: ["NamedEntity", "InventaryObject"],
+                properties: {
+                  code: "12.02.08.430.10",
+                  description: '""@de,<br>""@en',
+                },
+              },
+              position: {
+                x: 92,
+                y: 77,
+              },
+            },
+            {
+              data: {
+                id: "c12",
+                label: "Basel-City",
+                boxLabels: ["Canton"],
+                properties: {
+                  code: "12",
+                  name: '"Basel-City"@en<br>"Basel-Stadt"@en',
+                },
+              },
+              position: {
+                x: -6,
+                y: -50,
+              },
+            },
+            {
+              data: {
+                id: "n2",
+                boxLabels: ["NationalHighway"],
+                label: "N2",
+                properties: {
+                  code: "02",
+                  name: '"Nationalstrasse N2"@de<br>"National highway N2"@en',
+                },
+              },
+              position: {
+                x: 90,
+                y: -72,
+              },
+            },
+            {
+              data: {
+                id: "s08",
+                label: "08",
+                boxLabels: ["Section"],
+                properties: {
+                  code: "08",
+                  name: '"East tangent Basel"@en,<br>"Osttangente Basel"@de',
+                },
+              },
+              position: {
+                x: 179,
+                y: -12,
+              },
+            },
+            {
+              data: {
+                id: "og400",
+                label: "400 Civil Structure",
+                boxLabels: ["ObjectGroup"],
+                properties: {
+                  code: "76",
+                  name: '"Border VD/FR - Rossens"@en,<br>"Grenze VD/FR - Rossens"@de',
+                },
+              },
+              position: {
+                x: -9,
+                y: 184,
+              },
+            },
+            {
+              data: {
+                id: "430.10",
+                label: "430.10",
+                boxLabels: ["ObjectDefinitionNumber"],
+                properties: {
+                  code: "430.10",
+                },
+              },
+              position: {
+                x: 170,
+                y: 173,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "ne",
+                target: "c12",
+                label: "canton",
+              },
+            },
+            {
+              data: {
+                source: "c12",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "n2",
+                label: "road",
+              },
+            },
+            {
+              data: {
+                source: "n2",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "s08",
+                label: "sectionNumber",
+              },
+            },
+            {
+              data: {
+                source: "s08",
+                target: "ne",
+                label: "contains",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "ne",
+                target: "og400",
+                label: "objectGroup",
+              },
+            },
+            {
+              data: {
+                source: "ne",
+                target: "430.10",
+                label: "objectDefinitionNumber",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "ne",
+                label: "about",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "sar",
+                label: "about",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
