@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="132.41185mm"
+   height="25.257303mm"
+   viewBox="0 0 132.41185 25.257303"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aeda, 2022-05-15)"
+   sodipodi:docname="classification0.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="false"
+     inkscape:zoom="1.6419915"
+     inkscape:cx="260.96359"
+     inkscape:cy="88.611908"
+     inkscape:window-width="1512"
+     inkscape:window-height="741"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-15.00738,-9.628314)">
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;font-family:Poppins;-inkscape-font-specification:Poppins;fill:#000000;stroke:none;stroke-width:0.574146"
+       x="14.480768"
+       y="16.592142"
+       id="text186"><tspan
+         sodipodi:role="line"
+         id="tspan184"
+         x="14.480768"
+         y="16.592142"
+         style="fill:#000000;stroke:none;stroke-width:0.574146">KT.NN.AA.GXX.YY</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;font-family:Poppins;-inkscape-font-specification:Poppins;fill:#000000;stroke:none;stroke-width:0.574146"
+       x="107.20194"
+       y="25.997524"
+       id="text186-5"><tspan
+         sodipodi:role="line"
+         id="tspan184-5"
+         x="107.20194"
+         y="25.997524"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke:none;stroke-width:0.574146">Object definition</tspan></text>
+    <path
+       style="fill:none;fill-opacity:0.701961;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+       d="m 75.779868,18.138611 v 6.252891 h 29.198552"
+       id="path1934"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+       d="M 59.299436,18.138611 H 91.83041"
+       id="path1934-0-8-0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+       d="M 15.00738,18.138611 H 56.952023"
+       id="path1934-0-7"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.87777px;font-family:Poppins;-inkscape-font-specification:Poppins;fill:#000000;stroke:none;stroke-width:0.574146"
+       x="107.20116"
+       y="34.841167"
+       id="text186-5-4"><tspan
+         sodipodi:role="line"
+         id="tspan184-5-3"
+         x="107.20116"
+         y="34.841167"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;font-family:Poppins;-inkscape-font-specification:'Poppins, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke:none;stroke-width:0.574146">Location</tspan></text>
+    <path
+       style="fill:none;fill-opacity:0.701961;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.959124,18.138611 -0.07723,15.074672 70.114466,-0.103757"
+       id="path1934-8"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="../../../../../Downloads/code0.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>

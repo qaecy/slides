@@ -76,7 +76,7 @@
 
         <section>
           <section>
-            <h4>Classification code</h4>
+            <h4>Inventary object codes</h4>
           </section>
 
           <section>
@@ -94,42 +94,26 @@
           </section>
 
           <section>
-            <h4>Cantons</h4>
-            <ol style="font-size: 1rem; line-height: 1.1rem;">
-              <li>Zürich</li>
-              <li>Bern</li>
-              <li>Luzern</li>
-              <li>Uri</li>
-              <li>Schwyz</li>
-              <li>Obwalden</li>
-              <li>Nidwalden</li>
-              <li>Glarus</li>
-              <li>Zug</li>
-              <li>Freiburg</li>
-              <li>Solothurn</li>
-              <li>Basel-Stadt</li>
-              <li>Basel-Landschaft</li>
-              <li>Schaffhausen</li>
-              <li>Appenzell Ausserrhoden</li>
-              <li>Appenzell Innerrhoden</li>
-              <li>St. Gallen</li>
-              <li>Graubünden</li>
-              <li>Aargau</li>
-              <li>Thurgau</li>
-              <li>Tessin</li>
-              <li>Waadt</li>
-              <li>Wallis</li>
-              <li>Neuenburg</li>
-              <li>Genf</li>
-              <li>Jura</li>
-            </ol>
+            <p>Cantons and road numbers are well defined. Are sections and objects?</p>
           </section>
         </section>
 
         <section>
 
+          <section>
+            <h4>Document categories</h4>
+          </section>
+
+          <section data-background-image="dist/img/astra/document_categories.png" data-background-size="50%">
+            <p class="fragment">These are not globally unique. Only for the project</p>
+          </section>
+
+        </section>
+
+        <section>
+
             <section>
-                <h4>Modeling examples</h4>
+                <h4>Modeling example 1</h4>
             </section>
 
             <section>
@@ -139,6 +123,69 @@
             </section>
 
             <section data-background-iframe="dist/html/cytoscape/astra/12.02.08.430.10.html"></section>
+
+        </section>
+
+
+        <section>
+
+          <section>
+            <h4>Modeling example 2</h4>
+          </section>
+
+          <section>
+            <p>Starting with the following document</p>
+            <p style="font-size: 1.2rem;"><hlr>12.02.08</hlr>_Osttangente_Basel/00_Uebergeordnet/03b_GP_Rheintunnel/01_Abgabe an FU_20180731/05_Fachdossier_BSA/A-1.1 Schemaplan Abschnitts-Objektbezeichnungen.pdf</p>
+        </section>
+
+          <section>
+            <p>It appears to be a document related to the eastern bypass in Basel, more precisely the Rhine Tunnel. The file name also contains a date (08.02.12) and a reference to a submission to the FU (Environmental Protection Department) on July 31, 2018. The path shows that it is a schematic plan with section and object names that is stored in the BSA specialist dossier.</p>
+          </section>
+          
+        </section>
+
+        <section>
+
+          <section>
+            <h4>What we know from an inventory object code</h4>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/astra/skos.html"></section>
+
+          <section>
+            <p>In a more geneal view we can see some of these concepts as broader/narrower with the inventory object being the most narrow scope</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/astra/skos2.html"></section>
+
+          <section>
+            <p>Searching for a broad topic will also return the more narrow concepts:</p>
+            <p>Searching "Basel", "Civil structures", "Bridges", "Branch Zofingen" or "Highway N2" will return the object</p>
+          </section>
+
+          <section>
+            <p>All file paths include the section id, so from the path it is possible to map a file and a section</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/astra/skos3.html"></section>
+
+          <section>
+            <p>77 % of the file paths also include the object id</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/astra/skos4.html"></section>
+
+        </section>
+
+        <section>
+
+          <section><h4>Logical inference</h4></section>
+
+          <section>
+            <p>The more narrow we can go, the better</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cytoscape/astra/skos5.html"></section>
 
         </section>
 

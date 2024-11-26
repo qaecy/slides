@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          // name: "cose",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "object",
+                label: "12.02.08.410.34",
+                boxLabels: ["InventoryObject"],
+                properties: {
+                  labelEn: "BRIDGE Lehenmatt Basel",
+                  labelDe: "BRÜCKE Lehenmatt Basel",
+                  notation: "12.02.08.410.34",
+                  bauwerksnummer: "926_BS",
+                },
+              },
+              position: {
+                x: 123,
+                y: 36,
+              },
+            },
+            {
+              data: {
+                id: "objectType",
+                label: "4A",
+                boxLabels: ["InventoryObjectType"],
+                properties: {
+                  labelEn: "Bridge",
+                  labelDe: "Brücke",
+                  notation: "4A",
+                  definition:
+                    "An artificial structure allowing crossing over another roadway, railway lines, buildings, waterways or depressions. Can vary in type and construction depending on supporting structure and materials used.",
+                },
+              },
+              position: {
+                x: 17,
+                y: 97,
+              },
+            },
+            {
+              data: {
+                id: "fhb",
+                label: "FHB K",
+                boxLabels: ["TechnicalManual"],
+                properties: {
+                  label: "FHB K",
+                  definitionDe: "22001 Fachhandbuch Kunstbauten (FHB K)",
+                  definitionEn:
+                    "22001 Technical handbook for civil structures (FHB K)",
+                  link: "https://www.astra.admin.ch/astra/de/home/fachleute/dokumente-nationalstrassen/fachdokumente/fachunterstuetzung/fachhandbuch-kunstbauten.html",
+                },
+              },
+              position: {
+                x: -64,
+                y: 175,
+              },
+            },
+            {
+              data: {
+                id: "objectGroup",
+                label: "400",
+                boxLabels: ["InventoryObjectGroup"],
+                properties: {
+                  labelEn: "Civil structures",
+                  labelDe: "Kunstbauten",
+                  notation: "400",
+                },
+              },
+              position: {
+                x: -80,
+                y: -29,
+              },
+            },
+            {
+              data: {
+                id: "section",
+                label: "12.02.08",
+                boxLabels: ["Section"],
+                properties: {
+                  label: "BS.02.08",
+                  definition: "Gr. D/CH - Verzw. HAGNAU",
+                  notation: "12.02.08",
+                  twoLetterAbbreviation: "BS",
+                  startBreakPoint: "0A",
+                  endBreakPoint: "50",
+                },
+              },
+              position: {
+                x: 279,
+                y: 110,
+              },
+            },
+            {
+              data: {
+                id: "canton",
+                label: "12",
+                boxLabels: ["Canton"],
+                properties: {
+                  labelEn: "Basel-Stadt",
+                  labelDe: "Basel-Stadt",
+                  notation: "12",
+                  twoLetterAbbreviation: "BS",
+                  link: "https://schweiz.fandom.com/de/wiki/Kanton_Basel-Stadt",
+                },
+              },
+              position: {
+                x: 166,
+                y: 214,
+              },
+            },
+            {
+              data: {
+                id: "highway",
+                label: "02",
+                boxLabels: ["Highway"],
+                properties: {
+                  labelEn: "Highway N2",
+                  labelDe: "Nationalstrasse N2",
+                  notation: "02",
+                },
+              },
+              position: {
+                x: 284,
+                y: 250,
+              },
+            },
+            {
+              data: {
+                id: "branch",
+                label: "F3",
+                boxLabels: ["Branch"],
+                properties: {
+                  labelEn: "Filiale 3",
+                  labelDe: "Branch 3",
+                  altLabel: "Zofingen",
+                  notation: "F3",
+                },
+              },
+              position: {
+                x: 396,
+                y: 190,
+              },
+            },
+            {
+              data: {
+                id: "file",
+                label:
+                  "BerichtEP_926_Lehenmattbrücken_N02_Hauptinspektion_2010_Schadenspläne_V2.pdf",
+                boxLabels: ["File"],
+                properties: {
+                  path: "/12.02.08.410.34_926_BS_BRÜCKE Lehenmatt Basel/Inspektionen/2010/BerichtEP_926_Lehenmattbrücken_N02_Hauptinspektion_2010_Schadenspläne_V2.pdf",
+                },
+              },
+              position: {
+                x: 247,
+                y: -57,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "object",
+                target: "objectType",
+                label: "objectType",
+              },
+            },
+            {
+              data: {
+                source: "object",
+                target: "objectType",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "objectType",
+                target: "objectGroup",
+                label: "objectGroup",
+              },
+            },
+            {
+              data: {
+                source: "objectType",
+                target: "objectGroup",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "object",
+                target: "section",
+                label: "location",
+              },
+            },
+            {
+              data: {
+                source: "object",
+                target: "section",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "canton",
+                label: "location",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "canton",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "highway",
+                label: "location",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "highway",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "branch",
+                label: "location",
+              },
+            },
+            {
+              data: {
+                source: "section",
+                target: "branch",
+                label: "broader",
+              },
+            },
+            {
+              data: {
+                source: "objectType",
+                target: "fhb",
+                label: "technicalManual",
+              },
+            },
+            {
+              data: {
+                source: "objectType",
+                target: "fhb",
+                label: "related",
+              },
+            },
+            {
+              data: {
+                source: "file",
+                target: "section",
+                label: "about",
+              },
+            }
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
