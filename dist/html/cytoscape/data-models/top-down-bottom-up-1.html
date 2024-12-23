@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(style);
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "d1",
+                boxLabels: ["qcy:Document"],
+              },
+              position: {
+                x: -113,
+                y: -159,
+              },
+            },
+            {
+              data: {
+                id: "d1p1",
+                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
+              },
+              position: {
+                x: -32,
+                y: -144,
+              },
+            },
+            {
+              data: {
+                id: "d1p1ne1",
+                boxLabels: ["qcy:NamedEntity", "qce:Person"],
+              },
+              position: {
+                x: 30,
+                y: -108,
+              },
+            },
+            {
+              data: {
+                id: "aein",
+                label: "A. Einstein",
+              },
+              position: {
+                x: 116,
+                y: -160,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "d2",
+                boxLabels: ["qcy:Document"],
+              },
+              position: {
+                x: -101,
+                y: -242,
+              },
+            },
+            {
+              data: {
+                id: "d2p1",
+                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
+              },
+              position: {
+                x: -11,
+                y: -216,
+              },
+            },
+            {
+              data: {
+                id: "d2p1ne1",
+                boxLabels: ["qcy:NamedEntity", "qce:Person"],
+              },
+              position: {
+                x: 51,
+                y: -192,
+              },
+            },
+            {
+              data: {
+                id: "albein",
+                label: "Albert Einstein",
+              },
+              position: {
+                x: 148,
+                y: -228,
+              },
+              classes: "literal",
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "d1",
+                target: "d1p1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "d1p1",
+                target: "d1p1ne1",
+                label: "qcy:namedEntity",
+              },
+            },
+            {
+              data: {
+                source: "d1p1ne1",
+                target: "aein",
+                label: "rdf:value",
+              },
+            },
+            {
+              data: {
+                source: "d2",
+                target: "d2p1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "d2p1",
+                target: "d2p1ne1",
+                label: "qcy:namedEntity",
+              },
+            },
+            {
+              data: {
+                source: "d2p1ne1",
+                target: "albein",
+                label: "rdf:value",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="../default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "../helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        defaultSettings,
+      } from "../../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      console.log(style);
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "d1",
+                boxLabels: ["qcy:Document"],
+              },
+              position: {
+                x: -158,
+                y: -94,
+              },
+            },
+            {
+              data: {
+                id: "d1p1",
+                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
+              },
+              position: {
+                x: -58,
+                y: -67,
+              },
+            },
+            {
+              data: {
+                id: "d1p1ne1",
+                boxLabels: ["qcy:NamedEntity", "qce:Person"],
+              },
+              position: {
+                x: 34,
+                y: -90,
+              },
+            },
+            {
+              data: {
+                id: "aein",
+                label: "A. Einstein",
+              },
+              position: {
+                x: 122,
+                y: -37,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "d2",
+                boxLabels: ["qcy:Document"],
+              },
+              position: {
+                x: -108,
+                y: -247,
+              },
+            },
+            {
+              data: {
+                id: "d2p1",
+                boxLabels: ["qcy:Fragment", "qcy:DocumentPage"],
+              },
+              position: {
+                x: -19,
+                y: -213,
+              },
+            },
+            {
+              data: {
+                id: "d2p1ne1",
+                boxLabels: ["qcy:NamedEntity", "qce:Person"],
+              },
+              position: {
+                x: 49,
+                y: -183,
+              },
+            },
+            {
+              data: {
+                id: "albein",
+                label: "Albert Einstein",
+              },
+              position: {
+                x: 155,
+                y: -222,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "ne1",
+                boxLabels: ["qcy:NamedEntity", "qcy:KnownEntity", "qce:Person"],
+              },
+              position: {
+                x: 166,
+                y: -121,
+              },
+            },
+            {
+              data: {
+                id: "prefLabel",
+                label: "Albert Einstein@en",
+              },
+              position: {
+                x: 304,
+                y: -159,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "altLabel",
+                label: "A. Einstein",
+              },
+              position: {
+                x: 301,
+                y: -100,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "altLabel2",
+                label: "Einstein",
+              },
+              position: {
+                x: 295,
+                y: -68,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "grLabel",
+                label: "Άλμπερτ Αϊνστάιν@el",
+              },
+              position: {
+                x: 294,
+                y: -119,
+              },
+              classes: "literal",
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "d1",
+                target: "d1p1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "d1p1",
+                target: "d1p1ne1",
+                label: "qcy:namedEntity",
+              },
+            },
+            {
+              data: {
+                source: "d1p1ne1",
+                target: "aein",
+                label: "rdf:value",
+              },
+            },
+            {
+              data: {
+                source: "d2",
+                target: "d2p1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "d2p1",
+                target: "d2p1ne1",
+                label: "qcy:namedEntity",
+              },
+            },
+            {
+              data: {
+                source: "d2p1ne1",
+                target: "albein",
+                label: "rdf:value",
+              },
+            },
+            {
+              data: {
+                source: "ne1",
+                target: "prefLabel",
+                label: "skos:prefLabel",
+              },
+            },
+            {
+              data: {
+                source: "ne1",
+                target: "altLabel",
+                label: "skos:altLabel",
+              },
+            },
+            {
+              data: {
+                source: "ne1",
+                target: "altLabel2",
+                label: "skos:altLabel",
+              },
+            },
+            {
+              data: {
+                source: "ne1",
+                target: "grLabel",
+                label: "skos:prefLabel",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

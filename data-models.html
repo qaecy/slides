@@ -187,12 +187,22 @@
           </section>
 
           <section>
-            <p>A Material layer set from IFC is consiedered a <code>bpo:Product</code> since it provides the recipe for all walls, slabs etc. of this type</p>
+            <p>
+              A Material layer set from IFC is consiedered a
+              <code>bpo:Product</code> since it provides the recipe for all
+              walls, slabs etc. of this type
+            </p>
           </section>
 
           <section>
-            <p>A layer set not only describes the material layers but also the order between them</p>
-            <img src="./dist/img/data-models/ifcmateriallayerset-01.png" alt="">
+            <p>
+              A layer set not only describes the material layers but also the
+              order between them
+            </p>
+            <img
+              src="./dist/img/data-models/ifcmateriallayerset-01.png"
+              alt=""
+            />
             <p>In BPO we can also model these connections</p>
           </section>
 
@@ -202,7 +212,11 @@
           ></section>
 
           <section>
-            <p>Layered products are slightly different from other products like windows and doors since we don't knonw the volume before we have an actual insertion that realises the product.</p>
+            <p>
+              Layered products are slightly different from other products like
+              windows and doors since we don't knonw the volume before we have
+              an actual insertion that realises the product.
+            </p>
           </section>
 
           <section>
@@ -211,9 +225,9 @@
               <a href="https://schema.org/Product">schema:Product</a>
               <a href="https://schema.org/IndividualProduct"
                 >schema:IndividualProduct</a
-              > and <a href="https://schema.org/ProductModel"
-              >schema:ProductModel</a
-            >
+              >
+              and
+              <a href="https://schema.org/ProductModel">schema:ProductModel</a>
             </p>
           </section>
 
@@ -337,6 +351,88 @@
               </div>
             </div>
           </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>Bottom up vs. Top down</h4>
+          </section>
+
+          <section>
+            <p>
+              The <strong>bottom up approach</strong> is what our pipelines go
+              through in order to identify any named entity that
+              <em>could potentially be a Feature of Interest (FoI)</em> in the
+              project.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Examples of such FoIs are People, Companies,
+              Buildings/Storeys/Spaces, Element types etc.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The <strong>top down approach</strong> is applicable when we
+              <em>already have a list of well defined FoIs</em> in the project
+              from a participant list, room programme or the like. <br />
+              These are <strong>Known FoIs</strong>
+            </p>
+          </section>
+
+          <section>
+            <p>
+              A project would typically follow a
+              <strong>mixed approach</strong>. We would like to formalise what
+              we know but also allow discovering new FoIs across the project at
+              a later stage.
+            </p>
+          </section>
+
+          <section>
+            <p>Let's take a look at an example where we have derived two potential FoIs from two different PDF documents using the <strong>bottom up approach</strong></p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/top-down-bottom-up-1.html"
+          ></section>
+
+          <section>
+            <p>We have also processed a list of project participants following the <strong>top down approach</strong></p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/top-down-bottom-up-2.html"
+          ></section>
+
+          <section>
+            <p>Now we need to connect the potential FoIs with the known FoIs</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/top-down-bottom-up-3.html"
+          ></section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/top-down-bottom-up-4.html"
+          ></section>
+
+          <section>
+            <p>This new connection further allow us to derive the following implicit facts about the fragment and its parents.</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/data-models/top-down-bottom-up-5.html"
+          ></section>
+
         </section>
 
         <section>
