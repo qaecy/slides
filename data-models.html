@@ -434,7 +434,15 @@
           ></section>
 
           <section>
-            <p>Involving entity resolution and known entities.</p>
+            <p>Generalizing entity resolution</p>
+            <p style="text-align: left; font-size: 28px;">Suggested approach</p>
+            <ul style="text-align: left; font-size: 20px;">
+              <li>Each <b>NamedEntity</b> is uniquely identified by the source document it is found.</li>
+              <li>Entity resolution connects multiple named entities into one when they refer to the same entity.</li>
+              <li>Each resolved entity is represented as a <b>CanonicalEntity</b> (subclass of NamedEntity).</li>
+              <li>A <b>CanonicalEntity</b> has a boolean property <b>isExplicit</b>, which indicates whether the entity has been explicitely provided (top-down) or not (bottom-up).</li>
+              <li>Semantic relations between entities happen at the non-resolved level and are inferred in the resolved one.</li>
+            </ul>
           </section>
 
           <section

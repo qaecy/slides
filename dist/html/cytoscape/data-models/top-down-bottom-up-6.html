@@ -63,7 +63,7 @@
             },
             {
               data: {
-                id: "d1p1ne3",
+                id: "d1p1ne2",
                 boxLabels: ["qcy:NamedEntity", "qce:Location"],
               },
               position: {
@@ -85,7 +85,7 @@
             
             {
               data: {
-                id: "d1p1ne4",
+                id: "d2p1ne2",
                 boxLabels: ["qcy:NamedEntity", "qce:Location"],
               },
               position: {
@@ -107,8 +107,8 @@
 
             {
               data: {
-                id: "d1p1ne5",
-                boxLabels: ["qcy:NamedEntity", "qce:Location"],
+                id: "ne2",
+                boxLabels: ["qcy:NamedEntity", "qce:Location", "qcy:CanonicalEntity"],
               },
               position: {
                 x: -330,
@@ -204,7 +204,7 @@
             {
               data: {
                 id: "ne1",
-                boxLabels: ["qcy:NamedEntity", "qcy:KnownEntity", "qce:Person"],
+                boxLabels: ["qcy:NamedEntity", "qcy:CanonicalEntity", "qce:Person"],
               },
               position: {
                 x: 171,
@@ -219,6 +219,28 @@
               position: {
                 x: 305,
                 y: -163,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "isExplicit1",
+                label: "True",
+              },
+              position: {
+                x: 365,
+                y: -193,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "isExplicit2",
+                label: "False",
+              },
+              position: {
+                x: -365,
+                y: -193,
               },
               classes: "literal",
             },
@@ -274,27 +296,27 @@
             {
               data: {
                 source: "d1p1",
-                target: "d1p1ne3",
+                target: "d1p1ne2",
                 label: "schema:about",
               },
             },
             {
               data: {
                 source: "d2p1",
-                target: "d1p1ne4",
+                target: "d2p1ne2",
                 label: "schema:about",
               },
             },
             {
               data: {
-                source: "d1p1ne5",
+                source: "ne2",
                 target: "wurtmb1b",
                 label: "skos:prefLabel",
               },
             },
             {
               data: {
-                source: "d1p1ne3",
+                source: "d1p1ne2",
                 target: "wurtmb1",
                 label: "rdf:value",
               },
@@ -302,34 +324,34 @@
             {
               data: {
                 source: "d1p1ne1",
-                target: "d1p1ne3",
+                target: "d1p1ne2",
                 label: "schema:birthPlace",
               },
             },
             {
               data: {
-                source: "d1p1ne4",
+                source: "d2p1ne2",
                 target: "wurtmb2",
                 label: "rdf:value",
               },
             },
             {
               data: {
-                source: "d1p1ne4",
-                target: "d1p1ne5",
+                source: "d2p1ne2",
+                target: "ne2",
                 label: "qcy:resolvesTo",
               },
             },
             {
               data: {
-                source: "d1p1ne3",
-                target: "d1p1ne5",
+                source: "d1p1ne2",
+                target: "ne2",
                 label: "qcy:resolvesTo",
               },
             },
             {
               data: {
-                source: "d1p1ne5",
+                source: "ne2",
                 target: "wurtmb2b",
                 label: "skos:altLabel",
               },
@@ -408,6 +430,38 @@
               classes: "implicit",
               data: {
                 source: "d1",
+                target: "d1p1ne2",
+                label: "schema:about",
+              },
+            },
+            {
+              classes: "implicit",
+              data: {
+                source: "d1",
+                target: "ne2",
+                label: "schema:about",
+              },
+            },
+            {
+              classes: "implicit",
+              data: {
+                source: "d2",
+                target: "d2p1ne2",
+                label: "schema:about",
+              },
+            },
+            {
+              classes: "implicit",
+              data: {
+                source: "d2",
+                target: "ne2",
+                label: "schema:about",
+              },
+            },
+            {
+              classes: "implicit",
+              data: {
+                source: "d1",
                 target: "ne1",
                 label: "schema:about",
               },
@@ -436,6 +490,30 @@
                 label: "schema:about",
               },
             },
+            {
+              classes: "implicit",
+              data: {
+                source: "ne1",
+                target: "ne2",
+                label: "schema:birthPlace",
+              },
+            },
+            {
+              data: {
+                source: "ne1",
+                target: "isExplicit1",
+                label: "qcy:isExplicit",
+              },
+            },
+            {
+              data: {
+                source: "ne2",
+                target: "isExplicit2",
+                label: "qcy:isExplicit",
+              },
+            }
+            
+            
           ],
         },
       });
