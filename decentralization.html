@@ -101,7 +101,7 @@
               BIM is siloed.<br />
               One discipline, one model
             </p>
-            <p class="fragment">Lots of redundancy</p>
+            <p class="fragment">Duplication is necessary</p>
           </section>
 
           <section>
@@ -129,6 +129,11 @@
 
           <section>
             <img src="dist/img/decentral/bs-wall-03.svg" alt="" />
+          </section>
+
+		  <section>
+            <p>This would be a complete ecentralization of BIM which is obviously not easy to achieve.</p>
+			<p class="fragment">But a step on the way would be to make what we have more connected...</p>
           </section>
         </section>
 
@@ -167,6 +172,10 @@
 			<section>
 				<img src="dist/img/misc/file_dms.svg" alt="">
 			</section>
+
+			<section>
+				<p>This makes it hard to answer simple questions like <em>"Is this the most recent version of that plan drawing"</em> or <em>"what documents describe this pump?"</em></p>
+			</section>
 		</section>
 
 		<section>
@@ -176,7 +185,7 @@
 			</section>
 
 			<section>
-				At <img src="dist/img/logo.svg" class="inline-logo" /> we distinguish between the <strong>File</strong> and its <strong>Content</strong>.
+				At <img src="dist/img/logo.svg" class="inline-logo" /> we distinguish between a <strong>File</strong> and its <strong>Content</strong>.
 			</section>
 
 			<section>
@@ -198,12 +207,22 @@
 			</section>
 
 			<section>
-				<p>We can use this technique to always create the same id when we wish it to be so and in contrast create a new id when this is desired</p>
+				<p>We can use this technique to always create the same id for the same input</p>
+			</section>
+
+			<section>
+				<p>It's important to consider what parameters should change the id and which should not</p>
 			</section>
 
 			<section>
 				<p>The <strong>file id</strong> is generated from a combination of what system it is stored on and what is it's path</p>
 				<p class="fragment">The <strong>content id</strong> is generated from the file content</p>
+			</section>
+
+			<section>
+				<p>The same file name on two different platforms will then create two different file ids</p>
+				<p class="fragment">The same file stored at two different locations on the same platform will also create two different file ids</p>
+				<p class="fragment">The file content id will however stay the same as long as the content doesn't change</p>
 			</section>
 
 			<section data-background-iframe="dist/html/cytoscape/file-content-2.html"></section>
@@ -227,17 +246,17 @@
 			</section>
 
 			<section>
-				<p>The content node is the most overall representation of a document</p>
+				<p>A <strong>Content node</strong> is the most overall representation of a document</p>
 			</section>
 
 			<section>
-				<p>The any subset of a document is referred to as a <strong>Fragment</strong> and those can have sub-fragments in any arbitrary depth</p>
+				<p>Any subset of a document is referred to as a <strong>Fragment</strong> and each <strong>Fragment</strong> can have sub-fragments in any arbitrary depth</p>
 			</section>
 
 			<section data-background-iframe="dist/html/cytoscape/document-fragments.html"></section>
 
 			<section>
-				<p>Information such as the page number or the fragment's position relative to its parent can be expressed as properties on the individual fragments</p>
+				<p>Information such as the <strong>page number</strong> or the <strong>fragment position</strong> relative to its parent can be expressed as properties on the individual fragments</p>
 			</section>
 
 			<section>
