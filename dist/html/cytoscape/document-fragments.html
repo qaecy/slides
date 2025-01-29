@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                label: "Document",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 39,
+                y: -16,
+              },
+            },
+            {
+              data: {
+                id: "page",
+                label: "Page",
+                boxLabels: ["qcy:Fragment"],
+              },
+              position: {
+                x: 145,
+                y: 66,
+              },
+            },
+            {
+              data: {
+                id: "title",
+                label: "Title",
+                boxLabels: ["qcy:Fragment"],
+              },
+              position: {
+                x: 56,
+                y: 132,
+              },
+            },
+            {
+              data: {
+                id: "paragraph",
+                label: "Paragraph",
+                boxLabels: ["qcy:Fragment"],
+              },
+              position: {
+                x: 209,
+                y: 158,
+              },
+            },
+            {
+              data: {
+                id: "image",
+                label: "Image",
+                boxLabels: ["qcy:Fragment"],
+              },
+              position: {
+                x: 134,
+                y: 172,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc",
+                target: "page",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "title",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "paragraph",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "image",
+                label: "qcy:hasFragment",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

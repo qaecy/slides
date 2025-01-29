@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:FileContent"],
+                properties: {
+                  "@id": "b3a8fc9d-38f8-52c4-9db3-58e491ef2b52",
+                  "qcy:md5hash": "e939b0e66904941741696befc4e36f01",
+                  "qcy:mime": "application/octet-stream",
+                  "qcy:resourceType": "bim",
+                  "qcy:resourceOpen": true,
+                  "schema:encodingFormat": "application/octet-stream",
+                  "schema:size": "176500000",
+                },
+              },
+              position: {
+                x: 108,
+                y: 118,
+              },
+            },
+            {
+              data: {
+                id: "file1",
+                boxLabels: ["qcy:File"],
+                properties: {
+                  "@id": "5583df12-07e4-54a4-9710-40a2b75c02fc",
+                  "qcy:suffix": ".ifc",
+                  "qcy:name": "Model.ifc",
+                  "qcy:foldername": "/",
+                  "qcy:relativeRemotePath":
+                    "2ac516c0-1e5f-426c-9670-ae4dd43d9f53.ifc",
+                  "qcy:remoteProvider": "aconex",
+                  "schema:dateCreated": "2024-08-23 07:23:11Z",
+                  "schema:dateModified": "2024-08-23 07:23:11Z",
+                },
+              },
+              position: {
+                x: 181,
+                y: 12,
+              },
+            },
+            {
+              data: {
+                id: "file2",
+                boxLabels: ["qcy:File"],
+                properties: {
+                  "@id": "2a96619b-3dcd-4142-af68-22e20f39befe",
+                  "qcy:suffix": ".ifc",
+                  "qcy:name": "Architecture.ifc",
+                  "qcy:foldername": "/BIM",
+                  "qcy:relativeRemotePath": "/BIM/Architecture.ifc",
+                  "qcy:remoteProvider": "sharepoint",
+                  "schema:dateCreated": "2024-01-22 08:24:12Z",
+                  "schema:dateModified": "2024-01-22 08:24:12Z",
+                },
+              },
+              position: {
+                x: 123,
+                y: 6,
+              },
+            },
+            {
+              data: {
+                id: "file3",
+                boxLabels: ["qcy:File"],
+                properties: {
+                  "@id": "2a96619b-3dcd-4142-af68-22e20f39befe",
+                  "qcy:suffix": ".ifc",
+                  "qcy:name": "BLOX_A.ifc",
+                  "qcy:foldername": "/Models",
+                  "qcy:relativeRemotePath":
+                    "30432f25-9bb1-4130-9114-052baf19accf/b3a8fc9d-38f8-52c4-9db3-58e491ef2b52.ifc",
+                  "qcy:remoteProvider": "portal_upload",
+                  "schema:dateCreated": "2024-01-21 09:29:42Z",
+                  "schema:dateModified": "2024-01-21 09:29:42Z",
+                },
+              },
+              position: {
+                x: 61,
+                y: 7,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc",
+                target: "file1",
+                label: "qcy:hasLocation",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "file2",
+                label: "qcy:hasLocation",
+              },
+            },
+            {
+              data: {
+                source: "doc",
+                target: "file3",
+                label: "qcy:hasLocation",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

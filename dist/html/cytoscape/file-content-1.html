@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css">
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import { appendHTMLLabels, logNodePositions, animateGraph, buildStyles, layoutOptions, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc",
+                boxLabels: ["qcy:FileContent"]
+              },
+              position: {
+                x: 75,
+                y: 35,
+              },
+            },
+            {
+              data: {
+                id: "file",
+                boxLabels: ["qcy:File"]
+              },
+              position: {
+                x: 176,
+                y: 109,
+              },
+            }
+          ],
+          edges: [
+            {
+              data: {
+                id: "a",
+                source: "doc",
+                target: "file",
+                label: "qcy:hasLocation",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      // logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
+
+        <section>
+          <h4>A decentralized knowledge graph</h4>
+        </section>
+
+        <section>
+          <section>
+            <h4>The AEC industry has a fragmented and decentralized nature</h4>
+          </section>
+
+          <section>
+            <h4>
+              Designing, maintaining and operating a built asset involves
+              expertise from a myriad of professions
+            </h4>
+          </section>
+
+          <section>
+            <h4>
+              Therefore, there are many perspectives on each and every subset of
+              the project
+            </h4>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/Systems-01.svg" alt="" />
+            <p>What do you see?</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-02.svg" alt="" />
+            <p>What the architect sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-03.svg" alt="" />
+            <p>What the ICE engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-04.svg" alt="" />
+            <p>What the low voltage engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-05.svg" alt="" />
+            <p>What the low voltage engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-06.svg" alt="" />
+            <p>What the HVAC engineer sees</p>
+          </section>
+
+          <section>
+            <p>Today's BIM doesn't handle this nature well</p>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/monolitic-01.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/monolitic-02.svg" alt="" />
+          </section>
+
+          <section>
+            <p>
+              BIM is siloed.<br />
+              One discipline, one model
+            </p>
+            <p class="fragment">Lots of redundancy</p>
+          </section>
+
+          <section>
+            <p>
+              The only context that exists between them is the one established
+              when putting them in the same coordinate system and doing a clash
+              detection
+            </p>
+          </section>
+
+          <section>
+            <p>
+              A silo-free BIM would focus on the context and could be
+              decentralized
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-01.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-02.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-03.svg" alt="" />
+          </section>
+        </section>
+
+		<section>
+			
+			<section>
+				<h4>The reality</h4>
+			</section>
+
+			<section>
+				<p>No project has <span style="text-decoration: underline;">ONE</span> BIM model</p>
+			</section>
+
+			<section>
+				<p>Not all information is <span style="font-size: 1.2rem;">(or should ever be)</span> in the BIM model</p>
+			</section>
+
+			<section>
+				<ul>
+					<li>Reports</li>
+					<li>Meeting minutes</li>
+					<li>e-mails</li>
+					<li>Calculations</li>
+					<li>Images from site registrations</li>
+					<li>Point cloud scans</li>
+					<li>Reference images</li>
+					<li>Sketches</li>
+					<li>Norms & Regulations</li>
+				</ul>
+			</section>
+
+			<section>
+				<p>Information is scattered across different files and often on different data management systems</p>
+			</section>
+
+			<section>
+				<img src="dist/img/misc/file_dms.svg" alt="">
+			</section>
+		</section>
+
+		<section>
+
+			<section>
+				<h4>How we deal with it</h4>
+			</section>
+
+			<section>
+				At <img src="dist/img/logo.svg" class="inline-logo" /> we distinguish between the <strong>File</strong> and its <strong>Content</strong>.
+			</section>
+
+			<section>
+				The <strong>Content nodes</strong> and <strong>File nodes</strong> are represented in a knowledge graph
+			</section>
+
+			<section data-background-iframe="dist/html/cytoscape/file-content-1.html"></section>
+
+			<section data-background-image="dist/img/misc/file_dms.svg" data-background-size="80%">
+				<p>So how would we represent this?</p>
+			</section>
+
+			<section>
+				<p>We use a hashing mechanism so the same content will always translate to the same unique id</p>
+			</section>
+
+			<section>
+				<img src="dist/img//misc/hashing.png" alt="">
+			</section>
+
+			<section>
+				<p>We can use this technique to always create the same id when we wish it to be so and in contrast create a new id when this is desired</p>
+			</section>
+
+			<section>
+				<p>The <strong>file id</strong> is generated from a combination of what system it is stored on and what is it's path</p>
+				<p class="fragment">The <strong>content id</strong> is generated from the file content</p>
+			</section>
+
+			<section data-background-iframe="dist/html/cytoscape/file-content-2.html"></section>
+
+			<section>
+				<p>This approach is completely flexible</p>
+				<p class="fragment">One file can point to several content nodes (different versions) even though its name hasn't changed.</p>
+				<p class="fragment">One content node can point to several cloud locations - one for each file.</p>
+			</section>
+
+			<section>
+				<p>So now we can deal with multiple representations of the same file. But what about the relationships between the individual content nodes?</p>
+			</section>
+
+		</section>
+
+		<section>
+
+			<section>
+				<h4>Document fragments</h4>
+			</section>
+
+			<section>
+				<p>The content node is the most overall representation of a document</p>
+			</section>
+
+			<section>
+				<p>The any subset of a document is referred to as a <strong>Fragment</strong> and those can have sub-fragments in any arbitrary depth</p>
+			</section>
+
+			<section data-background-iframe="dist/html/cytoscape/document-fragments.html"></section>
+
+			<section>
+				<p>Information such as the page number or the fragment's position relative to its parent can be expressed as properties on the individual fragments</p>
+			</section>
+
+			<section>
+				<p>A BIM Model is not any different</p>
+			</section>
+
+			<section data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"></section>
+
+			<section data-background-iframe="dist/html/cytoscape/document-fragments-bim-2.html"></section>
+
+			<section>
+				<p>The same goes for a CAD document, an e-mail, an image etc.</p>
+			</section>
+
+			<section>
+				<p>In the BIM model already encapsulates a lot of contextural information like relationships between zones, elements etc.</p>
+				<p class="fragment">But how about when an object in one model has a relationship to an object in another model?</p>
+				<p class="fragment">Or when there are duplicate representations of the same object across models</p>
+				<p class="fragment">Or when there is a reference between a BIM object and some other document like an image or an e-mail?</p>
+			</section>
+
+			<section>
+				<p>This can all be represented in the knowledge graph!</p>
+			</section>
+
+		</section>
+
+		<section>
+			<h4>This is how much I have for now......</h4>
+			<ul>
+				<li>Fragments of a document</li>
+				<li>Fragment processing</li>
+				<li>Special for BIM models - a fragment can exist both in a Revit model and an IFC file</li>
+				<li>History</li>
+			</ul>
+		</section>
+
+        <section>
+          <section>
+            <h4>
+              How <img src="dist/img/logo.svg" class="inline-logo" /> deals with
+              decentralization
+            </h4>
+          </section>
+
+		  <section>
+			<p>Let's first take a look at a subset of a BIM model</p>
+		  </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/decentral-1.html"
+          ></section>
+
+		  <section>
+			<p><img src="dist/img/logo.svg" class="inline-logo" /> treats each element, zone etc. in the model as a Fragment of the parent document</p>
+		  </section>
+
+		  <section
+            data-background-iframe="dist/html/cytoscape/decentral-2.html"
+          ></section>
+
+        </section>
+
+        <section
+          data-background-iframe="https://ruben.verborgh.org/blog/2021/12/23/reflections-of-knowledge/#challenges"
+        ></section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

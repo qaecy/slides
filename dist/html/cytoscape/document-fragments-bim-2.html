@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+        appendHTMLLabels,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const settings = defaultSettings;
+      settings.edgeColor = "#666";
+      settings.edgeFontSize = "10rem";
+      settings.edgeWidth = "6rem";
+      const style = buildStyles(settings);
+      const padding = isMobile() ? 5 : 100;
+      const container = document.getElementById("cy");
+
+      const cy = cytoscape({
+        container,
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc1",
+                label: "202 BIM Model",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 618,
+                y: 566,
+              },
+            },
+            {
+              data: {
+                id: "site1",
+                label: "DTU Lyngby Campus",
+                boxLabels: ["bot:Site<br>qcy:Fragment"],
+              },
+              position: {
+                x: 412,
+                y: 181,
+              },
+            },
+            {
+              data: {
+                id: "building202",
+                label: "DTU Building 202",
+                boxLabels: ["bot:Building<br>qcy:Fragment"],
+              },
+              position: {
+                x: 430,
+                y: 336,
+              },
+            },
+            {
+              data: {
+                id: "storey0",
+                label: "00",
+                boxLabels: ["bot:Storey<br>qcy:Fragment"],
+              },
+              position: {
+                x: 713,
+                y: 338,
+              },
+            },
+            {
+              data: {
+                id: "storey1",
+                label: "01",
+                boxLabels: ["bot:Storey<br>qcy:Fragment"],
+              },
+              position: {
+                x: 471,
+                y: 524,
+              },
+            },
+            {
+              data: {
+                id: "space01",
+                label: "Room 0.21",
+                boxLabels: ["bot:Space<br>qcy:Fragment"],
+              },
+              position: {
+                x: 835,
+                y: 385,
+              },
+            },
+            {
+              data: {
+                id: "space02",
+                label: "Room 0.22",
+                boxLabels: ["bot:Space<br>qcy:Fragment"],
+              },
+              position: {
+                x: 829,
+                y: 483,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "site1",
+                target: "building202",
+                label: "bot:hasBuilding",
+              },
+            },
+            {
+              data: {
+                source: "building202",
+                target: "storey0",
+                label: "bot:hasStorey",
+              },
+            },
+            {
+              data: {
+                source: "building202",
+                target: "storey1",
+                label: "bot:hasStorey",
+              },
+            },
+            {
+              data: {
+                source: "storey0",
+                target: "space01",
+                label: "bot:hasSpace",
+              },
+            },
+            {
+              data: {
+                source: "storey0",
+                target: "space02",
+                label: "bot:hasSpace",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "site1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "building202",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "storey0",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "storey1",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "space01",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "space02",
+                label: "qcy:hasFragment",
+              },
+            },
+          ],
+        },
+      });
+
+      logNodePositions(cy);
+      animateGraph(cy);
+      const htmlLabelSettings = {
+        props: {
+          displayOnlyOnHover: true,
+        },
+        boxLabels: {
+          displayOnlyOnHover: true,
+        },
+      };
+      appendHTMLLabels(cy, container, htmlLabelSettings);
+    </script>
+  </body>
+</html>

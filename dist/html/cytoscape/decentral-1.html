@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+        appendHTMLLabels,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const settings = defaultSettings;
+      settings.edgeColor = "#666";
+      settings.edgeFontSize = "10rem";
+      settings.edgeWidth = "6rem";
+      const style = buildStyles(settings);
+      const padding = isMobile() ? 5 : 100;
+      const container = document.getElementById("cy");
+
+      const cy = cytoscape({
+        container,
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "ds1",
+                label: "Building Topology Dataset",
+              },
+              position: {
+                x: 601,
+                y: 376,
+              },
+              classes: "triple",
+            },
+            {
+              data: {
+                id: "site1",
+                parent: "ds1",
+                label: "DTU Lyngby Campus",
+                boxLabels: ["Site"],
+              },
+              position: {
+                x: 394,
+                y: 187,
+              },
+            },
+            {
+              data: {
+                id: "building202",
+                parent: "ds1",
+                label: "DTU Building 202",
+                boxLabels: ["Building"],
+              },
+              position: {
+                x: 477,
+                y: 334,
+              },
+            },
+            {
+              data: {
+                id: "storey0",
+                parent: "ds1",
+                label: "00",
+                boxLabels: ["Storey"],
+              },
+              position: {
+                x: 713,
+                y: 338,
+              },
+            },
+            {
+              data: {
+                id: "storey1",
+                parent: "ds1",
+                label: "01",
+                boxLabels: ["Storey"],
+              },
+              position: {
+                x: 503,
+                y: 510,
+              },
+            },
+            {
+              data: {
+                id: "space01",
+                parent: "ds1",
+                label: "Room 0.21",
+                boxLabels: ["Space"],
+              },
+              position: {
+                x: 835,
+                y: 384,
+              },
+            },
+            {
+              data: {
+                id: "space02",
+                parent: "ds1",
+                label: "Room 0.22",
+                boxLabels: ["Space"],
+              },
+              position: {
+                x: 780,
+                y: 446,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "site1",
+                target: "building202",
+                label: "has building",
+              },
+            },
+            {
+              data: {
+                source: "building202",
+                target: "storey0",
+                label: "has storey",
+              },
+            },
+            {
+              data: {
+                source: "building202",
+                target: "storey1",
+                label: "has storey",
+              },
+            },
+            {
+              data: {
+                source: "storey0",
+                target: "space01",
+                label: "has space",
+              },
+            },
+            {
+              data: {
+                source: "storey0",
+                target: "space02",
+                label: "has space",
+              },
+            }
+          ],
+        },
+      });
+
+      logNodePositions(cy);
+      animateGraph(cy);
+      const htmlLabelSettings = {
+        props: {
+          displayOnlyOnHover: true,
+        },
+        boxLabels: {
+          displayOnlyOnHover: true,
+        },
+      };
+      appendHTMLLabels(cy, container, htmlLabelSettings);
+    </script>
+  </body>
+</html>
