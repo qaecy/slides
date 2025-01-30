@@ -42,7 +42,7 @@
               },
               position: {
                 x: 394,
-                y: 187,
+                y: 191,
               },
             },
             {
@@ -52,8 +52,8 @@
                 boxLabels: ["bot:Building"],
               },
               position: {
-                x: 477,
-                y: 334,
+                x: 481,
+                y: 336,
               },
             },
             {
@@ -63,8 +63,8 @@
                 boxLabels: ["bot:Storey"],
               },
               position: {
-                x: 713,
-                y: 338,
+                x: 716,
+                y: 336,
               },
             },
             {
@@ -75,7 +75,7 @@
               },
               position: {
                 x: 503,
-                y: 510,
+                y: 506,
               },
             },
             {
@@ -85,8 +85,8 @@
                 boxLabels: ["bot:Space"],
               },
               position: {
-                x: 835,
-                y: 384,
+                x: 839,
+                y: 353,
               },
             },
             {
@@ -96,8 +96,19 @@
                 boxLabels: ["bot:Space"],
               },
               position: {
-                x: 780,
-                y: 446,
+                x: 771,
+                y: 487,
+              },
+            },
+            {
+              data: {
+                id: "win01",
+                label: "Window0.123",
+                boxLabels: ["bot:Element"],
+              },
+              position: {
+                x: 919,
+                y: 232,
               },
             },
           ],
@@ -136,7 +147,14 @@
                 target: "space02",
                 label: "bot:hasSpace",
               },
-            }
+            },
+            {
+              data: {
+                source: "space01",
+                target: "win01",
+                label: "bot:adjacentElement",
+              },
+            },
           ],
         },
       });

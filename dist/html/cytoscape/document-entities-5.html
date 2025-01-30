@@ -31,123 +31,117 @@
           nodes: [
             {
               data: {
-                id: "doc",
-                label: "Document",
-                boxLabels: ["qcy:FileContent"],
-              },
-              position: {
-                x: 22,
-                y: -41,
-              },
-            },
-            {
-              data: {
-                id: "page",
-                label: "Page",
+                id: "page1",
+                label: "Page 1",
                 boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
               },
               position: {
-                x: 184,
-                y: 57,
+                x: 200,
+                y: -72,
               },
             },
             {
               data: {
-                id: "title",
-                label: "Title",
-                boxLabels: ["qcy:Fragment"],
+                id: "ne1",
+                label: "0.22",
+                boxLabels: ["qcy:NamedEntity<br>qcy:Location"],
+                properties: {
+                  location: "xywh=percent:50,50,100,20",
+                },
               },
               position: {
-                x: 31,
-                y: 147,
+                x: 134,
+                y: 10,
               },
             },
             {
               data: {
-                id: "paragraph",
-                label: "Narrative Text",
-                boxLabels: ["qcy:Fragment"],
+                id: "ce1",
+                label: "Room 0.22",
+                boxLabels: [
+                  "qcy:CanonicalEntity<br>qcy:NamedEntity<br>qcy:Room",
+                ],
+                color: "#0D5BE9",
+                properties: {
+                  isExplicit: true,
+                  preferredLabel: "Room 0.22",
+                  preferredLabelDa: "Rum 0.22",
+                  preferredLabelDe: "Raum 0.22",
+                },
               },
               position: {
-                x: 287,
-                y: 118,
+                x: 225,
+                y: 84,
               },
             },
             {
               data: {
-                id: "image",
-                label: "Image",
-                boxLabels: ["qcy:Fragment"],
+                id: "doc2",
+                label: "Report",
+                boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 164,
-                y: 183,
+                x: 122,
+                y: -153,
               },
             },
             {
               data: {
-                id: "table",
-                label: "Table",
-                boxLabels: ["qcy:Fragment"],
+                id: "doc1",
+                label: "202 BIM Model",
+                boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 40,
-                y: 261,
+                x: 436,
+                y: -122,
               },
             },
             {
               data: {
-                id: "footer",
-                label: "Footer",
-                boxLabels: ["qcy:Fragment"],
+                id: "space02",
+                label: "Room 0.22",
+                boxLabels: ["bot:Space<br>qcy:Fragment"],
               },
               position: {
-                x: 244,
-                y: 237,
+                x: 340,
+                y: -9,
               },
             },
           ],
           edges: [
             {
               data: {
-                source: "doc",
-                target: "page",
+                source: "doc1",
+                target: "space02",
                 label: "qcy:hasFragment",
               },
             },
             {
               data: {
-                source: "page",
-                target: "title",
+                source: "doc2",
+                target: "page1",
                 label: "qcy:hasFragment",
               },
             },
             {
               data: {
-                source: "page",
-                target: "paragraph",
-                label: "qcy:hasFragment",
+                source: "page1",
+                target: "ne1",
+                label: "qcy:namedEntityOccurence",
               },
             },
             {
               data: {
-                source: "page",
-                target: "image",
-                label: "qcy:hasFragment",
+                source: "ne1",
+                target: "ce1",
+                label: "qcy:resolvesTo",
               },
             },
             {
               data: {
-                source: "page",
-                target: "table",
-                label: "qcy:hasFragment",
-              },
-            },
-            {
-              data: {
-                source: "page",
-                target: "footer",
-                label: "qcy:hasFragment",
+                source: "space02",
+                target: "ce1",
+                label: "qcy:resolvesTo",
               },
             },
           ],
