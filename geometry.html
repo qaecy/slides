@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY Geometry</title>
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+			.cue-inline{
+				display: inline; height: 1rem; margin: 0 0 -0.05rem 0 !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section>
+                    <section>
+                        Geometry Work
+                        <p style="font-size: 1.4rem;">
+                            - How do we work with geometry?
+                        </p>
+                        <p style="font-size: 1.4rem;">
+                            - Example: Inferring smokedamper locations in BIM-model
+                        </p>
+                    </section>
+                    <section>
+                        How do we work with geometry?
+                        <section>
+                            <p style="font-size: 1.4rem;">
+                                We work with detailed mesh geometries at a technical level, processing vertices, triangles, and other mesh-specific properties
+                            </p>
+                            <div style="display: flex; justify-content: center; gap: 20px;">
+                                <img src="dist/img/geometry/3dmodel.jpeg" style="width: 45%; height: 300px; object-fit: contain;" />
+                                <div style="display: flex; flex-direction: column; width: 45%; gap: 20px;">
+                                    <img src="dist/img/geometry/concrete_wall_mesh.jpeg" style="width: 100%; height: 140px; object-fit: contain;" />
+                                    <img src="dist/img/geometry/graph.jpeg" style="width: 100%; height: 140px; object-fit: contain;" />
+                                </div>
+                            </div>
+							<p style="font-size: 1.4rem;">
+                                We represent geometry as semantic entities in the knowledge graph, capturing high-level properties and relationships without the complexity of mesh-level details
+                            </p>
+                        </section>
+                    </section>
+				</section>
+
+				<section>
+                    Example: Inferring smokedamper locations in BIM-model
+
+                    <section>
+                        <p>Problem:</p>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="flex: 1;">
+								<p style="font-size: 1.4rem;">Can we automatically determine where smokedampers should be placed (where firesections changes)?</p>
+                                <p class="fragment" style="font-size: 1.4rem;">Can we infer firesection change across walls between different rooms?</p>
+                                <p class="fragment" style="font-size: 1.4rem;">Can we establish relationships between overlapping spaceboundaries accross space-separating walls?</p>
+                            </div>
+                            <img src="dist/img/geometry/firesection_plan.jpeg" style="width: 50%; height: 300px; object-fit: contain;" />
+                        </div>
+                    </section>
+                    <section>
+                        <p>Approach: Spaceboundary pairing</p>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo1.jpeg" /> 
+                    </section>
+                    <section>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo2.jpeg" /> 
+                    </section>
+                    <section>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo3.jpeg" /> 
+                    </section>
+                    <section>
+                        <div style="display: flex; justify-content: center; gap: 20px;">
+                            <img src="dist/img/geometry/space_boundary_pairing_algo3.jpeg" style="width: 45%; object-fit: contain;" />
+                            <img src="dist/img/geometry/opposite_face_graph.jpeg" style="width: 45%; object-fit: contain;" />
+                        </div>
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
