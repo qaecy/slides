@@ -131,198 +131,421 @@
             <img src="dist/img/decentral/bs-wall-03.svg" alt="" />
           </section>
 
-		  <section>
-            <p>This would be a complete ecentralization of BIM which is obviously not easy to achieve.</p>
-			<p class="fragment">But a step on the way would be to make what we have more connected...</p>
+          <section>
+            <p>
+              This would be a complete ecentralization of BIM which is obviously
+              not easy to achieve.
+            </p>
+            <p class="fragment">
+              But a step on the way would be to make what we have more
+              connected...
+            </p>
           </section>
         </section>
-
-		<section>
-			
-			<section>
-				<h4>The reality</h4>
-			</section>
-
-			<section>
-				<p>No project has <span style="text-decoration: underline;">ONE</span> BIM model</p>
-			</section>
-
-			<section>
-				<p>Not all information is <span style="font-size: 1.2rem;">(or should ever be)</span> in the BIM model</p>
-			</section>
-
-			<section>
-				<ul>
-					<li>Reports</li>
-					<li>Meeting minutes</li>
-					<li>e-mails</li>
-					<li>Calculations</li>
-					<li>Images from site registrations</li>
-					<li>Point cloud scans</li>
-					<li>Reference images</li>
-					<li>Sketches</li>
-					<li>Norms & Regulations</li>
-				</ul>
-			</section>
-
-			<section>
-				<p>Information is scattered across different files and often on different data management systems</p>
-			</section>
-
-			<section>
-				<img src="dist/img/misc/file_dms.svg" alt="">
-			</section>
-
-			<section>
-				<p>This makes it hard to answer simple questions like <em>"Is this the most recent version of that plan drawing"</em> or <em>"what documents describe this pump?"</em></p>
-			</section>
-		</section>
-
-		<section>
-
-			<section>
-				<h4>How we deal with it</h4>
-			</section>
-
-			<section>
-				At <img src="dist/img/logo.svg" class="inline-logo" /> we distinguish between a <strong>File</strong> and its <strong>Content</strong>.
-			</section>
-
-			<section>
-				The <strong>Content nodes</strong> and <strong>File nodes</strong> are represented in a knowledge graph
-			</section>
-
-			<section data-background-iframe="dist/html/cytoscape/file-content-1.html"></section>
-
-			<section data-background-image="dist/img/misc/file_dms.svg" data-background-size="80%">
-				<p>So how would we represent this?</p>
-			</section>
-
-			<section>
-				<p>We use a hashing mechanism so the same content will always translate to the same unique id</p>
-			</section>
-
-			<section>
-				<img src="dist/img//misc/hashing.png" alt="">
-			</section>
-
-			<section>
-				<p>We can use this technique to always create the same id for the same input</p>
-			</section>
-
-			<section>
-				<p>It's important to consider what parameters should change the id and which should not</p>
-			</section>
-
-			<section>
-				<p>The <strong>file id</strong> is generated from a combination of what system it is stored on and what is it's path</p>
-				<p class="fragment">The <strong>content id</strong> is generated from the file content</p>
-			</section>
-
-			<section>
-				<p>The same file name on two different platforms will then create two different file ids</p>
-				<p class="fragment">The same file stored at two different locations on the same platform will also create two different file ids</p>
-				<p class="fragment">The file content id will however stay the same as long as the content doesn't change</p>
-			</section>
-
-			<section data-background-iframe="dist/html/cytoscape/file-content-2.html"></section>
-
-			<section>
-				<p>This approach is completely flexible</p>
-				<p class="fragment">One file can point to several content nodes (different versions) even though its name hasn't changed.</p>
-				<p class="fragment">One content node can point to several cloud locations - one for each file.</p>
-			</section>
-
-			<section>
-				<p>So now we can deal with multiple representations of the same file. But what about the relationships between the individual content nodes?</p>
-			</section>
-
-		</section>
-
-		<section>
-
-			<section>
-				<h4>Document fragments</h4>
-			</section>
-
-			<section>
-				<p>A <strong>Content node</strong> is the most overall representation of a document</p>
-			</section>
-
-			<section>
-				<p>Any subset of a document is referred to as a <strong>Fragment</strong> and each <strong>Fragment</strong> can have sub-fragments in any arbitrary depth</p>
-			</section>
-
-			<section data-background-iframe="dist/html/cytoscape/document-fragments.html"></section>
-
-			<section>
-				<p>Information such as the <strong>page number</strong> or the <strong>fragment position</strong> relative to its parent can be expressed as properties on the individual fragments</p>
-			</section>
-
-			<section>
-				<p>A BIM Model is not any different</p>
-			</section>
-
-			<section data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"></section>
-
-			<section data-background-iframe="dist/html/cytoscape/document-fragments-bim-2.html"></section>
-
-			<section>
-				<p>The same goes for a CAD document, an e-mail, an image etc.</p>
-			</section>
-
-			<section>
-				<p>In the BIM model already encapsulates a lot of contextural information like relationships between zones, elements etc.</p>
-				<p class="fragment">But how about when an object in one model has a relationship to an object in another model?</p>
-				<p class="fragment">Or when there are duplicate representations of the same object across models</p>
-				<p class="fragment">Or when there is a reference between a BIM object and some other document like an image or an e-mail?</p>
-			</section>
-
-			<section>
-				<p>This can all be represented in the knowledge graph!</p>
-			</section>
-
-		</section>
-
-		<section>
-			<h4>This is how much I have for now......</h4>
-			<ul>
-				<li>Fragments of a document</li>
-				<li>Fragment processing</li>
-				<li>Special for BIM models - a fragment can exist both in a Revit model and an IFC file</li>
-				<li>History</li>
-			</ul>
-		</section>
 
         <section>
           <section>
-            <h4>
-              How <img src="dist/img/logo.svg" class="inline-logo" /> deals with
-              decentralization
-            </h4>
+            <h4>The reality</h4>
           </section>
 
-		  <section>
-			<p>Let's first take a look at a subset of a BIM model</p>
-		  </section>
+          <section>
+            <p>
+              No project has
+              <span style="text-decoration: underline">ONE</span> BIM model
+            </p>
+          </section>
 
-          <section
-            data-background-iframe="dist/html/cytoscape/decentral-1.html"
-          ></section>
+          <section>
+            <p>
+              Not all information is
+              <span style="font-size: 1.2rem">(or should ever be)</span> in the
+              BIM model
+            </p>
+          </section>
 
-		  <section>
-			<p><img src="dist/img/logo.svg" class="inline-logo" /> treats each element, zone etc. in the model as a Fragment of the parent document</p>
-		  </section>
+          <section>
+            <ul>
+              <li>Reports</li>
+              <li>Meeting minutes</li>
+              <li>e-mails</li>
+              <li>Calculations</li>
+              <li>Images from site registrations</li>
+              <li>Point cloud scans</li>
+              <li>Reference images</li>
+              <li>Sketches</li>
+              <li>Norms & Regulations</li>
+            </ul>
+          </section>
 
-		  <section
-            data-background-iframe="dist/html/cytoscape/decentral-2.html"
-          ></section>
+          <section>
+            <p>
+              Information is scattered across different files and often on
+              different data management systems
+            </p>
+          </section>
 
+          <section>
+            <img src="dist/img/misc/file_dms.svg" alt="" />
+          </section>
+
+          <section>
+            <p>
+              This makes it hard to answer simple questions like
+              <em>"Is this the most recent version of that plan drawing"</em> or
+              <em>"what documents describe this pump?"</em>
+            </p>
+          </section>
         </section>
 
-        <section
-          data-background-iframe="https://ruben.verborgh.org/blog/2021/12/23/reflections-of-knowledge/#challenges"
-        ></section>
+        <section>
+          <section>
+            <h4>How we deal with it</h4>
+          </section>
+
+          <section>
+            At <img src="dist/img/logo.svg" class="inline-logo" /> we
+            distinguish between a <strong>File</strong> and its
+            <strong>Content</strong>.
+          </section>
+
+          <section>
+            The <strong>Content nodes</strong> and
+            <strong>File nodes</strong> are represented in a knowledge graph
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/file-content-1.html"
+          ></section>
+
+          <section
+            data-background-image="dist/img/misc/file_dms.svg"
+            data-background-size="80%"
+          >
+            <p>So how would we represent this?</p>
+          </section>
+
+          <section>
+            <p>
+              We use a hashing mechanism so the same content will always
+              translate to the same unique id
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img//misc/hashing.png" alt="" />
+          </section>
+
+          <section>
+            <p>
+              We can use this technique to always create the same id for the
+              same input
+            </p>
+          </section>
+
+          <section>
+            <p>
+              It's important to consider what parameters should change the id
+              and which should not
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The <strong>file id</strong> is generated from a combination of
+              what system it is stored on and what is it's path
+            </p>
+            <p class="fragment">
+              The <strong>content id</strong> is generated from the file content
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The same file name on two different platforms will then create two
+              different file ids
+            </p>
+            <p class="fragment">
+              The same file stored at two different locations on the same
+              platform will also create two different file ids
+            </p>
+            <p class="fragment">
+              The file content id will however stay the same as long as the
+              content doesn't change
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/file-content-2.html"
+          ></section>
+
+          <section>
+            <p>This approach is completely flexible</p>
+            <p class="fragment">
+              One file can point to several content nodes (different versions)
+              even though its name hasn't changed.
+            </p>
+            <p class="fragment">
+              One content node can point to several cloud locations - one for
+              each file.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              So now we can deal with multiple representations of the same file.
+              But what about the relationships between the individual content
+              nodes?
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>Document fragments</h4>
+          </section>
+
+          <section>
+            <p>
+              A <strong>Content node</strong> is the most overall representation
+              of a document
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Any subset of a document is referred to as a
+              <strong>Fragment</strong> and each <strong>Fragment</strong> can
+              have sub-fragments in any arbitrary depth
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/misc/page-mixed_f_c.svg" height="500px" />
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments.html"
+          ></section>
+
+          <section>
+            <p>
+              Information such as the <strong>page number</strong> or the
+              <strong>fragment position</strong> relative to its parent can be
+              expressed as properties on the individual fragments
+            </p>
+          </section>
+
+          <section>
+            <p>A BIM Model is not any different</p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"
+          ></section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments-bim-2.html"
+          ></section>
+
+          <section>
+            <p>The same goes for a CAD document, an e-mail, an image etc.</p>
+          </section>
+
+          <section>
+            <p>
+              In the BIM model already encapsulates a lot of contextural
+              information like relationships between zones, elements etc.
+            </p>
+            <p class="fragment">
+              But how about when an object in one model has a relationship to an
+              object in another model?
+            </p>
+            <p class="fragment">
+              Or when there are duplicate representations of the same object
+              across models?
+            </p>
+            <p class="fragment">
+              Or when there is a reference between a BIM object and some other
+              document like an image or an e-mail?
+            </p>
+          </section>
+
+          <section>
+            <p>This can all be represented in the knowledge graph!</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>Named entities</h4>
+          </section>
+
+          <section>
+            <p>
+              One process in the
+              <img src="dist/img/logo.svg" class="inline-logo" /> pipelines is
+              detection of potential <strong>Named Entites</strong>
+            </p>
+          </section>
+
+          <section>
+            <div class="icon-row">
+              <img src="dist/img/misc/page-text_ne.svg" height="500px" />
+              <div>
+                <p style="font-size: 1.4rem">
+                  Default entities: Company, Person, Address, Material ...
+                </p>
+                <p style="font-size: 1.4rem">
+                  Other: custom entities defined per project
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-1.html"
+          ></section>
+
+          <section>
+            <p>
+              All <strong>Named Entities</strong> are unique, so
+              <em>Albert Einstein</em> in one document is not directly
+              considered the same as <em>Albert Einstein</em> or
+              <em>A. Einstein</em> in another document.
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-2.html"
+          ></section>
+
+          <section>
+            <p>
+              At this point there is nothing that connect the two document pages
+            </p>
+          </section>
+
+          <section>
+            <p>
+              A follow-up process in the pipelines, however, is our
+              <strong>entity resolution step</strong>, where we link similar
+              entities
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-3.html"
+          ></section>
+
+          <section>
+            <p>
+              Now page 1 and page 2 have that in common that they both refer to
+              <em>Albert Einstein</em>
+            </p>
+            <p class="fragment">
+              Therefore, we have established a link between them even if they
+              exist in different cloud environments
+            </p>
+          </section>
+
+          <section>
+            <p>
+              <strong>Canonical Entities</strong> are the standardized
+              representations of <strong>Named Entities</strong>
+            </p>
+          </section>
+
+          <section>
+            <p>
+              For <strong>Canonical Entities</strong> there will be only
+              <span style="text-decoration: underline">ONE</span>
+              <em>Albert Einstein</em> that refers to all individual occurences
+            </p>
+          </section>
+
+          <section>
+            <p>
+              There can be <strong>Canonical Entities</strong> that share the
+              same name.
+            </p>
+            <p class="fragment">
+              For example, there could both be a <strong>Company</strong> entity
+              and a <strong>Fruit</strong> entity named <strong>Apple</strong>
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="https://www.wikidata.org/wiki/Q159626"
+          >
+            <p>
+              Since the entities are well defined, this is also where we store
+              additional information like references to Linked Open Data
+              entities
+            </p>
+          </section>
+
+          <section>
+            <p>
+              With this information it is now possible to query the knowledge
+              graph for all <strong>Persons</strong> in the project and all the
+              fragments in which they are mentioned
+            </p>
+          </section>
+
+          <section>
+            <p>
+              These <strong>Canonical Entities</strong> are created by AI but it
+              is also possible to define
+              <strong>Explicit Canonical Entities</strong> in a project.
+            </p>
+            <p class="fragment">
+              For example from a room programme or a project member list.
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-4.html"
+          ></section>
+
+          <section>
+            <p>
+              BIM objects can also resolve to
+              <strong>Canonical Entities</strong>
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-5.html"
+          ></section>
+
+          <section>
+            <p>
+              The observer reader will see that the BIM object is
+              <span style="text-decoration: underline">NOT</span> the first
+              class citizen
+            </p>
+            <p class="fragment">
+              It cannot be since there can be different representations of that
+              room across different models
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The same room in a Revit or IFC version of the same model, will,
+              however resolve to the same object in the knowledge graph
+            </p>
+            <p class="fragment">
+              This is handled by the
+              <a href="#/4/5">previously described id technique</a>
+            </p>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/ne_link.svg"
+            data-background-size="70%"
+          ></section>
+        </section>
       </div>
     </div>
 

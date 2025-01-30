@@ -41,8 +41,8 @@
                 boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 618,
-                y: 566,
+                x: 619,
+                y: 572,
               },
             },
             {
@@ -52,8 +52,8 @@
                 boxLabels: ["bot:Site<br>qcy:Fragment"],
               },
               position: {
-                x: 412,
-                y: 181,
+                x: 649,
+                y: 136,
               },
             },
             {
@@ -63,8 +63,8 @@
                 boxLabels: ["bot:Building<br>qcy:Fragment"],
               },
               position: {
-                x: 430,
-                y: 336,
+                x: 435,
+                y: 333,
               },
             },
             {
@@ -75,7 +75,7 @@
               },
               position: {
                 x: 713,
-                y: 338,
+                y: 332,
               },
             },
             {
@@ -85,8 +85,8 @@
                 boxLabels: ["bot:Storey<br>qcy:Fragment"],
               },
               position: {
-                x: 471,
-                y: 524,
+                x: 466,
+                y: 521,
               },
             },
             {
@@ -96,8 +96,8 @@
                 boxLabels: ["bot:Space<br>qcy:Fragment"],
               },
               position: {
-                x: 835,
-                y: 385,
+                x: 957,
+                y: 384,
               },
             },
             {
@@ -107,8 +107,19 @@
                 boxLabels: ["bot:Space<br>qcy:Fragment"],
               },
               position: {
-                x: 829,
-                y: 483,
+                x: 885,
+                y: 527,
+              },
+            },
+            {
+              data: {
+                id: "win01",
+                label: "Window0.123",
+                boxLabels: ["bot:Element"],
+              },
+              position: {
+                x: 873,
+                y: 215,
               },
             },
           ],
@@ -150,6 +161,13 @@
             },
             {
               data: {
+                source: "space01",
+                target: "win01",
+                label: "bot:adjacentElement",
+              },
+            },
+            {
+              data: {
                 source: "doc1",
                 target: "site1",
                 label: "qcy:hasFragment",
@@ -187,6 +205,13 @@
               data: {
                 source: "doc1",
                 target: "space02",
+                label: "qcy:hasFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "win01",
                 label: "qcy:hasFragment",
               },
             },

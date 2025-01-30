@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "page1",
+                label: "Page 1",
+                boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
+              },
+              position: {
+                x: 149,
+                y: -31,
+              },
+            },
+            {
+              data: {
+                id: "ne1",
+                label: "Wurttemberg",
+                boxLabels: ["qcy:NamedEntity<br>qcy:Location"],
+                properties: {
+                  location: "xywh=percent:50,50,100,20"
+                }
+              },
+              position: {
+                x: 56,
+                y: 73,
+              },
+            },
+            {
+              data: {
+                id: "ne2",
+                label: "Albert Einstein",
+                boxLabels: ["qcy:NamedEntity<br>qcy:Person"],
+                properties: {
+                  location: "xywh=percent:10,30,100,20"
+                }
+              },
+              position: {
+                x: 191,
+                y: 122,
+              },
+            },
+            {
+              data: {
+                id: "page2",
+                label: "Page 2",
+                boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
+              },
+              position: {
+                x: 354,
+                y: -40,
+              },
+            },
+            {
+              data: {
+                id: "ne3",
+                label: "A. Einstein",
+                boxLabels: ["qcy:NamedEntity<br>qcy:Person"],
+                properties: {
+                  location: "xywh=percent:20,10,100,20"
+                }
+              },
+              position: {
+                x: 323,
+                y: 107,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "page1",
+                target: "ne1",
+                label: "qcy:namedEntityOccurence",
+              },
+            },
+            {
+              data: {
+                source: "page1",
+                target: "ne2",
+                label: "qcy:namedEntityOccurence",
+              },
+            },
+            {
+              data: {
+                source: "page2",
+                target: "ne3",
+                label: "qcy:namedEntityOccurence",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
