@@ -84,6 +84,10 @@
                             <img src="dist/img/geometry/opposite_face_graph.jpeg" style="width: 45%; object-fit: contain;" />
                         </div>
                     </section>
+                    <section
+                        data-background-iframe="https://ld-bim.web.app?duplex=true&query=PREFIX%20ex%3A%20%3Chttps%3A%2F%2Fexample.com%2F%3E%20%0APREFIX%20kg%3A%20%3Chttps%3A%2F%2Fw3id.org%2Fkobl%2Fgeometry%23%3E%20%0APREFIX%20bot%3A%20%3Chttps%3A%2F%2Fw3id.org%2Fbot%23%3E%20%0APREFIX%20inst%3A%20%3Chttps%3A%2F%2Fweb-bim%2Fresources%2F%3E%20%0A%0ASELECT%20DISTINCT%20%3Fboundary%20%3Fls%20%3Fel%0AWHERE%7B%0A%20%20%20BIND%28inst%3A0BTBFw6f90Nfh9rP1dl_3A%20AS%20%3Fspace%29%0A%20%20%20%3Fboundary%20bot%3AinterfaceOf%20%3Fspace%20%2C%20%3Fel%20%3B%0A%20%20%20%20%20%20%20kg%3Avertices3D%20%3Fver%20%3B%0A%20%20%20%20%20%20%20ex%3AisVertical%20true%20.%0A%20%20%20FILTER%28%3Fel%20%21%3D%20%3Fspace%29%0A%20%20%20BIND%28CONCAT%28%22POLYGON%20Z%20%28%22%2C%20STR%28%20%3Fver%20%29%2C%20%22%29%22%29%20%20%20AS%20%3Fls%20%29%0A%7D"
+                        data-background-interactive>
+                    </section>
                 </section>
 			</div>
 		</div>
