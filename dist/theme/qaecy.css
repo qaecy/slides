@@ -381,32 +381,3 @@ hlr{
 .bg-transparent-white{
   background-color: rgba(255,255,255,0.5);
 }
-
-.print-fallback {
-  display: none;
-}
-
-@media print {
-
-  iframe{
-    display: none;
-  }
-
-  /* section:has(> .print-fallback){
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: inherit;
-  } */
-  
-  /* Show fallback image or text */
-  .print-fallback {
-    display: block;
-  }
-
-  img.print-fallback {
-    display: block;
-    background-color: red;
-  }
-}
