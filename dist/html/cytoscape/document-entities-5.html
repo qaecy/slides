@@ -33,45 +33,41 @@
               data: {
                 id: "page1",
                 label: "Page 1",
-                boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
+                boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
                 x: 200,
-                y: -72,
+                y: -64,
               },
             },
             {
               data: {
                 id: "ne1",
-                label: "0.22",
-                boxLabels: ["qcy:NamedEntity<br>qcy:Location"],
-                properties: {
-                  location: "xywh=percent:50,50,100,20",
-                },
+                label: "1st floor",
+                boxLabels: ["qcy:EntityMention"],
               },
               position: {
-                x: 134,
-                y: 10,
+                x: 141,
+                y: 13,
               },
             },
             {
               data: {
                 id: "ce1",
-                label: "Room 0.22",
-                boxLabels: [
-                  "qcy:CanonicalEntity<br>qcy:NamedEntity<br>qcy:Room",
-                ],
+                label: "1st floor",
+                boxLabels: ["qcy:CanonicalEntity"],
                 color: "#0D5BE9",
                 properties: {
-                  isExplicit: true,
-                  preferredLabel: "Room 0.22",
-                  preferredLabelDa: "Rum 0.22",
-                  preferredLabelDe: "Raum 0.22",
+                  explicit: true,
+                  preferredLabel: "1st floor",
+                  preferredLabelDa: "Førstesal",
+                  altLabelEn: "1st storey",
+                  altLabelEn: "Level 01",
                 },
               },
               position: {
-                x: 225,
-                y: 84,
+                x: 245,
+                y: 94,
               },
             },
             {
@@ -82,7 +78,7 @@
               },
               position: {
                 x: 122,
-                y: -153,
+                y: -161,
               },
             },
             {
@@ -92,19 +88,52 @@
                 boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 436,
-                y: -122,
+                x: 427,
+                y: -139,
               },
             },
             {
               data: {
-                id: "space02",
-                label: "Room 0.22",
-                boxLabels: ["bot:Space<br>qcy:Fragment"],
+                id: "doc3",
+                label: "202 MEP Model",
+                boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 340,
-                y: -9,
+                x: 525,
+                y: 63,
+              },
+            },
+            {
+              data: {
+                id: "lvl01",
+                label: "Level 01",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: {
+                x: 394,
+                y: 164,
+              },
+            },
+            {
+              data: {
+                id: "level01",
+                label: "1st storey",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: {
+                x: 344,
+                y: -28,
+              },
+            },
+            {
+              data: {
+                id: "level02",
+                label: "2nd storey",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: {
+                x: 515,
+                y: -21,
               },
             },
           ],
@@ -112,22 +141,29 @@
             {
               data: {
                 source: "doc1",
-                target: "space02",
-                label: "qcy:hasFragment",
+                target: "level01",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "level02",
+                label: "qcy:mentions",
               },
             },
             {
               data: {
                 source: "doc2",
                 target: "page1",
-                label: "qcy:hasFragment",
+                label: "qcy:containsFragment",
               },
             },
             {
               data: {
                 source: "page1",
                 target: "ne1",
-                label: "qcy:namedEntityOccurence",
+                label: "qcy:mentions",
               },
             },
             {
@@ -139,7 +175,21 @@
             },
             {
               data: {
-                source: "space02",
+                source: "level01",
+                target: "ce1",
+                label: "qcy:resolvesTo",
+              },
+            },
+            {
+              data: {
+                source: "doc3",
+                target: "lvl01",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "lvl01",
                 target: "ce1",
                 label: "qcy:resolvesTo",
               },

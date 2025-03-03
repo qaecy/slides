@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "doc1",
+                label: "202 Architectural Model",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 108,
+                y: -132,
+              },
+            },
+            {
+              data: {
+                id: "doc2",
+                label: "202 MEP Model",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 373,
+                y: -150,
+              },
+            },
+            {
+              data: {
+                id: "doc1floor1",
+                label: "1st floor",
+                boxLabels: ["qcy:EntityMention"],
+                properties: {
+                  "qcy:value": "1st floor",
+                },
+              },
+              position: {
+                x: 25,
+                y: 79,
+              },
+            },
+            {
+              data: {
+                id: "doc1space022",
+                label: "Room 0.22",
+                boxLabels: ["qcy:EntityMention"],
+                properties: {
+                  "qcy:value": "Room 0.22",
+                },
+              },
+              position: {
+                x: 160,
+                y: 115,
+              },
+            },
+            {
+              data: {
+                id: "doc2floor1",
+                label: "Level 01",
+                boxLabels: ["qcy:EntityMention"],
+                properties: {
+                  "qcy:value": "Level 01",
+                },
+              },
+              position: {
+                x: 423,
+                y: 4,
+              },
+            },
+            {
+              data: {
+                id: "floor",
+                label: "Floor",
+                boxLabels: ["qcy-e:Floor"],
+              },
+              position: {
+                x: 235,
+                y: 217,
+              },
+            },
+            {
+              data: {
+                id: "doc1floor1elevation",
+                label: "elevation",
+                boxLabels: ["qcy:Property"],
+                properties: {
+                  "qcy:label": "elevation",
+                  "qcy:value": "2600",
+                  "qcy:propertyDefinition": "qcy-e:IFCAttribute",
+                  "qcy:unit": "mm",
+                },
+              },
+              position: {
+                x: -74,
+                y: 62,
+              },
+            },
+            {
+              data: {
+                id: "doc2floor1elevation",
+                label: "elevation",
+                boxLabels: ["qcy:Property"],
+                properties: {
+                  "qcy:label": "elevation",
+                  "qcy:value": "2600",
+                  "qcy:propertyDefinition": "qcy-e:IFCAttribute",
+                  "qcy:unit": "mm",
+                },
+              },
+              position: {
+                x: 509,
+                y: 60,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "doc1",
+                target: "doc1floor1",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "doc1floor1",
+                target: "floor",
+                label: "qcy:entityCategory",
+              },
+            },
+            {
+              data: {
+                source: "doc2",
+                target: "doc2floor1",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "doc2floor1",
+                target: "floor",
+                label: "qcy:entityCategory",
+              },
+            },
+            {
+              data: {
+                source: "doc1",
+                target: "doc1space022",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "doc1floor1",
+                target: "doc1space022",
+                label: "qcy:hasSpace",
+              },
+            },
+            {
+              data: {
+                source: "doc1floor1",
+                target: "doc1floor1elevation",
+                label: "qcy:hasProperty",
+              },
+            },
+            {
+              data: {
+                source: "doc2floor1",
+                target: "doc2floor1elevation",
+                label: "qcy:hasProperty",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

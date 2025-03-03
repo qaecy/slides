@@ -31,123 +31,137 @@
           nodes: [
             {
               data: {
-                id: "page1",
-                label: "Page 1",
+                id: "doc",
+                label: "Document",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 24,
+                y: -24,
+              },
+            },
+            {
+              data: {
+                id: "page",
+                label: "Page",
                 boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 149,
-                y: -29,
+                x: 179,
+                y: 88,
               },
             },
             {
               data: {
-                id: "ne1",
-                label: "Wurttemberg",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selector",
+                label: "Selector",
+                boxLabels: ["qcy:PageSelector"],
               },
               position: {
-                x: 57,
-                y: 74,
+                x: 221,
+                y: -106,
               },
             },
             {
               data: {
-                id: "ne2",
-                label: "Albert Einstein",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selectorVal",
+                label: "1",
               },
               position: {
-                x: 192,
-                y: 121,
+                x: 270,
+                y: -55,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "img",
+                label: "Image",
+                boxLabels: ["qcy:ImageFragment"],
+              },
+              position: {
+                x: 205,
+                y: 254,
               },
             },
             {
               data: {
-                id: "page2",
-                label: "Page 2",
-                boxLabels: ["qcy:DocumentPageFragment"],
+                id: "selector2",
+                label: "Selector",
+                boxLabels: ["qcy:XYWHSelector"],
               },
               position: {
-                x: 354,
-                y: -42,
+                x: 327,
+                y: 130,
               },
             },
             {
               data: {
-                id: "ne3",
-                label: "A. Einstein",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selector2Val",
+                label: "xywh=percent:10,10,20,15",
               },
               position: {
-                x: 322,
-                y: 106,
+                x: 438,
+                y: 196,
               },
-            },
-            {
-              data: {
-                id: "location",
-                label: "Location",
-                boxLabels: ["qcy-e:Location"],
-              },
-              position: {
-                x: 51,
-                y: 189,
-              },
-            },
-            {
-              data: {
-                id: "person",
-                label: "Person",
-                boxLabels: ["qcy-e:Person"],
-              },
-              position: {
-                x: 276,
-                y: 191,
-              },
+              classes: "literal",
             },
           ],
           edges: [
             {
               data: {
-                source: "page1",
-                target: "ne1",
-                label: "qcy:mentions",
+                source: "doc",
+                target: "page",
+                label: "qcy:containsFragment",
               },
             },
             {
               data: {
-                source: "page1",
-                target: "ne2",
-                label: "qcy:mentions",
+                source: "selector",
+                target: "doc",
+                label: "qcy:selectorSubject",
               },
             },
             {
               data: {
-                source: "page2",
-                target: "ne3",
-                label: "qcy:mentions",
+                source: "selector",
+                target: "page",
+                label: "qcy:selectorObject",
               },
             },
             {
               data: {
-                source: "ne1",
-                target: "location",
-                label: "qcy:entityCategory",
+                source: "selector",
+                target: "selectorVal",
+                label: "qcy:value",
               },
             },
             {
               data: {
-                source: "ne2",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "page",
+                target: "img",
+                label: "qcy:containsFragment",
               },
             },
             {
               data: {
-                source: "ne3",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "selector2",
+                target: "page",
+                label: "qcy:selectorSubject",
+              },
+            },
+            {
+              data: {
+                source: "selector2",
+                target: "img",
+                label: "qcy:selectorObject",
+              },
+            },
+            {
+              data: {
+                source: "selector2",
+                target: "selector2Val",
+                label: "qcy:value",
               },
             },
           ],

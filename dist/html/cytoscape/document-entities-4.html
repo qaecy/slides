@@ -33,149 +33,116 @@
               data: {
                 id: "page1",
                 label: "Page 1",
-                boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
+                boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 150,
-                y: -20,
-              },
-            },
-            {
-              data: {
-                id: "ne1",
-                label: "Wurttemberg",
-                boxLabels: ["qcy:NamedEntity<br>qcy:Location"],
-                properties: {
-                  location: "xywh=percent:50,50,100,20"
-                }
-              },
-              position: {
-                x: 65,
-                y: 77,
-              },
-            },
-            {
-              data: {
-                id: "ne2",
-                label: "Albert Einstein",
-                boxLabels: ["qcy:NamedEntity<br>qcy:Person"],
-                properties: {
-                  location: "xywh=percent:10,30,100,20"
-                }
-              },
-              position: {
-                x: 200,
-                y: 117,
+                x: 156,
+                y: 80,
               },
             },
             {
               data: {
                 id: "page2",
                 label: "Page 2",
-                boxLabels: ["qcy:Fragment<br>qcy:DocumentPage"],
+                boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 354,
-                y: -51,
-              },
-            },
-            {
-              data: {
-                id: "ne3",
-                label: "A. Einstein",
-                boxLabels: ["qcy:NamedEntity<br>qcy:Person"],
-                properties: {
-                  location: "xywh=percent:20,10,100,20"
-                }
-              },
-              position: {
-                x: 314,
-                y: 101,
+                x: 328,
+                y: 108,
               },
             },
             {
               data: {
                 id: "ce1",
                 label: "Albert Einstein",
-                boxLabels: [
-                  "qcy:CanonicalEntity<br>qcy:NamedEntity<br>qcy:Person",
-                ],
+                boxLabels: ["qcy:CanonicalEntity"],
                 color: "#0D5BE9",
                 properties: {
-                  "isExplicit": true,
-                  "preferredLabel": "Albert Einstein",
-                  "preferredLabelEl": "Άλμπερτ Αϊνστάιν",
-                  "alternativeLabel": "A. Einstein",
-                  "seeAlso": "https://www.wikidata.org/wiki/Q937"
-                }
+                  preferredLabel: "Albert Einstein",
+                  preferredLabelEl: "Άλμπερτ Αϊνστάιν",
+                  alternativeLabel: "A. Einstein",
+                  seeAlso: "https://www.wikidata.org/wiki/Q937",
+                },
               },
               position: {
                 x: 273,
-                y: 243,
+                y: 219,
               },
             },
             {
               data: {
                 id: "ce2",
                 label: "Württemberg",
-                boxLabels: [
-                  "qcy:CanonicalEntity<br>qcy:NamedEntity<br>qcy:Person",
-                ],
+                boxLabels: ["qcy:CanonicalEntity"],
                 color: "#0D5BE9",
                 properties: {
-                  "isExplicit": false,
-                  "preferredLabel": "Württemberg",
-                  "alternativeLabel": "Wurttemberg",
-                  "seeAlso": "https://www.wikidata.org/wiki/Q159626"
-                }
+                  preferredLabel: "Württemberg",
+                  alternativeLabel: "Wurttemberg",
+                  seeAlso: "https://www.wikidata.org/wiki/Q159626",
+                },
               },
               position: {
-                x: 23,
-                y: 245,
+                x: 95,
+                y: 243,
               },
+            },
+            {
+              data: {
+                id: "false",
+                label: "false",
+              },
+              position: {
+                x: 307,
+                y: 308,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "true",
+                label: "true",
+              },
+              position: {
+                x: 66,
+                y: 314,
+              },
+              classes: "literal",
             },
           ],
           edges: [
             {
               data: {
                 source: "page1",
-                target: "ne1",
-                label: "qcy:namedEntityOccurence",
+                target: "ce2",
+                label: "qcy:about",
               },
             },
             {
               data: {
                 source: "page1",
-                target: "ne2",
-                label: "qcy:namedEntityOccurence",
+                target: "ce1",
+                label: "qcy:about",
               },
             },
             {
               data: {
                 source: "page2",
-                target: "ne3",
-                label: "qcy:namedEntityOccurence",
-              },
-            },
-            {
-              data: {
-                source: "ne1",
-                target: "ce2",
-                label: "qcy:resolvesTo",
-              },
-            },
-            {
-              data: {
-                source: "ne2",
                 target: "ce1",
-                label: "qcy:resolvesTo",
+                label: "qcy:about",
               },
             },
             {
               data: {
-                source: "ne3",
-                target: "ce1",
-                label: "qcy:resolvesTo",
+                source: "ce1",
+                target: "false",
+                label: "qcy:explicit",
+              },
+            },
+            {
+              data: {
+                source: "ce2",
+                target: "true",
+                label: "qcy:explicit",
               },
             },
           ],

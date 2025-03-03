@@ -133,8 +133,8 @@
 
           <section>
             <p>
-              This would be a complete decentralization of BIM which is obviously
-              not easy to achieve.
+              This would be a complete decentralization of BIM which is
+              obviously not easy to achieve.
             </p>
             <p class="fragment">
               But a step on the way would be to make what we have more
@@ -204,13 +204,14 @@
 
           <section>
             At <img src="dist/img/logo.svg" class="inline-logo" /> we
-            distinguish between a <strong>File</strong> and its
+            distinguish between a <strong>File Location</strong> and its
             <strong>Content</strong>.
           </section>
 
           <section>
-            The <strong>Content nodes</strong> and
-            <strong>File nodes</strong> are represented in a knowledge graph
+            The <strong>File Content</strong> nodes and
+            <strong>File Location</strong> nodes are represented in a knowledge
+            graph
           </section>
 
           <section
@@ -331,60 +332,32 @@
             <p>
               Information such as the <strong>page number</strong> or the
               <strong>fragment position</strong> relative to its parent can be
-              expressed as properties on the individual fragments
+              expressed using <strong>Selectors</strong>
             </p>
-          </section>
-
-          <section>
-            <p>A BIM Model is not any different</p>
           </section>
 
           <section
-            data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"
+            data-background-iframe="dist/html/cytoscape/selectors-1.html"
           ></section>
 
           <section
-            data-background-iframe="dist/html/cytoscape/document-fragments-bim-2.html"
+            data-background-iframe="dist/html/cytoscape/selectors-2.html"
           ></section>
 
-          <section>
-            <p>The same goes for a CAD document, an e-mail, an image etc.</p>
-          </section>
-
-          <section>
-            <p>
-              The BIM model already encapsulates a lot of contextual
-              information like relationships between zones, elements etc.
-            </p>
-            <p class="fragment">
-              But how about when an object in one model has a relationship to an
-              object in another model?
-            </p>
-            <p class="fragment">
-              Or when there are duplicate representations of the same object
-              across models?
-            </p>
-            <p class="fragment">
-              Or when there is a reference between a BIM object and some other
-              document like an image or an e-mail?
-            </p>
-          </section>
-
-          <section>
-            <p>This can all be represented in the knowledge graph!</p>
-          </section>
+          
         </section>
 
         <section>
           <section>
-            <h4>Named entities</h4>
+            <h4>Entity References</h4>
           </section>
 
           <section>
             <p>
               One process in the
               <img src="dist/img/logo.svg" class="inline-logo" /> pipelines is
-              detection of potential <strong>Named Entites</strong>
+              finding mentionings of <strong>Entity References</strong> in the
+              content of any document
             </p>
           </section>
 
@@ -408,7 +381,15 @@
 
           <section>
             <p>
-              All <strong>Named Entities</strong> are unique, so
+              Selectors can further specify where in the parent fragment it is
+              found. For example specified as a bounding box or with an index
+              range in a text.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              All <strong>Entity Mentions</strong> are unique, so
               <em>Albert Einstein</em> in one document is not directly
               considered the same as <em>Albert Einstein</em> or
               <em>A. Einstein</em> in another document.
@@ -421,13 +402,18 @@
 
           <section>
             <p>
-              At this point there is nothing that connect the two document pages
+              Already at this point the two documents have something in common
+            </p>
+            <p class="fragment">They mention <strong>Persons</strong></p>
+            <p class="fragment">
+              This establishes a loose coupling between them even if
+              they exist in different cloud environments
             </p>
           </section>
 
           <section>
             <p>
-              A follow-up process in the pipelines, however, is our
+              A follow-up process in the pipelines, is our
               <strong>entity resolution step</strong>, where we link similar
               entities
             </p>
@@ -437,15 +423,22 @@
             data-background-iframe="dist/html/cytoscape/document-entities-3.html"
           ></section>
 
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-3.1.html"
+          >
+          <aside class="notes">
+            It is impliitly given that the fragment that mentions an entity that resloves to a canonical entity is about that canonical entity.
+            It is also given that when the fragment is about that entity, so is the document containing the fragment.
+          </aside>
+          </section>
+
           <section>
             <p>
-              Now page 1 and page 2 have that in common that they both refer to
+              Now page 1 and page 2 have that in common that they are both about
+              the <strong>Canonical Entity</strong>
               <em>Albert Einstein</em>
             </p>
-            <p class="fragment">
-              Therefore, we have established a link between them even if they
-              exist in different cloud environments
-            </p>
+            <p class="fragment">This establishes an even stronger link between the two</p>
           </section>
 
           <section>
@@ -459,7 +452,7 @@
             <p>
               For <strong>Canonical Entities</strong> there will be only
               <span style="text-decoration: underline">ONE</span>
-              <em>Albert Einstein</em> that refers to all individual occurences
+              <em>Albert Einstein</em> that refers to all individual occurrences
             </p>
           </section>
 
@@ -474,7 +467,88 @@
             </p>
           </section>
 
+          <section>
+            <p>
+              The entity resolution process makes use of as much
+              context as possible to resolve to actual unique entities. This means that
+              <span style="text-decoration: underline"
+                >context is incredibly important!</span
+              >
+            </p>
+          </section>
+
+          <section>
+            <p>
+              With this information it is now possible to query the knowledge
+              graph for all documents and fragments that are about a specific <strong>Person</strong> or <strong>Location</strong>
+            </p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>BIM and Entity References</h4>
+          </section>
+
+          <section>
+            <p>
+              BIM objects are special kinds of <strong>Entity Mentions</strong>.
+            </p>
+            <p class="fragment">
+              The reason why these are not
+              <strong>Canonical Entities</strong> is that <span style="text-decoration: underline;">BIM objects are duplicated
+                across models</span>
+            </p>
+          </section>
+
+          <section>
+            <p>There are other challenges with the siloed BIM that can be resolved by accepting the fact that any object in a BIM model is not the single source</p>
+          </section>
+
+          <section>
+            <ul>
+              <li>An object in one model can suddenly have relationships to
+                objects in other models</li>
+              <li class="fragment">No need to establish mechanisms to avoid counting objects twice</li>
+              <li class="fragment">An object can be tracked over time</li>
+              <li class="fragment">A BIM object can have relationships to other entities like people, organizations, documents etc.</li>
+            </ul>
+          </section>
+
+          <section>
+            <p>Relating a BIM object with an entity mention is not different from a text document other than it uses different selectors</p>
+          </section>
+
           <section
+            data-background-iframe="dist/html/cytoscape/selectors-3.html"
+          ></section>
+
+          <section>
+            <p><strong>1st floor</strong> in model A and model B might be the same but they might also refer to floors in different buildings <br>- therefore context is important as always</p>
+          </section>
+
+          <section>
+            <p>BIM models already have this information, and we extract this as relationships between and properties assigned to the entity mentions</p>
+            <aside class="notes">
+              Two models with each one floor + one space in architectural model. Both floors have an elevation property assigned + there is a relationship qcy:hasSpace between floor and space in architectural model.
+            </aside>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/bim-entities-1.html"
+          ></section>
+
+          <section data-background-iframe="https://w3id.org/bot#Zones">
+            <p class="bg-transparent-white">The topological relationships we define between entities are aligned with the Building Topology Ontology (BOT)</p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"
+          >
+          </section>
+
+          <!-- <section
             data-background-iframe="https://www.wikidata.org/wiki/Q159626"
           >
             <p>
@@ -482,30 +556,7 @@
               additional information like references to Linked Open Data
               entities
             </p>
-          </section>
-
-          <section>
-            <p>
-              With this information it is now possible to query the knowledge
-              graph for all <strong>Persons</strong> in the project and all the
-              fragments in which they are mentioned
-            </p>
-          </section>
-
-          <section>
-            <p>
-              These <strong>Canonical Entities</strong> are created by AI but it
-              is also possible to define
-              <strong>Explicit Canonical Entities</strong> in a project.
-            </p>
-            <p class="fragment">
-              For example from a room programme or a project member list.
-            </p>
-          </section>
-
-          <section
-            data-background-iframe="dist/html/cytoscape/document-entities-4.html"
-          ></section>
+          </section> -->
 
           <section>
             <p>
@@ -519,26 +570,7 @@
           ></section>
 
           <section>
-            <p>
-              The attentive observer will see that the BIM object is
-              <span style="text-decoration: underline">NOT</span> the first
-              class citizen
-            </p>
-            <p class="fragment">
-              It cannot be since there can be different representations of that
-              room across different models
-            </p>
-          </section>
-
-          <section>
-            <p>
-              The same room in a Revit or IFC version of the same model, will,
-              however resolve to the same object in the knowledge graph
-            </p>
-            <p class="fragment">
-              This is handled by the
-              <a href="#/4/5">previously described id technique</a>
-            </p>
+            <p>The same approach is valid for CAD documents, an e-mails, images etc.</p>
           </section>
 
           <section
@@ -547,26 +579,83 @@
           ></section>
         </section>
 
-		<section>
+        <section>
 
-			<section>
-				<h4>Learnings and perspectives</h4>
-			</section>
+          <section>
+            <h4>Explicit Canonical Entities</h4>
+          </section>
 
-			<section>
-				<ul>
-					<li>Our Knowledge Graph establishes loose connections between files on different systems</li>
-					<li class="fragment">Not only documents but the fragments within them are linked</li>
-					<li class="fragment">The graph sits on top of existing systems and can be implemented in a non-intrusive way</li>
-				</ul>
-			</section>
+          <section>
+            <p>
+              Most <strong>Canonical Entities</strong> in our pipelines are created by AI but it
+              is also possible to define
+              <strong>Explicit Canonical Entities</strong> in a project.
+            </p>
+          </section>
 
-			<section>
-				<p>The quest of discovery always has a starting point. A type of object, a geo-location, a material, a person or company.</p>
-				<p class="fragment">The more context we establish between fragments, the better discoverability we can deliver</p>
-			</section>
+          <section>
+            <p>These are entities that are well defined in the project.</p>
+            <p class="fragment">
+              For example from a room programme or a project member list.
+            </p>
+          </section>
 
-		</section>
+          <section>
+            <p>The approach can be<br><br> 
+              <strong>top-down:</strong> Here is the list of people - only resolve to those</p>
+              or <strong>bottom-up:</strong> Show me what you found and I will flag the relevant ones as explicit</p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-4.html"
+          ></section>
+
+          <section>
+            <p>By flagging explicit canonical entities it is possible to filter out unwanted entities</p>
+          </section>
+
+          <section>
+            <p>Lists of explicit canonical entities of certain categories and their inherited properties are extremely valuable in a construction project</p>
+          </section>
+
+          <section>
+            <p>"List all unique windows in building A and all the properties assigned to them"</p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>Learnings and perspectives</h4>
+          </section>
+
+          <section>
+            <ul>
+              <li>
+                Our Knowledge Graph establishes loose connections between files
+                on different systems
+              </li>
+              <li class="fragment">
+                Not only documents but the fragments within them are linked
+              </li>
+              <li class="fragment">
+                The graph sits on top of existing systems and can be implemented
+                in a non-intrusive way
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <p>
+              The quest of discovery always has a starting point. A type of
+              object, a geo-location, a material, a person or company.
+            </p>
+            <p class="fragment">
+              The more context we establish between fragments, the better
+              discoverability we can deliver
+            </p>
+          </section>
+        </section>
       </div>
     </div>
 

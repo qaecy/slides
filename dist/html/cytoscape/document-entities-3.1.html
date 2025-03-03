@@ -20,6 +20,18 @@
       const style = buildStyles();
       const padding = isMobile() ? 5 : 200;
 
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
       const cy = cytoscape({
         container: document.getElementById("cy"),
         style,
@@ -31,13 +43,35 @@
           nodes: [
             {
               data: {
+                id: "doc1",
+                label: "Document 1",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 35,
+                y: -202,
+              },
+            },
+            {
+              data: {
+                id: "doc2",
+                label: "Document 2",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 243,
+                y: -148,
+              },
+            },
+            {
+              data: {
                 id: "page1",
                 label: "Page 1",
                 boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 150,
-                y: -18,
+                x: 147,
+                y: -37,
               },
             },
             {
@@ -47,8 +81,8 @@
                 boxLabels: ["qcy:EntityMention"],
               },
               position: {
-                x: 67,
-                y: 78,
+                x: 9,
+                y: 76,
               },
             },
             {
@@ -58,8 +92,8 @@
                 boxLabels: ["qcy:EntityMention"],
               },
               position: {
-                x: 202,
-                y: 116,
+                x: 153,
+                y: 127,
               },
             },
             {
@@ -69,8 +103,8 @@
                 boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 354,
-                y: -53,
+                x: 346,
+                y: -49,
               },
             },
             {
@@ -80,8 +114,8 @@
                 boxLabels: ["qcy:EntityMention"],
               },
               position: {
-                x: 312,
-                y: 100,
+                x: 384,
+                y: 132,
               },
             },
             {
@@ -98,8 +132,8 @@
                 },
               },
               position: {
-                x: 282,
-                y: 263,
+                x: 278,
+                y: 249,
               },
             },
             {
@@ -115,34 +149,26 @@
                 },
               },
               position: {
-                x: 23,
-                y: 247,
-              },
-            },
-            {
-              data: {
-                id: "location",
-                label: "Location",
-                boxLabels: ["qcy-e:Location"],
-              },
-              position: {
-                x: 92,
-                y: 168,
-              },
-            },
-            {
-              data: {
-                id: "person",
-                label: "Person",
-                boxLabels: ["qcy-e:Person"],
-              },
-              position: {
-                x: 397,
-                y: 156,
+                x: 31,
+                y: 244,
               },
             },
           ],
           edges: [
+            {
+              data: {
+                source: "doc1",
+                target: "page1",
+                label: "qcy:containsFragment",
+              },
+            },
+            {
+              data: {
+                source: "doc2",
+                target: "page2",
+                label: "qcy:containsFragment",
+              },
+            },
             {
               data: {
                 source: "page1",
@@ -187,38 +213,51 @@
             },
             {
               data: {
-                source: "ne1",
-                target: "location",
-                label: "qcy:entityCategory",
+                source: "page1",
+                target: "ce2",
+                label: "qcy:about",
               },
+              classes: "implicit",
             },
             {
               data: {
-                source: "ne2",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "page1",
+                target: "ce1",
+                label: "qcy:about",
               },
+              classes: "implicit",
             },
             {
               data: {
-                source: "ne3",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "page2",
+                target: "ce1",
+                label: "qcy:about",
               },
+              classes: "implicit",
             },
             {
               data: {
-                source: "ce2",
-                target: "location",
-                label: "qcy:entityCategory",
+                source: "doc1",
+                target: "ce2",
+                label: "qcy:about",
               },
+              classes: "implicit",
             },
             {
               data: {
-                source: "ce1",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "doc1",
+                target: "ce1",
+                label: "qcy:about",
               },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "doc2",
+                target: "ce1",
+                label: "qcy:about",
+              },
+              classes: "implicit",
             },
           ],
         },

@@ -31,122 +31,136 @@
           nodes: [
             {
               data: {
-                id: "page1",
-                label: "Page 1",
-                boxLabels: ["qcy:DocumentPageFragment"],
+                id: "doc",
+                label: "202 BIM Model",
+                boxLabels: ["qcy:FileContent"],
               },
               position: {
-                x: 149,
-                y: -29,
+                x: 90,
+                y: -114,
               },
             },
             {
               data: {
-                id: "ne1",
-                label: "Wurttemberg",
+                id: "room",
+                label: "Room 0.22",
                 boxLabels: ["qcy:EntityMention"],
               },
               position: {
-                x: 57,
-                y: 74,
+                x: 133,
+                y: 103,
               },
             },
             {
               data: {
-                id: "ne2",
-                label: "Albert Einstein",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selector1",
+                label: "Selector",
+                boxLabels: ["qcy:IFCExpressIDSelector"],
               },
               position: {
-                x: 192,
-                y: 121,
+                x: 210,
+                y: -64,
               },
             },
             {
               data: {
-                id: "page2",
-                label: "Page 2",
-                boxLabels: ["qcy:DocumentPageFragment"],
+                id: "selector1Val",
+                label: "29740",
               },
               position: {
-                x: 354,
-                y: -42,
+                x: 305,
+                y: -5,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "selector2",
+                label: "Selector",
+                boxLabels: ["qcy:IFCGlobalIDSelector"],
+              },
+              position: {
+                x: -14,
+                y: -28,
               },
             },
             {
               data: {
-                id: "ne3",
-                label: "A. Einstein",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selector2Val",
+                label: "1aj$VJZFn2TxepZUBcKpvt",
               },
               position: {
-                x: 322,
-                y: 106,
+                x: -86,
+                y: 50,
               },
+              classes: "literal",
             },
             {
               data: {
-                id: "location",
-                label: "Location",
-                boxLabels: ["qcy-e:Location"],
+                id: "space",
+                label: "Space",
+                boxLabels: ["qcy-e:Space"],
               },
               position: {
-                x: 51,
-                y: 189,
-              },
-            },
-            {
-              data: {
-                id: "person",
-                label: "Person",
-                boxLabels: ["qcy-e:Person"],
-              },
-              position: {
-                x: 276,
-                y: 191,
+                x: 231,
+                y: 178,
               },
             },
           ],
           edges: [
             {
               data: {
-                source: "page1",
-                target: "ne1",
+                source: "doc",
+                target: "room",
                 label: "qcy:mentions",
               },
             },
             {
               data: {
-                source: "page1",
-                target: "ne2",
-                label: "qcy:mentions",
+                source: "selector1",
+                target: "doc",
+                label: "qcy:selectorSubject",
               },
             },
             {
               data: {
-                source: "page2",
-                target: "ne3",
-                label: "qcy:mentions",
+                source: "selector1",
+                target: "room",
+                label: "qcy:selectorObject",
               },
             },
             {
               data: {
-                source: "ne1",
-                target: "location",
-                label: "qcy:entityCategory",
+                source: "selector1",
+                target: "selector1Val",
+                label: "qcy:value",
               },
             },
             {
               data: {
-                source: "ne2",
-                target: "person",
-                label: "qcy:entityCategory",
+                source: "selector2",
+                target: "doc",
+                label: "qcy:selectorSubject",
               },
             },
             {
               data: {
-                source: "ne3",
-                target: "person",
+                source: "selector2",
+                target: "room",
+                label: "qcy:selectorObject",
+              },
+            },
+            {
+              data: {
+                source: "selector2",
+                target: "selector2Val",
+                label: "qcy:value",
+              },
+            },
+            {
+              data: {
+                source: "room",
+                target: "space",
                 label: "qcy:entityCategory",
               },
             },

@@ -31,87 +31,76 @@
           nodes: [
             {
               data: {
-                id: "page1",
-                label: "Page 1",
+                id: "doc",
+                label: "Document",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: {
+                x: 22,
+                y: -37,
+              },
+            },
+            {
+              data: {
+                id: "page",
+                label: "Page",
                 boxLabels: ["qcy:DocumentPageFragment"],
               },
               position: {
-                x: 173,
-                y: -46,
+                x: 167,
+                y: 84,
               },
             },
             {
               data: {
-                id: "ne1",
-                label: "Wurttemberg",
-                boxLabels: ["qcy:EntityMention"],
+                id: "selector",
+                label: "Selector",
+                boxLabels: ["qcy:PageSelector"],
               },
               position: {
-                x: 101,
-                y: 82,
+                x: 211,
+                y: -98,
               },
             },
             {
               data: {
-                id: "ne1Cat",
-                label: "Location",
-                boxLabels: ["qcy-e:Location"],
+                id: "selectorVal",
+                label: "1",
               },
               position: {
-                x: 172,
-                y: 152,
+                x: 271,
+                y: -42,
               },
-            },
-            {
-              data: {
-                id: "ne2",
-                label: "Albert Einstein",
-                boxLabels: ["qcy:EntityMention"],
-              },
-              position: {
-                x: 221,
-                y: 80,
-              },
-            },
-            {
-              data: {
-                id: "ne2Cat",
-                label: "Person",
-                boxLabels: ["qcy-e:Person"],
-              },
-              position: {
-                x: 288,
-                y: 145,
-              },
+              classes: "literal",
             },
           ],
           edges: [
             {
               data: {
-                source: "page1",
-                target: "ne1",
-                label: "qcy:mentions",
+                source: "doc",
+                target: "page",
+                label: "qcy:hasFragment",
               },
             },
             {
               data: {
-                source: "page1",
-                target: "ne2",
-                label: "qcy:mentions",
+                source: "selector",
+                target: "doc",
+                label: "qcy:selectorSubject",
               },
             },
             {
               data: {
-                source: "ne1",
-                target: "ne1Cat",
-                label: "qcy:entityCategory",
+                source: "selector",
+                target: "page",
+                label: "qcy:selectorObject",
               },
             },
             {
               data: {
-                source: "ne2",
-                target: "ne2Cat",
-                label: "qcy:entityCategory",
+                source: "selector",
+                target: "selectorVal",
+                label: "qcy:value",
               },
             },
           ],
