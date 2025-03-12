@@ -218,13 +218,16 @@
 
           <section
             data-background-iframe="dist/html/cytoscape/file-content-1.html"
-          ></section>
+          >
+          <img src="dist/img/fallback/Decentral-G1.png" alt="" class="print-fallback">
+          </section>
 
           <section
             data-background-image="dist/img/misc/file_dms.svg"
             data-background-size="80%"
           >
-            <p>So how would we represent this?</p>
+            <p class="bg-transparent-white">So how would we represent this?</p>
+            <img src="dist/img/fallback/Decentral-DMSs.png" alt="" class="print-fallback">
           </section>
 
           <section>
@@ -665,6 +668,7 @@
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/

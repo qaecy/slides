@@ -22,6 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
           element.style.display = "none";
         });
       }
+      if(fallbacks.length === 1){
+        const el = fallbacks[0];
+        if (el.tagName.toLowerCase() === "img") {
+            el.parentElement.style.display = "block";
+            el.parentElement.style.textAlign = "center";
+            el.style.display = "inline-block";
+            el.style.maxHeight = "600px";
+            el.style.height = "80%";
+            // el.setAttribute("height", "80%");
+        }
+        fallbacks[0]
+      }
     }
   }
 
