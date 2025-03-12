@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY - AI in AEC 2025</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center; justify-content: center;">
+            <img src="dist/img/logo.svg" alt="" />
+            <span>@</span>
+            <img style="height: 100px; background-color: #5E8C94; padding: 0.2rem; border-radius: 0.2rem; transform: translateY(-0.2rem);" src="dist/img/logos/aiinaec2025.png" alt="" />
+          </div>
+          <p style="font-size: 2.1rem;">Let's acknowledge that there is no single source of truth <br>- and deal with it</p>
+        </section>
+
+        <!-- About -->
+        <section>
+          <section data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17212009421947">
+            <h4 class="bg-transparent-white">Who are we?</h4>
+          </section>
+        </section>
+
+        <!-- Why -->
+        <section>
+          <section>
+            <h4>The AEC industry has a fragmented and decentralized nature</h4>
+          </section>
+
+          <section>
+            <h4>
+              Designing, maintaining and operating a built asset involves
+              expertise from a myriad of professions
+            </h4>
+          </section>
+
+          <section>
+            <h4>
+              Therefore, there are many perspectives on each and every subset of
+              the project
+            </h4>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/Systems-01.svg" alt="" />
+            <p>What do you see?</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-02.svg" alt="" />
+            <p>What the architect sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-03.svg" alt="" />
+            <p>What the ICE engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-04.svg" alt="" />
+            <p>What the low voltage engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-05.svg" alt="" />
+            <p>What the low voltage engineer sees</p>
+          </section>
+          <section>
+            <img src="dist/img/decentral/Systems-06.svg" alt="" />
+            <p>What the HVAC engineer sees</p>
+          </section>
+
+          <section>
+            <p>Today's BIM doesn't handle this nature well</p>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/monolitic-01.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/monolitic-02.svg" alt="" />
+          </section>
+
+          <section>
+            <p>
+              BIM is siloed.<br />
+              One discipline, one model
+            </p>
+            <aside class="notes">
+              This means that we typicaly need to duplicate information across models
+            </aside>
+          </section>
+
+          <section>
+            <img src="dist/img/misc/clash.svg" height="150px" alt="">
+            <aside class="notes">
+              The only context that exists between them is the one established
+              when putting them in the same coordinate system and doing a clash
+              detection
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              A silo-free BIM would focus on the <span style="text-decoration: underline;">relationships</span> and could be
+              decentralized
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-01.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-02.svg" alt="" />
+          </section>
+
+          <section>
+            <img src="dist/img/decentral/bs-wall-03.svg" alt="" />
+          </section>
+
+          <section>
+            <p>
+              This would be a complete decentralization of BIM which is
+              obviously not easy to achieve.
+            </p>
+            <p class="fragment">
+              But a step on the way would be to make what we have more
+              connected...
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>The reality</h4>
+          </section>
+
+          <section>
+            <p>
+              No project has
+              <span style="text-decoration: underline">ONE</span> BIM model
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Not all information is<br>
+              <span style="font-size: 1.2rem">(or should ever be)</span> in the
+              BIM model
+            </p>
+          </section>
+
+          <section>
+            <ul>
+              <li>Reports</li>
+              <li>Meeting minutes</li>
+              <li>e-mails</li>
+              <li>Calculations</li>
+              <li>Images from site registrations</li>
+              <li>Point cloud scans</li>
+              <li>Reference images</li>
+              <li>Sketches</li>
+              <li>Norms & Regulations</li>
+            </ul>
+          </section>
+
+          <section>
+            <p>
+              Information is scattered across different files and often on
+              different document management systems <span style="font-size: 1.2rem">(DMSs)</span>
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/misc/file_dms.svg" alt="" />
+          </section>
+
+          <section>
+            <p> <em>"Is this the most recent version of that plan drawing"</em></p>
+            <p class="fragment"><em>"what documents describe this pump?"</em></p>
+            <aside class="notes">
+              This makes it hard to answer even simple questions like
+            </aside>
+          </section>
+        </section>
+
+        <!-- Tech intro -->
+        <section>
+          <section>
+            <h4>Tech intro</h4>
+          </section>
+
+          <section>
+            <p>At <img src="dist/img/logo.svg" class="inline-logo" /> we
+            process documents through a set of pipelines</p>
+            <p class="fragment">In addition to vector embeddings we produce a <span style="text-decoration: underline;">Knowledge Graph</span></p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/undirected-graph.html"
+          >
+            <p class="bg-transparent-white">
+              A graph is a network of nodes and edges
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              In a knowledge graph, the edges are directed
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo1.html"
+          >
+            <p class="bg-transparent-white">
+              One node-edge-node relationship is called a "triple" and describes
+              a "statement" or a "fact"
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo2.html"
+          >
+            <p class="bg-transparent-white">
+              A triple consists of a Subject, a predicate and an Object
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">An example from a BIM model</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo4.html"
+          >
+            <p class="bg-transparent-white">
+              As more facts are added, the object in one triple becomes the
+              subject in another
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo5.html"
+          >
+            <p class="bg-transparent-white">
+              Objects can also represent simple data properties
+            </p>
+            <aside class="notes">
+              BIM models are essentially graphs, and one of the things we do at QAECY is to tear them apart and take out all the relevant context.<br><br>
+              What spaces are at what storeys, what windows are adjacent to which rooms, what chairs are located in which space etc.
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              These graphs can grow to unbelievable sizes.<br>
+              <img src="dist/img/logos/DBpedia.svg" class="inline-logo" style="height: 60px; transform: translateY(5.5px);" /> consists of 9.5 billion triples!
+            </p>
+          </section>
+
+          <section data-background-iframe="https://dbpedia.org/page/Paasitorni">
+            <a href="https://dbpedia.org/page/Paasitorni">Paasitorni at DBpedia</a>
+            <aside class="notes">
+              This is the DBPedia entry for this building. You will see that it describes facts such as a reference to an image, where it is located, geocoordinates, an abstract, when it was established etc.
+            </aside>
+          </section>
+
+          <!-- Mads Mikkelsen -->
+          <section
+            style="pointer-events: none;"
+            data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
+          >
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+            <aside class="notes">
+              You can query the graph, and when you do that you essentially describe a pattern in the graph that should be matched<br><br>
+              Things that are prefixed with ? are variables (ex ?theActor, ?movie)<br><br>
+              Things that are not are constants (ex Mads Mikkelsen, starring)
+            </aside>
+          </section>
+
+          <section data-background-iframe="https://bit.ly/48kp6l0">
+            <a href="https://bit.ly/48kp6l0" target="_blank"
+              >https://dbpedia.org/sparql</a
+            >
+            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
+            <aside class="notes">
+              In SPARQL language, the query looks like this and here I will execute it on the actual DBPedia live.<br><br>
+              You see how fast it is even with 9,5 billion triples?<br><br>
+              Therefore: Capture as much information about your real estate assets as possible. Size is not a limitation!<br><br>
+              You hopefully also see how versatile this data structure is. I don't imagine anyone considering this query when originally building the data structure 
+              - this is vastly different from the world of relational databases!
+            </aside>
+          </section>
+
+          <section>
+            <h4>Should I learn to write SPARQL queries?</h4>
+            <p>No! The LLMs already know 😎</p>
+            <aside class="notes">
+              There are different techniques for this and they improve every day.
+            </aside>
+          </section>
+
+        </section>
+
+        <!-- How we deal with decentralization -->
+        <section>
+
+          <section>
+            <h4>How we construct a Single View of Truth</h4>
+          </section>
+
+          <section>
+            The <img src="dist/img/logo.svg" class="inline-logo" /> knowledge graph contains the concepts <strong>File Location</strong> and
+            <strong>File Content</strong>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/file-content-1.html"
+          ></section>
+
+          <section
+            data-background-image="dist/img/misc/file_dms.svg"
+            data-background-size="80%"
+          >
+            <p>So how would we represent this?</p>
+          </section>
+
+          <section>
+            <img src="dist/img//misc/hashing.png" alt="" />
+            <aside class="notes">
+              We use a hashing mechanism so the same content will always
+              translate to the same unique id
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Same input = same output
+            </p>
+            <aside class="notes">
+              We can use this technique to always create the same id for the
+              same input. It's important to consider what parameters should change the id
+              and which should not
+            </aside>
+          </section>
+
+          <section>
+            <div>
+              <h4>File Location node id</h4>
+              <p>
+                Provider + file path
+              </p>
+            </div>
+
+            <div class="fragment" style="margin-top: 5rem;">
+              <h4>File Content node id</h4>
+              <p>
+                file content
+              </p>
+            </div>
+            <aside class="notes">
+              The File Location id is generated from a combination of
+              what system it is stored on and what is it's path.<br><br>
+              The File Content id is genertated from the content hash.<br><br>
+
+              This means that:
+
+              <ul>
+                <li>The same file name on two different platforms will then create two
+                  different file ids</li>
+                  <li>The same file stored at two different locations on the same
+                    platform will also create two different file ids</li>
+                    <li>The file content id will stay the same as long as the
+                      content doesn't change</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/file-content-2.html"
+          >
+          <aside class="notes">
+            This is how this will be represented. Hovering the nodes reveal some of the attributes that are assigned to the nodes
+          </aside>
+          </section>
+
+          <section>
+            <h4>Flexibility achieved</h4>
+            <ul style="width: 80%; line-height: 1.7rem;">
+              <li class="fragment">One file can point to several content nodes <span style="font-size: 1.2rem">(different versions)</span>
+                even though its name hasn't changed.</li>
+              <li class="fragment" style="margin-top: 2rem;">One content node can point to several cloud locations - one for
+                each file.</li>
+            </ul>
+            <aside class="notes">
+              So now we can deal with multiple representations of the same file.
+              But what about the relationships between the individual content
+              nodes?
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>Document fragments</h4>
+          </section>
+
+          <section>
+            <h4>Content Node</h4>
+            <p>
+              the most overall representation of a document
+            </p>
+          </section>
+
+          <section>
+            <h4>Fragment Node</h4>
+            <p>
+              Any subset of a document is referred to as a
+              <strong>Fragment</strong> and each <strong>Fragment</strong> can
+              have sub-fragments in any arbitrary depth
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/misc/page-mixed_f_c.svg" height="500px" />
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments.html"
+          ></section>
+
+          <section>
+            <h4>Selector Node</h4>
+            <p>
+              Information such as the <strong>page number</strong> or the
+              <strong>fragment position</strong> relative to its parent can be
+              expressed using <strong>Selectors</strong>
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/selectors-1.html"
+          ></section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/selectors-2.html"
+          ></section>
+
+          
+        </section>
+
+        <section>
+          <section>
+            <h4>Entity References</h4>
+          </section>
+
+          <section>
+            <p>
+              One process in the
+              <img src="dist/img/logo.svg" class="inline-logo" /> pipelines is
+              finding mentionings of <strong>Entity References</strong> in the
+              content of any document
+            </p>
+          </section>
+
+          <section>
+            <div class="icon-row">
+              <img src="dist/img/misc/page-text_ne.svg" height="500px" />
+              <div>
+                <p style="font-size: 1.4rem">
+                  Default entities: Company, Person, Address, Material ...
+                </p>
+                <p style="font-size: 1.4rem">
+                  Other: custom entities defined per project
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-1.html"
+          ></section>
+
+          <section>
+            <p>
+              Selectors can further specify where in the parent fragment it is
+              found. For example specified as a <strong>bounding box</strong> or with an <strong>index
+                range</strong> in a text.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              All <strong>Entity Mentions</strong> are unique, so
+              <em>Albert Einstein</em> in one document is not directly
+              considered the same as <em>Albert Einstein</em> or
+              <em>A. Einstein</em> in another document.
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-2.html"
+          >
+          <aside class="notes">
+            Already at this point the two documents have something in common<br><br>
+            They mention <strong>Persons</strong><br><br>
+            This establishes a loose coupling between them even if they exist in different cloud environments
+          </aside>
+          </section>
+
+          <section>
+            <h4>Entity Resolution</h4>
+            <p>
+              A follow-up process in the pipelines, is the
+              <strong>entity resolution step</strong>, where we link similar
+              entities
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-3.html"
+          >
+          <aside class="notes">
+            Now page 1 and page 2 have that in common that they are both about
+              the <strong>Canonical Entity</strong>
+              <em>Albert Einstein</em>
+            </p>
+            <p>This establishes an even stronger link between the two</p>
+          </aside>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-3.1.html"
+          >
+          <aside class="notes">
+            It is impliitly given that the fragment that mentions an entity that resloves to a canonical entity is about that canonical entity.
+            It is also given that when the fragment is about that entity, so is the document containing the fragment.
+          </aside>
+          </section>
+
+          <section>
+            <h4>Canonical Entities</h4>
+            <p>
+              the standardized representations of <strong>Named Entities</strong>
+            </p>
+          </section>
+
+          <section>
+            <p>
+              For <strong>Canonical Entities</strong> there will be only
+              <span style="text-decoration: underline">ONE</span>
+              <em>Albert Einstein</em> that refers to all individual occurrences
+            </p>
+            <aside class="notes">
+              There can be <strong>Canonical Entities</strong> that share the
+              same name.
+              <br><br>
+              For example, there could both be a <strong>Company</strong> entity
+              and a <strong>Fruit</strong> entity named <strong>Apple</strong>
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              The entity resolution process makes use of as much
+              context as possible to resolve to actual unique entities. This means that
+              <span style="text-decoration: underline"
+                >context is incredibly important!</span
+              >
+            </p>
+          </section>
+
+          <section>
+            <h4>Context achieved</h4>
+            <ul style="width: 80%; line-height: 1.7rem;">
+              <li>Possible to list any <strong>Person</strong> or <strong>Location</strong> found across all documents.</li>
+              <li class="fragment" style="margin-top: 2rem;">Possible to query the knowledge graph for all documents and fragments that are about a specific <strong>Person</strong> or <strong>Location</strong>.</li>
+            </ul>
+            <aside class="notes">
+              
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>BIM and Entity References</h4>
+          </section>
+
+          <section>
+            <p>
+              BIM objects are special kinds of <strong>Entity Mentions</strong>.
+            </p>
+            <p class="fragment">
+              The reason why these are not
+              <strong>Canonical Entities</strong> is that <span style="text-decoration: underline;">BIM objects are duplicated
+                across models</span>
+            </p>
+            <aside class="notes">
+              There are other challenges with the siloed BIM that can be resolved by accepting the fact that any object in a BIM model is not the single source. You should soon recognize this fact.
+            </aside>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/selectors-3.html"
+          >
+          <aside class="notes">
+            Relating a BIM object with an entity mention is not different from a text document other than it uses different selectors
+          </aside>
+          </section>
+
+          <section>
+            <p><strong>1st floor</strong> in model A and model B might be the same but they might also refer to floors in different buildings <br>- therefore <span style="text-decoration: underline;">context is important as always</span></p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/bim-entities-1.html"
+          >
+          <aside class="notes">
+            BIM models already have this information inherent, and we extract this as relationships between and properties assigned to the entity mentions<br><br>
+            Two models with each one floor + one space in architectural model. Both floors have an elevation property assigned + there is a relationship qcy:hasSpace between floor and space in architectural model.
+          </aside>
+          </section>
+
+          <section data-background-iframe="https://w3id.org/bot#Zones">
+            <p class="bg-transparent-white">The topological relationships we define between entities are aligned with the Building Topology Ontology (BOT)</p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-fragments-bim-1.html"
+          >
+          </section>
+
+          <!-- <section
+            data-background-iframe="https://www.wikidata.org/wiki/Q159626"
+          >
+            <p>
+              Since the entities are well defined, this is also where we store
+              additional information like references to Linked Open Data
+              entities
+            </p>
+          </section> -->
+
+          <section>
+            <p>
+              BIM objects can also resolve to
+              <strong>Canonical Entities</strong>
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-5.html"
+          ></section>
+
+          <section>
+            <p>The same approach is valid for CAD documents, e-mails, images etc.</p>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/ne_link.svg"
+            data-background-size="80vh"
+          ></section>
+
+          <section>
+            <h4>BIM Siloes vanished</h4>
+            <ul style="width: 80%; line-height: 1.7rem;">
+              <li>An object in one model can suddenly have relationships to
+                objects in other models</li>
+              <li class="fragment" style="margin-top: 2rem;">No need to establish mechanisms to avoid counting objects twice</li>
+              <li class="fragment" style="margin-top: 2rem;">An object can be tracked over time</li>
+              <li class="fragment" style="margin-top: 2rem;">A BIM object can have relationships to other entities like people, organizations, documents etc.</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+
+          <section>
+            <h4>Explicit Canonical Entities</h4>
+          </section>
+
+          <section>
+            <p>
+              Most <strong>Canonical Entities</strong> in our pipelines are created by AI but it
+              is also possible to define
+              <strong>Explicit Canonical Entities</strong> in a project.
+            </p>
+          </section>
+
+          <section>
+            <p>These are entities that are well defined in the project.</p>
+            <p class="fragment">
+              For example from a room programme or a project member list.
+            </p>
+          </section>
+
+          <section>
+            <p>The approach can be:</p>
+            <div style="margin-top: 5rem;" class="fragment">
+              <h4>top-down</h4>
+              <p>Here is the list of people - only resolve to those</p>
+            </div>
+            <div style="margin-top: 5rem;" class="fragment">
+              <h4>bottom-up</h4>
+              <p>Show me what you found and I will flag the relevant ones as explicit</p>
+            </div>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-4.html"
+          >
+          <aside class="notes">
+            By flagging explicit canonical entities it is possible to filter out unwanted entities
+            <br><br>
+            Lists of explicit canonical entities of certain categories and their inherited properties are extremely valuable in a construction project
+          </aside>
+          </section>
+
+          <section>
+            <h4>Trusted entities</h4>
+            <ul style="width: 80%; line-height: 1.7rem;">
+              <li>"List all unique windows in building A and all the properties assigned to them"</li>
+              <li class="fragment" style="margin-top: 2rem;">"Show slabs and ventilation equipment on first to second floor"</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h4>Learnings and perspectives</h4>
+          </section>
+
+          <section>
+            <ul style="width: 80%; line-height: 1.7rem;">
+              <li>Our Knowledge Graph establishes loose connections between files on different systems</li>
+              <li class="fragment" style="margin-top: 2rem;">Not only documents but the fragments within them are linked</li>
+              <li class="fragment" style="margin-top: 2rem;">The graph sits on top of existing systems and can be implemented in a non-intrusive way</li>
+              <li class="fragment" style="margin-top: 2rem;">The quest of discovery always has a starting point. A type of object, a geo-location, a material, a person or company. The more context we establish between fragments, the better discoverability we can deliver</li>
+              <li class="fragment" style="margin-top: 2rem;">We deliver the processing pipelines and expose the result with our <img src="dist/img/logos/cue.svg" class="cue-inline" /> agent</li>
+            </ul>
+          </section>
+
+          <section>
+            <div style="height: 100%">
+              <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+            </div>
+          </section>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
