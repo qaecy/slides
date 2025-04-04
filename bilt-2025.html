@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY - BiLT 2025</title>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+      .footer-left{
+        position: absolute;
+        bottom: 27px;
+        left: 27px;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-content: flex-start;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .footer-left img{
+        height: 2.5rem;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+
+      <div class="footer-left">
+        <img src="dist/img/logos/bilt-10.png">
+        <img src="dist/img/logo.svg">
+      </div>
+
+      <div class="slides">
+
+        <section>
+          <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center; justify-content: center;">
+            <img src="dist/img/logo.svg" alt="" />
+            <span>@</span>
+            <img style="height: 100px;" src="dist/img/logos/bilt-10.png" alt="" />
+          </div>
+          <p style="font-size: 2.1rem;">GraphRAG for AEC: Unlocking Insights from BIM Data</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?data=http://slides.qaecy.com/bilt-2025.html&size=150x150" alt="http://slides.qaecy.com/bilt-2025.html">
+        </section>
+
+        <!-- About -->
+        <section>
+          <section data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17212009421947">
+            <h4 class="bg-transparent-white">Who are we?</h4>
+            <img class="print-fallback" src="dist/img/fallback/AIinAEC2025-about.png" alt="">
+          </section>
+        </section>
+
+        <section>
+
+          <section>
+            <h4>What is RAG?</h4>
+          </section>
+
+          <section>
+            <h4>RAG</h4>
+            <p>Retrieval-Augmented Generation</p>
+            <aside class="notes">They would typically use a RAG approach</aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple.svg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              Very simply speaking, the app will extract the text from your PDF
+              and add it to the prompt along with your question and some
+              instructions on what to do with the information in the text.
+            </aside>
+          </section>
+
+          <section>
+            <h4>And what if I wish to search across multiple documents?</h4>
+          </section>
+
+          <section>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <img
+                    src="dist/img/rag/f_embedding.svg"
+                    alt=""
+                    style="height: 200px"
+                  />
+                </div>
+                <div>
+                  <h3 style="color: black">
+                    \( \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <aside class="notes">
+              If you wish to search across multiple documents the text body
+              becomes too big for the query.<br /><br />
+              In this case, there is a pre step in converting all the text
+              fragments into so-called vector embeddings.
+            </aside>
+          </section>
+
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div>
+                <p style="font-size: 26px">
+                  \[ \begin{bmatrix} 0.125 & -2.103 & \dots & -2.005 & 0.012 \\
+                  0.615 & -1.142 & \dots & 1.945 & -2.113 \\ \vdots & \vdots &
+                  \ddots & \vdots & \vdots \\ 0.712 & 1.153 & \dots & -1.721 &
+                  -0.852 \\ -0.925 & -0.903 & \dots & 1.044 & -1.412
+                  \end{bmatrix} \rightarrow \]
+                </p>
+              </div>
+              <div>
+                <img src="dist/img/rag/db.svg" style="height: 200px" />
+              </div>
+            </div>
+            <aside class="notes">
+              The vector embeddings are put in a special type of database called
+              a vector database, and based on your search term, these databases
+              will give you the text fragments that are most related.<br /><br />
+              It's al based on mathematical similarities between the vectors and
+              it is kind of mind blowing how well it actually works.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple2.svg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              Only the relevant  text fragments from the vector database are then added to the prompt.
+            </aside>
+          </section>
+
+          <section>
+            WIP: More on RAG
+            <ul>
+              <li>How RAG improves the accuracy and relevance of LLM outputs by grounding them in external knowledge.</li>
+              <li>Why RAG is particularly valuable for domains with complex, evolving information, such as AEC.</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          
+          <section>
+            <h4>Graph RAG</h4>
+          </section>
+
+          <section>
+            <p>At <img src="dist/img/logo.svg" class="inline-logo" /> we
+            process documents through a set of pipelines to establish the RAG foundation</p>
+            <p class="fragment">In addition to vector embeddings we produce a <span style="text-decoration: underline;">Knowledge Graph</span></p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/undirected-graph.html"
+          >
+            <p class="bg-transparent-white">
+              A graph is a network of nodes and edges
+            </p>
+            <img src="dist/img/fallback/KG1.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              In a knowledge graph, the edges are directed
+            </p>
+            <img src="dist/img/fallback/KG2.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo1.html"
+          >
+            <p class="bg-transparent-white">
+              One node-edge-node relationship is called a "triple" and describes
+              a "statement" or a "fact"
+            </p>
+            <img src="dist/img/fallback/KG3.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo2.html"
+          >
+            <p class="bg-transparent-white">
+              A triple consists of a Subject, a predicate and an Object
+            </p>
+            <img src="dist/img/fallback/KG4.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">An example from a BIM model</p>
+            <img src="dist/img/fallback/KG5.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo4.html"
+          >
+            <p class="bg-transparent-white">
+              As more facts are added, the object in one triple becomes the
+              subject in another
+            </p>
+            <img src="dist/img/fallback/KG6.png" alt="" class="print-fallback">
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo5.html"
+          >
+            <p class="bg-transparent-white">
+              Objects can also represent simple data properties
+            </p>
+            <img src="dist/img/fallback/KG7.png" alt="" class="print-fallback">
+            <aside class="notes">
+              BIM models are essentially graphs, and one of the things we do at QAECY is to tear them apart and take out all the relevant context.<br><br>
+              What spaces are at what storeys, what windows are adjacent to which rooms, what chairs are located in which space etc.
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              These graphs can grow to unbelievable sizes.<br>
+              <img src="dist/img/logos/DBpedia.svg" class="inline-logo" style="height: 60px; transform: translateY(5.5px);" /> consists of 9.5 billion triples!
+            </p>
+          </section>
+
+          <section data-background-iframe="https://dbpedia.org/page/Paasitorni">
+            <a href="https://dbpedia.org/page/Paasitorni">Paasitorni at DBpedia</a>
+            <img src="dist/img/fallback/AIinAEC2025-Paasitorni.png" alt="" class="print-fallback">
+            <aside class="notes">
+              This is the DBPedia entry for this building. You will see that it describes facts such as a reference to an image, where it is located, geocoordinates, an abstract, when it was established etc.
+            </aside>
+          </section>
+
+          <!-- Mads Mikkelsen -->
+          <section
+            style="pointer-events: none;"
+            data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
+          >
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+            <aside class="notes">
+              You can query the graph, and when you do that you essentially describe a pattern in the graph that should be matched<br><br>
+              Things that are prefixed with ? are variables (ex ?theActor, ?movie)<br><br>
+              Things that are not are constants (ex Mads Mikkelsen, starring)
+            </aside>
+          </section>
+
+          <section data-background-iframe="https://bit.ly/48kp6l0">
+            <div class="bg-transparent-white">
+              <a style="pointer-events: all" href="https://bit.ly/48kp6l0" target="_blank"
+              >https://dbpedia.org/sparql</a
+            >
+            </div>
+            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
+            <aside class="notes">
+              In SPARQL language, the query looks like this and here I will execute it on the actual DBPedia live.<br><br>
+              You see how fast it is even with 9,5 billion triples?<br><br>
+              Therefore: Capture as much information about your real estate assets as possible. Size is not a limitation!<br><br>
+              You hopefully also see how versatile this data structure is. I don't imagine anyone considering this query when originally building the data structure 
+              - this is vastly different from the world of relational databases!
+            </aside>
+          </section>
+
+          <section>
+            WIP: More on Graph RAG
+            <ul>
+              <li>How does the LLM access it?</li>
+              <li>Different approaches...</li>
+            </ul>
+          </section>
+
+        </section>
+
+          <section>
+            <div style="height: 100%">
+              <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+              <img src="dist/img/fallback/Cue.png" alt="" class="print-fallback">
+            </div>
+          </section>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        scrollActivationWidth: null, // No mobile scroll
+        // showNotes: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
