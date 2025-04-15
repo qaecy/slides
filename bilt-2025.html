@@ -52,6 +52,7 @@
       </div>
 
       <div class="slides">
+        <!-- Front -->
         <section>
           <div
             style="
@@ -79,12 +80,12 @@
           />
         </section>
 
-        <!-- About -->
+        <!-- Us -->
         <section>
           <section
             data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17212009421947"
           >
-            <h4 class="bg-transparent-white">Who are we?</h4>
+            <h2 class="bg-transparent-white">Who are we?</h2>
             <img
               class="print-fallback"
               src="dist/img/fallback/AIinAEC2025-about.png"
@@ -93,6 +94,7 @@
           </section>
         </section>
 
+        <!-- Agenda -->
         <section>
           <h2>Overall agenda</h2>
           <ul>
@@ -115,7 +117,7 @@
         <!-- Why -->
         <section>
           <section>
-            <h4>Why are we here?</h4>
+            <h2>Why are we here?</h2>
           </section>
 
           <section data-background-image="dist/img/misc/archive.png">
@@ -436,9 +438,10 @@
           </section>
         </section>
 
+        <!-- Graph RAG -->
         <section>
           <section>
-            <h4>Graph RAG</h4>
+            <h2>Graph RAG</h2>
           </section>
 
           <section>
@@ -655,38 +658,9 @@
               world of relational databases!
             </aside>
           </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Data Processing</h2>
-          </section>
 
           <section>
-            <p>
-              So now we know that we need graphs and Vector embeddings, but how
-              do we build these?
-            </p>
-          </section>
-
-          <section>
-            <img
-              src="https://api.qrserver.com/v1/create-qr-code/?data=https://github.com/qaecy/bilt2025/tree/main&size=100x100"
-              alt="https://github.com/qaecy/bilt2025/tree/main"
-            /><br />
-            <a href="https://github.com/qaecy/bilt2025/tree/main"
-              >https://github.com/qaecy/bilt2025</a
-            >
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h4>Natural Language to SPARQL</h4>
-          </section>
-
-          <section>
-            <pre><code data-trim class="text hljs" data-line-numbers="1-6|7-16|18-24|26-37|39-50|52-63|65-75|77-81"><script type="text/template">
+            <pre><code data-trim class="text hljs" data-line-numbers="1-6|7-16|7-75|77-81"><script type="text/template">
 Your job is to convert NLP questions to SPARQL queries. You are conservative, so if there is no obvious answer to the question, you will simply reply with "undefined". If there is a match you  return the SPARQL query and nothing else.
 
 Used prefixes:
@@ -769,49 +743,554 @@ Below this line you find the question you should map to a query
 
 Show windows on second floor
 </script></code></pre>
+            <aside class="notes">
+              If we use a RAG approach to converting Natural Language to SPARQL
+              queries it could look like this. 1. provide instructions and
+              examples and 2. insert the user request.
+            </aside>
           </section>
 
           <section
             data-background-video="dist/videos/misc/NL-SPARQL.mp4"
             data-background-size="contain"
+          >
+            <aside class="notes">
+              This is a demonstration of how we use this technology. Since we
+              process individual IFCs and establish the graph as a glue between
+              them we can even perform a query across multiple models.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
+            data-background-size="contain"
           ></section>
+        </section>
+
+        <!-- Lab session 1 -->
+        <section>
+          <section>
+            <h2>Data Processing</h2>
+          </section>
 
           <section>
-            <div style="height: 100%">
-              <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+            <p>
+              So now we know that we need graphs and Vector embeddings, but how
+              do we build these?
+            </p>
+          </section>
+
+          <section>
+            <p>TODO: quick introduction to what we will be creating here...</p>
+          </section>
+
+          <section>
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?data=https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/01_data_integration.ipynb&size=250x250"
+              alt="https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/01_data_integration.ipynb"
+            /><br />
+            <a
+              href="https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/01_data_integration.ipynb"
+              >Notebook 1</a
+            >
+          </section>
+        </section>
+
+        <!-- Break -->
+        <section>
+          <h2>Coffee break ☕</h2>
+        </section>
+
+        <!-- RAG and LLMs -->
+        <section>
+          <section>
+            <h2>RAG and LLMs</h2>
+            <p>Retrieval Augmented Generation & <br />Large Language Models</p>
+          </section>
+
+          <section>
+            <h3>LLMs</h3>
+            <ul>
+              <li>
+                Base LLMs (like GPT-4) are very big Neural Networks, consisting
+                of billions of parameters, that have been trained on vast
+                amounts of data.
+              </li>
+              <li>
+                However they <b>haven't been trained on</b> and
+                <b>don't have direct access</b> to private (unseen) data.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>3 Ways to Expose LLMs to Unseen Data</h3>
+            <ol>
+              <li>Training a new LLM</li>
+              <li>Fine-Tuning an existing LLM</li>
+              <li>Performing Retrieval Augmented Generation (RAG)</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>LLM Training & Fine-Tuning Challenges</h3>
+            <ul>
+              <li>Costs</li>
+              <li>Complexity</li>
+              <li>Updating problem</li>
+              <li>Poor/No information access control</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Retrieval Augmented Generation</h3>
+            <p>
+              In simple terms, <b>RAG</b> describes a setup through which an LLM
+              is provided with direct access to information relevant to the
+              user's question, which is not part of the training data.
+            </p>
+          </section>
+
+          <section>
+            <h3>RAG Benefits</h3>
+            <ul>
+              <li>
+                Splits <b>information retrieval</b> from <b>text generation</b>
+              </li>
+              <li>Very cheap and fast to update</li>
+              <li>Allows more explicit control on information access</li>
+              <li>Scales efficiently</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Training & RAG</h3>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <div style="text-align: center">
+                <p style="margin-bottom: 5px">Training / Fine-Tuning</p>
+                <img
+                  src="dist/img/rag/llm_ft.svg"
+                  alt=""
+                  style="height: 150px"
+                />
+              </div>
+            </div>
+            <div style="text-align: center">
+              <p style="margin-bottom: 5px">RAG</p>
               <img
-                src="dist/img/fallback/Cue.png"
+                src="dist/img/rag/llm_rag.svg"
                 alt=""
-                class="print-fallback"
+                style="height: 220px"
               />
             </div>
           </section>
-
         </section>
 
+        <!-- Base RAG -->
         <section>
-          WIP: More on RAG
-          <ul>
-            <li>
-              How RAG improves the accuracy and relevance of LLM outputs by
-              grounding them in external knowledge.
-            </li>
-            <li>
-              Why RAG is particularly valuable for domains with complex,
-              evolving information, such as AEC.
-            </li>
-          </ul>
+          <section>
+            <h2>Base RAG</h2>
+          </section>
+
+          <section>
+            <h3>Base RAG Architecture</h3>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <div>
+                <div style="text-align: center">
+                  <img
+                    src="dist/img/rag/rag.svg"
+                    alt=""
+                    style="height: 520px"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Processing</h3>
+            <h6 style="color: black">Text-Heavy Documents</h6>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  src="dist/img/rag/doc_transform.svg"
+                  alt=""
+                  style="height: 300px"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Processing</h3>
+            <h6 style="color: black">Multimodal Documents</h6>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <div style="text-align: center">
+                <img
+                  src="dist/img/rag/docx_transform.svg"
+                  alt=""
+                  style="height: 300px"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Processing</h3>
+            <h6 style="color: black">Basic Principle</h6>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <img
+                    src="dist/img/rag/f_split.svg"
+                    alt=""
+                    style="height: 280px"
+                  />
+                </div>
+                <div>
+                  <h3 style="color: black">\( \rightarrow \)</h3>
+                </div>
+                <div>
+                  <img
+                    src="dist/img/rag/docx_f.svg"
+                    alt=""
+                    style="height: 200px"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="fragment">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <h3 style="color: black; margin-right: 20px">\( f : \)</h3>
+                <p
+                  style="
+                    color: black;
+                    font-size: 30px;
+                    text-align: left;
+                    font-style: italic;
+                  "
+                >
+                  simple chunking function ...or a deep neural network
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Embeddings</h3>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <img
+                    src="dist/img/rag/f_embedding.svg"
+                    alt=""
+                    style="height: 200px"
+                  />
+                </div>
+                <div>
+                  <h3 style="color: black">
+                    \( \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="fragment">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <h3 style="color: black; margin-right: 20px">\( f : \)</h3>
+                <p
+                  style="
+                    color: black;
+                    font-size: 30px;
+                    text-align: left;
+                    font-style: italic;
+                  "
+                >
+                  deep neural network trained to produce vector representations
+                  of the input data
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Vector Database</h3>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div>
+                <p style="font-size: 26px">
+                  \[ \begin{bmatrix} 0.125 & -2.103 & \dots & -2.005 & 0.012 \\
+                  0.615 & -1.142 & \dots & 1.945 & -2.113 \\ \vdots & \vdots &
+                  \ddots & \vdots & \vdots \\ 0.712 & 1.153 & \dots & -1.721 &
+                  -0.852 \\ -0.925 & -0.903 & \dots & 1.044 & -1.412
+                  \end{bmatrix} \rightarrow \]
+                </p>
+              </div>
+              <div>
+                <img src="dist/img/rag/db.svg" style="height: 200px" />
+              </div>
+            </div>
+            <div class="fragment">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <p style="text-align: left">
+                  Storing vectors along with metadata and content
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Searching</h3>
+            <p style="text-align: center">
+              Embedding a query and calculating its distance (eg <b>cosine</b>)
+              to the other data points.
+            </p>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <img
+                src="dist/img/rag/vectors_distance.svg"
+                style="height: 350px"
+              />
+            </div>
+            <p style="text-align: center">
+              <b>K Nearest Neighbors</b> (KNN) as the search result
+            </p>
+          </section>
+
+          <section>
+            <h3>Indexing</h3>
+            <p style="text-align: center">
+              Speeding up retrieval by pre-calculating communities.
+            </p>
+            <div
+              style="
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+              "
+            >
+              <img
+                src="dist/img/rag/vectors_clusters.svg"
+                style="height: 350px"
+              />
+            </div>
+            <p style="text-align: center">
+              <b>Approximate Nearest Neighbor</b> (ANN)
+            </p>
+          </section>
+
+          <section>
+            <h3>Response</h3>
+            <p style="text-align: left; font-size: 1.6rem">
+              The LLM is now provided with the search results as additional
+              <b>context</b> to produce a response to the user's question.
+            </p>
+            <div style="stroke: gray; stroke-width: 4px; text-align: left">
+              <div>
+                <h6 style="font-size: 25px; color: black; margin-bottom: 0px">
+                  Instructions
+                </h6>
+                <p
+                  style="font-size: 20px; font-style: italic; margin-left: 45px"
+                >
+                  "Given the context provided answer the question as an
+                  assistant that..."
+                </p>
+              </div>
+              <div>
+                <h4 style="font-size: 25px; color: black; margin-bottom: 0px">
+                  Question
+                </h4>
+                <p
+                  style="font-size: 20px; font-style: italic; margin-left: 45px"
+                >
+                  "What is the main entrance's corridor width?"
+                </p>
+              </div>
+              <div>
+                <h4 style="font-size: 25px; color: black; margin-bottom: 0px">
+                  Context
+                </h4>
+                <ul
+                  style="
+                    font-size: 20px;
+                    font-style: italic;
+                    margin-left: 105px;
+                    margin-top: 0;
+                  "
+                >
+                  <li>"search result 1"</li>
+                  <li>"search result 2"</li>
+                  <li>"..."</li>
+                </ul>
+              </div>
+              <h4 style="font-size: 25px; color: black">Response</h4>
+            </div>
+          </section>
+
+          <section>
+            <h3>Benefits of Base RAG</h3>
+            <ul>
+              <li>
+                Search is much more flexible and relaxed than traditional
+                approaches.
+              </li>
+              <li>Great at answering specific/narrow questions.</li>
+              <li>
+                The sources used to answer a question are directly accessible.
+              </li>
+              <li>Straighforward and not complicated to maintain.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Limitations</h3>
+            <ul>
+              <li>
+                Not so great at answering questions that require a
+                <b>combination</b> of different sources.
+              </li>
+              <li>Misses a <b>global</b> view on the data.</li>
+              <li>Might miss <b>exact</b> matches.</li>
+            </ul>
+          </section>
         </section>
 
+        <!-- Lab session 2 -->
         <section>
-          <div style="height: 100%">
-            <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+          <section>
+            <h2>RAG Hands on</h2>
+          </section>
+
+          <section>
             <img
-              src="dist/img/fallback/Cue.png"
+              src="https://api.qrserver.com/v1/create-qr-code/?data=https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/02_rag_querying.ipynb&size=250x250"
+              alt="https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/02_rag_querying.ipynb"
+            /><br />
+            <a
+              href="https://colab.research.google.com/github/qaecy/built2025/blob/main/notebooks/02_rag_querying.ipynb"
+              >Notebook 2</a
+            >
+          </section>
+        </section>
+
+        <!-- Perspective -->
+        <section>
+          <section>
+            <h2>Perspective</h2>
+          </section>
+
+          <section>
+            <p>The richer the input the richer the output</p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-5.html"
+          >
+            <img
+              src="dist/img/fallback/Decentral-G13.png"
               alt=""
               class="print-fallback"
             />
-          </div>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/ne_link.svg"
+            data-background-size="80vh"
+          ></section>
+
+          <section>
+            <p>The richer the input the richer the output</p>
+          </section>
+
+          <section>
+            <img src="dist/img/misc/saas-is-dead.jpeg" alt="SaaS is dead?" />
+          </section>
+
+          <section>
+            <img src="dist/img/rag/Agentic-RAG1.png" height="500px"><br>
+            <a
+              href="https://vectorize.io/how-i-finally-got-agentic-rag-to-work-right/"
+              >How I finally got agentic RAG to work right</a
+            >
+            <aside class="notes">
+              Agentic setups or Agent as a Service is probably the new way for us to interact with our data.
+              In this context it's also relevant to mention MCP: Model Context Protocol.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/cue/cue.png"
+            data-background-size="100vh"
+          ></section>
+
+          <section>
+            <p>TODO: Tool calling / agentic setup</p>
+            <p>TODO: Managing different versions etc.</p>
+          </section>
         </section>
       </div>
     </div>
