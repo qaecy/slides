@@ -24,7 +24,7 @@
         height: 1rem;
         margin: 0 0 -0.05rem 0 !important;
       }
-      .footer-left{
+      .footer-left {
         position: absolute;
         bottom: 27px;
         left: 27px;
@@ -37,7 +37,7 @@
         justify-content: flex-end;
         align-items: center;
       }
-      .footer-left img{
+      .footer-left img {
         height: 2.5rem;
         margin: 0;
         padding: 0;
@@ -46,36 +46,274 @@
   </head>
   <body>
     <div class="reveal">
-
       <div class="footer-left">
-        <img src="dist/img/logos/bilt-10.png">
-        <img src="dist/img/logo.svg">
+        <img src="dist/img/logos/bilt-10.png" />
+        <img src="dist/img/logo.svg" />
       </div>
 
       <div class="slides">
-
         <section>
-          <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center; justify-content: center;">
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+              justify-content: center;
+            "
+          >
             <img src="dist/img/logo.svg" alt="" />
             <span>@</span>
-            <img style="height: 100px;" src="dist/img/logos/bilt-10.png" alt="" />
+            <img
+              style="height: 100px"
+              src="dist/img/logos/bilt-10.png"
+              alt=""
+            />
           </div>
-          <p style="font-size: 2.1rem;">GraphRAG for AEC: Unlocking Insights from BIM Data</p>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?data=http://slides.qaecy.com/bilt-2025.html&size=150x150" alt="http://slides.qaecy.com/bilt-2025.html">
+          <p style="font-size: 2.1rem">
+            Unlocking AEC Insights with Graph RAG: A Hands-On Lab Session
+          </p>
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?data=http://slides.qaecy.com/bilt-2025.html&size=150x150"
+            alt="http://slides.qaecy.com/bilt-2025.html"
+          />
         </section>
 
         <!-- About -->
         <section>
-          <section data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17212009421947">
+          <section
+            data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17212009421947"
+          >
             <h4 class="bg-transparent-white">Who are we?</h4>
-            <img class="print-fallback" src="dist/img/fallback/AIinAEC2025-about.png" alt="">
+            <img
+              class="print-fallback"
+              src="dist/img/fallback/AIinAEC2025-about.png"
+              alt=""
+            />
           </section>
         </section>
 
         <section>
+          <h2>Overall agenda</h2>
+          <ul>
+            <li class="fragment fade-up">Session 3.1 | 09:30-10:45</li>
+            <ul class="fragment fade-up" style="margin-top: 0">
+              <li>Why?</li>
+              <li>What tech?</li>
+              <li>Hands on: Data processing</li>
+            </ul>
+            <li class="fragment fade-up">Coffee break ☕</li>
+            <li class="fragment fade-up">Session 3.2 | 11:00-12:15</li>
+            <ul class="fragment fade-up" style="margin-top: 0">
+              <li>Hands on: RAG</li>
+              <li>Perspective and discussion</li>
+            </ul>
+            <li class="fragment fade-up">Lunch 🥗🥖🍴</li>
+          </ul>
+        </section>
+
+        <!-- Why -->
+        <section>
+          <section>
+            <h4>Why are we here?</h4>
+          </section>
+
+          <section data-background-image="dist/img/misc/archive.png">
+            <h4 style="color: #fff">The problem:</h4>
+            <p style="color: #fff">
+              Information is trapped in silos, it's incomplete
+              <span style="font-size: 1.5rem"
+                >(or in multiple incompatible versions)</span
+              >
+              and therefore hardly accessible
+            </p>
+            <aside class="notes">
+              We do store data in document management systems and assign
+              metadata like revision letters, but often there are duplicates of
+              a file and metadata might not be up to date.<br /><br />
+              Some files are even scanned copies that are not searchable. And
+              even if they are, it typically requires an expert to read through
+              the files in order to deduce the requested information.
+            </aside>
+          </section>
+
+          <section data-background-image="dist/img/misc/trinity-library.png">
+            <p style="color: #fff">Library of</p>
+            <p style="color: #fff">Trinity College Dublin</p>
+            <aside class="notes">
+              In a library we add structure to books so we can easily find them,
+              but how should they be organised? By author? subject? color? At
+              Trinity College Dublin they are organised by size. The limitation
+              is that they can only be put in one place, just like the files in
+              your file explorer.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/tim-berners-lee.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                text-align: end;
+                background-color: rgba(255, 255, 255, 0.2);
+              "
+            >
+              <p>1991</p>
+              <p>World Wide Web</p>
+            </div>
+            <aside class="notes">
+              With the WWW we suddenly had a common language to publish
+              documents and create hyperlinks to other documents published by
+              other people
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/yahoo.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                bottom: 20vh;
+                text-align: start;
+                color: #fff;
+                width: 200px;
+              "
+            >
+              <p>We need structure. Let's order the web by category!</p>
+            </div>
+            <aside class="notes">
+              As people started publishing content, we needed a way to search
+              this information. Yahoo initially tried to do this like a phone
+              book. By topic.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/google.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                text-align: left;
+                top: 10vh;
+                color: #fff;
+                width: 220px;
+                background-color: rgba(0, 0, 0, 0.1);
+                padding: 0 1rem;
+              "
+            >
+              <p>All we need is a search bar!</p>
+            </div>
+            <aside class="notes">
+              Then came Google who invented a smart page ranking algorithm.<br /><br />
+              More incoming links = higher score.<br /><br />
+              In the beginnig it was simple keyword search, so if you wanted to
+              find the a contry's population you would search for the page that
+              would be likely to have this information
+              ("Population+europe+2012")
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/semantic-results.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />results</p>
+            </div>
+            <aside class="notes">
+              Since 2012, Google has been working on displaying semantic
+              results. This particular entity recognition feature was probably
+              added around 2015.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/semantic-search.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />search</p>
+              <aside class="notes">
+                With semantic search, you can now search more like you would ask
+                the question to a person.<br /><br />
+                The algorithm understands the intent of your question and finds
+                the information in a knowledge graph (more on that later).
+              </aside>
+            </div>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/postit-classify.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 10vh;
+                text-align: end;
+                color: #fff;
+                width: 40vw;
+              "
+            >
+              <p>The construction industry is still in the Yahoo age</p>
+            </div>
+            <aside class="notes">
+              We think we can solve everything with classification and tidy
+              systems. One of the challenges with this strategy is that things
+              can typically only belong to one type/class.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/misc/LLM_search_algae.mp4"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Large Language Models<br />are changing the way we search</p>
+            </div>
+            <aside class="notes">
+              Perplexity is a serious competitor to Google and with ChatGPT and
+              Gemini we are getting used to basically have a conversation with
+              the AI.<br /><br />
+              I will not go much into details on the technology behind, but it's
+              all about probability and math.
+            </aside>
+          </section>
+        </section>
+
+        <!-- RAG Intro -->
+        <section>
+          <section>
+            <h4>But what if I wish to search my own documents?</h4>
+          </section>
 
           <section>
-            <h4>What is RAG?</h4>
+            <video
+              data-autoplay
+              data-preload
+              src="dist/videos/misc/PDF_chat2.mp4"
+            ></video>
+            <aside class="notes">
+              There are free services that allow you to chat with a PDF and
+              these are great for a quick Q&A with your document
+            </aside>
           </section>
 
           <section>
@@ -165,36 +403,70 @@
             data-background-size="40%"
           >
             <aside class="notes">
-              Only the relevant  text fragments from the vector database are then added to the prompt.
+              Only the relevant text fragments from the vector database are then
+              added to the prompt.
+            </aside>
+          </section>
+
+          <section data-background-image="dist/img/misc/copilot.jpg">
+            <aside class="notes">
+              With the technologies available this is also getting quite common
+              now, and you will find generic non-industry specific solutions
+              that support it.<br /><br />
+              For example Microsoft Co-pilot that works with Microsoft 365
             </aside>
           </section>
 
           <section>
-            WIP: More on RAG
-            <ul>
-              <li>How RAG improves the accuracy and relevance of LLM outputs by grounding them in external knowledge.</li>
-              <li>Why RAG is particularly valuable for domains with complex, evolving information, such as AEC.</li>
-            </ul>
+            <h4>
+              And if I want to also include results from my CAD files, BIM
+              models and tasks in my FM-system?
+            </h4>
+            <h4>And what about information that constantly changes?</h4>
           </section>
 
+          <section
+            data-background-image="dist/img/misc/take-it-easy.jpeg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              This is were it gets harder and where you can no longer depend on
+              the generic tools
+            </aside>
+          </section>
         </section>
 
         <section>
-          
           <section>
             <h4>Graph RAG</h4>
           </section>
 
           <section>
-            <p>At <img src="dist/img/logo.svg" class="inline-logo" /> we
-            process documents through a set of pipelines to establish the RAG foundation</p>
-            <p class="fragment">In addition to vector embeddings we produce a <span style="text-decoration: underline;">Knowledge Graph</span></p>
+            <p>
+              At <img src="dist/img/logo.svg" class="inline-logo" /> we process
+              documents through a set of pipelines to establish the RAG
+              foundation
+            </p>
+            <p class="fragment">
+              In addition to vector embeddings we produce a
+              <span style="text-decoration: underline">Knowledge Graph</span>
+            </p>
           </section>
 
           <section>
             <p>First we need to understand what a Knowledge Graph is</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://lbd-hackers.github.io/slides/20221116_BILT.html&size=100x100" alt="https://lbd-hackers.github.io/slides/20221116_BILT.html"><br>
-            <a href="https://lbd-hackers.github.io/slides/20221116_BILT.html">BiLT 2022 presentation</a>
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?data=https://lbd-hackers.github.io/slides/20221116_BILT.html&size=100x100"
+              alt="https://lbd-hackers.github.io/slides/20221116_BILT.html"
+            /><br />
+            <a href="https://lbd-hackers.github.io/slides/20221116_BILT.html"
+              >BiLT 2022 presentation</a
+            >
+            <aside class="notes">
+              My former colleague Alex and I gave a deeper presentation on this
+              at BiLT 2022 in Valencia. You can take a look at it later but here
+              we will just briefly introduce the concept.
+            </aside>
           </section>
 
           <section
@@ -204,7 +476,11 @@
             <p class="bg-transparent-white">
               A graph is a network of nodes and edges
             </p>
-            <img src="dist/img/fallback/KG1.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG1.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -214,7 +490,11 @@
             <p class="bg-transparent-white">
               In a knowledge graph, the edges are directed
             </p>
-            <img src="dist/img/fallback/KG2.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG2.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -225,7 +505,11 @@
               One node-edge-node relationship is called a "triple" and describes
               a "statement" or a "fact"
             </p>
-            <img src="dist/img/fallback/KG3.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG3.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -235,7 +519,11 @@
             <p class="bg-transparent-white">
               A triple consists of a Subject, a predicate and an Object
             </p>
-            <img src="dist/img/fallback/KG4.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG4.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -243,7 +531,11 @@
             data-background-iframe="dist/html/cytoscape/spo3.html"
           >
             <p class="bg-transparent-white">An example from a BIM model</p>
-            <img src="dist/img/fallback/KG5.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG5.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -254,7 +546,11 @@
               As more facts are added, the object in one triple becomes the
               subject in another
             </p>
-            <img src="dist/img/fallback/KG6.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG6.png"
+              alt=""
+              class="print-fallback"
+            />
           </section>
 
           <section
@@ -264,75 +560,258 @@
             <p class="bg-transparent-white">
               Objects can also represent simple data properties
             </p>
-            <img src="dist/img/fallback/KG7.png" alt="" class="print-fallback">
+            <img
+              src="dist/img/fallback/KG7.png"
+              alt=""
+              class="print-fallback"
+            />
             <aside class="notes">
-              BIM models are essentially graphs, and one of the things we do at QAECY is to tear them apart and take out all the relevant context.<br><br>
-              What spaces are at what storeys, what windows are adjacent to which rooms, what chairs are located in which space etc.
+              BIM models are essentially graphs, and one of the things we do at
+              QAECY is to tear them apart and take out all the relevant
+              context.<br /><br />
+              What spaces are at what storeys, what windows are adjacent to
+              which rooms, what chairs are located in which space etc.
             </aside>
           </section>
 
           <section>
             <p>
-              These graphs can grow to unbelievable sizes.<br>
-              <img src="dist/img/logos/DBpedia.svg" class="inline-logo" style="height: 60px; transform: translateY(5.5px);" /> consists of 9.5 billion triples!
+              These graphs can grow to unbelievable sizes.<br />
+              <img
+                src="dist/img/logos/DBpedia.svg"
+                class="inline-logo"
+                style="height: 60px; transform: translateY(5.5px)"
+              />
+              consists of 9.5 billion triples!
             </p>
           </section>
 
-          <section data-background-iframe="https://dbpedia.org/page/Paasitorni">
-            <a href="https://dbpedia.org/page/Paasitorni">Paasitorni at DBpedia</a>
-            <img src="dist/img/fallback/AIinAEC2025-Paasitorni.png" alt="" class="print-fallback">
+          <section
+            data-background-iframe="https://dbpedia.org/page/The_Hague_University_of_Applied_Sciences"
+          >
+            <div class="bg-transparent-white">
+              <a
+                href="https://dbpedia.org/page/The_Hague_University_of_Applied_Sciences"
+                >The Hague University of Applied Sciences at DBpedia</a
+              >
+            </div>
+            <img
+              src="dist/img/fallback/BiLT2025-DBPedia.png"
+              alt=""
+              class="print-fallback"
+            />
             <aside class="notes">
-              This is the DBPedia entry for this building. You will see that it describes facts such as a reference to an image, where it is located, geocoordinates, an abstract, when it was established etc.
+              This is the DBPedia entry for this building. You will see that it
+              describes facts such as a reference to an image, where it is
+              located, geocoordinates, an abstract, when it was established etc.
             </aside>
           </section>
 
           <!-- Mads Mikkelsen -->
           <section
-            style="pointer-events: none;"
+            style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
           >
-            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+            <img
+              class="print-fallback"
+              src="dist/img/misc/mads-mikkelsen-query.png"
+              alt=""
+            />
             <aside class="notes">
-              You can query the graph, and when you do that you essentially describe a pattern in the graph that should be matched<br><br>
-              Things that are prefixed with ? are variables (ex ?theActor, ?movie)<br><br>
+              You can query the graph, and when you do that you essentially
+              describe a pattern in the graph that should be matched<br /><br />
+              Things that are prefixed with ? are variables (ex ?theActor,
+              ?movie)<br /><br />
               Things that are not are constants (ex Mads Mikkelsen, starring)
             </aside>
           </section>
 
           <section data-background-iframe="https://bit.ly/48kp6l0">
             <div class="bg-transparent-white">
-              <a style="pointer-events: all" href="https://bit.ly/48kp6l0" target="_blank"
-              >https://dbpedia.org/sparql</a
-            >
+              <a
+                style="pointer-events: all"
+                href="https://bit.ly/48kp6l0"
+                target="_blank"
+                >https://dbpedia.org/sparql</a
+              >
             </div>
-            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
-            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
+            <p class="print-fallback" style="font-size: 2rem">
+              https://bit.ly/48kp6l0
+            </p>
+            <img
+              class="print-fallback"
+              src="dist/img/misc/mads-mikkelsen-query2.png"
+              alt=""
+            />
             <aside class="notes">
-              In SPARQL language, the query looks like this and here I will execute it on the actual DBPedia live.<br><br>
-              You see how fast it is even with 9,5 billion triples?<br><br>
-              Therefore: Capture as much information about your real estate assets as possible. Size is not a limitation!<br><br>
-              You hopefully also see how versatile this data structure is. I don't imagine anyone considering this query when originally building the data structure 
-              - this is vastly different from the world of relational databases!
+              In SPARQL language, the query looks like this and here I will
+              execute it on the actual DBPedia live.<br /><br />
+              You see how fast it is even with 9,5 billion triples?<br /><br />
+              Therefore: Capture as much information about your real estate
+              assets as possible. Size is not a limitation!<br /><br />
+              You hopefully also see how versatile this data structure is. I
+              don't imagine anyone considering this query when originally
+              building the data structure - this is vastly different from the
+              world of relational databases!
             </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Data Processing</h2>
           </section>
 
           <section>
-            <p>WIP: More on Graph RAG</p>
-            <ul>
-              <li>How does the LLM access it?</li>
-              <li>Different approaches...</li>
-            </ul>
+            <p>
+              So now we know that we need graphs and Vector embeddings, but how
+              do we build these?
+            </p>
           </section>
 
+          <section>
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?data=https://github.com/qaecy/bilt2025/tree/main&size=100x100"
+              alt="https://github.com/qaecy/bilt2025/tree/main"
+            /><br />
+            <a href="https://github.com/qaecy/bilt2025/tree/main"
+              >https://github.com/qaecy/bilt2025</a
+            >
+          </section>
         </section>
+
+        <section>
+          <section>
+            <h4>Natural Language to SPARQL</h4>
+          </section>
+
+          <section>
+            <pre><code data-trim class="text hljs" data-line-numbers="1-6|7-16|18-24|26-37|39-50|52-63|65-75|77-81"><script type="text/template">
+Your job is to convert NLP questions to SPARQL queries. You are conservative, so if there is no obvious answer to the question, you will simply reply with "undefined". If there is a match you  return the SPARQL query and nothing else.
+
+Used prefixes:
+PREFIX qcy:   <https://dev.qaecy.com/ont#>
+PREFIX qcy-e: <https://dev.qaecy.com/enum#>
+PREFIX text:  <http://jena.apache.org/text#>
+
+The kind of queries you understand are:
+
+# List windows
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:value ?label .
+}
+
+# List doors
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Door ;
+    	qcy:value ?label .
+}
+
+# List spaces on second floor
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Space ;
+      qcy:value ?label .
+  	?storey a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Storey ;
+    	qcy:containsSpace ?match .
+    (?storey ?score) text:query (qcy:value "Level 2~") .
+  FILTER(?score > 3)
+}
+
+# Show slabs on second floor
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Slab ;
+      qcy:value ?label .
+  	?storey a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Storey ;
+    	qcy:hasElement ?match .
+    (?storey ?score) text:query (qcy:value "Level 2~") .
+  FILTER(?score > 3)
+}
+
+# Show windows adjacent to space A101
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Door ;
+      qcy:value ?label .
+  	?space a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:adjacentElement ?match .
+    (?space ?score) text:query (qcy:value "A101~") .
+  FILTER(?score > 3)
+}
+
+# Show elements inside space A102
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:value ?label .
+  	?space a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:containsElement ?match .
+    (?space ?score) text:query (qcy:value "A102~") .
+  FILTER(?score > 3)
+}
+
+Below this line you find the question you should map to a query
+---------------------
+
+
+Show windows on second floor
+</script></code></pre>
+          </section>
+
+          <section
+            data-background-video="dist/videos/misc/NL-SPARQL.mp4"
+            data-background-size="contain"
+          ></section>
 
           <section>
             <div style="height: 100%">
               <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
-              <img src="dist/img/fallback/Cue.png" alt="" class="print-fallback">
+              <img
+                src="dist/img/fallback/Cue.png"
+                alt=""
+                class="print-fallback"
+              />
             </div>
           </section>
 
+        </section>
+
+        <section>
+          WIP: More on RAG
+          <ul>
+            <li>
+              How RAG improves the accuracy and relevance of LLM outputs by
+              grounding them in external knowledge.
+            </li>
+            <li>
+              Why RAG is particularly valuable for domains with complex,
+              evolving information, such as AEC.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <div style="height: 100%">
+            <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+            <img
+              src="dist/img/fallback/Cue.png"
+              alt=""
+              class="print-fallback"
+            />
+          </div>
         </section>
       </div>
     </div>

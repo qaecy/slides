@@ -388,3 +388,7 @@ hlr{
   position: fixed;
   width: 100%;
 }
+
+.bg-transparent-white a{
+  pointer-events: all;
+}
