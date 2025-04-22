@@ -781,7 +781,28 @@ Show windows on second floor
           </section>
 
           <section>
-            <p>TODO: quick introduction to what we will be creating here...</p>
+            <p>Notebooks demonstrate processing and querying BIM data in RAG approach:</p>
+              <ul>
+                  <li>
+                      <p>
+                          <strong>Data Integration (Notebook 1):</strong> Converts IFC and PDF documents into structured RDF graphs (TTL format) and generates entity-centric text embeddings (JSON format). This prepares the data for downstream analysis and querying.
+                      </p>
+                  </li>
+                  <li>
+                      <p>
+                          <strong>RAG Querying (Notebook 2):</strong> Implements and compares two Retrieval-Augmented Generation (RAG) methods to query the processed data.
+                      </p>
+                  </li>
+              </ul>
+          </section>
+
+          <section>
+              <p>RAG Querying Methods Explored (Notebook 2)</p>
+              <p style="font-size: 1.4rem;">The two specific RAG techniques implemented and compared are:</p>
+              <ul>
+                  <li><strong>Vector-Based RAG:</strong> Uses semantic search on the generated embeddings to answer questions based on text similarity.</li>
+                  <li><strong>Graph-Based RAG:</strong> Translates natural language questions into SPARQL queries to retrieve precise information from the RDF knowledge graph.</li>
+              </ul>
           </section>
 
           <section>
