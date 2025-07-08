@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY Geometry</title>
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+			.cue-inline{
+				display: inline; height: 1rem; margin: 0 0 -0.05rem 0 !important;
+			}
+			.table-container {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+			}
+			.file-stats {
+				width: 80%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+			.flex-container {
+				display: flex;
+				align-items: center;
+				gap: 2rem;
+				margin: 20px 0;
+			}
+			.text-content {
+				flex: 1;
+				font-size: 1.4rem;
+			}
+			.image-content {
+				flex: 0.7;
+			}
+			.image-content img {
+				max-width: 70%;
+				height: auto;
+				display: block;
+				margin: 0 auto;
+				border-radius: 4px;
+				box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			}
+			.image-content.larger-image {
+				flex: 1;
+			}
+			.image-content.larger-image img {
+				max-width: 90%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                    <h2>DTU-Qaecy Workday</h2>
+                </section>
+				
+				<section>
+                    <h2>Overview</h2>
+                    <section>
+                        <p style="font-size: 1.4rem;">Test data consists of 1.640 files</p>
+                        <div class="table-container">
+                            <table class="file-stats">
+                                <thead>
+                                    <tr>
+                                        <th>Group</th>
+                                        <th>Extensions</th>
+                                        <th>Count</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Documents</td>
+                                        <td>.pdf, .xlsx, .doc, .docx, .xlsm, .xls, .txt</td>
+                                        <td>1,282</td>
+                                        <td>78.17%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CAD/Modeling</td>
+                                        <td>.dwg, .rvt, .pro, .ifc, .3dm</td>
+                                        <td>148</td>
+                                        <td>9.02%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Images</td>
+                                        <td>.tif, .jpg</td>
+                                        <td>130</td>
+                                        <td>7.93%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GIS</td>
+                                        <td>.sep</td>
+                                        <td>45</td>
+                                        <td>2.74%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diagrams</td>
+                                        <td>.vsd</td>
+                                        <td>32</td>
+                                        <td>1.95%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>.msg</td>
+                                        <td>2</td>
+                                        <td>0.12%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other</td>
+                                        <td>-</td>
+                                        <td>1</td>
+                                        <td>0.06%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+				</section>
+
+                <section>
+                    <h2>Processing of content</h2>
+
+                    <section></section>
+
+                    <section>
+                        <h2>1. iteration</h2>
+                        <p style="font-size: 1.4rem;">2/3 of test data to be processed in 1. iteration</p>
+                        <div class="table-container">
+                            <table class="file-stats">
+                                <thead>
+                                    <tr>
+                                        <th>Group</th>
+                                        <th>Extensions</th>
+                                        <th>Count</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Documents</td>
+                                        <td>.pdf</td>
+                                        <td>1,057</td>
+                                        <td>64.45%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <br>
+
+                        <p style="font-size: 1.4rem;">Result csv has the following content:</p>
+                        <div class="table-container">
+                            <table class="file-stats">
+                                <thead>
+                                    <tr>
+                                        <th>document</th>
+                                        <th>fileLocation</th>
+                                        <th>contentDescription</th>
+                                        <th>drawingRevisionDates</th>
+                                        <th>themes</th>
+                                        <th>documentationTypes</th>
+                                        <th>associatedWithBuildingOrProject</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="truncate"><a>https://cue.qaecy.com/r/a12d093b-dcd3-492c-a413-516de9018d7b/b2ba57f0-65e8-56af-96fd-2487d7c23766</a></span></td>
+                                        <td><span class="truncate">56301_vejledning_01.pdf</span></td>
+                                        <td><span class="truncate content-desc">This document provides instructions for the operation and maintenance of Purmo Compact, Plan Compact, Hygiene, and Ventil Compact radiators. It includes information on installation, system maintenance, troubleshooting, cleaning, and repainting. The document also provides technical data such as materials, coating process, and pressure class. Key points include avoiding system oxygenation, proper flushing before regulation, and addressing noise issues by checking pump pressure. Regular cleaning with mild soap is recommended, and touch-up paint is available for damaged surfaces. The guide also details the air bleeding process to optimize radiator efficiency.</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                        <td><span class="truncate">Building (11), PlumbingInBuilding (5), Electrical (4), PlumbingInTerrain (2), Cooling (1)</span></td>
+                                        <td><span class="truncate">Guide (1)</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="truncate"><a>https://cue.qaecy.com/r/a12d093b-dcd3-492c-a413-516de9018d7b/b459bb37-fb7c-5fab-ad3b-243927572216</a></span></td>
+                                        <td><span class="truncate">LLYN.B328_K37_C08_09.screenshot.VG900_01.2024.pdf</span></td>
+                                        <td><span class="truncate content-desc">This document contains data and status information for building 328 at DTU Lyngby, specifically for VEG01 - Lab & undervisning...</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                        <td><span class="truncate">Building (4), Electrical (2), Ventilation (2), PlumbingInBuilding (1)</span></td>
+                                        <td><span class="truncate">Datasheet (1)</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="truncate"><a>https://cue.qaecy.com/r/a12d093b-dcd3-492c-a413-516de9018d7b/29936a16-0c15-5207-9212-336b6a119745</a></span></td>
+                                        <td><span class="truncate">432_datablade_03.pdf</span></td>
+                                        <td><span class="truncate content-desc">This document is a datasheet for Mapegum WPS, a fast-drying, flexible liquid membrane used for interior waterproofing...</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                        <td><span class="truncate">Building (19), AirTypes (2), PlumbingInBuilding (1), PlumbingInTerrain (1)</span></td>
+                                        <td><span class="truncate">Datasheet (1)</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="truncate"><a>https://cue.qaecy.com/r/a12d093b-dcd3-492c-a413-516de9018d7b/29936a16-0c15-5207-9212-336b6a119745</a></span></td>
+                                        <td><span class="truncate">431_datablade_03.pdf</span></td>
+                                        <td><span class="truncate content-desc">This document is a datasheet for Mapegum WPS, a fast-drying, flexible liquid membrane used for interior waterproofing...</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                        <td><span class="truncate">Building (19), AirTypes (2), PlumbingInBuilding (1), PlumbingInTerrain (1)</span></td>
+                                        <td><span class="truncate">Datasheet (1)</span></td>
+                                        <td><span class="truncate">-</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section>
+
+                        <div class="table-container">
+                            <table class="file-stats">
+                                <tbody>
+                                    <tr>
+                                        <th style="width: 200px;">Document</th>
+                                        <td><a>https://cue.qaecy.com/r/a12d093b-dcd3-492c-a413-516de9018d7b/b2ba57f0-65e8-56af-96fd-2487d7c23766</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>fileLocation</th>
+                                        <td>56301_vejledning_01.pdf</td>
+                                    </tr>
+                                    <tr>
+                                        <th>contentDescription</th>
+                                        <td style="white-space: normal;">This document provides instructions for the operation and maintenance of Purmo Compact, Plan Compact, Hygiene, and Ventil Compact radiators. It includes information on installation, system maintenance, troubleshooting, cleaning, and repainting. The document also provides technical data such as materials, coating process, and pressure class. Key points include avoiding system oxygenation, proper flushing before regulation, and addressing noise issues by checking pump pressure. Regular cleaning with mild soap is recommended, and touch-up paint is available for damaged surfaces. The guide also details the air bleeding process to optimize radiator efficiency.</td>
+                                    </tr>
+                                    <tr>
+                                        <th>drawingRevisionDates</th>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>themes</th>
+                                        <td>Building (11), PlumbingInBuilding (5), Electrical (4), PlumbingInTerrain (2), Cooling (1)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>documentationTypes</th>
+                                        <td>Guide (1)</td>
+                                    </tr>
+                                    <tr>
+                                        <th>associatedWithBuildingOrProject</th>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="font-size: 1.4rem;">Fields drawingRevisionDates, themes, documentationTypes and associatedWithBuildingOrProject are aggregated information from pages in the document</p>
+                        <p style="font-size: 1.4rem;">e.g. "Building (11)" means that the theme "Building" is found 11 times across all pages</p>
+                    </section>
+                
+                </section>
+
+                <section>
+
+                    <h2>Processing of content</h2>
+
+                    <section>
+                    </section>
+
+                    <section>
+                        <h2>2. iteration</h2>
+
+                        Under processing...
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Processing of file names</h2>
+
+                    <section>
+                        <div class="flex-container">
+                            <div class="text-content">
+                                We have reviewed your document on file naming and syntax for this.
+
+                                <ul>
+                                    <li>
+                                        <p>
+                                            B_E_F_SfB_N: Older model files
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            B_SfB_T_E_N: Older drawing files
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            L.B_K_T_F_H_E/R_N: Model and drawing files
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            L.B_K_T_C_Z_N: General files
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="image-content">
+                                <img src="/dist/img/dtu/filename_syntax_document.jpeg" alt="File naming syntax document">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="flex-container">
+                            <div class="text-content">
+                                We have created a schema of your file naming syntax, and can use this to extract information about the files.
+                            </div>
+                            <div class="image-content larger-image">
+                                <img src="/dist/img/dtu/filename_syntax_wbs.jpeg" alt="File naming syntax document">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="flex-container">
+                            <div class="text-content">
+                                <p style="font-size: 1.1rem;">"11321501_Facader, Detaljer incl. forbindelsesgang"</p>
+                                <p style="font-size: 1.1rem;">Matched groups: [{'1.0': '113', '1.1': '21', '1.2': '5', '1.3': '01'}]</p>
+                                <p style="font-size: 1.1rem;">-> older drawing file where we can extract the following information:</p>
+                                <ul>
+                                    <li>
+                                        <p style="font-size: 1.1rem;">
+                                            '1.0': '113' -> Bygning/type -> Bygningsnummer
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 1.1rem;">
+                                            '1.1': '21' -> SfB klassifikation -> SfB klassifikation
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 1.1rem;">
+                                            '1.2': '5' -> Tegningsniveau -> Detalje-, bygnings-, og installationstegninger
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 1.1rem;">
+                                            '1.3': '01' -> Etage/afbildningstype -> 1. etage
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="image-content larger-image">
+                                <img src="/dist/img/dtu/filename_syntax_wbs2.jpeg" alt="File naming syntax document">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="flex-container">
+                            <div class="text-content">
+                                <p style="font-size: 1.1rem;">"LLYN.B101_K08_T57_H4_R102"</p>
+                                <p style="font-size: 1.1rem;">Matched groups: [{'2.0': 'LLYN', '2.1': 'B101', '2.2': 'K08', '2.3': 'T57', '2.5': 'H4', '2.6': 'R102'}]</p>
+                                <p style="font-size: 1.1rem;">-> Model and drawing file where we can extract the following information:</p>
+                                <ul>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.0': 'LLYN' -> Lokalitet -> Lyngby Campus
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.1': 'B101' -> Sted -> Bygning 101
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.2': 'K08' -> Vidensområde -> Mekaniske Installationer
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.3': 'T57' -> Bygningsbasis -> Ventilation,,
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.5': 'H4' -> Afbildningstype -> Bygningsudsnit
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 0.9rem;">
+                                            '2.6': 'R102' -> Rum / Areal / Space -> Rum / Areal / Space 102
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="image-content larger-image">
+                                <img src="/dist/img/dtu/filename_syntax_wbs3.jpeg" alt="File naming syntax document">
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                
+
+				<!-- <section>
+                    Example: Inferring smokedamper locations in BIM-model
+
+                    <section>
+                        <p>Problem:</p>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="flex: 1;">
+								<p style="font-size: 1.4rem;">Can we automatically determine where smokedampers should be placed (where firesections changes)?</p>
+                                <p class="fragment" style="font-size: 1.4rem;">Can we infer firesection change across walls between different rooms?</p>
+                                <p class="fragment" style="font-size: 1.4rem;">Can we establish relationships between overlapping spaceboundaries accross space-separating walls?</p>
+                            </div>
+                            <img src="dist/img/geometry/firesection_plan.jpeg" style="width: 50%; height: 300px; object-fit: contain;" />
+                        </div>
+                    </section>
+                    <section>
+                        <p>Approach: Spaceboundary pairing</p>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo1.jpeg" /> 
+                    </section>
+                    <section>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo2.jpeg" /> 
+                    </section>
+                    <section>
+                        <img src="dist/img/geometry/space_boundary_pairing_algo3.jpeg" /> 
+                    </section>
+                    <section>
+                        <div style="display: flex; justify-content: center; gap: 20px;">
+                            <img src="dist/img/geometry/space_boundary_pairing_algo3.jpeg" style="width: 45%; object-fit: contain;" />
+                            <img src="dist/img/geometry/opposite_face_graph.jpeg" style="width: 45%; object-fit: contain;" />
+                        </div>
+                    </section>
+                    <section
+                        data-background-iframe="https://ld-bim.web.app?duplex=true&query=PREFIX%20ex%3A%20%3Chttps%3A%2F%2Fexample.com%2F%3E%20%0APREFIX%20kg%3A%20%3Chttps%3A%2F%2Fw3id.org%2Fkobl%2Fgeometry%23%3E%20%0APREFIX%20bot%3A%20%3Chttps%3A%2F%2Fw3id.org%2Fbot%23%3E%20%0APREFIX%20inst%3A%20%3Chttps%3A%2F%2Fweb-bim%2Fresources%2F%3E%20%0A%0ASELECT%20DISTINCT%20%3Fboundary%20%3Fls%20%3Fel%0AWHERE%7B%0A%20%20%20BIND%28inst%3A0BTBFw6f90Nfh9rP1dl_3A%20AS%20%3Fspace%29%0A%20%20%20%3Fboundary%20bot%3AinterfaceOf%20%3Fspace%20%2C%20%3Fel%20%3B%0A%20%20%20%20%20%20%20kg%3Avertices3D%20%3Fver%20%3B%0A%20%20%20%20%20%20%20ex%3AisVertical%20true%20.%0A%20%20%20FILTER%28%3Fel%20%21%3D%20%3Fspace%29%0A%20%20%20BIND%28CONCAT%28%22POLYGON%20Z%20%28%22%2C%20STR%28%20%3Fver%20%29%2C%20%22%29%22%29%20%20%20AS%20%3Fls%20%29%0A%7D"
+                        data-background-interactive>
+                    </section>
+                </section> -->
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+        <style>
+            .file-stats {
+    width: 80%;  /* Reduce width to allow for centering */
+    border-collapse: collapse;
+    margin: 20px auto;  /* Using auto for left/right margin centers the table */
+    display: table;
+                font-size: 14px; /* or any size you prefer */
+            }
+    
+            .file-stats th {
+                font-size: 15px;
+            }
+            .file-stats td {
+                padding: 12px;
+                text-align: left;
+                border: 1px solid #ddd;
+                font-size: 13px;
+            }
+    
+            .file-stats th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+            }
+    
+            .file-stats tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+    
+            .file-stats tr:hover {
+                background-color: #f0f0f0;
+            }
+            .truncate {
+                max-width: 100px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+            }
+            .content-desc {
+                max-width: 150px;
+            }
+            </style>
+	</body>
+</html>
