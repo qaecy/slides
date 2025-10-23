@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <title>QAECY</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <!-- For Math -->
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
+
+        <section data-background-iframe="https://fh-hwz.ch/bildungsangebot/weiterbildung/mas/mas-real-estate-management-hwz-major-in-digital-and-ai">
+          <h4>Your background</h4>
+        </section>
+
+        <!-- Who -->
+        <section>
+          <section>
+            <h4>Who am I?</h4>
+          </section>
+
+          <section
+            data-background-iframe="./dist/html/timelines/timeline.html?file=mhra-short.json"
+          ></section>
+
+          <section
+            data-background-iframe="https://www.qaecy.com/about#hs_cos_wrapper_module_17201010611025"
+          >
+            <h4>Who are we?</h4>
+            <aside class="notes">
+              QAECY was founded by Philipp, Manos and me. I met Philipp at a bSI
+              Summit in Paris in 2018 (or London 2018 - hard to remember).<br /><br />
+              I met Manos in 2019 at LDAC Lisbon.<br /><br />
+              When I was at NIRAS we finally got the chance to do a project
+              together for a danish ofshore wind farm company. That involved
+              developing a minimal PoC that we are now turning into a
+              product.<br /><br />
+              We have quite different competences that compliment each other
+              well.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <p>Follow along</p>
+          <a href="https://bit.ly/3YFzkbp">bit.ly/3YFzkbp</a>
+        </section>
+
+        <!-- Why -->
+        <section>
+          <section>
+            <h4>Why am I here?</h4>
+          </section>
+
+          <section data-background-image="dist/img/misc/archive.png">
+            <h4 style="color: #fff">The problem:</h4>
+            <p style="color: #fff">
+              Information is trapped in silos, it's incomplete
+              <span style="font-size: 1.5rem"
+                >(or in multiple incompatible versions)</span
+              >
+              and therefore hardly accessible
+            </p>
+            <aside class="notes">
+              We do store data in document management systems and assign
+              metadata like revision letters, but often there are duplicates of
+              a file and metadata might not be up to date.<br /><br />
+              Some files are even scanned copies that are not searchable. And
+              even if they are, it typically requires an expert to read through
+              the files in order to deduce the requested information.
+            </aside>
+          </section>
+
+          <section data-background-image="dist/img/misc/trinity-library.png">
+            <p style="color: #fff">Library of</p>
+            <p style="color: #fff">Trinity College Dublin</p>
+            <aside class="notes">
+              In a library we add structure to books so we can easily find them,
+              but how should they be organised? By author? subject? color? At
+              Trinity College Dublin they are organised by size. The limitation
+              is that they can only be put in one place, just like the files in
+              your file explorer.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/tim-berners-lee.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end; background-color: rgba(255,255,255,0.2);"
+            >
+              <p>1991</p>
+              <p>World Wide Web</p>
+            </div>
+            <aside class="notes">
+              With the WWW we suddenly had a common language to publish
+              documents and create hyperlinks to other documents published by
+              other people
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/yahoo.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                bottom: 20vh;
+                text-align: start;
+                color: #fff;
+                width: 200px;
+              "
+            >
+              <p>We need structure. Let's order the web by category!</p>
+            </div>
+            <aside class="notes">
+              As people started publishing content, we needed a way to search
+              this information. Yahoo initially tried to do this like a phone
+              book. By topic.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/google.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                left: 0;
+                text-align: left;
+                top: 10vh;
+                color: #fff;
+                width: 220px;
+                background-color: rgba(0,0,0,0.1);
+                padding: 0 1rem;
+              "
+            >
+              <p>All we need is a search bar!</p>
+            </div>
+            <aside class="notes">
+              Then came Google who invented a smart page ranking algorithm.<br /><br />
+              More incoming links = higher score.<br /><br />
+              In the beginnig it was simple keyword search, so if you wanted to
+              find the a contry's population you would search for the page that
+              would be likely to have this information
+              ("Population+europe+2012")
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/semantic-results.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />results</p>
+            </div>
+            <aside class="notes">
+              Since 2012, Google has been working on displaying semantic
+              results. This particular entity recognition feature was probably
+              added around 2015.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/semantic-search.png"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Semantic<br />search</p>
+              <aside class="notes">
+                With semantic search, you can now search more like you would ask
+                the question to a person.<br /><br />
+                The algorithm understands the intent of your question and finds
+                the information in a knowledge graph (more on that later).
+              </aside>
+            </div>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/postit-classify.png"
+            style="height: 100%"
+          >
+            <div
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 10vh;
+                text-align: end;
+                color: #fff;
+                width: 40vw;
+              "
+            >
+              <p>The construction industry is still in the Yahoo age</p>
+            </div>
+            <aside class="notes">
+              We think we can solve everything with classification and tidy
+              systems. One of the challenges with this strategy is that things
+              can typically only belong to one type/class.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/misc/LLM_search_algae.mp4"
+            style="height: 100%"
+          >
+            <div
+              style="position: absolute; right: 0; bottom: 0; text-align: end"
+            >
+              <p>Large Language Models<br />are changing the way we search</p>
+            </div>
+            <aside class="notes">
+              Perplexity is a serious competitor to Google and with ChatGPT and
+              Gemini we are getting used to basically have a conversation with
+              the AI.<br /><br />
+              I will not go much into details on the technology behind, but it's
+              all about probability and math.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>But what if I wish to search my own documents?</h4>
+          </section>
+
+          <section
+            data-background-video="dist/videos/misc/PDF_chat.mp4"
+            data-preload
+            data-autoplay
+          >
+            <aside class="notes">
+              There are free services that allow you to chat with a PDF and
+              these are great for a quick Q&A with your document
+            </aside>
+          </section>
+
+          <section>
+            <h4>RAG</h4>
+            <p>Retrieval-Augmented Generation</p>
+            <aside class="notes">They would typically use a RAG approach</aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple.svg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              Very simply speaking, the app will extract the text from your PDF
+              and add it to the prompt along with your question and some
+              instructions on what to do with the information in the text.
+            </aside>
+          </section>
+
+          <section>
+            <h4>And what if I wish to search across multiple documents?</h4>
+          </section>
+
+          <section>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <div>
+                  <img
+                    src="dist/img/rag/f_embedding.svg"
+                    alt=""
+                    style="height: 200px"
+                  />
+                </div>
+                <div>
+                  <h3 style="color: black">
+                    \( \rightarrow [-0.2, 0.1, \dots, -0.5, 0.1] \)
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <aside class="notes">
+              If you wish to search across multiple documents the text body
+              becomes too big for the query.<br /><br />
+              In this case, there is a pre step in converting all the text
+              fragments into so-called vector embeddings.
+            </aside>
+          </section>
+
+          <section>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div>
+                <p style="font-size: 26px">
+                  \[ \begin{bmatrix} 0.125 & -2.103 & \dots & -2.005 & 0.012 \\
+                  0.615 & -1.142 & \dots & 1.945 & -2.113 \\ \vdots & \vdots &
+                  \ddots & \vdots & \vdots \\ 0.712 & 1.153 & \dots & -1.721 &
+                  -0.852 \\ -0.925 & -0.903 & \dots & 1.044 & -1.412
+                  \end{bmatrix} \rightarrow \]
+                </p>
+              </div>
+              <div>
+                <img src="dist/img/rag/db.svg" style="height: 200px" />
+              </div>
+            </div>
+            <aside class="notes">
+              The vector embeddings are put in a special type of database called
+              a vector database, and based on your search term, these databases
+              will give you the text fragments that are most related.<br /><br />
+              It's al based on mathematical similarities between the vectors and
+              it is kind of mind blowing how well it actually works.
+            </aside>
+          </section>
+
+          <section
+            data-background-image="dist/img/rag/rag_simple2.svg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              Only the relevant  text fragments from the vector database are then added to the prompt.
+            </aside>
+          </section>
+
+          <section data-background-image="dist/img/misc/copilot.jpg">
+            <aside class="notes">
+              With the technologies available this is also getting quite common now, and you will find generic non-industry specific solutions that support it.<br><br>
+              For example Microsoft Co-pilot that works with Microsoft 365
+            </aside>
+          </section>
+
+          <section>
+            <h4>
+              And if I want to also include results from my CAD files, BIM
+              models and tasks in my FM-system?
+            </h4>
+            <h4>And what about information that constantly changes?</h4>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/take-it-easy.jpeg"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              This is were it gets harder and where you can no longer depend on
+              the generic tools
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>A combination of technologies</h4>
+          </section>
+
+          <section>
+            <p>
+              <img src="dist/img/logo.svg" class="inline-logo" /> uses Knowledge
+              Graphs to capture facts that are not easily expressed in text
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/undirected-graph.html"
+          >
+            <p class="bg-transparent-white">
+              A graph is a network of nodes and edges
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              In a knowledge graph, the edges are directed
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo1.html"
+          >
+            <p class="bg-transparent-white">
+              One node-edge-node relationship is called a "triple" and describes
+              a "statement" or a "fact"
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo2.html"
+          >
+            <p class="bg-transparent-white">
+              A triple consists of a Subject, a predicate and an Object
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo3.html"
+          >
+            <p class="bg-transparent-white">An example from a BIM model</p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo4.html"
+          >
+            <p class="bg-transparent-white">
+              As more facts are added, the object in one triple becomes the
+              subject in another
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/spo5.html"
+          >
+            <p class="bg-transparent-white">
+              Objects can also represent simple data properties
+            </p>
+            <aside class="notes">
+              BIM models are essentially graphs, and one of the things we do at QAECY is to tear them apart and take out all the relevant context.<br><br>
+              What spaces are at what storeys, what windows are adjacent to which rooms, what chairs are located in which space etc.
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              These graphs can grow to unbelievable sizes.<br>
+              <img src="dist/img/logos/DBpedia.svg" class="inline-logo" style="height: 60px; transform: translateY(5.5px);" /> consists of 9.5 billion triples!
+            </p>
+          </section>
+
+          <section data-background-iframe="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration">
+            <a href="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration">HWZ at DBpedia</a>
+            <aside class="notes">
+              This is the DBPedia entry for your university. You will see that it describes facts such as a reference to a logo, where it is located, geocoordinates, an abstract in german and english, when it was established etc.
+            </aside>
+          </section>
+
+          <!-- Mads Mikkelsen -->
+          <section
+            style="pointer-events: none;"
+            data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
+          >
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+            <aside class="notes">
+              You can query the graph, and when you do that you essentially describe a pattern in the graph that should be matched<br><br>
+              Things that are prefixed with ? are variables (ex ?theActor, ?movie)<br><br>
+              Things that are not are constants (ex Mads Mikkelsen, starring)
+            </aside>
+          </section>
+
+          <section data-background-iframe="https://bit.ly/48kp6l0">
+            <a href="https://bit.ly/48kp6l0" target="_blank"
+              >https://dbpedia.org/sparql</a
+            >
+            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
+            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
+            <aside class="notes">
+              In SPARQL language, the query looks like this and here I will execute it on the actual DBPedia live.<br><br>
+              You see how fast it is even with 9,5 billion triples?<br><br>
+              Therefore: Capture as much information about your real estate assets as possible. Size is not a limitation!<br><br>
+              You hopefully also see how versatile this data structure is. I don't imagine anyone considering this query when originally building the data structure 
+              - this is vastly different from the world of relational databases!
+            </aside>
+          </section>
+
+          <section>
+            <h4>Should I learn to write SPARQL queries?</h4>
+            <p>No! The LLMs already know 😎</p>
+            <aside class="notes">
+              There are different techniques for this and they improve every day.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
+          >
+            <aside class="notes">
+              This is an example from our product where the question is mapped to a query on the graph.<br><br>
+              One interesting thing to note here is the fact that it doesn't matter in what BIM model the information is.
+              The slabs and mechanical elements are in two different models but can be viewed together. The graph allows us to have a higher abstraction layer<br><br>
+              We also support that the same geometry can have multiple geometrical representations. 2D, 3D, Point cloud, BIM etc.
+            </aside>
+          </section>
+
+          <section>
+            <h4>Other examples of contextual questions</h4>
+            <ul>
+              <li class="fragment">
+                How many windows are there on the northern facade?
+              </li>
+              <li class="fragment">
+                Where is the mixing plant that feeds this radiator?
+              </li>
+              <li class="fragment">When was this filter last replaced?</li>
+              <li class="fragment">
+                In what facilities do we use Company X for cleaning?
+              </li>
+            </ul>
+            <aside class="notes">
+              The information can be fetched from various systems and structured in this general form so it can be easily retrieved
+            </aside>
+          </section>
+
+          <section>
+            <div style="display: flex; justify-content: center;">
+              <div style="display: flex; justify-content: space-around; width: 500px;">
+                <img src="dist/img/misc/software_wasteland.jpeg" alt="" height="300px">
+                <img src="dist/img/misc/the_data_centric_revolution.jpg" style="border: 1px solid" alt="" height="300px">
+              </div>
+            </div>
+            <aside class="notes">
+              I can recommend these two books if you want to understand why it is so important that we stop focusing on the applications and start focusing on the information they consume and create<br><br>
+              The latter is written specifically for decision makers.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>Multiple realities</h4>
+          </section>
+
+          <section>
+            <p>Is the earth round or flat?</p>
+            <p>Are the migrants eating their dogs and cats in Springfield, Ohio?</p>
+            <!-- <p>Will the building's carbon footprint be lower if we use timber over concrete?</p> -->
+          </section>
+
+          <section>
+            <p>The web follows the <b>AAA</b> principle</p>
+            <p style="font-style: italic">
+              <b>A</b>nyone can say <b>A</b>nything about <b>A</b>nything
+            </p>
+          </section>
+
+          <section>
+            <p>
+              It is up to you as a <b>reflective individual</b> to form your own
+              opinion
+            </p>
+          </section>
+
+          <section>
+            <p>
+              This can be good or bad, but most importantly it lets us
+              <b>deal with the fact that reality is complex</b>
+            </p>
+          </section>
+
+          <section>
+            <p style="padding-bottom: 1rem">
+              Construction projects are also complex and there will exist more
+              realities simultaniously
+            </p>
+          </section>
+
+          <section>
+            <p style="padding-bottom: 1rem">
+              Drawing conclusions requires gathering information from multiple
+              sources and always includes a multitude of assumptions
+            </p>
+            <p style="font-size: 1.5rem">
+              "Would the carbon footprint be reduced if we switch to a wooden
+              structure?"
+            </p>
+            <p style="font-size: 1.5rem; font-style: italic">
+              - It depends on how you calculate it!
+            </p>
+          </section>
+
+          <section>
+            <p style="padding-bottom: 1rem">
+              Furthermore, the reality rapidly changes during the design stages
+              making it hard to gather the current state of truth
+            </p>
+            <p style="font-size: 1.5rem">"Is the door red or orange?"</p>
+            <p style="font-size: 1.5rem; font-style: italic">
+              - It depends on when you ask!
+            </p>
+          </section>
+
+          <section>
+            <p style="padding-bottom: 1rem">
+              Over the years we gather so much information that multiple
+              realities will inevitably exist
+            </p>
+            <p style="font-size: 1.5rem">"Was this wall removed?"</p>
+            <p style="font-size: 1.5rem; font-style: italic">
+              - It depends on which document you look at!
+            </p>
+          </section>
+
+          <section>
+            <p>The single truth is often complicated.</p>
+            <p>
+              <img src="dist/img/logo.svg" class="inline-logo" /> gives you the
+              insights needed to draw your own qualified conclusion.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              How many times have you experienced a Single
+              <span style="font-style: oblique">Source</span> of Truth in your
+              construction projects?
+            </p>
+          </section>
+
+          <section data-background-image="dist/img/misc/no-ssot.png"></section>
+
+          <section>
+            <p>
+              <img src="dist/img/logo.svg" class="inline-logo" /> provides a
+              Single <span style="font-style: oblique">View</span> of Truth that
+              spans across the knowledge repositories provided.
+            </p>
+            <aside class="notes">
+              We follow the data centric principals. We don't try to establish one place where everything should be stored. We establish the links
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Let's take a look at how we deal with inconsistencies
+            </p>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/door-has-color1.html"
+          >
+            <aside class="notes">
+              This graph shows a door and two facts about its color<br><br>
+              One claims that the door is orange<br><br>
+              The other one claims that it is red<br><br>
+              What do you think? Which one should we trust? Could it be both?<br><br>
+              It is obvious that one of the statements must be invalid unless
+              the door has multiple colors
+            </aside>
+          </section>
+
+          <section>
+            <p>Let's see how an LLM would interpret it</p>
+          </section>
+
+          <section>
+            <div style="height: 100%">
+              <video
+                data-autoplay
+                src="dist/videos/Gemini_door-color1.mov"
+              ></video>
+            </div>
+            <aside class="notes">
+              This was a small experiment that I made and it was interesting to see that Gemini has the exact reasoning that I intended<br><br>
+              I actually tried the same with ChatGPT yesterday and it thought it was more likely that it was red because it is a stronger color :D<br><br>
+              Nevertheless, we can conclude that we need more information to actualy derive something meaningful
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Let's imagine that we had access to some provenence data about
+              each statement
+            </p>
+
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/door-has-color2.html"
+          >
+          <aside class="notes">
+            Metadata about the "door has color orange fact":<br>
+            - Generated by an algorithm with a certainty of 0.4<br>
+            - Derived from an Image<br>
+            - Information from January 2024
+          </aside>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/door-has-color3.html"
+          >
+          <aside class="notes">
+            Metadata about the "door has color red fact":<br>
+            - Generated by a person who works on behalf of a company<br>
+            - Attached a comment with why he believes it is red<br>
+            - Information from August 2024
+          </aside>
+          </section>
+
+          <section>
+            <div style="height: 100%">
+              <video
+                data-autoplay
+                src="dist/videos/Gemini_door-color2.mov"
+              ></video>
+            </div>
+            <aside class="notes">
+              Now suddenly the LLM has enough information to come with a reasonable answer<br><br>
+              This tells us that the importance is probably not which LLM we use (they are all incredibly good at this point) but what we feed it with!
+            </aside>
+          </section>
+
+          <section>
+            <p>Full prompt for you to try</p>
+            <pre><code data-trim class="text hljs" data-line-numbers="1-5|6-14|15-23"><script type="text/template">
+Given the below information, 
+which color would you trust the door to have?
+
+<Door> hasColor "Red" .
+<Door> hasColor "Orange" .
+
+<< <Door> hasColor "Orange" >> 
+	wasGeneratedBy <Algorithm_a-v2.0.1> ;
+	generatedAtTime "2024-01-11T12:11:28Z" .
+<Algorithm_a-v2.0.1> 
+	derivedFrom <Image-X> .
+<< <Algorithm_a-v2.0.1> derivedFrom <Image-X> >> 
+	certainty 0.4 .
+
+<< <Door> hasColor "Red" >> 
+	wasGeneratedBy <John> ;
+	generatedAtTime "2024-01-11T12:11:28Z" ;
+	comment "I have been on site and can confirm that the door is red." .
+<John> 
+	email "john-doe@the-company.com" ;
+	actedOnBehalfOf <TheCompany> .
+<TheCompany> 
+	wasEstablished "1908-03-1" .
+						</script></code></pre>
+          </section>
+
+          <section>
+            <h4>Context is important!</h4>
+            <aside class="notes">
+              We could also have imagined another situation where the colors were on opposite sides of the door.<br><br>
+              Or we could have information about a maintainance task where the color was changed. The context is so important!
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>
+              The <img src="dist/img/logo.svg" class="inline-logo" /> product
+            </h4>
+          </section>
+
+          <section
+            data-background-image="dist/img/qaecy/data_funnel.png"
+            data-background-size="50%"
+          >
+            <aside class="notes">
+              Overall, we can illustrate what we do with this simple funnel. We take structured, unstructured, unstructured documents and we are born AEC and understand BIM, CAD and classification systems<br><br>
+              We process the files through our pipelines. They can do something now and much more in the future. If a client has a specific demand we can add this to form the best possible dataset for our knowledge assistant<br><br>
+              We can expose this through an API which is how some clients decide to consume it, but we also have a portal app that is essentially based around a search bar
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/document_graph.mp4"
+            data-background-size="50%"
+          >
+            <aside class="notes">
+              One of the simpler things we do is that we establish an overview of your project<br><br>
+              What we want to achieve with this dashboard is an overview for the person just arriving at the project. What type of files? 
+              How many? Spatial breakdown site/building/storey/space if it's a building or a campus. Different if it's a bridge or a tunnel.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Search_misc.mp4"
+            data-background-size="50%"
+          >
+            <aside class="notes">
+              This is a demonstration how the search works. First result gives us a little information about the thing we are searching and shows the result which it found in a CAD file<br><br>
+              The remaining searches are on information in the graph and these are mapped to queries. We are considering how much of this to show to an end-user and probably we will just use the LLM to formulate a response answer based on what was found
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Elevator.mp4"
+            data-background-size="50%"
+          >
+            <aside class="notes">
+              Here is a more traditional LLM search that builds a response entirely on text content.
+            </aside>
+          </section>
+
+          <section
+            data-background-video="dist/videos/portal/Model_PDF.mp4"
+            data-background-size="50%"
+          >
+            <aside class="notes">
+              We try to make the contextual information available where the user us. For example, if you click an object in our BIM viewer which we were able to
+              correlate to a PDF file or even a fragment of text in this PDF file, you will see this.<br><br>
+              You can even drag/drop a file from your desktop to an object to establish this relationship.<br><br>
+              If the file is already in the system it will not be re-uploaded. 
+              It is identified by its content and can therefore be mapped to the existing document even if the names are different.
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h4>How to take part in it?</h4>
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/lego-warriors-2.png"
+            data-background-size="40%"
+          >
+            <aside class="notes">
+              We are of course on a mission to conquer the world but we are also
+              a small team that need a strong focus. Therefore we carefully
+              choose projects that we can learn from in collaboration with our
+              client.
+            </aside>
+          </section>
+
+          <!-- <section
+            data-background-image="dist/img/qaecy/evaluation_process.svg"
+            data-background-size="70%"
+          ></section>
+
+          <section
+            data-background-image="dist/img/qaecy/evaluation_process2.svg"
+            data-background-size="70%"
+          ></section> -->
+
+          <section>
+            <h4>Key takeaways</h4>
+            <ul>
+              <li class="fragment">
+                We gather tons of important information around our build assets
+              </li>
+              <li class="fragment">
+                This information is not easily accessible
+              </li>
+              <li class="fragment">
+                AI can provide knowledge so you can make proper decisions
+              </li>
+              <li class="fragment">
+                AI is not one tool but a myriad of tools for specific purpuses
+              </li>
+              <li class="fragment">
+                <img src="dist/img/logo.svg" class="inline-logo" /> wants to
+                deliver the best AI for knowledge retrival in AEC
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <img src="dist/img/philipp.jpg" height="300px" alt="" />
+            <p>
+              Grab a ☕ with Philipp<br />
+              <a style="font-size: 1rem" href="mailto:philipp.dohmen@qaecy.com"
+                >philipp.dohmen@qaecy.com</a
+              >
+            </p>
+            <aside class="notes">
+              Our co-founder is based in Zurich and I strongly recommend you to reach out to him if you want to know more.<br><br>
+              I am also up for a virtual one if you have questions.
+            </aside>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        // showNotes: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

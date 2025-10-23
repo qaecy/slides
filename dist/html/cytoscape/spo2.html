@@ -10,7 +10,8 @@
       import { isMobile } from "./helpers.js";
       import { logNodePositions, animateGraph, buildStyles, layoutOptions, defaultSettings } from '../../js/cytoscape-helpers/index.mjs';
 
-      const style = buildStyles();
+      const s = { ...defaultSettings, edgeFontSize: "8rem", edgeWidth: "5rem" };
+      const style = buildStyles(s);
       const padding = isMobile() ? 5 : 200;
 
       console.log(isMobile());
