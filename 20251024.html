@@ -556,31 +556,131 @@
 
           <section>
             <h4>Should I learn to write SPARQL queries?</h4>
-            <p>No! The LLMs already know 😎</p>
+            <p>No! The LLMs are there to assist you 😎</p>
             <aside class="notes">
               There are different techniques for this and they improve every
               day.
             </aside>
           </section>
 
-          <section
-            data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
-          >
+          <section>
+            <pre><code data-trim class="text hljs" data-line-numbers="1-6|7-16|7-75|77-81"><script type="text/template">
+Your job is to convert NLP questions to SPARQL queries. You are conservative, so if there is no obvious answer to the question, you will simply reply with "undefined". If there is a match you  return the SPARQL query and nothing else.
+
+Used prefixes:
+PREFIX qcy:   <https://dev.qaecy.com/ont#>
+PREFIX qcy-e: <https://dev.qaecy.com/enum#>
+PREFIX text:  <http://jena.apache.org/text#>
+
+The kind of queries you understand are:
+
+# List windows
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:value ?label .
+}
+
+# List doors
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Door ;
+    	qcy:value ?label .
+}
+
+# List spaces on second floor
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Space ;
+      qcy:value ?label .
+  	?storey a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Storey ;
+    	qcy:containsSpace ?match .
+    (?storey ?score) text:query (qcy:value "Level 2~") .
+  FILTER(?score > 3)
+}
+
+# Show slabs on second floor
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Slab ;
+      qcy:value ?label .
+  	?storey a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Storey ;
+    	qcy:hasElement ?match .
+    (?storey ?score) text:query (qcy:value "Level 2~") .
+  FILTER(?score > 3)
+}
+
+# Show windows adjacent to space A101
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:entityCategory qcy-e:Door ;
+      qcy:value ?label .
+  	?space a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:adjacentElement ?match .
+    (?space ?score) text:query (qcy:value "A101~") .
+  FILTER(?score > 3)
+}
+
+# Show elements inside space A102
+SELECT ?match ?label
+WHERE {
+    ?match a qcy:BIMEntity ;
+      qcy:value ?label .
+  	?space a qcy:BIMEntity ;
+  		qcy:entityCategory qcy-e:Space ;
+    	qcy:containsElement ?match .
+    (?space ?score) text:query (qcy:value "A102~") .
+  FILTER(?score > 3)
+}
+
+Below this line you find the question you should map to a query
+---------------------
+
+
+Show windows on second floor
+</script></code></pre>
             <aside class="notes">
-              This is an example from our product where the question is mapped
-              to a query on the graph.<br /><br />
-              One interesting thing to note here is the fact that it doesn't
-              matter in what BIM model the information is. The slabs and
-              mechanical elements are in two different models but can be viewed
-              together. The graph allows us to have a higher abstraction
-              layer<br /><br />
-              We also support that the same geometry can have multiple
-              geometrical representations. 2D, 3D, Point cloud, BIM etc.
+              If we use a RAG approach to converting Natural Language to SPARQL
+              queries it could look like this. 1. provide instructions and
+              examples and 2. insert the user request.
             </aside>
           </section>
 
+          <section
+            data-background-video="dist/videos/misc/NL-SPARQL.mp4"
+            data-background-size="contain"
+          >
+            <aside class="notes">
+              This is a demonstration of how we use this technology. Since we
+              process individual IFCs and establish the graph as a glue between
+              them we can even perform a query across multiple models.
+            </aside>
+          </section>
+
+          <!-- <section
+            data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
+            data-background-size="contain"
+          ></section> -->
+
           <section>
-            <h4>Other examples of contextual questions</h4>
+            <p>This works if you know the graph schema but what if you don't?</p>
+          </section>
+
+          <section
+            data-background-video="dist/videos/misc/GRASP.mp4"
+            data-background-size="contain"
+          ></section>
+
+          <section>
+            <h4>Examples of contextual questions</h4>
             <ul>
               <li class="fragment">
                 How many windows are there on the northern facade?
@@ -599,35 +699,7 @@
             </aside>
           </section>
 
-          <section>
-            <div style="display: flex; justify-content: center">
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-around;
-                  width: 500px;
-                "
-              >
-                <img
-                  src="dist/img/misc/software_wasteland.jpeg"
-                  alt=""
-                  height="300px"
-                />
-                <img
-                  src="dist/img/misc/the_data_centric_revolution.jpg"
-                  style="border: 1px solid"
-                  alt=""
-                  height="300px"
-                />
-              </div>
-            </div>
-            <aside class="notes">
-              I can recommend these two books if you want to understand why it
-              is so important that we stop focusing on the applications and
-              start focusing on the information they consume and create<br /><br />
-              The latter is written specifically for decision makers.
-            </aside>
-          </section>
+          
         </section>
 
         <section>
@@ -866,7 +938,11 @@ which color would you trust the door to have?
         <section>
           <section>
             <div style="display: flex; justify-content: center">
-              <cue-logo class="inline-logo" active="true"></cue-logo>
+              <cue-logo
+                class="inline-logo"
+                active="true"
+                continuous="true"
+              ></cue-logo>
             </div>
           </section>
 
@@ -883,10 +959,30 @@ which color would you trust the door to have?
           </section>
 
           <section>
-            <video
-              data-autoplay
-              src="dist/videos/cue/Changes.mp4"
-            ></video>
+            <video data-autoplay src="dist/videos/cue/Changes.mp4"></video>
+          </section>
+
+          <section
+            data-background-iframe="dist/html/cytoscape/document-entities-5.html"
+          >
+            <img
+              src="dist/img/fallback/Decentral-G13.png"
+              alt=""
+              class="print-fallback"
+            />
+          </section>
+
+          <section
+            data-background-image="dist/img/misc/ne_link.svg"
+            data-background-size="80vh"
+          ></section>
+
+          <section>
+            <ul>
+              <li>Same entity represented in multiple contexts</li>
+              <li>Different visual representaitions of the same entity</li>
+              <li>Different historical versions of the same entity</li>
+            </ul>
           </section>
         </section>
 
