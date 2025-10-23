@@ -38,7 +38,9 @@
           <p>your knowledge, accessible</p>
         </section>
 
-        <section data-background-iframe="https://fh-hwz.ch/bildungsangebot/weiterbildung/mas/mas-real-estate-management-hwz-major-in-digital-and-ai">
+        <section
+          data-background-iframe="https://fh-hwz.ch/bildungsangebot/weiterbildung/mas/mas-real-estate-management-hwz-major-in-digital-and-ai"
+        >
           <h4>Your background</h4>
         </section>
 
@@ -72,7 +74,9 @@
 
         <section>
           <p>Follow along</p>
-          <a href="https://bit.ly/3YFzkbp">bit.ly/3YFzkbp</a>
+          <a href="https://slides.qaecy.com/20251023.html"
+            >https://slides.qaecy.com/20251023.html</a
+          >
         </section>
 
         <!-- Why -->
@@ -117,7 +121,13 @@
             style="height: 100%"
           >
             <div
-              style="position: absolute; right: 0; bottom: 0; text-align: end; background-color: rgba(255,255,255,0.2);"
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                text-align: end;
+                background-color: rgba(255, 255, 255, 0.2);
+              "
             >
               <p>1991</p>
               <p>World Wide Web</p>
@@ -164,7 +174,7 @@
                 top: 10vh;
                 color: #fff;
                 width: 220px;
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgba(0, 0, 0, 0.1);
                 padding: 0 1rem;
               "
             >
@@ -358,13 +368,16 @@
             data-background-size="40%"
           >
             <aside class="notes">
-              Only the relevant  text fragments from the vector database are then added to the prompt.
+              Only the relevant text fragments from the vector database are then
+              added to the prompt.
             </aside>
           </section>
 
           <section data-background-image="dist/img/misc/copilot.jpg">
             <aside class="notes">
-              With the technologies available this is also getting quite common now, and you will find generic non-industry specific solutions that support it.<br><br>
+              With the technologies available this is also getting quite common
+              now, and you will find generic non-industry specific solutions
+              that support it.<br /><br />
               For example Microsoft Co-pilot that works with Microsoft 365
             </aside>
           </section>
@@ -462,34 +475,56 @@
               Objects can also represent simple data properties
             </p>
             <aside class="notes">
-              BIM models are essentially graphs, and one of the things we do at QAECY is to tear them apart and take out all the relevant context.<br><br>
-              What spaces are at what storeys, what windows are adjacent to which rooms, what chairs are located in which space etc.
+              BIM models are essentially graphs, and one of the things we do at
+              QAECY is to tear them apart and take out all the relevant
+              context.<br /><br />
+              What spaces are at what storeys, what windows are adjacent to
+              which rooms, what chairs are located in which space etc.
             </aside>
           </section>
 
           <section>
             <p>
-              These graphs can grow to unbelievable sizes.<br>
-              <img src="dist/img/logos/DBpedia.svg" class="inline-logo" style="height: 60px; transform: translateY(5.5px);" /> consists of 9.5 billion triples!
+              These graphs can grow to unbelievable sizes.<br />
+              <img
+                src="dist/img/logos/DBpedia.svg"
+                class="inline-logo"
+                style="height: 60px; transform: translateY(5.5px)"
+              />
+              consists of 9.5 billion triples!
             </p>
           </section>
 
-          <section data-background-iframe="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration">
-            <a href="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration">HWZ at DBpedia</a>
+          <section
+            data-background-iframe="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration"
+          >
+            <a
+              href="https://dbpedia.org/page/Zurich_University_of_Applied_Sciences_in_Business_Administration"
+              >HWZ at DBpedia</a
+            >
             <aside class="notes">
-              This is the DBPedia entry for your university. You will see that it describes facts such as a reference to a logo, where it is located, geocoordinates, an abstract in german and english, when it was established etc.
+              This is the DBPedia entry for your university. You will see that
+              it describes facts such as a reference to a logo, where it is
+              located, geocoordinates, an abstract in german and english, when
+              it was established etc.
             </aside>
           </section>
 
           <!-- Mads Mikkelsen -->
           <section
-            style="pointer-events: none;"
+            style="pointer-events: none"
             data-background-iframe="dist/html/cytoscape/mads-mikkelsen.html"
           >
-            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query.png" alt="">
+            <img
+              class="print-fallback"
+              src="dist/img/misc/mads-mikkelsen-query.png"
+              alt=""
+            />
             <aside class="notes">
-              You can query the graph, and when you do that you essentially describe a pattern in the graph that should be matched<br><br>
-              Things that are prefixed with ? are variables (ex ?theActor, ?movie)<br><br>
+              You can query the graph, and when you do that you essentially
+              describe a pattern in the graph that should be matched<br /><br />
+              Things that are prefixed with ? are variables (ex ?theActor,
+              ?movie)<br /><br />
               Things that are not are constants (ex Mads Mikkelsen, starring)
             </aside>
           </section>
@@ -498,14 +533,24 @@
             <a href="https://bit.ly/48kp6l0" target="_blank"
               >https://dbpedia.org/sparql</a
             >
-            <p class="print-fallback" style="font-size: 2rem;">https://bit.ly/48kp6l0</p>
-            <img class="print-fallback" src="dist/img/misc/mads-mikkelsen-query2.png" alt="">
+            <p class="print-fallback" style="font-size: 2rem">
+              https://bit.ly/48kp6l0
+            </p>
+            <img
+              class="print-fallback"
+              src="dist/img/misc/mads-mikkelsen-query2.png"
+              alt=""
+            />
             <aside class="notes">
-              In SPARQL language, the query looks like this and here I will execute it on the actual DBPedia live.<br><br>
-              You see how fast it is even with 9,5 billion triples?<br><br>
-              Therefore: Capture as much information about your real estate assets as possible. Size is not a limitation!<br><br>
-              You hopefully also see how versatile this data structure is. I don't imagine anyone considering this query when originally building the data structure 
-              - this is vastly different from the world of relational databases!
+              In SPARQL language, the query looks like this and here I will
+              execute it on the actual DBPedia live.<br /><br />
+              You see how fast it is even with 9,5 billion triples?<br /><br />
+              Therefore: Capture as much information about your real estate
+              assets as possible. Size is not a limitation!<br /><br />
+              You hopefully also see how versatile this data structure is. I
+              don't imagine anyone considering this query when originally
+              building the data structure - this is vastly different from the
+              world of relational databases!
             </aside>
           </section>
 
@@ -513,7 +558,8 @@
             <h4>Should I learn to write SPARQL queries?</h4>
             <p>No! The LLMs already know 😎</p>
             <aside class="notes">
-              There are different techniques for this and they improve every day.
+              There are different techniques for this and they improve every
+              day.
             </aside>
           </section>
 
@@ -521,10 +567,15 @@
             data-background-video="dist/videos/portal/Search_Combined_Models.mp4"
           >
             <aside class="notes">
-              This is an example from our product where the question is mapped to a query on the graph.<br><br>
-              One interesting thing to note here is the fact that it doesn't matter in what BIM model the information is.
-              The slabs and mechanical elements are in two different models but can be viewed together. The graph allows us to have a higher abstraction layer<br><br>
-              We also support that the same geometry can have multiple geometrical representations. 2D, 3D, Point cloud, BIM etc.
+              This is an example from our product where the question is mapped
+              to a query on the graph.<br /><br />
+              One interesting thing to note here is the fact that it doesn't
+              matter in what BIM model the information is. The slabs and
+              mechanical elements are in two different models but can be viewed
+              together. The graph allows us to have a higher abstraction
+              layer<br /><br />
+              We also support that the same geometry can have multiple
+              geometrical representations. 2D, 3D, Point cloud, BIM etc.
             </aside>
           </section>
 
@@ -543,19 +594,37 @@
               </li>
             </ul>
             <aside class="notes">
-              The information can be fetched from various systems and structured in this general form so it can be easily retrieved
+              The information can be fetched from various systems and structured
+              in this general form so it can be easily retrieved
             </aside>
           </section>
 
           <section>
-            <div style="display: flex; justify-content: center;">
-              <div style="display: flex; justify-content: space-around; width: 500px;">
-                <img src="dist/img/misc/software_wasteland.jpeg" alt="" height="300px">
-                <img src="dist/img/misc/the_data_centric_revolution.jpg" style="border: 1px solid" alt="" height="300px">
+            <div style="display: flex; justify-content: center">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-around;
+                  width: 500px;
+                "
+              >
+                <img
+                  src="dist/img/misc/software_wasteland.jpeg"
+                  alt=""
+                  height="300px"
+                />
+                <img
+                  src="dist/img/misc/the_data_centric_revolution.jpg"
+                  style="border: 1px solid"
+                  alt=""
+                  height="300px"
+                />
               </div>
             </div>
             <aside class="notes">
-              I can recommend these two books if you want to understand why it is so important that we stop focusing on the applications and start focusing on the information they consume and create<br><br>
+              I can recommend these two books if you want to understand why it
+              is so important that we stop focusing on the applications and
+              start focusing on the information they consume and create<br /><br />
               The latter is written specifically for decision makers.
             </aside>
           </section>
@@ -568,7 +637,9 @@
 
           <section>
             <p>Is the earth round or flat?</p>
-            <p>Are the migrants eating their dogs and cats in Springfield, Ohio?</p>
+            <p>
+              Are the migrants eating their dogs and cats in Springfield, Ohio?
+            </p>
             <!-- <p>Will the building's carbon footprint be lower if we use timber over concrete?</p> -->
           </section>
 
@@ -661,24 +732,24 @@
               spans across the knowledge repositories provided.
             </p>
             <aside class="notes">
-              We follow the data centric principals. We don't try to establish one place where everything should be stored. We establish the links
+              We follow the data centric principals. We don't try to establish
+              one place where everything should be stored. We establish the
+              links
             </aside>
           </section>
 
           <section>
-            <p>
-              Let's take a look at how we deal with inconsistencies
-            </p>
+            <p>Let's take a look at how we deal with inconsistencies</p>
           </section>
 
           <section
             data-background-iframe="dist/html/cytoscape/door-has-color1.html"
           >
             <aside class="notes">
-              This graph shows a door and two facts about its color<br><br>
-              One claims that the door is orange<br><br>
-              The other one claims that it is red<br><br>
-              What do you think? Which one should we trust? Could it be both?<br><br>
+              This graph shows a door and two facts about its color<br /><br />
+              One claims that the door is orange<br /><br />
+              The other one claims that it is red<br /><br />
+              What do you think? Which one should we trust? Could it be both?<br /><br />
               It is obvious that one of the statements must be invalid unless
               the door has multiple colors
             </aside>
@@ -696,9 +767,13 @@
               ></video>
             </div>
             <aside class="notes">
-              This was a small experiment that I made and it was interesting to see that Gemini has the exact reasoning that I intended<br><br>
-              I actually tried the same with ChatGPT yesterday and it thought it was more likely that it was red because it is a stronger color :D<br><br>
-              Nevertheless, we can conclude that we need more information to actualy derive something meaningful
+              This was a small experiment that I made and it was interesting to
+              see that Gemini has the exact reasoning that I intended<br /><br />
+              I actually tried the same with ChatGPT yesterday and it thought it
+              was more likely that it was red because it is a stronger color
+              :D<br /><br />
+              Nevertheless, we can conclude that we need more information to
+              actualy derive something meaningful
             </aside>
           </section>
 
@@ -707,29 +782,28 @@
               Let's imagine that we had access to some provenence data about
               each statement
             </p>
-
           </section>
 
           <section
             data-background-iframe="dist/html/cytoscape/door-has-color2.html"
           >
-          <aside class="notes">
-            Metadata about the "door has color orange fact":<br>
-            - Generated by an algorithm with a certainty of 0.4<br>
-            - Derived from an Image<br>
-            - Information from January 2024
-          </aside>
+            <aside class="notes">
+              Metadata about the "door has color orange fact":<br />
+              - Generated by an algorithm with a certainty of 0.4<br />
+              - Derived from an Image<br />
+              - Information from January 2024
+            </aside>
           </section>
 
           <section
             data-background-iframe="dist/html/cytoscape/door-has-color3.html"
           >
-          <aside class="notes">
-            Metadata about the "door has color red fact":<br>
-            - Generated by a person who works on behalf of a company<br>
-            - Attached a comment with why he believes it is red<br>
-            - Information from August 2024
-          </aside>
+            <aside class="notes">
+              Metadata about the "door has color red fact":<br />
+              - Generated by a person who works on behalf of a company<br />
+              - Attached a comment with why he believes it is red<br />
+              - Information from August 2024
+            </aside>
           </section>
 
           <section>
@@ -740,8 +814,11 @@
               ></video>
             </div>
             <aside class="notes">
-              Now suddenly the LLM has enough information to come with a reasonable answer<br><br>
-              This tells us that the importance is probably not which LLM we use (they are all incredibly good at this point) but what we feed it with!
+              Now suddenly the LLM has enough information to come with a
+              reasonable answer<br /><br />
+              This tells us that the importance is probably not which LLM we use
+              (they are all incredibly good at this point) but what we feed it
+              with!
             </aside>
           </section>
 
@@ -777,71 +854,39 @@ which color would you trust the door to have?
           <section>
             <h4>Context is important!</h4>
             <aside class="notes">
-              We could also have imagined another situation where the colors were on opposite sides of the door.<br><br>
-              Or we could have information about a maintainance task where the color was changed. The context is so important!
+              We could also have imagined another situation where the colors
+              were on opposite sides of the door.<br /><br />
+              Or we could have information about a maintainance task where the
+              color was changed. The context is so important!
             </aside>
           </section>
         </section>
 
+        <!-- CUE -->
         <section>
           <section>
-            <h4>
-              The <img src="dist/img/logo.svg" class="inline-logo" /> product
-            </h4>
+            <div style="display: flex; justify-content: center">
+              <cue-logo class="inline-logo" active="true"></cue-logo>
+            </div>
           </section>
 
           <section
-            data-background-image="dist/img/qaecy/data_funnel.png"
+            data-background-image="dist/img/cue/cue.png"
             data-background-size="50%"
-          >
-            <aside class="notes">
-              Overall, we can illustrate what we do with this simple funnel. We take structured, unstructured, unstructured documents and we are born AEC and understand BIM, CAD and classification systems<br><br>
-              We process the files through our pipelines. They can do something now and much more in the future. If a client has a specific demand we can add this to form the best possible dataset for our knowledge assistant<br><br>
-              We can expose this through an API which is how some clients decide to consume it, but we also have a portal app that is essentially based around a search bar
-            </aside>
+          ></section>
+
+          <section>
+            <video
+              data-autoplay
+              src="dist/videos/cue/BIM-follow-up.mp4"
+            ></video>
           </section>
 
-          <section
-            data-background-video="dist/videos/portal/document_graph.mp4"
-            data-background-size="50%"
-          >
-            <aside class="notes">
-              One of the simpler things we do is that we establish an overview of your project<br><br>
-              What we want to achieve with this dashboard is an overview for the person just arriving at the project. What type of files? 
-              How many? Spatial breakdown site/building/storey/space if it's a building or a campus. Different if it's a bridge or a tunnel.
-            </aside>
-          </section>
-
-          <section
-            data-background-video="dist/videos/portal/Search_misc.mp4"
-            data-background-size="50%"
-          >
-            <aside class="notes">
-              This is a demonstration how the search works. First result gives us a little information about the thing we are searching and shows the result which it found in a CAD file<br><br>
-              The remaining searches are on information in the graph and these are mapped to queries. We are considering how much of this to show to an end-user and probably we will just use the LLM to formulate a response answer based on what was found
-            </aside>
-          </section>
-
-          <section
-            data-background-video="dist/videos/portal/Elevator.mp4"
-            data-background-size="50%"
-          >
-            <aside class="notes">
-              Here is a more traditional LLM search that builds a response entirely on text content.
-            </aside>
-          </section>
-
-          <section
-            data-background-video="dist/videos/portal/Model_PDF.mp4"
-            data-background-size="50%"
-          >
-            <aside class="notes">
-              We try to make the contextual information available where the user us. For example, if you click an object in our BIM viewer which we were able to
-              correlate to a PDF file or even a fragment of text in this PDF file, you will see this.<br><br>
-              You can even drag/drop a file from your desktop to an object to establish this relationship.<br><br>
-              If the file is already in the system it will not be re-uploaded. 
-              It is identified by its content and can therefore be mapped to the existing document even if the names are different.
-            </aside>
+          <section>
+            <video
+              data-autoplay
+              src="dist/videos/cue/Changes.mp4"
+            ></video>
           </section>
         </section>
 
@@ -903,7 +948,8 @@ which color would you trust the door to have?
               >
             </p>
             <aside class="notes">
-              Our co-founder is based in Zurich and I strongly recommend you to reach out to him if you want to know more.<br><br>
+              Our co-founder is based in Zurich and I strongly recommend you to
+              reach out to him if you want to know more.<br /><br />
               I am also up for a virtual one if you have questions.
             </aside>
           </section>
@@ -916,6 +962,10 @@ which color would you trust the door to have?
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script src="js/print-fallback.js"></script>
+
+    <script src="dist/js/cue-ui/logo/runtime.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/polyfills.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/main.js" type="module"></script>
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
