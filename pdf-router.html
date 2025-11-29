@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - MCP</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<style>
+			p {
+				font-size: 1.8rem !important;
+			}
+			h3 {
+				font-size: 2.8rem !important;
+			}
+		</style>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+				<h3>PDF Routing app</h3>
+                <h4>tutorial</h4>
+				<p style="font-size: 0.6em">v2</p>
+			</section>
+
+			<!-- Intro -->
+			<section>
+
+				<section>
+					<h3>This tutorial will introduce you to the PDF Routing app</h3>
+					<p>Use right/left arrow keys to switch between sections</p>
+                    <p>Use up/down arrow keys to brows through section content</p>
+				</section>
+	
+				<section data-background-image="./dist/tutorials/pdf-router/intro.png">
+					<p class="box">We're still in the introduction section. <strong>Press right to get started!</strong></p>
+				</section>
+
+			</section>
+
+            <!-- Load PDF -->
+			<section>
+				
+                <section>
+                    <h2>Load a PDF underlay</h2>
+                </section>
+
+                <section>
+                    <p>To load a PDF underlay, click the "File" button in the bottom toolbar to bring up the file dialog.</p>
+                    <img data-src="./dist/tutorials/pdf-router/load_pdf_1.svg" width="400px"></img>
+                </section>
+
+                <section>
+                    <p>In the file dialog click the "Set PDF" button and browse to your file</p>
+                    <img data-src="./dist/tutorials/pdf-router/load_pdf_3.svg" width="200px"></img>
+                </section>
+
+                <section>
+                    <p>When the PDF is loaded you should set the drawing scale so lengths are calculated correctly</p>
+                    <img data-src="./dist/tutorials/pdf-router/load_pdf_2.svg" width="150px"></img>
+                </section>
+                
+			</section>
+
+            <!-- Navigation -->
+			<section>
+				
+                <section>
+                    <h2>Navigation</h2>
+                </section>
+
+                <section>
+                    <h3>Pan</h3>
+                    <p>Click and hold left mouse button while moving the mouse</p>
+                </section>
+
+                <section>
+                    <h3>Zoom</h3>
+                    <p>Use the +/- buttons to zoom in/out</p>
+                    <img data-src="./dist/tutorials/pdf-router/navigation_1.svg" width="35px"></img>
+                </section>
+
+                <section>
+                    <h3>Zoom</h3>
+                    <p>Click this button to zoom to the original size of the PDF</p>
+                    <img data-src="./dist/tutorials/pdf-router/navigation_2.svg" width="35px"></img>
+                </section>
+
+                <section>
+                    <h3>Zoom</h3>
+                    <p>When the drawing contains compoentns, use this button to zoom to fit these in the view</p>
+                    <img data-src="./dist/tutorials/pdf-router/navigation_3.svg" width="35px"></img>
+                </section>
+                
+			</section>
+
+            <!-- Terminology -->
+			<section>
+
+                <section>
+                    <h2>Terminology</h2>
+                </section>
+
+                <section data-background-image="./dist/tutorials/pdf-router/tree_2.svg" data-background-size="50%" data-background-opacity="80%">
+                    <h3>System structure</h3>
+                    <p class="box">A system always consists of one <strong>root</strong> and one or more <strong>leaves</strong> if we compare it to a tree.</p>
+                </section>
+
+                <section>
+                    <h3>System structure</h3>
+                    <p>In a <strong>supply system</strong> the root is the <strong>source</strong> from which the fluid flows.</p>
+                    <p>In a <strong>return system</strong> the root is the <strong>sink</strong> to which the fluid flows.</p>
+                </section>
+
+                <section>
+                    <h3>Nodes</h3>
+                    <p>In graph terminology, each point in the tree is called a <strong>node</strong>.</p>
+                    <p>The nodes of particulat interest from a flow perspective are of course the root and leaf and then those of the sub-nodes where the flow is divided into several branches.</p>
+                </section>
+
+                <section>
+                    <h3>Edges</h3>
+                    <p>In graph terminology, the connection between two nodes is called an <strong>edge</strong>.</p>
+                    <p>The edges are <strong>directed</strong> meaning that they always go from one node to another.</p>
+                    <p>The drection is indicated by an arrow.</p>
+                </section>
+
+            </section>
+
+            <!-- Start drawing -->
+			<section>
+				
+                <section>
+                    <h2>Start drawing</h2>
+                </section>
+
+                <section>
+                    <h3>Draw mode</h3>
+                    <p>You can only draw when <strong>draw mode</strong> is enabled.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_mode_1.svg" width="350px"></img>
+                </section>
+
+                <section>
+                    <h3>Draw mode</h3>
+                    <p>When <strong>draw mode</strong> is enabled the button changes color.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_mode_2.svg" width="350px"></img>
+                </section>
+
+                <section>
+                    <p>When starting a new tree you first need to place the <a href="#/4/1">root</a>.</p>
+                    <p>Click where you wish to place the root (typically in a shaft or plant room).</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_1.png" width="200px"></img>
+                </section>
+
+                <section>
+                    <p>You will now see that an <a href="#/4/4">edge</a> is being dragged as you move the mouse.</p>
+                    <p>Click to lock the position of the edge by placing a new <a href="#/4/3">node</a>.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_2.png" width="200px"></img>
+                </section>
+
+                <section>
+                    <p>You can now place a new node and thereby continue the path.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_3.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>When you have drawn a full path from <a href="#/4/1">root to leaf</a> click Esc.</p>
+                    <p>The last drawn node now changes to green color to indicate that it is a leaf.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_4.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>You can click any <a href="#/4/3">node</a> or <a href="#/4/4">edge</a> in the path to continue drawing the tree.</p>
+                    <img data-src="./dist/tutorials/pdf-router/draw_5.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <h3>Bonus tip</h3>
+                    <p>Click and hold the Shift key to draw orthogonal edges.</p>
+                </section>
+
+                <section>
+                    <h3>Delete node</h3>
+                    <p>Click and hold a <a href="#/4/3">node</a> to bring up a context menu that lets you delete the node.</p>
+                    <p>You are only allowed to delete <a href="#/4/1">leaves</a> and sub-nodes that do not divide the flow.</p>
+                </section>
+                
+			</section>
+
+            <!-- Set flows -->
+			<section>
+				
+                <section>
+                    <h2>Set flows and labels</h2>
+                </section>
+
+                <section>
+                    <p>Set the flow of a node by clicking and editing the value shown on the label.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_1.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>The total flow is automatically updated to include the typed value.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_2.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>You can use the same approach to change the label of the leaf.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_3.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>When using proper names for labels you can set up a work flow where flows are handled externally in a spreadsheet.</p>
+                    <p>Click <strong>Download leaves</strong> in the File dialog to download a CSV file with all the leaves and their label/flow.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_4.svg" width="150px"></img>
+                </section>
+
+                <section>
+                    <p>When you have made corrections to the labels/flows, save the CSV file and upload it again by clicking <strong>Upload leaves</strong>.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_5.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>All labels are automatically updated to match the new flows and the total flow is updated at the root.</p>
+                    <img data-src="./dist/tutorials/pdf-router/flow_6.png" width="300px"></img>
+                </section>
+
+            </section>
+
+            <!-- Copy from PDF -->
+            <section>
+
+                <section>
+                    <h2>Inherit text from PDF</h2>
+                </section>
+
+                <section>
+                    <p>If the PDF underlay has room numbers, wouldn't it be great if you could just copy the text from there to your nodes? Well, you can!</p>
+                </section>
+
+                <section>
+                    <video data-autoplay src="./dist/tutorials/pdf-router/pdf-text.mp4"></video>
+                </section>
+
+                <section>
+                    <p>The example below uses a very simple space naming that is simply a double-digit number (01, 02, 03, 04).</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_1.png" width="500px"></img>
+                </section>
+
+                <section>
+                    <p>Click the "PDF Label copy" command to bring up the menu for text copying.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_2.svg" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>If the PDF has no text, we will se a message saying "PDF contains 0 text partitions". In this case it doesn't make use to use the tool.</p>
+                    <p>Perhaps you can get a PDF that does contain text?</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_3.png" width="300px"></img>
+                </section>
+
+                <section>
+                    <p>We specify the regex <strong>^\d{2}$</strong>, click the "Search PDF" button and immidiately we see the matched text partitions marked with transparent orange nodes.</p>
+                    <p><strong>^</strong> and <strong>$</strong> refer to start and end of string respectively and <strong>\d{2}</strong> means exactly 2 digits.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_4.png" width="700px"></img>
+                </section>
+
+                <section>
+                    <h2>Regular expressions</h2>
+                    <p>Regexes are super powerful for pattern matching in a string but they can be hard to write. Fortunately ChatGPT or Bard can help you out! Try yourself with a prompt like this: "Build me a 
+                        regex that matches the following pattern [any uppercase character], [.], 
+                        [some integers of arbitrary length], [.], [some integers of arbitrary length] Example: E.02.12"</p>
+                    <p>See Bard's result on next slide.</p>
+                </section>
+
+                <section data-background-image="./dist/tutorials/pdf-router/pdf-text_5.png" data-background-size="60%"></section>
+
+                <section>
+                    <p>If you click "Match leaves" you will see arrows from each leaf in the tree to the nearest label found in the PDF. The default setting ensures that matches are only appended if the label is an auto generated one and not one that you have typed. You can set it to apply all matches.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_6.png" width="700px"></img>
+                </section>
+
+                <section>
+                    <h2>Edit match</h2>
+                    <p>You can change a match by clicking the edge. This allows you to match it with another node. Clicking the "delete" key will simply remove it.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_7.png" width="700px"></img>
+                </section>
+
+                <section>
+                    <h2>Apply</h2>
+                    <p>When you are happy about the mapping, click "Append" to copy over the text values from the PDF.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_8.png" width="700px"></img>
+                </section>
+
+                <section>
+                    <h2>Areas</h2>
+                    <p>Often areas are also stated, and therefore, there is a specific method for copying these over.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_9.svg" width="300px"></img>
+                </section>
+
+                <section>
+                    <h2>Areas</h2>
+                    <p>In the specific drawing the value and unit for the areas are not in the same text partition, so we find them by the simple regex <strong>\d+\,\d+</strong>.</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_10.png" width="700px"></img>
+                </section>
+
+                <section>
+                    <h2>Areas</h2>
+                    <p>The areas are not directly visible in the leaf node labels but can be found under <strong>Node info</strong> in the leaf context menu (click and hold node to bring up the menu).</p>
+                    <img data-src="./dist/tutorials/pdf-router/pdf-text_11.png" width="700px"></img>
+                </section>
+
+            </section>
+
+            <!-- Calculations -->
+			<section>
+				
+                <section>
+                    <h2>Calculations</h2>
+                </section>
+
+                <section>
+                    <p>In the <a href="#/6">previous section</a> you saw that the total flow is calculated at the root. Actually the flow is aggregated anywhere in the <a href="#/4/1">tree</a> from leaves further out in the tree.</p>
+                </section>
+
+                <section>
+                    <h3>Velocity</h3>
+                    <p>Knowing the flow anywhere in the tree means that adding segment size to the pipe/duct represented by an edge will allow us to calculate cross sectional area and hence the velocity.</p>
+                    <p>Per default all segments are Ø200, but this can be changed.</p>
+                </section>
+
+                <section>
+                    <h3>Segment size</h3>
+                    <p>You will notice that hovering an edge wil bring up a tooltip with the segment size.</p>
+                    <p>Clicking the tooltip brings up the segment size selector.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_1.png" width="150px"></img>
+                </section>
+
+                <section>
+                    <h3>Segment size</h3>
+                    <p>In the segment size selector you can select any size that is available in the segment-series that is available for the system type.</p>
+                    <p>The selector also includes an intelligent selector that simply takes the next available size that is either larger or smaller than the current.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_2.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Sizing settings</h3>
+                    <p>The size selector tries to stay in the same segment-series as long as its size complies with the mximum allowed height.</p>
+                    <p>The maximum allowed height is specified in the <strong>Sizing settings</strong> which is found under <strong>Routing settings</strong> in the menu.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_3.svg" width="200px"></img>
+                </section>
+
+                <section>
+                    <h3>Auto sizing</h3>
+                    <p>You will notice that the <strong>Sizing settings</strong> also lets you specify maximum velocity and pressure drop.</p>
+                    <p>This brings us to another way to set sizes of the segments, which is the <strong>Auto size</strong> function. Try clicking the button and you will see that sizes are automatically set.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_4.svg" width="200px"></img>
+                </section>
+
+                <section>
+                    <h3>Insights</h3>
+                    <p>After using the auto resize it is useful to apply the <strong>Color by size</strong> filter to visually inspect the aplied sizes that were chosen.</p>
+                    <p>With this filter, the ducts are show in atual size.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_5.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Color by volume flow</h3>
+                    <p>You can also apply a <strong>Color by volume flow</strong> filter which reveals how the flow is aggregated down the tree.</p>
+                    <p>You will see that hovering an edge now shows the volume flow in the segment along with its size.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_6.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Color by velocity</h3>
+                    <p>The <strong>Color by velocity</strong> filter shows the calculated velocity.</p>
+                    <p>Hovering an edge now shows the velocity in that specific segment.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_7.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Color by pressure drop</h3>
+                    <p>The <strong>Color by pressure drop</strong> filter shows the friction pressure drop per meter in each segment.</p>
+                    <p>These are calculated using the Colebrook-White Equation. Segment roughness depends on the selected segment-series.</p>
+                    <p><strong>NB!</strong> currently all calculations are for air at 20 degC.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_8.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Critical path</h3>
+                    <p>The app also allows you to visualize the critical path. This is calculated using an A* algorithm that starts at the root and uses the total segment pressure drop as edge weight.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_9.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Units</h3>
+                    <p>Units can be changed under <strong>Routing settings</strong> -> <strong>Unit settings</strong></p>
+                </section>
+
+                <section>
+                    <h3>Export to Excel</h3>
+                    <p>You can export any segment path to Excel. Simply click the node from where the path should start and click <strong>Node info</strong>.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_10.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Export to Excel</h3>
+                    <p>Under the <strong>Path analysis</strong> section click <strong>Shortest path to root</strong> and you will see the path + details in the window. Now click <strong>Download path data</strong>.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_11.png" width="400px"></img>
+                </section>
+
+                <section>
+                    <h3>Export to Excel</h3>
+                    <p>If we open the CSV file in excel we see all the segments including all the calculated values.</p>
+                    <img data-src="./dist/tutorials/pdf-router/calc_12.png" width="100%"></img>
+                </section>
+                
+            </section>
+
+            <!-- Organizing -->
+            <section>
+
+                <section>
+                    <h2>Organizing files</h2>
+                </section>
+
+                <section>
+                    <p>In the current version, the app only suports one underlay and one system. 
+                        This might change in future versions, but the current focus is to prioritize enhancement for a single system.</p>
+                </section>
+
+                <section>
+                    <p>To save your work with a system, click the <strong>Download system</strong> button and save the file to your project folder.</p>
+                    <p>Recommended system naming could be something like "{planName}-{systemName}-{version}.json"</p>
+                </section>
+
+                <section>
+                    <p>If you wish to use a system as the basis for another one (for example design return system from flow system) 
+                        it can be handy to use the <strong>Change flow direction</strong> command.
+                    This simply does what it says.</p>
+                </section>
+
+            </section>
+
+            <!-- Backlog -->
+            <section>
+
+                <section>
+                    <h2>Backlog</h2>
+                </section>
+
+                <section>
+                    <p>The following enhancements are prioritized for now:</p>
+                    <ul>
+                        <li>Proper edge details display</li>
+                        <li>Continuity factor</li>
+                    </ul>
+                </section>
+
+            </section>
+				
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script type="module">
+			import { turtle } from "./plugin/highlight/turtle.js";
+			import { sparql } from "./plugin/highlight/sparql.js";
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+				highlight: {
+					beforeHighlight: (hljs) => {
+						hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+						hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+					},
+				},
+			});
+		</script>
+	</body>
+</html>
