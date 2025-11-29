@@ -1,0 +1,14 @@
+.tippy-box[data-theme~='cue'] {
+  background-color: var(--cue-menu-background-color);
+  box-shadow: var(--cue-menu-box-shadow);
+  border-color: var(--cue-menu-border-color);
+  color: var(--cue-menu-foreground-color);
+  border-radius: 4px;
+  font-family: var(--cue-font-family);
+  font-size: 0.75rem;
+  padding: 2px;
+  z-index: 9999 !important;
+}
+.tippy-box[data-theme~='cue'] .tippy-arrow {
+  color: var(--cue-menu-background-color);
+}

@@ -1,0 +1,28 @@
+:root {
+  /* FONT SYSTEM */
+  --cue-font-family: "Poppins";
+
+  --cue-font-weight-regular: 400;
+  --cue-font-weight-medium: 500;
+  --cue-font-weight-semibold: 600;
+
+  --cue-font-xs-size: calc(100% / 16 * 9);
+  --cue-font-xs-line-height: calc(16 / 11);
+  --cue-font-xs-letter-spacing: 0.075em;
+
+  --cue-font-s-size: calc(100% / 16 * 11);
+  --cue-font-s-line-height: calc(16 / 11);
+  --cue-font-s-letter-spacing: 0.05em;
+
+  --cue-font-m-size: calc(100% / 16 * 14);
+  --cue-font-m-line-height: calc(20 / 14);
+  --cue-font-m-letter-spacing: 0.04em;
+
+  --cue-font-l-size: calc(100% / 16 * 18);
+  --cue-font-l-line-height: calc(24 / 18);
+  --cue-font-l-letter-spacing: 0.01em;
+
+  --cue-font-xl-size: calc(100% / 16 * 24);
+  --cue-font-xl-line-height: calc(32 / 24);
+  --cue-font-xl-letter-spacing: 0.01em;
+}

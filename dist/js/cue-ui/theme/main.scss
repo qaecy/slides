@@ -1,0 +1,68 @@
+@use "./font";
+@use "./color";
+@use "./chart";
+@use "./dimension";
+@use "./card";
+@use "./button";
+@use "./badge";
+@use "./input";
+@use "./graph";
+@use "./menu";
+@use "./grid";
+@use "./flex";
+@use "./table";
+@use "./paginator";
+@use "./flip-wrapper";
+@use "./modal";
+@use "./icon";
+@use "./pulse-border";
+@use './tooltip.scss';
+@import url(https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp);
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cue-main-background);
+
+  &.dark {
+    color-scheme: dark;
+  }
+
+  & > * {
+    scrollbar-color: var(--cue-scrollbar-thumb-color)
+      var(--cue-scrollbar-track-color);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+  }
+}
+
+.sb-show-main,
+.sb-main-padded {
+  display: flex !important;
+  min-height: 100%;
+  padding: 0 !important;
+
+  #storybook-root {
+    display: contents;
+
+    storybook-root {
+      display: contents;
+    }
+  }
+}
+
+.docs-story {
+  background-color: var(--cue-main-background) !important;
+  color: var(--cue-main-foreground) !important;
+}

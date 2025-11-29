@@ -1,0 +1,107 @@
+:root {
+  /* BUTTON SYSTEM */
+  --cue-button-gap: calc(8em / 16);
+
+  --cue-button-xs-height: var(--cue-dim-elem-xs);
+  --cue-button-xs-padding-x: calc(3em / 16);
+  --cue-button-xs-icon-width: calc(18em / 16);
+
+  --cue-button-s-height: var(--cue-dim-elem-s);
+  --cue-button-s-padding-x: calc(6em / 16);
+  --cue-button-s-icon-width: calc(20em / 16);
+
+  --cue-button-m-height: var(--cue-dim-elem-m);
+  --cue-button-m-padding-x: calc(10em / 16);
+  --cue-button-m-icon-width: calc(24em / 16);
+
+  --cue-button-border-radius: var(--button-height);
+  --cue-button-border-width: 1px;
+  --cue-button-border-style: solid;
+
+  --cue-button-primary-background: var(--cue-color-blue);
+  --cue-button-primary-foreground: var(--cue-color-white);
+  --cue-button-primary-focus-color: var(--cue-color-blue);
+  --cue-button-primary-border-color: var(--cue-color-blue);
+  --cue-button-primary-disabled-foreground: var(
+    --background-color,
+    --cue-main-background
+  );
+  --cue-button-primary-disabled-foreground: var(--cue-color-lightgray);
+  --cue-button-primary-disabled-background: var(--cue-color-ultralightgray);
+  --cue-button-primary-disabled-border-color: var(--cue-color-ultralightgray);
+
+  --cue-button-accent-background: var(--cue-accent);
+  --cue-button-accent-foreground: var(--cue-accentContrast);
+  --cue-button-accent-focus-color: var(--cue-accent);
+  --cue-button-accent-border-color: var(--cue-accent);
+  --cue-button-accent-disabled-foreground: var(
+    --background-color,
+    --cue-main-background
+  );
+  --cue-button-accent-disabled-foreground: var(--cue-color-lightgray);
+  --cue-button-accent-disabled-background: var(--cue-color-ultralightgray);
+  --cue-button-accent-disabled-border-color: var(--cue-color-ultralightgray);
+
+  --cue-button-secondary-background: transparent;
+  --cue-button-secondary-foreground: currentColor;
+  --cue-button-secondary-focus-color: currentColor;
+  --cue-button-secondary-border-color: currentColor;
+  --cue-button-secondary-disabled-background: transparent;
+  --cue-button-secondary-disabled-foreground: var(--cue-color-midgray);
+  --cue-button-secondary-disabled-border-color: var(--cue-color-midgray);
+
+  --cue-button-tertiary-background: transparent;
+  --cue-button-tertiary-foreground: currentColor;
+  --cue-button-tertiary-focus-color: currentColor;
+  --cue-button-tertiary-border-color: transparent;
+  --cue-button-tertiary-disabled-background: transparent;
+  --cue-button-tertiary-disabled-foreground: var(--cue-color-midgray);
+  --cue-button-tertiary-disabled-border-color: transparent;
+
+  --cue-button-ghost-background: transparent;
+  --cue-button-ghost-foreground: currentColor;
+  --cue-button-ghost-focus-color: transparent;
+  --cue-button-ghost-border-color: transparent;
+  --cue-button-ghost-disabled-background: transparent;
+  --cue-button-ghost-disabled-foreground: var(--cue-color-midgray);
+  --cue-button-ghost-disabled-border-color: transparent;
+
+  --cue-button-danger-background: transparent;
+  --cue-button-danger-foreground: var(--cue-error);
+  --cue-button-danger-focus-color: var(--cue-error);
+  --cue-button-danger-border-color: transparent;
+  --cue-button-danger-disabled-foreground: transparent;
+  --cue-button-danger-disabled-background: var(--cue-color-midgray);
+  --cue-button-danger-disabled-border-color: transparent;
+
+  --cue-button-s-label-padding-x: calc(16em / 16);
+  --cue-button-m-label-padding-x: calc(24em / 16);
+  --cue-button-l-label-padding-x: calc(48em / 16);
+
+  @media (prefers-color-scheme: dark) {
+    --cue-button-primary-disabled-foreground: var(--cue-color-midgray);
+    --cue-button-primary-disabled-border-color: var(--cue-color-midgray);
+    --cue-button-primary-disabled-background: var(--cue-color-lightgray);
+
+    --cue-button-secondary-disabled-foreground: var(--cue-color-darkmidgray);
+    --cue-button-secondary-disabled-border-color: var(--cue-color-darkmidgray);
+
+    --cue-button-tertiary-disabled-foreground: var(--cue-color-darkmidgray);
+  }
+}
+
+@container cue-container (width < 20em) {
+  cue-button {
+    --cue-button-xs-height: var(--cue-dim-s-elem-xs);
+    --cue-button-xs-padding-x: calc(1em / 16);
+    --cue-button-xs-icon-width: calc(12em / 16);
+
+    --cue-button-s-height: var(--cue-dim-s-elem-s);
+    --cue-button-s-padding-x: calc(4em / 16);
+    --cue-button-s-icon-width: calc(16em / 16);
+
+    --cue-button-m-height: var(--cue-dim-s-elem-m);
+    --cue-button-m-padding-x: calc(4em / 16);
+    --cue-button-m-icon-width: calc(18em / 16);
+  }
+}

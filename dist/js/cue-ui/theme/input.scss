@@ -1,0 +1,32 @@
+/* INPUT ELEMENTS SYSTEM */
+
+/* SWITCH */
+:root {
+  --cue-input-switch-background: var(--cue-color-midgray);
+  --cue-input-switch-indicator-background: var(--cue-color-white);
+  --cue-input-switch-indicator-foreground: var(--cue-color-black);
+  --cue-input-switch-focus-color: var(--cue-color-white);
+
+  --cue-input-switch-checked-background: var(--cue-color-darkblue);
+  --cue-input-switch-checked-indicator-background: var(--cue-color-white);
+  --cue-input-switch-checked-indicator-foreground: var(--cue-color-black);
+
+  --cue-input-switch-disabled-background: var(--cue-color-midgray);
+  --cue-input-switch-disabled-indicator-background: var(--cue-color-lightgray);
+  --cue-input-switch-disabled-indicator-foreground: var(--cue-color-midgray);
+}
+
+/* INPUT */
+:root {
+  --cue-input-value-color: var(--cue-main-foreground);
+  --cue-input-label-color: var(--cue-main-foreground);
+  --cue-input-border-bottom-color: var(--cue-main-foreground);
+  --cue-input-placeholder-color: var(--cue-color-darkmidgray);
+}
+
+body.dark {
+  --cue-input-value-color: var(--cue-color-white);
+  --cue-input-label-color: var(--cue-color-white);
+  --cue-input-border-bottom-color: var(--cue-color-white);
+  --cue-input-placeholder-color: var(--cue-color-lightgray);
+}

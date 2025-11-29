@@ -1,0 +1,45 @@
+:root {
+  /* CARD SYSTEM */
+  --cue-menu-border-radius: calc(15em / 16);
+  --cue-menu-padding-x: calc(8em / 16);
+  --cue-menu-padding-y: calc(8em / 16);
+  --cue-menu-gap: calc(8em / 16);
+  --cue-menu-background-color: var(--cue-color-white);
+  --cue-menu-foreground-color: var(--cue-color-black);
+  --cue-menu-border-color: var(--cue-border-color);
+  --cue-menu-box-shadow: 0 1px calc(20em / 16) rgba(0, 0, 0, 0.1);
+  --cue-menu-max-height: 300px;
+
+  --cue-menu-item-background-color: var(--cue-color-white);
+  --cue-menu-item-selected-background-color: var(--cue-color-lightgray);
+  --cue-menu-item-focus-background-color: var(--cue-color-ultralightgray);
+  --cue-menu-item-height: var(--cue-dim-elem-m);
+  --cue-menu-item-border-radius: calc(15em / 16);
+  --cue-menu-item-padding-x: calc(16em / 16);
+  --cue-menu-item-gap: calc(16em / 16);
+  --cue-menu-item-icon-size: calc(20em / 16);
+
+  /* Size-based menu item widths */
+  --cue-menu-item-xs-min-width: 3em;
+  --cue-menu-item-s-min-width: 6em;
+  --cue-menu-item-m-min-width: 12em;
+}
+
+body.dark {
+  --cue-menu-box-shadow: 0 1px calc(20em / 16) rgba(255, 255, 255, 0.1);
+  --cue-menu-background-color: var(--cue-color-black);
+  --cue-menu-foreground-color: var(--cue-color-white);
+  --cue-menu-border-color: var(--cue-border-color);
+
+  --cue-menu-item-background-color: var(--cue-color-black);
+  --cue-menu-item-selected-background-color: var(--cue-color-midgray);
+  --cue-menu-item-focus-background-color: var(--cue-color-darkmidgray);
+}
+
+@container cue-container (width < 20em) {
+  :root {
+    --cue-menu-item-xs-min-width: 3em;
+    --cue-menu-item-s-min-width: 6em;
+    --cue-menu-item-m-min-width: 12em;
+  }
+}

@@ -1,0 +1,39 @@
+:root {
+  --cue-table-row-border-bottom: 1px solid;
+  --cue-table-row-border-bottom-color: var(--cue-color-midgray);
+  --cue-table-text-color: var(--cue-main-foreground);
+  --cue-table-secondary-text-color: var(--cue-color-midgray);
+  --cue-table-highlight-color: var(--cue-color-ultralightgray);
+  --cue-table-highlight-text-color: var(--cue-color-darkgray);
+  --cue-table-selected-color: var(--cue-color-green);
+  --cue-table-selected-text-color: var(--cue-color-darkgray);
+  --cue-table-border-color: var(--cue-border-color);
+  --cue-table-row-hover-bg: var(--cue-color-ultralightgray);
+
+  --cue-table-xs-height: 200px;
+  --cue-table-s-height: 300px;
+  --cue-table-m-height: 400px;
+  --cue-table-l-height: 500px;
+  --cue-table-xl-height: 600px;
+
+  --cue-table-font-xs-size: var(--cue-font-xs-size);
+  --cue-table-font-s-size: var(--cue-font-s-size);
+  --cue-table-font-m-size: var(--cue-font-m-size);
+  --cue-table-font-l-size: var(--cue-font-l-size);
+  --cue-table-data-font-xl-size: var(--cue-font-xl-size);
+
+  --cue-table-data-font-xs-size: var(--cue-font-xs-size);
+  --cue-table-data-font-s-size: var(--cue-font-s-size);
+  --cue-table-data-font-m-size: var(--cue-font-m-size);
+  --cue-table-data-font-l-size: var(--cue-font-l-size);
+  --cue-table-data-font-xl-size: var(--cue-font-xl-size);
+}
+
+body.dark {
+    --cue-table-row-border-bottom-color: var(--cue-color-lightgray);
+    --cue-table-highlight-text-color: var(--cue-color-lightgray);
+    --cue-table-text-color: var(--cue-main-foreground);
+    --cue-table-highlight-color: var(--cue-color-darkmidgray);
+    --cue-table-border-color: var(--cue-border-color);
+    --cue-table-row-hover-bg: var(--cue-color-darkmidgray);
+}

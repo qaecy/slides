@@ -1,88 +1,218 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>QAECY - RML Mapper</title>
+    <title>QAECY - RML Mapper</title>
 
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/qaecy.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
 
-				<section>
-					<img src="dist/img/logo.svg" alt="">
-					<p>your knowledge, accessible</p>
-				</section>
-				
-				<section>
+	<!-- Cue theme -->
+    <link rel="stylesheet" href="dist/js/cue-ui/theme/main.scss" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logo.svg" alt="" />
+          <p>your knowledge, accessible</p>
+        </section>
 
-					<section>
-						<h2>RML Mapper</h2>
-					</section>
+        <section>
+          <section>
+            <h2>RML Mapper</h2>
+          </section>
 
-					<section>
-						<p>In the <a href="./table-vs-graph.html">Table vs. Graph</a> slide deck we learned what table data looks like when represented in a graph.</p>
-					</section>
+          <section>
+            <p>
+              In the <a href="./table-vs-graph.html">Table vs. Graph</a> slide
+              deck we learned what table data looks like when represented in a
+              graph.
+            </p>
+          </section>
 
-					<section>
-						<p><strong>Purpose:</strong> Formalize the inherent structure of a dataset and make it machine-readable, so it can be <em>queried in the context of other information</em>.</p>
-					</section>
+          <section>
+            <p>
+              <strong>Purpose:</strong> Formalize the inherent structure of a
+              dataset and make it machine-readable, so it can be
+              <em>queried in the context of other information</em>.
+            </p>
+          </section>
 
-					<section>
-						<p>One way to achieve this is to implement a custom parser in a programming language of choice. However, such parsers are not easily portable or reusable across different systems.</p>
-					</section>
+          <section>
+            <p>
+              One way to achieve this is to implement a custom parser in a
+              programming language of choice. However, such parsers are not
+              easily portable or reusable across different systems.
+            </p>
+          </section>
 
-					<section>
-						<p>In this guide we will explore how to use Cue's RML Mapper to transform data into RDF graphs.</p>
-					</section>
+          <section>
+            <p>
+              In this guide we will explore how to use Cue's RML Mapper to
+              transform data into RDF graphs.
+            </p>
+          </section>
 
-					<section data-background-iframe="https://rml.io/specs/rml/">
-					</section>
+          <section data-background-iframe="https://rml.io/specs/rml/"></section>
 
-					<section>
-						https://rml.io/specs/rml/
-					</section>
+          <section data-background-iframe="https://rml.io/yarrrml/">
+            <p class="bg-transparent-white">
+              For easier readability we use the YARRRML to represent the rules
+            </p>
+          </section>
+        </section>
 
-				</section>
+        <section>
+          <section>
+            <h2>YARRRML 101</h2>
+          </section>
 
-				
-				
-			</div>
-		</div>
+          <section>
+            <p>
+              Let's map a table like that found in
+              <a href="./table-vs-graph.html#/2/5">Table vs. Graph</a> to RDF
+            </p>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script type="module">
-			import { turtle } from "./plugin/highlight/turtle.js";
-			import { sparql } from "./plugin/highlight/sparql.js";
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First</th>
+                  <th>Last</th>
+                </tr>
+              </thead>
+              <tr>
+                <td>1</td>
+                <td>Mads</td>
+                <td>Rasmussen</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Philipp</td>
+                <td>Dohmen</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Manos</td>
+                <td>Argyris</td>
+              </tr>
+            </table>
+          </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
-				highlight: {
-					beforeHighlight: (hljs) => {
-						hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
-						hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
-					},
-				},
-			});
-		</script>
-	</body>
+          <section>
+            <p>In CSV the table looks like this</p>
+            <pre><code data-trim class="csv hljs" >
+				ID,First,last
+				1,Mads,Rasmussen
+				2,Philipp,Dohmen
+				3,Manos,Argyris
+			</code></pre>
+          </section>
+
+          <section>
+            <p>A simple YARRRML map would look like this</p>
+            <pre><code data-trim class="yml hljs" >
+prefixes:
+  schema: "http://schema.org/"
+mappings:
+  person:
+    sources:
+      - ['input~csv']
+    s: http://example.com/$(ID)
+    po:
+      - [a, schema:Person]
+      - [schema:name, $(First)]
+      - [schema:familyName, $(Last)]
+			</code></pre>
+            <a href="https://semantifyit.github.io/rml/" target="_blank"
+              >Try it here</a
+            >
+          </section>
+
+          <section>
+            <p>The resulting RDF in Turtle syntax</p>
+            <pre><code data-trim class="turtle hljs" >
+@base: &lt;http://example.com/&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+&lt;1&gt; a schema:Person ;
+  schema:name "Mads" ;
+  schema:familyName "Rasmussen" .
+&lt;2&gt; a schema:Person ;
+  schema:name "Philipp" ;
+  schema:familyName "Dohmen" .
+&lt;3&gt; a schema:Person ;
+  schema:name "Manos" ;
+  schema:familyName "Argyris" .
+			</code></pre>
+          </section>
+
+          <section>
+            <div style="display: flex; justify-content: center">
+              <cue-logo
+                class="inline-logo"
+                active="true"
+                [continuous]="false"
+                style="width: 100px"
+              ></cue-logo>
+            </div>
+            <p>
+              uses special identifiers <br>derived from concatenated text strings.
+            </p>
+          </section>
+
+		  <section>
+			<iframe src="dist/html/id-builder/index.html" frameborder="0"></iframe>
+		  </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="dist/js/cue-ui/logo/runtime.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/polyfills.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/main.js" type="module"></script>
+    <script src="dist/js/cue-ui/id-builder/main.js" type="module"></script>
+    <script src="dist/js/cue-ui/id-builder/polyfills.js" type="module"></script>
+    <script src="dist/js/cue-ui/id-builder/polyfills.js" type="module"></script>
+    <script type="module">
+      import { turtle } from "./plugin/highlight/turtle.js";
+      import { sparql } from "./plugin/highlight/sparql.js";
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => {
+            hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+            hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

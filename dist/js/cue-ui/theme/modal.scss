@@ -1,0 +1,7 @@
+:root {
+  --cue-modal-overlay-color: rgba(245, 246, 249, 0.7);
+}
+
+body.dark {
+  --cue-modal-overlay-color: rgba(18, 28, 43, 0.7);
+}

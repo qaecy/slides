@@ -1,0 +1,36 @@
+:root {
+  --cue-dim-gap-s: calc(8em / 16);
+  --cue-dim-gap-m: calc(16em / 16);
+  --cue-dim-gap-l: calc(30em / 16);
+  --cue-dim-gap-xl: calc(40em / 16);
+
+  --cue-dim-elem-xs: calc(24em / 16);
+  --cue-dim-elem-s: calc(32em / 16);
+  --cue-dim-elem-m: calc(44em / 16);
+
+  /* for very narrow elements */
+  --cue-dim-s-gap-s: calc(6em / 16);
+  --cue-dim-s-gap-m: calc(10em / 16);
+  --cue-dim-s-gap-l: calc(16em / 16);
+
+  --cue-dim-s-elem-xs: calc(16em / 16);
+  --cue-dim-s-elem-s: calc(20em / 16);
+  --cue-dim-s-elem-m: calc(28em / 16);
+
+  --cue-dim-padding-main: calc(10em / 16);
+  --cue-dim-padding-sub: calc(10em / 16);
+}
+
+@media (min-width: 20em) {
+  :root {
+    --cue-dim-padding-main: calc(20em / 16);
+    --cue-dim-padding-sub: calc(10em / 16);
+  }
+}
+
+@media (min-width: 40em) {
+  :root {
+    --cue-dim-padding-main: calc(32em / 16);
+    --cue-dim-padding-sub: calc(16em / 16);
+  }
+}

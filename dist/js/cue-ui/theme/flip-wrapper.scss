@@ -1,0 +1,28 @@
+// Add perspective to parent for 3D flip effect
+.flip-card {
+  perspective: 1200px;
+}
+.flip-content {
+  display: grid;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.flipped .flip-content {
+  transform: rotateY(180deg);
+}
+.card-face {
+  pointer-events: auto;
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  position: relative;
+  width: 100%;
+}
+.card-face.back {
+  transform: rotateY(180deg);
+}
+
+/* When the card is flipped, back is active, front is ignored */
+.flipped .card-face.front {
+  pointer-events: none;
+}

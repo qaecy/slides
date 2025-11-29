@@ -1,0 +1,14 @@
+:root {
+  /* CARD SYSTEM */
+  --cue-chart-text-color: var(--cue-color-darkgray);
+  --cue-chart-text-color-select: var(--cue-color-black);
+  --cue-chart-border-background-color: var(--cue-color-white);
+  --chart-graph-edge-color: var(--cue-color-darkgray);
+}
+
+body.dark {
+  --cue-chart-text-color: var(--cue-color-ultralightgray);
+  --cue-chart-text-color-select: var(--cue-main-white);
+  --cue-chart-border-background-color: var(--cue-color-darkgray);
+  --chart-graph-edge-color: var(--cue-color-ultralightgray);
+}

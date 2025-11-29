@@ -1,0 +1,65 @@
+:root {
+  /* COLOR SYSTEM */
+  /* 1 - COLOR VALUES */
+  --cue-color-blue: #2859e1;
+  --cue-color-darkblue: #1744c2;
+  --cue-color-ultralightgray: #f5f6f9;
+  --cue-color-lightgray: #d9d9d9;
+  --cue-color-midgray: #8394b0;
+  --cue-color-darkmidgray: #404955;
+  --cue-color-darkgray: #121c2b;
+  --cue-color-black: #0e1827;
+  --cue-color-white: #ffffff;
+  --cue-color-green: #e2f552;
+
+  /* 2 - COLOR KEYS */
+  --cue-main-background: var(--cue-color-ultralightgray);
+  --cue-main-foreground: var(--cue-color-darkgray);
+
+  --cue-default: var(--cue-color-white);
+  --cue-defaultContrast: var(--cue-color-darkgray);
+
+  --cue-primary: var(--cue-color-blue);
+  --cue-primaryContrast: var(--cue-color-white);
+
+  --cue-accent: var(--cue-color-green);
+  --cue-accentContrast: var(--cue-color-darkgray);
+
+  --cue-secondary: var(--cue-color-darkblue);
+  --cue-secondaryContrast: var(--cue-color-white);
+
+  --cue-neutral: var(--cue-color-midgray);
+  --cue-neutralContrast: var(--cue-color-darkgray);
+
+  --cue-info: var(--cue-color-darkblue);
+  --cue-infoContrast: var(--cue-color-white);
+
+  --cue-error: #fc2626;
+  --cue-errorContrast: var(--cue-color-white);
+
+  --cue-success: #4caf50;
+  --cue-successContrast: var(--cue-color-white);
+
+  --cue-warning: #ffc107;
+  --cue-warningContrast: var(--cue-color-white);
+
+  --cue-border-color: var(--cue-color-lightgray);
+  --cue-scrollbar-thumb-color: var(--cue-color-lightgray);
+  --cue-scrollbar-track-color: transparent;
+}
+
+body.dark {
+  --cue-main-background: var(--cue-color-darkgray);
+  --cue-main-foreground: var(--cue-color-white);
+
+  --cue-default: var(--cue-color-black);
+  --cue-defaultContrast: var(--cue-color-ultralightgray);
+
+  --cue-neutral: var(--cue-color-midgray);
+  --cue-neutralContrast: var(--cue-color-white);
+
+  --cue-border-color: var(--cue-color-darkmidgray);
+  --cue-scrollbar-thumb-color: var(--cue-color-darkmidgray);
+
+  --cue-tertiaryContrast: var(--cue-color-ultralightgray);
+}
