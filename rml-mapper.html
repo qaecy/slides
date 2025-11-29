@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>QAECY - RML Mapper</title>
+
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/qaecy.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<img src="dist/img/logo.svg" alt="">
+					<p>your knowledge, accessible</p>
+				</section>
+				
+				<section>
+
+					<section>
+						<h2>RML Mapper</h2>
+					</section>
+
+					<section>
+						<p>In the <a href="./table-vs-graph.html">Table vs. Graph</a> slide deck we learned what table data looks like when represented in a graph.</p>
+					</section>
+
+					<section>
+						<p><strong>Purpose:</strong> Formalize the inherent structure of a dataset and make it machine-readable, so it can be <em>queried in the context of other information</em>.</p>
+					</section>
+
+					<section>
+						<p>One way to achieve this is to implement a custom parser in a programming language of choice. However, such parsers are not easily portable or reusable across different systems.</p>
+					</section>
+
+					<section>
+						<p>In this guide we will explore how to use Cue's RML Mapper to transform data into RDF graphs.</p>
+					</section>
+
+					<section data-background-iframe="https://rml.io/specs/rml/">
+					</section>
+
+					<section>
+						https://rml.io/specs/rml/
+					</section>
+
+				</section>
+
+				
+				
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script type="module">
+			import { turtle } from "./plugin/highlight/turtle.js";
+			import { sparql } from "./plugin/highlight/sparql.js";
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+				highlight: {
+					beforeHighlight: (hljs) => {
+						hljs.registerLanguage("turtle", (hljs) => turtle(hljs));
+						hljs.registerLanguage("sparql", (hljs) => sparql(hljs));
+					},
+				},
+			});
+		</script>
+	</body>
+</html>
