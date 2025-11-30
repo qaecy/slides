@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const s = { ...defaultSettings, edgeFontSize: "8rem", edgeWidth: "5rem" };
+      const style = buildStyles(s);
+      const padding = isMobile() ? 5 : 200;
+
+      let cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "person1",
+              },
+              position: {
+                x: 100,
+                y: 44,
+              },
+            },
+            {
+              data: {
+                id: "person2",
+              },
+              position: {
+                x: 209,
+                y: 100,
+              },
+            },
+            {
+              data: {
+                id: "person3",
+              },
+              position: {
+                x: 312,
+                y: 34,
+              },
+            },
+            {
+              data: {
+                id: "person",
+                label: "Person",
+              },
+              position: {
+                x: 201,
+                y: -11,
+              },
+            },
+            {
+              data: {
+                id: "person1first",
+                label: "Mads",
+              },
+              position: {
+                x: 130,
+                y: 144,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "person1last",
+                label: "Rasmussen",
+              },
+              position: {
+                x: 20,
+                y: 142,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "person2first",
+                label: "Philipp",
+              },
+              position: {
+                x: 176,
+                y: 204,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "person2last",
+                label: "Dohmen",
+              },
+              position: {
+                x: 280,
+                y: 204,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "person3first",
+                label: "Manos",
+              },
+              position: {
+                x: 302,
+                y: 154,
+              },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "person3last",
+                label: "Argyris",
+              },
+              position: {
+                x: 403,
+                y: 128,
+              },
+              classes: "literal",
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "person1",
+                target: "person",
+                label: "a",
+              },
+            },
+            {
+              data: {
+                source: "person2",
+                target: "person",
+                label: "a",
+              },
+            },
+            {
+              data: {
+                source: "person3",
+                target: "person",
+                label: "a",
+              },
+            },
+            {
+              data: {
+                source: "person1",
+                target: "person1first",
+                label: "schema:name",
+              },
+            },
+            {
+              data: {
+                source: "person1",
+                target: "person1last",
+                label: "schema:familyName",
+              },
+            },
+            {
+              data: {
+                source: "person2",
+                target: "person2first",
+                label: "schema:name",
+              },
+            },
+            {
+              data: {
+                source: "person2",
+                target: "person2last",
+                label: "schema:familyName",
+              },
+            },
+            {
+              data: {
+                source: "person3",
+                target: "person3first",
+                label: "schema:name",
+              },
+            },
+            {
+              data: {
+                source: "person3",
+                target: "person3last",
+                label: "schema:familyName",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

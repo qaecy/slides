@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+        layoutOptions,
+        defaultSettings,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const s = { ...defaultSettings, edgeFontSize: "8rem", edgeWidth: "5rem" };
+      const style = buildStyles(s);
+      const padding = isMobile() ? 5 : 200;
+
+      let cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: {
+          name: "preset",
+          padding,
+        },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "person1",
+                boxLabels: ["schema:Person"],
+                properties: {
+                  "schema:name": "Mads",
+                  "schema:familyName": "Rasmussen",
+                },
+              },
+              position: {
+                x: 125,
+                y: 28,
+              },
+            },
+            {
+              data: {
+                id: "person2",
+                boxLabels: ["schema:Person"],
+                properties: {
+                  "schema:name": "Philipp",
+                  "schema:familyName": "Dohmen",
+                },
+              },
+              position: {
+                x: 238,
+                y: 201,
+              },
+            },
+            {
+              data: {
+                id: "person3",
+                boxLabels: ["schema:Person"],
+                properties: {
+                  "schema:name": "Manos",
+                  "schema:familyName": "Argyris",
+                },
+              },
+              position: {
+                x: 329,
+                y: 38,
+              },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "person1",
+                target: "person2",
+                label: "schema:knows",
+              },
+            },
+            {
+              data: {
+                source: "person1",
+                target: "person3",
+                label: "schema:knows",
+              },
+            },
+            {
+              data: {
+                source: "person2",
+                target: "person3",
+                label: "schema:knows",
+              },
+            },
+            {
+              data: {
+                source: "person3",
+                target: "person2",
+                label: "schema:knows",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      logNodePositions(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>
