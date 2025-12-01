@@ -33,6 +33,7 @@
           <p>your knowledge, accessible</p>
         </section>
 
+        <!-- Intro -->
         <section>
           <section>
             <h2>RML Mapper</h2>
@@ -78,6 +79,74 @@
           </section>
         </section>
 
+        <!-- Purpose -->
+        <section>
+          <section>
+            <h2>Purpose</h2>
+          </section>
+
+          <section>
+            <img
+              src="dist/img/idlab/KGGenerationStep1a.svg"
+              style="height: 50vh"
+            />
+            <div class="reference">
+              https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation
+            </div>
+          </section>
+
+          <section>
+            <img
+              src="dist/img/idlab/KGGenerationStep1b.svg"
+              style="height: 50vh"
+            />
+            <div class="reference">
+              https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation
+            </div>
+          </section>
+
+          <section>
+            <img
+              src="dist/img/idlab/KGGenerationStep2a.svg"
+              style="height: 50vh"
+            />
+            <div class="reference">
+              https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation
+            </div>
+          </section>
+
+          <section>
+            <img
+              src="dist/img/idlab/KGGenerationStep2b.svg"
+              style="height: 50vh"
+            />
+            <div class="reference">
+              https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation
+            </div>
+          </section>
+
+          <section>
+            <img
+              src="dist/img/idlab/KGGenerationStep3a.svg"
+              style="height: 50vh"
+            />
+            <div class="reference">
+              https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation
+            </div>
+          </section>
+
+          <!-- <section>
+            <img src="dist/img/idlab/KGGenerationStep3b.svg" style="height: 50vh;">
+            <div class="reference">https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation</div>
+          </section>
+
+          <section>
+            <img src="dist/img/idlab/KGGenerationStep4.svg" style="height: 50vh;">
+            <div class="reference">https://dylanvanassche.be/assets/leveraging-wot-for-kg-generation</div>
+          </section> -->
+        </section>
+
+        <!-- 101 -->
         <section>
           <section>
             <h2>YARRRML 101</h2>
@@ -129,7 +198,7 @@
             <p>A simple YARRRML map would look like this</p>
             <pre><code data-trim class="yml hljs" data-line-numbers="|4-7|8|9-12|1-2">
 prefixes:
-  schema: "http://schema.org/"
+  schema: http://schema.org/
 
 mappings:
   person:
@@ -164,25 +233,31 @@ mappings:
 			</code></pre>
           </section>
 
-          <section data-background-iframe="dist/html/cytoscape/rml1.html"></section>
+          <section
+            data-background-iframe="dist/html/cytoscape/rml1.html"
+          ></section>
 
-          <section data-background-iframe="dist/html/cytoscape/rml2.html"></section>
+          <section
+            data-background-iframe="dist/html/cytoscape/rml2.html"
+          ></section>
 
-                    <section>
+          <section>
             <p>Another data source might specify the following</p>
             <pre><code data-trim class="json hljs" >
-[{
-  "id": "1",
-  "knows": ["2", "3"]
-},
-{
-  "id": "2",
-  "knows": ["3"]
-},
-{
-  "id": "3",
-  "knows": ["2"]
-}]
+[
+  {
+    "id": "1",
+    "knows": ["2", "3"]
+  },
+  {
+    "id": "2",
+    "knows": ["3"]
+  },
+  {
+    "id": "3",
+    "knows": ["2"]
+  }
+]
 			</code></pre>
           </section>
 
@@ -206,14 +281,19 @@ mappings:
             >
           </section>
 
-          <section data-background-iframe="dist/html/cytoscape/rml3.html"></section>
+          <section
+            data-background-iframe="dist/html/cytoscape/rml3.html"
+          ></section>
 
           <section>
-            <p>The challenge in doing these mappings is defining common identifiers</p>
+            <p>
+              The challenge in doing these mappings is defining common
+              identifiers
+            </p>
           </section>
-
         </section>
 
+        <!-- IRI resolution -->
         <section>
           <section>
             <h2>IRI resolution</h2>
@@ -229,26 +309,203 @@ mappings:
               ></cue-logo>
             </div>
             <p>
-              uses IRIs with special identifiers <br />derived from concatenated text
-              strings.
+              uses IRIs with special identifiers <br />derived from concatenated
+              text strings.
             </p>
           </section>
 
           <section>
-            <p>https://cue.qaecy.com/<span style="color: orange;">{prejectID}</span>/<span style="color: #2859e1;">{resourceID}</span></p>
+            <p>
+              https://cue.qaecy.com/<span style="color: orange">{prejectID}</span>/<span style="color: #2859e1">{resourceID}</span>
+            </p>
           </section>
 
           <section>
-            <p><strong>Cue IRIs are dereferenceable:</strong> If you open it in a web browser, and you are allowed to view the resource, you will see something meaningful.</p>
+            <p>
+              <strong>Cue IRIs are dereferenceable:</strong> If you open it in a
+              web browser, and you are allowed to view the resource, you will
+              see something meaningful.
+            </p>
           </section>
 
           <section>
-            <p>The resource IDs we use in our RML maps</p>
+            <p>Interactive resourceID generator</p>
             <iframe
               style="width: 500px; background: transparent"
               src="dist/html/id-builder/index.html"
               frameborder="0"
             ></iframe>
+          </section>
+
+          <section>
+            <p>In the RML map we use a function for creating resource IDs</p>
+            <pre><code data-trim class="yml hljs" data-line-numbers="11-12|">
+prefixes:
+  qcy: https://dev.qaecy.com/ont#
+  qcy-e: https://dev.qaecy.com/enum#
+  qcy-f: https://dev.qaecy.com/functions#
+  qcy-r: https://cue.qaecy.com/r/555548e1-f6b2-43c1-af6e-3797ac3c2096/
+
+mappings:
+ person:
+   sources:
+     - ['input~csv']
+   s:
+     - function: qcy-f:contextIRI(ns = "qcy-r:", str1 = $(First), str2 = " ", str3 = $(Last), str4 = "https://dev.qaecy.com/enum#Person")
+   po:
+     - [a, qcy:CanonicalEntity]
+     - [qcy-e:hasEntityCategory, qcy-e:Person~iri]
+     - [qcy:value, $(First) $(Last)]
+			    </code></pre>
+          <p style="font-size: 1.4rem;">IRI built from eg. "<span style="font-style: italic;">Mads Rasmussenhttps://dev.qaecy.com/enum#Person</span>" <br><span style="font-size: 1.2rem;">-> 5f958fb3-9c9e-5e64-acdf-cfba21a5cd79</span></p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Filtering</h2>
+          </section>
+
+          <section>
+            <p>In some cases there are rows that need to be filtered out</p>
+          </section>
+
+          <section>
+            <p>For example, for classification codes in a hierachy</p>
+          </section>
+
+          <section>
+            <p>Example from BIM7AA</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Label</th>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Complementary Building Parts</td>
+                </tr>
+                <tr>
+                  <td>31</td>
+                  <td>Exterior Walls, Complementary</td>
+                </tr>
+                <tr>
+                  <td>311</td>
+                  <td>Exterior Doors</td>
+                </tr>
+                <tr>
+                  <td>312</td>
+                  <td>Exterior Windows</td>
+                </tr>
+                <tr>
+                  <td>313</td>
+                  <td>Exterior doors, facade systems</td>
+                </tr>
+              </thead>
+            </table>
+          </section>
+
+          <section>
+            <p>In CSV the table looks like this</p>
+            <pre><code data-trim class="text hljs" >
+				Code,Label
+				3,Complementary Building Parts
+				31,Exterior Walls, Complementary
+				311,Exterior Doors
+				312,Exterior Windows
+				313,Exterior doors, facade systems
+			</code></pre>
+          </section>
+
+          <section>
+            <p><strong>Condition:</strong> Code must consist of three digits</p>
+            <pre><code data-trim class="yml hljs" data-line-numbers="13-17|">
+prefixes:
+  qcy: https://dev.qaecy.com/ont#
+  qcy-e: https://dev.qaecy.com/enum#
+  skos: http://www.w3.org/2004/02/skos/core#
+  grel: http://users.ugent.be/~bjdmeest/function/grel.ttl#
+  bim7aa: http://bim7aa.dk/no/
+
+mappings:
+ person:
+   sources:
+     - ['input~csv']
+   s: bim7aa:$(Code)
+   condition:
+      function: grel:string_match
+      parameters:
+        - [grel:valueParameter, $(Code)]
+        - [grel:p_string_find, "^\\d{3}$"]
+   po:
+     - [a, qcy:EntityCategory]
+     - [a, skos:Concept]
+     - [skos:notation, $(Code)]
+     - [skos:prefLabel, $(Label)]
+     - [skos:broader, qcy-e:BuildingElement~iri]
+			    </code></pre>
+          </section>
+
+          <section>
+            <p>Result</p>
+            <pre><code data-trim class="turtle hljs" data-line-numbers="|11-12">
+&lt;http://bim7aa.dk/no/311&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
+&lt;http://bim7aa.dk/no/311&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
+&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
+&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "311" .
+&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior Doors" .
+&lt;http://bim7aa.dk/no/312&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
+&lt;http://bim7aa.dk/no/312&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
+&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
+&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "312" .
+&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior Windows" .
+&lt;http://bim7aa.dk/no/313&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
+&lt;http://bim7aa.dk/no/313&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
+&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
+&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "313" .
+&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior doors" .
+			    </code></pre>
+          </section>
+
+        </section>
+
+        <!-- Perspectives -->
+        <section>
+          <section>
+            <h2>Perspectives</h2>
+          </section>
+
+          <section>
+            <p>A canonical entity could be a WoT device</p>
+          </section>
+
+          <section>
+            <p>These can carry a "Thing Description"</p>
+            <ul style="font-size: 1.4rem; line-height: 1.6rem;">
+              <li style="margin-bottom: 1em;"><strong>Thing Metadata:</strong> Includes general details like name, description, domain-specific info, and optional semantic annotations for the Thing.​</li>
+              <li style="margin-bottom: 1em;"><strong>Protocol Bindings:</strong> Specifies communication protocols (e.g., HTTP, CoAP, MQTT) via binding templates and media types for interaction affordances.​</li>
+              <li><strong>Security and Authentication:</strong> Defines security schemes (e.g., Basic, Digest, OAuth2) with metadata for access control across resources.​</li>
+            </ul>
+            <div style="height: 2rem;"></div>
+            <a style="font-size: 1.4rem;" href="https://www.w3.org/TR/wot-thing-description11/#:~:text=Thing%20Description%20generation%20from%20Thing%20Model" target="_blank">Example: Thing model MQTT</a>
+          </section>
+        </section>
+
+        <!-- Next -->
+        <section>
+          <section>
+            <h2>Next</h2>
+          </section>
+
+          <section>
+            <ul>
+              <li>
+                Mapping can also include instructions for declarative
+                authentication
+              </li>
+            </ul>
           </section>
         </section>
       </div>

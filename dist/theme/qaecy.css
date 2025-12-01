@@ -392,3 +392,16 @@ hlr{
 .bg-transparent-white a{
   pointer-events: all;
 }
+
+.reference{ 
+  bottom: -0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  font-size: 1rem;
+  text-align: left;
+  font-style: italic;
+  font-weight: 600;
+  color: #0d5be9;
+  transform: translateY(70px);
+}
