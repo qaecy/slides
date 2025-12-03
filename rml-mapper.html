@@ -316,7 +316,7 @@ mappings:
 
           <section>
             <p>
-              https://cue.qaecy.com/<span style="color: orange">{prejectID}</span>/<span style="color: #2859e1">{resourceID}</span>
+              https://cue.qaecy.com/r/<span style="color: orange">{projectID}</span>/<span style="color: #2859e1">{resourceID}</span>
             </p>
           </section>
 
@@ -410,12 +410,12 @@ mappings:
           <section>
             <p>In CSV the table looks like this</p>
             <pre><code data-trim class="text hljs" >
-				Code,Label
-				3,Complementary Building Parts
-				31,Exterior Walls, Complementary
-				311,Exterior Doors
-				312,Exterior Windows
-				313,Exterior doors, facade systems
+Code,"Label"
+3,"Complementary Building Parts"
+31,"Exterior Walls, Complementary"
+311,"Exterior Doors"
+312,"Exterior Windows"
+313,"Exterior doors, facade systems"
 			</code></pre>
           </section>
 
@@ -450,22 +450,24 @@ mappings:
 
           <section>
             <p>Result</p>
-            <pre><code data-trim class="turtle hljs" data-line-numbers="|11-12">
-&lt;http://bim7aa.dk/no/311&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
-&lt;http://bim7aa.dk/no/311&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
-&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
-&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "311" .
-&lt;http://bim7aa.dk/no/311&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior Doors" .
-&lt;http://bim7aa.dk/no/312&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
-&lt;http://bim7aa.dk/no/312&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
-&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
-&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "312" .
-&lt;http://bim7aa.dk/no/312&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior Windows" .
-&lt;http://bim7aa.dk/no/313&gt; a &lt;http://www.w3.org/2004/02/skos/core#Concept&gt; .
-&lt;http://bim7aa.dk/no/313&gt; a &lt;https://dev.qaecy.com/ont#EntityCategory&gt; .
-&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#broader&gt; &lt;https://dev.qaecy.com/enum#BuildingElement&gt; .
-&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#notation&gt; "313" .
-&lt;http://bim7aa.dk/no/313&gt; &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Exterior doors" .
+            <pre><code data-trim class="turtle hljs" data-line-numbers="|6-9">
+@prefix base: &lt;http://bim7aa.dk/no/&gt; .
+@prefix qcy: &lt;https://dev.qaecy.com/ont#&gt; .
+@prefix qcy-e: &lt;https://dev.qaecy.com/enum#&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+
+&lt;311&gt; a skos:Concept , qcy:EntityCategory ;
+    skos:broader qcy-e:BuildingElement ;
+    skos:notation "311" ;
+    skos:prefLabel "Exterior Doors" .
+&lt;312&gt; a skos:Concept , qcy:EntityCategory ;
+    skos:broader qcy-e:BuildingElement ;
+    skos:notation "312" ;
+    skos:prefLabel "Exterior Windows" .
+&lt;313&gt; a skos:Concept , qcy:EntityCategory ;
+    skos:broader qcy-e:BuildingElement ;
+    skos:notation "313" ;
+    skos:prefLabel "Exterior doors, facade systems" .
 			    </code></pre>
           </section>
 
