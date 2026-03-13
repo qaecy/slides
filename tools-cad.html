@@ -32,7 +32,14 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <img src="dist/img/logos/cue.svg" alt="" />
+          <div style="display: flex; justify-content: center">
+            <cue-logo
+              class="inline-logo"
+              active="true"
+              [continuous]="false"
+              style="height: 100px"
+            ></cue-logo>
+          </div>
           <p>by <img src="dist/img/logo.svg" class="inline-logo" /></p>
         </section>
 
@@ -149,6 +156,11 @@
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script src="dist/js/arrow-converter.js"></script>
+
+    <script src="dist/js/cue-ui/logo/runtime.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/polyfills.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/main.js" type="module"></script>
+    
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
