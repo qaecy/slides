@@ -405,3 +405,13 @@ hlr{
   color: #0d5be9;
   transform: translateY(70px);
 }
+
+.reveal ul{
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.reveal ul ul{
+  margin-top: 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>cue by QAECY</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logos/cue.svg" alt="" />
+          <p>by <img src="dist/img/logo.svg" class="inline-logo" /></p>
+        </section>
+
+        <section>
+          <img src="dist/img/logos/cue.svg" alt="" />
+          <p style="font-size: 1.4rem">
+            An “Agent as a Service” that accelerates <br />domain practitioners'
+            search for information.
+          </p>
+        </section>
+
+        <section>
+
+          <section>
+            <p>Has read and understood all your documents</p>
+          </section>
+
+          <section data-background-iframe="dist/html/cue-nest/project-files/index.html">
+          </section>
+
+
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

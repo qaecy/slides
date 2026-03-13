@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>CAD tools</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="dist/img/logos/cue.svg" alt="" />
+          <p>by <img src="dist/img/logo.svg" class="inline-logo" /></p>
+        </section>
+
+        <section>
+          <img src="dist/img/logos/cue.svg" alt="" />
+          <p style="font-size: 1.4rem">Could my CAD become BIM?</p>
+        </section>
+
+        <section>
+          <section>
+            <p>We take your DWGs and do the following:</p>
+            <ul>
+              <li>Create web friendly formats</li>
+              <ul>
+                <li>DXF vector viewing in browser</li>
+                <li>PNGs of each paper layout in desired DPI</li>
+              </ul>
+              <li>Extract info about all viewports</li>
+              <ul>
+                <li>Scale</li>
+                <li>Transformation matrices</li>
+              </ul>
+              <li>Formalise all relationships a knowledge graph</li>
+            </ul>
+          </section>
+
+          <section>
+            <p>Knowledge graph subset</p>
+            <ul>
+              <li>DWG -[alternative representation]-> DXF</li>
+              <li>DWG -[contains fragment]-> Paper layout</li>
+              <li>Paper layout -[contains fragment]-> Viewport</li>
+              <li>Viewport -[scale]-> 1:50</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+
+          <section>
+            <p>Click layout image and get coordinates relative to both paper and model space</p>
+            <video src="dist/videos/cue/CAD/Point insert.mov" autoplay></video>
+          </section>
+
+          <section>
+            <p>Copy objects</p>
+            <video src="dist/videos/cue/CAD/Object copy.mov" autoplay></video>
+          </section>
+
+          <section>
+            <p>Draw polygons</p>
+            <video src="dist/videos/cue/CAD/Draw polygon.mov" autoplay></video>
+          </section>
+
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="dist/js/arrow-converter.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
