@@ -74,6 +74,16 @@
         <section>
 
           <section>
+            <p>DXF viewer allows toggling layers on/off</p>
+            <video src="dist/videos/cue/CAD/Layers.mov" autoplay></video>
+          </section>
+
+          <section>
+            <p>Viewer also shows paper space layouts with viewports and can bring geometry from model space to paper space</p>
+            <video src="dist/videos/cue/CAD/Paper layout.mov" autoplay></video>
+          </section>
+
+          <section>
             <p>Click layout image and get coordinates relative to both paper and model space</p>
             <video src="dist/videos/cue/CAD/Point insert.mov" autoplay></video>
           </section>
@@ -88,6 +98,37 @@
             <video src="dist/videos/cue/CAD/Draw polygon.mov" autoplay></video>
           </section>
 
+        </section>
+
+        <section>
+          <section>
+            <h4>Ideas for implementations</h4>
+          </section>
+
+          <section>
+            <p>Create space polygons for spaces and relate them to a storey</p>
+            <ul>
+              <li>2nd floor -[contains]-> Space</li>
+              <li>Space -[has geometry]-> Polygon</li>
+              <li>Space -[area]-> 12.3 m² <span class="note">(from polygon)</span></li>
+            </ul>
+          </section>
+
+          <section>
+            <p>Use space polygon to automatically derive containment</p>
+            <ul>
+              <li>Space -[contains]-> Chair</li>
+              <li>Chair -[has geometry]-> SVG</li>
+            </ul>
+          </section>
+
+          <section>
+            <p>And the general UI features like:</p>
+            <ul>
+              <li>Do measurements</li>
+              <li>Calculate areas</li>
+            </ul>
+          </section>
         </section>
 
       </div>
