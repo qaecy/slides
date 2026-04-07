@@ -11,7 +11,7 @@ function convertArrows() {
         wrapper.innerHTML = node.textContent.replace(arrowPattern, 
           '<span style="display: inline-flex; align-items: center; margin: 0 0.3rem;">' +
           '  <span style="font-size: 1.2rem; color: #0d5be9;">—</span>' +
-          '  <span style="background: #0d5be9; color: white; padding: 0 0.2rem; border-radius: 0.2rem; font-size: 0.6rem;">$1</span>' +
+          '  <span style="background: #0d5be9; color: white; padding: 0 0.2rem; border-radius: 0.2rem; font-size: 0.8rem; line-height: 1.4rem">$1</span>' +
           '  <span style="font-size: 1.2rem; color: #0d5be9;">→</span>' +
           '</span>'
         );
