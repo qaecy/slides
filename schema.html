@@ -82,6 +82,14 @@
               Reasoning then stitches them together with inferred relationships.
             </p>
           </section>
+          <section>
+            <ul style="list-style: none; font-size: 1.15rem; line-height: 2.8rem; width: 85%; margin: 0 auto;">
+              <li class="fragment">FileContent -[containsFragment]-> Fragment</li>
+              <li class="fragment">Fragment -[mentions]-> EntityMention</li>
+              <li class="fragment">EntityMention -[resolvesTo]-> CanonicalEntity</li>
+              <li class="fragment" style="opacity: 0.6; font-style: italic;">FileContent -[about]-> CanonicalEntity <small>(inferred)</small></li>
+            </ul>
+          </section>
         </section>
 
         <!-- ─── Section 1: FileContent + FileLocation ─────────────── -->
@@ -139,7 +147,10 @@
             <ul class="prop-list">
               <li class="fragment">One file present on SharePoint, Aconex <em>and</em> a local drive is modelled once</li>
               <li class="fragment">Renaming or moving a file does not break the content identity</li>
-              <li class="fragment"><code>qcy:FileLocation</code> also carries <code>qcy:mentions</code> relationships — entity mentions inferred directly from the file <em>path</em></li>
+              <li class="fragment">
+                <code>qcy:FileLocation</code> also carries mentions inferred from the file <em>path</em>:<br />
+                <span style="font-size: 0.9rem;">FileLocation -[mentions]-> EntityMention</span>
+              </li>
             </ul>
           </section>
 
@@ -248,7 +259,11 @@
               Reasoning derives <code class="ont">qcy:containsFragment</code>
               implicitly from selectors — you never need to assert it manually.
             </p>
-            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?sub qcy:containsFragment ?obj } }
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { 
+    GRAPH &lt;implicit&gt; { 
+        ?sub qcy:containsFragment ?obj 
+    } 
+} 
 WHERE {
   ?sel a qcy:Selector ;
        qcy:selectorSubject ?sub ;
@@ -337,7 +352,11 @@ WHERE {
               implicitly from selectors — fragments automatically inherit
               the entity mentions of their sub-fragments.
             </p>
-            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?sub qcy:mentions ?obj } }
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { 
+    GRAPH &lt;implicit&gt; { 
+        ?sub qcy:mentions ?obj 
+    } 
+} 
 WHERE {
   ?sel a qcy:Selector ;
        qcy:selectorSubject ?sub ;
@@ -412,16 +431,27 @@ WHERE {
               Canonical entities also inherit the relations found between their
               entity mentions:
             </p>
-            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?c1 ?rel ?c2 } }
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { 
+    GRAPH &lt;implicit&gt; { 
+        ?c1 ?rel ?c2 
+    } 
+}
 WHERE {
-  ?m1 a qcy:EntityMention ; ?rel ?m2 ; qcy:resolvesTo ?c1 .
-  ?m2 a qcy:EntityMention ;              qcy:resolvesTo ?c2 .
+  ?m1 a qcy:EntityMention ; 
+    ?rel ?m2 ; 
+    qcy:resolvesTo ?c1 .
+  ?m2 a qcy:EntityMention ;              
+    qcy:resolvesTo ?c2 .
   FILTER(?m1 != ?m2)
   FILTER NOT EXISTS { ?c1 ?rel ?c2 }
 }</code></pre>
             <p class="fragment" style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.8;">
               Relations like <code>qcy:elementHasMaterial</code>, <code>qcy:contractInvolvesParty</code>, or <code>qcy:associatedWith</code>
               automatically propagate from mentions to canonical entities.
+            </p>
+            <p class="fragment" style="font-size: 0.95rem; margin-top: 0.5rem;">
+              Wall (mention) -[elementHasMaterial]-> Concrete (mention)<br />
+              <span style="opacity: 0.5;">∴</span> Wall (canonical) -[elementHasMaterial]-> Concrete (canonical)
             </p>
           </section>
         </section>
@@ -460,15 +490,19 @@ WHERE {
 
           <section>
             <h4>How <code class="ont">qcy:about</code> propagates</h4>
-            <ol class="prop-list">
-              <li class="fragment">Fragment <code>mentions</code> EntityMention<br />
-                + EntityMention <code>resolvesTo</code> CanonicalEntity<br />
-                → Fragment <code>about</code> CanonicalEntity</li>
-              <li class="fragment">Document <code>containsFragment</code> Fragment<br />
-                + Fragment <code>about</code> CanonicalEntity<br />
-                → Document <code>about</code> CanonicalEntity</li>
-              <li class="fragment">Transitivity extends this through any depth of nesting</li>
-            </ol>
+            <ul style="list-style: none; font-size: 1.05rem; line-height: 2.2rem; width: 90%; margin: 0 auto; text-align: center;">
+              <li class="fragment">
+                Fragment -[mentions]-> EntityMention<br />
+                EntityMention -[resolvesTo]-> CanonicalEntity<br />
+                <span style="opacity: 0.5;">∴</span> Fragment -[about]-> CanonicalEntity
+              </li>
+              <li class="fragment" style="margin-top: 0.8rem;">
+                Document -[containsFragment]-> Fragment<br />
+                Fragment -[about]-> CanonicalEntity<br />
+                <span style="opacity: 0.5;">∴</span> Document -[about]-> CanonicalEntity
+              </li>
+              <li class="fragment" style="margin-top: 0.8rem; opacity: 0.7; font-size: 0.9rem;">Transitivity extends this through any depth of nesting</li>
+            </ul>
           </section>
 
           <section
@@ -518,6 +552,9 @@ WHERE {
             &nbsp;·&nbsp;
             <a href="https://dev.qaecy.com/enum/">dev.qaecy.com/enum</a>
           </p>
+          <p style="font-size: 0.95rem; margin-top: 2rem; opacity: 0.5;">
+            See also: <a href="agent.html">Querying the graph with Cue →</a>
+          </p>
         </section>
 
       </div>
@@ -528,6 +565,7 @@ WHERE {
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script src="js/print-fallback.js"></script>
+    <script src="dist/js/arrow-converter.js"></script>
 
     <script>
       Reveal.initialize({
