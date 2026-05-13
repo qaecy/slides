@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      // dashed style for inferred (implicit) edges
+      style.push({
+        selector: ".implicit",
+        style: {
+          "line-style": "dashed",
+          "line-dash-pattern": [15, 8],
+          "line-color": "#6692e3",
+          "target-arrow-color": "#6692e3",
+          color: "#6692e3",
+          "z-index": "-1",
+        },
+      });
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: { name: "preset", padding },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "fc",
+                label: "design-report.pdf",
+                boxLabels: ["qcy:FileContent"],
+              },
+              position: { x: -120, y: -180 },
+            },
+            {
+              data: {
+                id: "page",
+                label: "Page 3",
+                boxLabels: ["qcy:DocumentPageFragment"],
+              },
+              position: { x: -30, y: -50 },
+            },
+            {
+              data: {
+                id: "em",
+                label: "A. Einstein",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: 180, y: 60 },
+            },
+            {
+              data: {
+                id: "ce",
+                label: "Albert Einstein",
+                boxLabels: ["qcy:CanonicalEntity"],
+                color: "#0D5BE9",
+              },
+              position: { x: 30, y: 200 },
+            },
+          ],
+          edges: [
+            // explicit / structural
+            {
+              data: {
+                source: "fc",
+                target: "page",
+                label: "qcy:containsFragment",
+              },
+            },
+            {
+              data: {
+                source: "page",
+                target: "em",
+                label: "qcy:mentions",
+              },
+            },
+            {
+              data: {
+                source: "em",
+                target: "ce",
+                label: "qcy:resolvesTo",
+              },
+            },
+            // inferred
+            {
+              data: {
+                source: "page",
+                target: "ce",
+                label: "qcy:about",
+              },
+              classes: "implicit",
+            },
+            {
+              data: {
+                source: "fc",
+                target: "ce",
+                label: "qcy:about",
+              },
+              classes: "implicit",
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

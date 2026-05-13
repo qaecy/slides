@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: { name: "preset", padding },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "fc",
+                label: "arch-model.ifc",
+                boxLabels: ["qcy:FileContent"],
+                properties: {
+                  "qcy:md5Hash": "e939b0e66904...",
+                  "qcy:mime": "application/x-step",
+                },
+              },
+              position: { x: 0, y: 60 },
+            },
+            {
+              data: {
+                id: "loc1",
+                label: "SharePoint",
+                boxLabels: ["qcy:FileLocation"],
+                properties: {
+                  "qcy:filePath": "/BIM/Architecture.ifc",
+                  "qcy:remoteProvider": "azure",
+                },
+              },
+              position: { x: -200, y: -60 },
+            },
+            {
+              data: {
+                id: "loc2",
+                label: "Aconex",
+                boxLabels: ["qcy:FileLocation"],
+                properties: {
+                  "qcy:filePath": "2ac516c0.ifc",
+                  "qcy:remoteProvider": "aconex",
+                },
+              },
+              position: { x: 0, y: -90 },
+            },
+            {
+              data: {
+                id: "loc3",
+                label: "Local Drive",
+                boxLabels: ["qcy:FileLocation"],
+                properties: {
+                  "qcy:filePath": "/projects/arch.ifc",
+                  "qcy:remoteProvider": "local",
+                },
+              },
+              position: { x: 200, y: -60 },
+            },
+          ],
+          edges: [
+            {
+              data: {
+                source: "fc",
+                target: "loc1",
+                label: "qcy:hasFileLocation",
+              },
+            },
+            {
+              data: {
+                source: "fc",
+                target: "loc2",
+                label: "qcy:hasFileLocation",
+              },
+            },
+            {
+              data: {
+                source: "fc",
+                target: "loc3",
+                label: "qcy:hasFileLocation",
+              },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

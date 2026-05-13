@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: { name: "preset", padding },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "tf",
+                label: "...born in Württemberg...",
+                boxLabels: ["qcy:TextFragment"],
+              },
+              position: { x: 0, y: -100 },
+            },
+            {
+              data: {
+                id: "em1",
+                label: "Württemberg",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: -160, y: 70 },
+            },
+            {
+              data: {
+                id: "em2",
+                label: "A. Einstein",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: 160, y: 70 },
+            },
+            {
+              data: {
+                id: "sel1",
+                label: "TextIndexSelector",
+                boxLabels: ["qcy:TextIndexSelector"],
+              },
+              position: { x: -260, y: -60 },
+            },
+            {
+              data: { id: "val1", label: "10,22" },
+              position: { x: -370, y: 20 },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "sel2",
+                label: "TextIndexSelector",
+                boxLabels: ["qcy:TextIndexSelector"],
+              },
+              position: { x: 260, y: -60 },
+            },
+            {
+              data: { id: "val2", label: "31,41" },
+              position: { x: 370, y: 20 },
+              classes: "literal",
+            },
+            {
+              data: {
+                id: "cat1",
+                label: "Location",
+                boxLabels: ["qcy-e:Location"],
+              },
+              position: { x: -220, y: 200 },
+            },
+            {
+              data: {
+                id: "cat2",
+                label: "Person",
+                boxLabels: ["qcy-e:Person"],
+              },
+              position: { x: 220, y: 200 },
+            },
+          ],
+          edges: [
+            {
+              data: { source: "tf", target: "em1", label: "qcy:mentions" },
+            },
+            {
+              data: { source: "tf", target: "em2", label: "qcy:mentions" },
+            },
+            {
+              data: { source: "sel1", target: "tf", label: "qcy:selectorSubject" },
+            },
+            {
+              data: { source: "sel1", target: "em1", label: "qcy:selectorObject" },
+            },
+            {
+              data: { source: "sel1", target: "val1", label: "qcy:value" },
+            },
+            {
+              data: { source: "sel2", target: "tf", label: "qcy:selectorSubject" },
+            },
+            {
+              data: { source: "sel2", target: "em2", label: "qcy:selectorObject" },
+            },
+            {
+              data: { source: "sel2", target: "val2", label: "qcy:value" },
+            },
+            {
+              data: { source: "em1", target: "cat1", label: "qcy:hasEntityCategory" },
+            },
+            {
+              data: { source: "em2", target: "cat2", label: "qcy:hasEntityCategory" },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

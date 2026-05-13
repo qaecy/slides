@@ -178,6 +178,101 @@
           </section>
         </section>
 
+        <!-- ─── Real estate owner questions ─────────────────────── -->
+        <section>
+          <section>
+            <h4>Questions a real estate owner would ask</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              You shouldn't need to understand the data model to get value
+            </p>
+          </section>
+
+          <section>
+            <h4>Know your assets</h4>
+            <table class="query-table">
+              <tr>
+                <td></td>
+                <td><em>"What building elements exist — and how many of each type?"</em><br /><small>Full inventory from all models, broken down by Wall, Slab, Window, Door, …</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"What is the spatial hierarchy? Buildings → storeys → spaces"</em><br /><small>Walks the zone topology extracted from BIM and CAD</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"How many slabs are in the tower, and which are structural vs. architectural?"</em><br /><small>Classification check across models</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <h4>Know your stakeholders</h4>
+            <table class="query-table">
+              <tr>
+                <td></td>
+                <td><em>"List all people in this project and their organizations"</em><br /><small>Canonical entities across all documents</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"Generate a project summary: stakeholders, building scope, document inventory, key systems"</em><br /><small>Multi-query synthesis — one question, the full picture</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"Which people or organizations appear in contracts but not in design documents?"</em><br /><small>Surfaces advisors, legal parties and others invisible to the design team</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <h4>Compliance &amp; safety</h4>
+            <table class="query-table">
+              <tr>
+                <td></td>
+                <td><em>"How many fire-rated doors are on each floor?"</em><br /><small>Combines spatial context with property classification</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"Are all doors classified consistently between the model and the room schedule?"</em><br /><small>Cross-document comparison of the same entity category</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"Are structural beams and columns in the correct object categories?"</em><br /><small>Flags miscategorized elements before they cause downstream errors</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <h4>What's missing?</h4>
+            <table class="query-table">
+              <tr>
+                <td></td>
+                <td><em>"Which building element types have the most entities without a material assigned?"</em><br /><small>Gap analysis per category — shows where BIM data is incomplete</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"Which building components have quantities but no linked category for cost or procurement?"</em><br /><small>Directly impacts budget reliability</small></td>
+              </tr>
+              <tr class="fragment">
+                <td></td>
+                <td><em>"How many curtain wall panels are missing a type or category assignment?"</em><br /><small>Untyped elements are invisible to quantity take-offs and specifications</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <h4>Provenance — trace anything back to its source</h4>
+            <p style="font-size: 1.3rem;">
+              <em>"Where exactly is this entity mentioned — which documents, which pages, in what context?"</em>
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; opacity: 0.8; margin-top: 1.5rem;">
+              Every answer is traceable: canonical entity → mention → fragment → page → file
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; opacity: 0.8; margin-top: 1rem;">
+              No black box — you always know where the information came from
+            </p>
+          </section>
+        </section>
+
         <!-- ─── Drawings ──────────────────────────────────────────── -->
         <section>
           <section>

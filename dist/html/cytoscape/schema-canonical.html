@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../js/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="./default-styles.css" />
+  </head>
+  <body>
+    <div id="cy"></div>
+    <script type="module">
+      import { isMobile } from "./helpers.js";
+      import {
+        appendHTMLLabels,
+        logNodePositions,
+        animateGraph,
+        buildStyles,
+      } from "../../js/cytoscape-helpers/index.mjs";
+
+      const style = buildStyles();
+      const padding = isMobile() ? 5 : 200;
+
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        style,
+        layout: { name: "preset", padding },
+        elements: {
+          nodes: [
+            {
+              data: {
+                id: "em1",
+                label: "Wurttemberg",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: -200, y: -50 },
+            },
+            {
+              data: {
+                id: "em2",
+                label: "Württemberg",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: 0, y: -80 },
+            },
+            {
+              data: {
+                id: "em3",
+                label: "Württemberg, Germany",
+                boxLabels: ["qcy:EntityMention"],
+              },
+              position: { x: 200, y: -50 },
+            },
+            {
+              data: {
+                id: "ce",
+                label: "Württemberg",
+                boxLabels: ["qcy:CanonicalEntity"],
+                color: "#0D5BE9",
+                properties: {
+                  "qcy:label": "Württemberg",
+                  "qcy:altLabel": "Wurttemberg",
+                  "qcy:seeAlso": "wikidata:Q159626",
+                  "qcy:confidence": "0.97",
+                },
+              },
+              position: { x: 0, y: 120 },
+            },
+          ],
+          edges: [
+            {
+              data: { source: "em1", target: "ce", label: "qcy:resolvesTo" },
+            },
+            {
+              data: { source: "em2", target: "ce", label: "qcy:resolvesTo" },
+            },
+            {
+              data: { source: "em3", target: "ce", label: "qcy:resolvesTo" },
+            },
+            {
+              data: { source: "ce", target: "em2", label: "qcy:hasFoundingMention" },
+            },
+          ],
+        },
+      });
+
+      animateGraph(cy);
+      appendHTMLLabels(cy, document.getElementById("cy"));
+    </script>
+  </body>
+</html>

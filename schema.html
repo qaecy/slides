@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>QAECY Ontology — Schema</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+      code.ont {
+        font-size: 0.85rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.2rem;
+        padding: 0.05em 0.4em;
+      }
+      .prop-list {
+        font-size: 0.95rem;
+        line-height: 1.9rem;
+        text-align: left;
+        margin: 0 auto;
+        width: 80%;
+      }
+      .prop-list code {
+        font-size: 0.8rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.2rem;
+        padding: 0.05em 0.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ─── Title ─────────────────────────────────────────────── -->
+        <section>
+          <img src="dist/img/logo.svg" alt="QAECY" class="inline-logo" style="height:80px;" />
+          <p style="font-size: 1.8rem; margin-top: 1rem;">The QAECY Ontology</p>
+          <p style="font-size: 1rem; opacity: 0.6;">
+            How project knowledge is modelled in the graph
+          </p>
+          <p style="font-size: 0.85rem; opacity: 0.4;">
+            <a href="https://dev.qaecy.com/ont/">dev.qaecy.com/ont</a> &nbsp;·&nbsp;
+            <a href="https://dev.qaecy.com/enum/">dev.qaecy.com/enum</a>
+          </p>
+        </section>
+
+        <!-- ─── Overview ──────────────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Five layers of the model</h4>
+          </section>
+          <section>
+            <ol style="font-size: 1.2rem; line-height: 2.4rem; width: 80%;">
+              <li><strong>File</strong> — where content lives and how many copies exist</li>
+              <li class="fragment"><strong>Fragments</strong> — any subset of a document, at any depth</li>
+              <li class="fragment"><strong>Selectors</strong> — precise pointers into content</li>
+              <li class="fragment"><strong>Entity Mentions</strong> — unique occurrences of named things</li>
+              <li class="fragment"><strong>Canonical Entities</strong> — the single source of truth for each thing</li>
+            </ol>
+          </section>
+          <section>
+            <p style="font-size: 1.3rem; opacity: 0.7;">
+              Each layer builds on the previous.<br />
+              Reasoning then stitches them together with inferred relationships.
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Section 1: FileContent + FileLocation ─────────────── -->
+        <section>
+          <section>
+            <h4>1. File Content &amp; File Location</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              Separating <em>what</em> a file contains from <em>where</em> it lives
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:FileContent</code> node represents the
+              <strong>immutable content</strong> of a file.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              Its identity is derived from the content hash — the same bytes
+              always produce the same node.
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-file-content.html"
+          >
+            <p class="bg-transparent-white">
+              <code class="ont">qcy:FileContent</code> carries metadata and category assignments
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:FileLocation</code> node represents one
+              specific copy of the content on a storage system.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              One <code class="ont">qcy:FileContent</code> can have
+              <strong>many</strong> <code class="ont">qcy:FileLocation</code> nodes
+              — one per DMS, cloud provider, or local path.
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-file-locations.html"
+          >
+            <p class="bg-transparent-white">
+              Same content — three locations on different systems
+            </p>
+          </section>
+
+          <section>
+            <h4>What this enables</h4>
+            <ul class="prop-list">
+              <li class="fragment">One file present on SharePoint, Aconex <em>and</em> a local drive is modelled once</li>
+              <li class="fragment">Renaming or moving a file does not break the content identity</li>
+              <li class="fragment"><code>qcy:FileLocation</code> also carries <code>qcy:mentions</code> relationships — entity mentions inferred directly from the file <em>path</em></li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Key data properties on <code class="ont">qcy:FileContent</code></h4>
+            <ul class="prop-list">
+              <li><code>qcy:md5Hash</code> — content fingerprint</li>
+              <li><code>qcy:mime</code> — MIME type string</li>
+              <li><code>qcy:sizeBytes</code> — file size</li>
+              <li><code>qcy:openFormat</code> — readable without proprietary tools?</li>
+              <li><code>qcy:language</code> — detected language</li>
+              <li><code>qcy:textSummary</code> — LLM-generated summary</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Key data properties on <code class="ont">qcy:FileLocation</code></h4>
+            <ul class="prop-list">
+              <li><code>qcy:filePath</code> — relative path on the provider</li>
+              <li><code>qcy:suffix</code> — file extension</li>
+              <li><code>qcy:remoteRelativePath</code> — provider-specific path</li>
+              <li><code>qcy:remoteProvider</code> → <code>qcy:ProviderType</code><br />
+                <span style="font-size: 0.8rem; opacity: 0.7;">(Azure, AWS, GCP, Aconex, local, …)</span></li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- ─── Section 2: Fragments + Selectors ─────────────────── -->
+        <section>
+          <section>
+            <h4>2. Fragments &amp; Selectors</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              Every subset of a document is a first-class citizen
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:Fragment</code> is any subset of a
+              <code class="ont">qcy:FileContent</code>.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              Fragments nest to arbitrary depth via
+              <code class="ont">qcy:containsFragment</code>.
+            </p>
+          </section>
+
+          <section>
+            <h4>Fragment subtypes</h4>
+            <ul class="prop-list">
+              <li><code>qcy:DocumentPageFragment</code> — a page in a paginated document</li>
+              <li><code>qcy:TextFragment</code> — a passage of text</li>
+              <li><code>qcy:ImageFragment</code> — an image or figure</li>
+              <li><code>qcy:TableFragment</code> — a table with rows and columns</li>
+            </ul>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-fragments.html"
+          >
+            <p class="bg-transparent-white">
+              Document → Pages → sub-fragments at any depth
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:Selector</code> is a precise pointer that
+              specifies <strong>where</strong> in a parent object a child object occurs.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              Every selector has:<br />
+              <code class="ont">qcy:selectorSubject</code> → the containing object<br />
+              <code class="ont">qcy:selectorObject</code> → the located object<br />
+              <code class="ont">qcy:value</code> → the positional data
+            </p>
+          </section>
+
+          <section>
+            <h4>Selector types</h4>
+            <ul class="prop-list">
+              <li><code>qcy:PageSelector</code> — page number (integer)</li>
+              <li><code>qcy:XYWHSelector</code> — bounding box on a page</li>
+              <li><code>qcy:TextIndexSelector</code> — character range <code>"start,end"</code></li>
+              <li><code>qcy:TextDirectiveSelector</code> — text fragment syntax <code>#::text=…</code></li>
+              <li><code>qcy:IFCExpressIDSelector</code> — IFC line number</li>
+              <li><code>qcy:IFCGlobalIDSelector</code> — IFC GlobalId</li>
+              <li><code>qcy:IDSelector</code> — generic identifier (XML, JSON, …)</li>
+              <li><code>qcy:TimeRangeSelector</code> — time range in media files</li>
+            </ul>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-selectors.html"
+          >
+            <p class="bg-transparent-white">
+              <code class="ont">qcy:PageSelector</code> locates the page,
+              <code class="ont">qcy:XYWHSelector</code> locates the image within it
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              Reasoning derives <code class="ont">qcy:containsFragment</code>
+              implicitly from selectors — you never need to assert it manually.
+            </p>
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?sub qcy:containsFragment ?obj } }
+WHERE {
+  ?sel a qcy:Selector ;
+       qcy:selectorSubject ?sub ;
+       qcy:selectorObject  ?obj .
+  ?obj a qcy:Fragment .
+  FILTER NOT EXISTS { ?sub qcy:containsFragment ?obj }
+}</code></pre>
+          </section>
+        </section>
+
+        <!-- ─── Section 3: Entity Mentions ───────────────────────── -->
+        <section>
+          <section>
+            <h4>3. Entity Mentions</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              Every occurrence of a named thing in a document is unique
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:EntityMention</code> is one specific
+              occurrence of a named entity within an information object.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              Two mentions of <em>"Albert Einstein"</em> on the same page are
+              two <strong>distinct</strong> entity mention nodes.
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              Entity mentions carry:
+            </p>
+            <ul class="prop-list">
+              <li><code>qcy:label</code> — the text as it appears in the document</li>
+              <li><code>qcy:hasEntityCategory</code> → <code>qcy:EntityCategory</code><br />
+                <span style="font-size: 0.8rem; opacity: 0.7;">e.g. Person, Organization, Location, Wall, Storey, …</span></li>
+              <li><code>qcy:confidence</code> — extraction confidence 0–1</li>
+              <li><code>qcy:hasProperty</code> → <code>qcy:Property</code> — additional key-value facts</li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              The containing fragment <code class="ont">qcy:mentions</code>
+              the entity mention.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              A <code class="ont">qcy:Selector</code> then specifies exactly
+              <strong>where</strong> in that fragment the mention occurs.
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-entity-mentions.html"
+          >
+            <p class="bg-transparent-white">
+              Two entity mentions in a text fragment, each located by a
+              <code class="ont">qcy:TextIndexSelector</code>
+            </p>
+          </section>
+
+          <section>
+            <h4>BIM entities are a special kind of mention</h4>
+            <p style="font-size: 1.2rem;">
+              <code class="ont">qcy:BIMEntity</code> is a subclass of
+              <code class="ont">qcy:EntityMention</code>.
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1rem;">
+              Instead of a text index, selectors use
+              <code class="ont">qcy:IFCExpressIDSelector</code> or
+              <code class="ont">qcy:IFCGlobalIDSelector</code>.
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1rem;">
+              Spatial relations extracted from IFC
+              (<code>qcy:zoneContainsSpace</code>, <code>qcy:elementHasMaterial</code>, …)
+              are stored directly on the entity mentions.
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              Reasoning derives <code class="ont">qcy:mentions</code>
+              implicitly from selectors — fragments automatically inherit
+              the entity mentions of their sub-fragments.
+            </p>
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?sub qcy:mentions ?obj } }
+WHERE {
+  ?sel a qcy:Selector ;
+       qcy:selectorSubject ?sub ;
+       qcy:selectorObject  ?obj .
+  ?obj a qcy:EntityMention .
+  FILTER NOT EXISTS { ?sub qcy:mentions ?obj }
+}</code></pre>
+          </section>
+        </section>
+
+        <!-- ─── Section 4: Canonical Entities ────────────────────── -->
+        <section>
+          <section>
+            <h4>4. Canonical Entities</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              One node to rule all mentions of the same real-world thing
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A <code class="ont">qcy:CanonicalEntity</code> is the
+              standardized representation of a named entity.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              An <code class="ont">qcy:EntityMention</code> resolves to exactly
+              one canonical entity via <code class="ont">qcy:resolvesTo</code>.
+            </p>
+          </section>
+
+          <section>
+            <h4>Two creation modes</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; font-size: 1.1rem; text-align: left;">
+              <div class="fragment">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">Bottom-up (AI)</p>
+                <p>All entity mentions are processed by the pipeline. Similar mentions are clustered and resolved to a canonical entity.</p>
+                <p style="opacity: 0.7; font-size: 0.95rem;"><code>qcy:explicit</code> = false</p>
+              </div>
+              <div class="fragment">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">Top-down (User)</p>
+                <p>A project practitioner defines a list of canonical entities — e.g. from a room programme or member directory. Only mentions matching this list are resolved.</p>
+                <p style="opacity: 0.7; font-size: 0.95rem;"><code>qcy:explicit</code> = true</p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-canonical.html"
+          >
+            <p class="bg-transparent-white">
+              Multiple mentions of the same location resolve to one
+              <code class="ont">qcy:CanonicalEntity</code>
+            </p>
+          </section>
+
+          <section>
+            <h4>Key properties on <code class="ont">qcy:CanonicalEntity</code></h4>
+            <ul class="prop-list">
+              <li><code>qcy:label</code> — preferred English label</li>
+              <li><code>qcy:explicit</code> — user-confirmed entity?</li>
+              <li><code>qcy:hasFoundingMention</code> → the mention that established this entity</li>
+              <li><code>qcy:hasEntityCategory</code> → category (Person, Wall, Space, …)</li>
+              <li><code>qcy:similarTo</code> → linked open data (Wikidata, OpenStreetMap, …)</li>
+              <li><code>qcy:hasProperty</code> → additional key-value facts</li>
+              <li><code>qcy:confidence</code> — resolution confidence</li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              Canonical entities also inherit the relations found between their
+              entity mentions:
+            </p>
+            <pre style="font-size: 0.7rem; width: 85%"><code class="sparql">INSERT { GRAPH &lt;implicit&gt; { ?c1 ?rel ?c2 } }
+WHERE {
+  ?m1 a qcy:EntityMention ; ?rel ?m2 ; qcy:resolvesTo ?c1 .
+  ?m2 a qcy:EntityMention ;              qcy:resolvesTo ?c2 .
+  FILTER(?m1 != ?m2)
+  FILTER NOT EXISTS { ?c1 ?rel ?c2 }
+}</code></pre>
+            <p class="fragment" style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.8;">
+              Relations like <code>qcy:elementHasMaterial</code>, <code>qcy:contractInvolvesParty</code>, or <code>qcy:associatedWith</code>
+              automatically propagate from mentions to canonical entities.
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Section 5: Reasoning / qcy:about ─────────────────── -->
+        <section>
+          <section>
+            <h4>5. Reasoning</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              Inferred relationships that tie the layers together
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              After the five layers are in place, a set of SPARQL
+              <code class="ont">INSERT … WHERE</code> queries populates an
+              <strong>implicit graph</strong> with derived facts.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              The most valuable inferred relationship is
+              <code class="ont">qcy:about</code>.
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              <code class="ont">qcy:about</code> connects any
+              <code class="ont">qcy:InformationObject</code> directly to a
+              <code class="ont">qcy:CanonicalEntity</code>.
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1rem;">
+              It answers the question: <em>"What is this document (or fragment) about?"</em>
+            </p>
+          </section>
+
+          <section>
+            <h4>How <code class="ont">qcy:about</code> propagates</h4>
+            <ol class="prop-list">
+              <li class="fragment">Fragment <code>mentions</code> EntityMention<br />
+                + EntityMention <code>resolvesTo</code> CanonicalEntity<br />
+                → Fragment <code>about</code> CanonicalEntity</li>
+              <li class="fragment">Document <code>containsFragment</code> Fragment<br />
+                + Fragment <code>about</code> CanonicalEntity<br />
+                → Document <code>about</code> CanonicalEntity</li>
+              <li class="fragment">Transitivity extends this through any depth of nesting</li>
+            </ol>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/schema-about.html"
+          >
+            <p class="bg-transparent-white">
+              Dashed edges are <strong>inferred</strong> — never asserted explicitly.<br />
+              Both the page and the document become <code class="ont">qcy:about</code> the canonical entity.
+            </p>
+          </section>
+
+          <section>
+            <h4>All reasoning queries at a glance</h4>
+            <ul class="prop-list" style="font-size: 0.9rem; line-height: 1.7rem;">
+              <li><code>rdfs:domain</code> inference — auto-type subjects</li>
+              <li><code>rdfs:range</code> inference — auto-type objects</li>
+              <li><code>rdfs:subClassOf</code> inference — propagate types up the hierarchy</li>
+              <li><code>rdfs:subPropertyOf</code> inference — propagate relations to super-properties</li>
+              <li><code>qcy:containsFragment</code> — derived from selectors</li>
+              <li><code>qcy:mentions</code> — derived from selectors</li>
+              <li><code>qcy:implicitlyContainsFragment</code> — transitive containment</li>
+              <li><code>qcy:mentions</code> — propagated through contained fragments</li>
+              <li><code>qcy:about</code> — via direct mention → resolvesTo chain</li>
+              <li><code>qcy:about</code> — propagated through contained fragments</li>
+              <li><code>qcy:about</code> — via file location mentions</li>
+              <li><code>qcy:relatedEntity</code> — lifted from mentions to canonical entities</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>What the graph enables</h4>
+            <ul class="prop-list">
+              <li class="fragment"><em>"List all documents about Storey 2"</em> — query <code>qcy:about</code></li>
+              <li class="fragment"><em>"Which elements are made of concrete?"</em> — query <code>qcy:elementHasMaterial</code> on canonical entities</li>
+              <li class="fragment"><em>"What is this document about?"</em> — read <code>qcy:about</code> on the <code>qcy:FileContent</code></li>
+              <li class="fragment"><em>"Trace entity X back to its source"</em> — walk <code>qcy:hasFoundingMention</code> → <code>qcy:selectorObject</code> → fragment → document</li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- ─── Closing ───────────────────────────────────────────── -->
+        <section>
+          <img src="dist/img/logo.svg" alt="QAECY" class="inline-logo" style="height:80px;" />
+          <p style="font-size: 1.1rem; margin-top: 1.5rem; opacity: 0.7;">
+            <a href="https://dev.qaecy.com/ont/">dev.qaecy.com/ont</a>
+            &nbsp;·&nbsp;
+            <a href="https://dev.qaecy.com/enum/">dev.qaecy.com/enum</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        scrollActivationWidth: null,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
