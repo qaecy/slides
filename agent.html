@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Cue — Querying the Knowledge Graph</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+      .command {
+        font-family: monospace;
+        background: rgba(255,255,255,0.12);
+        border-radius: 0.2rem;
+        padding: 0.05em 0.4em;
+        font-size: 0.95em;
+      }
+      .community-tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-family: monospace;
+        background: rgba(255,255,255,0.15);
+        border-radius: 0.2rem;
+        padding: 0.1em 0.5em;
+        margin-left: 0.5em;
+        vertical-align: middle;
+      }
+      .question-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+        text-align: left;
+      }
+      .question-card {
+        background: rgba(255,255,255,0.07);
+        border-radius: 0.4rem;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+      .question-card em {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.9);
+      }
+      .question-card small {
+        font-size: 0.8rem;
+        opacity: 0.6;
+      }
+      table.query-table {
+        font-size: 0.9rem;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table.query-table td {
+        padding: 0.5rem 0.7rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: left;
+        vertical-align: top;
+      }
+      table.query-table td:first-child {
+        opacity: 0.5;
+        white-space: nowrap;
+        font-family: monospace;
+        font-size: 0.8rem;
+      }
+      table.query-table em {
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ─── Title ─────────────────────────────────────────────── -->
+        <section>
+          <img src="dist/img/logos/cue.svg" style="height: 60px;" alt="Cue" />
+          <p style="font-size: 1.8rem; margin-top: 1rem;">
+            Querying the Knowledge Graph
+          </p>
+          <p style="font-size: 1rem; opacity: 0.6;">
+            A playbook for exploring AEC project data with the
+            <img src="dist/img/logo.svg" class="cue-inline" style="height:1rem; transform:translateY(-1px);" /> agent
+          </p>
+        </section>
+
+        <!-- ─── What Cue does ─────────────────────────────────────── -->
+        <section>
+          <section>
+            <p style="font-size: 1.4rem;">
+              <img src="dist/img/logos/cue.svg" class="cue-inline" /> sits on top of a
+              <strong>Knowledge Graph</strong> built from your project's documents,
+              BIM models, contracts, drawings and more
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              Rather than searching free text, the agent
+              <strong>navigates relationships</strong> between typed entities —
+              people, organizations, building elements, materials, obligations, drawings
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/directed-graph.html"
+          >
+            <p class="bg-transparent-white">
+              Every fact in the graph is a typed triple:<br />
+              <em>Subject — predicate — Object</em>
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              The agent can answer questions by walking these relationships —
+              across document types, disciplines and systems
+            </p>
+            <p class="fragment" style="font-size: 1.4rem;">
+              The richer the graph, the richer the answers
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Communities overview ──────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Communities in the graph</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              The knowledge graph naturally organises into clusters of tightly connected predicates
+            </p>
+          </section>
+
+          <section>
+            <ul style="line-height: 2.2rem; font-size: 1.2rem;">
+              <li>📐 <strong>Drawings</strong> — sheets, viewports, disciplines, scales, authors</li>
+              <li class="fragment">📄 <strong>Contracts</strong> — obligations, conditions, responsible parties</li>
+              <li class="fragment">🧱 <strong>Building Elements ↔ Materials</strong> — the tightest single edge</li>
+              <li class="fragment">🏢 <strong>Parties &amp; Places</strong> — people, organizations, locations</li>
+              <li class="fragment">🗓️ <strong>Projects &amp; Activities</strong> — phases, sequences, resources</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Where to start</h4>
+            <p style="font-size: 1.3rem;">
+              Run <span class="command">/graph-overview</span> to get a profile of your project graph
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1.5rem;">
+              Then run <span class="command">/relation-analysis</span> to see which communities are
+              dense <em>in this specific project</em>
+            </p>
+            <p class="fragment" style="font-size: 1.3rem; margin-top: 1.5rem;">
+              Use those results to pick which questions are worth asking
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Drawings ──────────────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Drawings</h4>
+            <p style="font-size: 1.1rem; opacity: 0.7;">
+              Usually the largest community by volume
+            </p>
+            <p style="font-size: 1.1rem;">
+              Spine: <code>DrawingSheet → DrawingEntity → DesignMetadata</code><br />
+              Authorship and provenance fan out to Person, Organization, Date, Discipline, Scale
+            </p>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>D1</td>
+                <td><em>"Who are the most prolific drawing authors, and who approves the most sheets?"</em><br /><small>Surfaces approval bottlenecks when approval count ≪ creation count</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>D2</td>
+                <td><em>"Which disciplines tend to appear together on the same drawing sheet?"</em><br /><small>Cross-discipline coordination heatmap</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>D3</td>
+                <td><em>"Are there sheets where the approval date predates the creation date, or where the gap is unusually long?"</em><br /><small>Workflow timing + data quality</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>D4</td>
+                <td><em>"Which drawings are missing a creation date, author, or file reference?"</em><br /><small>Extraction-quality audit</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>D5</td>
+                <td><em>"Which file references are cited by the most drawings?"</em><br /><small>Hub deliverables: master PDFs, source CAD files</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>D6</td>
+                <td><em>"How is drawing coverage distributed across disciplines and scales?"</em><br /><small>Coverage check across MEP / Arch / Struct at different scales</small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Contracts ─────────────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Contracts</h4>
+            <p style="font-size: 1.1rem; opacity: 0.7;">
+              Typically the <strong>cleanest</strong> sub-graph — typed predicates are tightly scoped
+            </p>
+            <p style="font-size: 1.1rem;">
+              Best place to walk a full multi-hop chain in a single query
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              A single query can tell the complete legal story of a contract
+            </p>
+            <ul style="font-size: 1.1rem; line-height: 1.9rem; margin-top: 1rem;">
+              <li>What are its obligations?</li>
+              <li class="fragment">Under what conditions does each obligation apply?</li>
+              <li class="fragment">Who is responsible for each obligation?</li>
+            </ul>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>C1</td>
+                <td><em>"For each contract, what are the obligations, conditions, and who is responsible?"</em><br /><small>3-hop join — one query = complete legal story</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>C2</td>
+                <td><em>"Which organizations appear in the most contracts, and in what roles?"</em><br /><small>Party-influence ranking</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>C3</td>
+                <td><em>"Which contracts have a signature date but are missing a start or end date?"</em><br /><small>Lifecycle completeness audit</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>C4</td>
+                <td><em>"Which built assets are referenced across multiple contracts?"</em><br /><small>Cross-contract asset exposure</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>C5</td>
+                <td><em>"When obligations are assigned, are responsible parties more often people or organizations?"</em><br /><small>Delegation vs. corporate responsibility pattern</small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Elements & Materials ──────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Building Elements ↔ Materials</h4>
+            <p style="font-size: 1.1rem; opacity: 0.7;">
+              Usually the <strong>tightest single edge</strong> in the graph
+            </p>
+            <p style="font-size: 1.1rem;">
+              <code>elementHasMaterial</code> exclusively connects
+              <code>BuildingElement</code> subtypes — Wall, Slab, Window — to <code>Material</code>
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/bim-entities-1.html"
+          >
+            <p class="bg-transparent-white">
+              BIM objects become typed entity mentions in the graph
+            </p>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>M1</td>
+                <td><em>"What are walls made of? What about slabs, windows?"</em><br /><small>Definitive answers — the cleanest cut in the graph</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>M2</td>
+                <td><em>"Which materials are used across multiple element subtypes?"</em><br /><small>Universal materials vs. subtype-specific ones</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>M3</td>
+                <td><em>"Which building elements have no material assigned?"</em><br /><small>BIM-side extraction completeness</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>M4</td>
+                <td><em>"Which materials are reused across the most distinct elements?"</em><br /><small>Material catalogue centrality</small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Parties & Places ──────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Parties &amp; Places</h4>
+            <p style="font-size: 1.1rem; opacity: 0.7;">
+              The connective tissue of the graph
+            </p>
+            <p style="font-size: 1.1rem;">
+              <code>Person → Organization → Location / Address / City / Email</code><br />
+              Connects everything else
+            </p>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/document-entities-3.html"
+          >
+            <p class="bg-transparent-white">
+              Entity resolution links mentions of the same person or organization across all documents
+            </p>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>P1</td>
+                <td><em>"Who works for which organization, and where is that organization located?"</em><br /><small>Walks the social-graph backbone in 2 hops</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>P2</td>
+                <td><em>"Which organizations share an address — subsidiaries, joint ventures, shared offices?"</em><br /><small>Corporate structure patterns</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>P3</td>
+                <td><em>"Which people are associated with more than one organization?"</em><br /><small>Multi-org individuals: consultants, secondments</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>P4</td>
+                <td><em>"Which organizations are the most connected in the graph overall?"</em><br /><small>Hub parties — often appear in both contracts AND drawings</small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Projects & Activities ─────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Projects &amp; Activities</h4>
+            <p style="font-size: 1.1rem; opacity: 0.7;">
+              Typically the <strong>sparsest</strong> community — confirm density with
+              <span class="command">/relation-analysis</span> before deep-diving
+            </p>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>A1</td>
+                <td><em>"What phases does this project have, and where do they happen?"</em></td>
+              </tr>
+              <tr class="fragment">
+                <td>A2</td>
+                <td><em>"What equipment and materials does each activity require?"</em></td>
+              </tr>
+              <tr class="fragment">
+                <td>A3</td>
+                <td><em>"Which activities touch which building elements, and what are those elements made of?"</em><br /><small>Narratively rich when it returns rows</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>A4</td>
+                <td><em>"What is the sequence of activities — which precede which?"</em><br /><small>Transitive walk over <code>precedesActivity</code></small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Cross-community joins ──────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Cross-community joins</h4>
+            <p style="font-size: 1.2rem;">
+              These bridge communities — strongest narrative payoff per query
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              The most interesting stories live at the intersection of communities
+            </p>
+            <p class="fragment" style="font-size: 1.4rem; margin-top: 1rem;">
+              <em>"Which organizations appear both as drawing authors and as contract parties?"</em>
+            </p>
+            <p class="fragment" style="font-size: 1.1rem; opacity: 0.7;">
+              Intersects Drawings ↔ Contracts — usually a short list of key firms
+            </p>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>X1</td>
+                <td><em>"Which organizations appear both as drawing authors and as contract parties?"</em></td>
+              </tr>
+              <tr class="fragment">
+                <td>X2</td>
+                <td><em>"Do built assets named in contracts overlap with the building elements drawn in design documents?"</em><br /><small>Connects legal ↔ design layers</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>X3</td>
+                <td><em>"Which people hold a contract role AND have authored drawings?"</em><br /><small>Key individuals across legal / design</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>X4</td>
+                <td><em>"Are there contracts whose obligations name a person who also appears as a drawing approver?"</em><br /><small>Full accountability chain across both domains</small></td>
+              </tr>
+            </table>
+          </section>
+
+          <section
+            style="pointer-events: none"
+            data-background-iframe="dist/html/cytoscape/document-entities-5.html"
+          >
+            <p class="bg-transparent-white">
+              Canonical entities are the anchors that make cross-community joins possible
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Semantic / fuzzy search ───────────────────────────── -->
+        <section>
+          <section>
+            <h4>Semantic search</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              When the question is fuzzy, spatial, or doesn't fit the structural schema
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              Use <span class="command">/search</span> when you need full-text reasoning across document content
+            </p>
+            <p class="fragment" style="font-size: 1.4rem; margin-top: 1rem;">
+              Follow up with <span class="command">/query-graph</span> to resolve hits to canonical entities
+            </p>
+          </section>
+
+          <section>
+            <ul style="line-height: 2.2rem; font-size: 1.2rem; width: 85%;">
+              <li><em>"Which documents discuss fire-safety obligations?"</em></li>
+              <li class="fragment"><em>"Are there drawings related to the basement or foundation?"</em></li>
+              <li class="fragment"><em>"Is there anything in the documents about delays or schedule risk?"</em></li>
+              <li class="fragment"><em>"Where is Rockwool mentioned, and how do those mentions map to canonical Material entities?"</em></li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- ─── Data quality ──────────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Data quality audits</h4>
+            <p style="font-size: 1.2rem; opacity: 0.7;">
+              The graph makes gaps visible — and gaps are actionable
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem;">
+              Gap queries identify missing metadata across any document type
+            </p>
+            <ul style="font-size: 1.2rem; line-height: 2rem; margin-top: 1rem; width: 85%;">
+              <li class="fragment"><em>"Which drawings are missing a creation date or author?"</em></li>
+              <li class="fragment"><em>"Which contracts have a signature date but no end date?"</em></li>
+              <li class="fragment"><em>"Which building elements have no material assigned?"</em></li>
+              <li class="fragment"><em>"Which organizations have no email address on record?"</em></li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              Use <span class="command">/list-predicates</span> to audit ontology coverage
+            </p>
+            <p class="fragment" style="font-size: 1.4rem; margin-top: 1rem;">
+              Predicates that dominate vs. those in the long tail tell you where extraction is working well
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Meta / about the graph ────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Questions about the graph itself</h4>
+          </section>
+
+          <section>
+            <table class="query-table">
+              <tr>
+                <td>S1</td>
+                <td><em>"What are the most-connected canonical entities in this project?"</em><br /><small><span class="command">/graph-overview</span> returns this directly</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>S2</td>
+                <td><em>"Which documents have contributed the most typed relations, and to which communities?"</em><br /><small>Which documents are most graph-productive</small></td>
+              </tr>
+              <tr class="fragment">
+                <td>S3</td>
+                <td><em>"Which predicates dominate the graph, and which sit in the long tail?"</em><br /><small><span class="command">/list-predicates</span></small></td>
+              </tr>
+            </table>
+          </section>
+        </section>
+
+        <!-- ─── Summary ───────────────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Rules of thumb</h4>
+          </section>
+
+          <section>
+            <ul style="line-height: 2.1rem; font-size: 1.15rem; width: 85%;">
+              <li>For a clean multi-hop story → start with <strong>Contracts</strong></li>
+              <li class="fragment">For volume and breadth → start with <strong>Drawings</strong></li>
+              <li class="fragment">For a precise BIM answer → <strong>Elements ↔ Materials</strong></li>
+              <li class="fragment">For "who matters?" → <strong>Cross-community joins</strong></li>
+              <li class="fragment">For data quality → the <strong>gap queries</strong></li>
+              <li class="fragment">For fuzzy exploration → <span class="command">/search</span> first, then <span class="command">/query-graph</span></li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem;">
+              Always start a new project with:
+            </p>
+            <ol style="font-size: 1.3rem; line-height: 2.2rem; margin-top: 1rem;">
+              <li><span class="command">/graph-overview</span></li>
+              <li><span class="command">/relation-analysis</span></li>
+            </ol>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1.5rem; opacity: 0.8;">
+              Use those results to decide which communities are worth exploring in this project
+            </p>
+          </section>
+
+          <section>
+            <div style="height: 100%">
+              <video data-autoplay src="dist/videos/widget1-fast.mp4"></video>
+            </div>
+          </section>
+
+          <section>
+            <img src="dist/img/logos/cue.svg" style="height: 60px;" alt="Cue" />
+            <p style="font-size: 1.4rem; margin-top: 1rem;">
+              by <img src="dist/img/logo.svg" class="inline-logo" style="height:1.4rem; transform:translateY(-2px);" />
+            </p>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+
+    <script src="dist/js/cue-ui/logo/runtime.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/polyfills.js" type="module"></script>
+    <script src="dist/js/cue-ui/logo/main.js" type="module"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        scrollActivationWidth: null,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
