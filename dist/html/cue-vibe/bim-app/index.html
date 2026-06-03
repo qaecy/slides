@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIM Viewer — Powered by Cue</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.25",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.21/styles.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="dark">
+    <!-- ── Login screen ──────────────────────────────────────────── -->
+    <div id="screen-login" class="screen">
+      <div class="login-card">
+        <cue-logo size="s"></cue-logo>
+        <h1>BIM Viewer</h1>
+        <p class="login-subtitle">Sign in to browse and open IFC models</p>
+        <div class="auth-buttons">
+          <button id="btn-google" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4"
+              />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853"
+              />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                fill="#FBBC05"
+              />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335"
+              />
+            </svg>
+            Sign in with Google
+          </button>
+          <button id="btn-microsoft" class="btn btn-secondary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.4 2H2v9.4h9.4V2z" fill="#F25022" />
+              <path d="M22 2h-9.4v9.4H22V2z" fill="#7FBA00" />
+              <path d="M11.4 12.6H2V22h9.4v-9.4z" fill="#00A4EF" />
+              <path d="M22 12.6h-9.4V22H22v-9.4z" fill="#FFB900" />
+            </svg>
+            Sign in with Microsoft
+          </button>
+        </div>
+        <div id="auth-error" class="error-msg hidden"></div>
+      </div>
+    </div>
+
+    <!-- ── Main app ───────────────────────────────────────────────── -->
+    <div id="screen-app" class="screen hidden">
+      <header class="app-header">
+        <cue-logo size="s"></cue-logo>
+        <div class="project-selector">
+          <label for="project-select">Project</label>
+          <select id="project-select">
+            <option value="">— Select a project —</option>
+          </select>
+        </div>
+        <button id="btn-signout" class="btn btn-ghost btn-sm">Sign out</button>
+      </header>
+
+      <main class="app-main">
+        <!-- Left panel: file list -->
+        <aside class="panel-files">
+          <div class="panel-header">
+            <h2>IFC Models</h2>
+            <span id="file-count" class="badge hidden"></span>
+          </div>
+
+          <div id="files-placeholder" class="state-msg">
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="8" y="4" width="32" height="40" rx="3" />
+              <path d="M16 16h16M16 24h16M16 32h8" />
+            </svg>
+            <p>Select a project to browse IFC models</p>
+          </div>
+
+          <div id="files-loading" class="state-msg hidden">
+            <div class="spinner"></div>
+            <p>Loading IFC files…</p>
+          </div>
+
+          <div id="files-empty" class="state-msg hidden">
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M24 4L4 14v20l20 10 20-10V14L24 4z" />
+              <path d="M24 4v30M4 14l20 10 20-10" />
+            </svg>
+            <p id="files-empty-msg">No IFC files found in this project.</p>
+          </div>
+
+          <ul
+            id="files-list"
+            class="file-list hidden"
+            role="listbox"
+            aria-label="IFC files"
+          ></ul>
+        </aside>
+
+        <!-- Right panel: viewer -->
+        <section class="panel-viewer">
+          <div id="viewer-placeholder" class="state-msg viewer-placeholder">
+            <svg
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M32 6L6 20v24l26 14 26-14V20L32 6z" />
+              <path d="M32 6v38M6 20l26 14 26-14" />
+              <circle cx="32" cy="32" r="5" />
+            </svg>
+            <p>Select an IFC model to view it</p>
+          </div>
+
+          <div id="viewer-container" class="viewer-container hidden">
+            <div class="viewer-header">
+              <h3 id="viewer-title" class="viewer-title"></h3>
+              <button
+                id="btn-close-viewer"
+                class="btn btn-ghost btn-sm"
+                aria-label="Close viewer"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <!-- viewer element is created dynamically by app.js -->
+            <div id="viewer-host"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="app.js"></script>
+
+    <!-- Cue UI — single loader; Angular boots once, components lazy-loaded -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.21/index.js"
+      type="module"
+      data-components="cue-document-viewer"
+    ></script>
+  </body>
+</html>

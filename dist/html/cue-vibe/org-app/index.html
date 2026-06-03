@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEST · Organisation Map</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --sidebar: 370px;
+        --accent: #2563eb;
+        --accent-dark: #1d4ed8;
+        --surface: #ffffff;
+        --surface-2: #f8fafc;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-2: #64748b;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.09);
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        color: var(--text);
+      }
+
+      /* ── Loading splash ─────────────────────────────────────────────────── */
+      #splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1e3a5f;
+        z-index: 999;
+        flex-direction: column;
+        gap: 14px;
+        color: white;
+        font-size: 0.9375rem;
+        font-weight: 500;
+      }
+      #splash[hidden] {
+        display: none;
+      }
+
+      /* ── Login ──────────────────────────────────────────────────────────── */
+      #login-screen {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      }
+      #login-screen[hidden] {
+        display: none;
+      }
+
+      #login-card {
+        background: white;
+        border-radius: 18px;
+        padding: 40px;
+        width: 400px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+      }
+      #login-card h1 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+      #login-card .sub {
+        color: var(--text-2);
+        font-size: 0.875rem;
+        margin-bottom: 28px;
+      }
+
+      .sso-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 12px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        background: white;
+        cursor: pointer;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+        margin-bottom: 10px;
+      }
+      .sso-btn:hover {
+        background: var(--surface-2);
+        border-color: #94a3b8;
+      }
+      .sso-btn svg {
+        flex-shrink: 0;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 20px 0;
+        color: var(--text-2);
+        font-size: 0.8125rem;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .form-field {
+        margin-bottom: 14px;
+      }
+      .form-field label {
+        display: block;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text-2);
+      }
+      .form-field input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.9375rem;
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      .form-field input:focus {
+        border-color: var(--accent);
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .btn-primary:hover {
+        background: var(--accent-dark);
+      }
+      .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #login-error {
+        color: #ef4444;
+        font-size: 0.8125rem;
+        margin-top: 12px;
+        min-height: 18px;
+      }
+
+      /* ── App shell ──────────────────────────────────────────────────────── */
+      #app {
+        display: flex;
+        height: 100vh;
+      }
+      #app[hidden] {
+        display: none;
+      }
+
+      /* ── Sidebar ────────────────────────────────────────────────────────── */
+      #sidebar {
+        width: var(--sidebar);
+        flex-shrink: 0;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow);
+        z-index: 10;
+        overflow: hidden;
+      }
+
+      #sidebar-header {
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .logo-area {
+        line-height: 0;
+      }
+      .logo-area img {
+        display: block;
+        height: 32px;
+        width: auto;
+      }
+
+      #sign-out-btn {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 0.8125rem;
+        cursor: pointer;
+        color: var(--text-2);
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      #sign-out-btn:hover {
+        border-color: #94a3b8;
+        color: var(--text);
+      }
+
+      /* ── Org list ───────────────────────────────────────────────────────── */
+      #org-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      #org-list[hidden] {
+        display: none;
+      }
+
+      .list-heading {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-2);
+        margin-bottom: 12px;
+        padding: 0 4px;
+      }
+
+      .org-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.12s;
+        border: 1.5px solid transparent;
+        margin-bottom: 8px;
+      }
+      .org-card:hover {
+        background: var(--surface-2);
+      }
+      .org-card.active {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+      }
+      .org-card:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+      }
+
+      .org-rank {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: var(--surface-2);
+        border: 1.5px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text-2);
+      }
+      .org-card.active .org-rank {
+        background: #dbeafe;
+        border-color: #93c5fd;
+        color: var(--accent);
+      }
+
+      .org-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .org-name {
+        font-weight: 600;
+        font-size: 0.9375rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .org-city {
+        font-size: 0.75rem;
+        color: var(--text-2);
+        margin-top: 2px;
+      }
+
+      .mention-badge {
+        background: #dbeafe;
+        color: #1d4ed8;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 20px;
+        flex-shrink: 0;
+      }
+
+      /* ── Detail panel ───────────────────────────────────────────────────── */
+      #detail-panel {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      #detail-panel[hidden] {
+        display: none;
+      }
+
+      #detail-header {
+        padding: 16px 20px 14px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      #back-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-2);
+        font-size: 0.8125rem;
+        margin-bottom: 12px;
+        padding: 0;
+      }
+      #back-btn:hover {
+        color: var(--text);
+      }
+
+      #detail-org-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 8px;
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      .b-blue {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .b-violet {
+        background: #f3e8ff;
+        color: #7e22ce;
+      }
+      .b-green {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .b-orange {
+        background: #ffedd5;
+        color: #9a3412;
+      }
+      .b-gray {
+        background: #f1f5f9;
+        color: #475569;
+      }
+
+      #detail-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+
+      .section-heading {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-2);
+        margin-bottom: 10px;
+      }
+      .detail-section {
+        margin-bottom: 22px;
+      }
+
+      .doc-item {
+        padding: 10px 12px;
+        background: var(--surface-2);
+        border-radius: 10px;
+        margin-bottom: 7px;
+        border: 1.5px solid var(--border);
+        cursor: pointer;
+        transition:
+          border-color 0.12s,
+          background 0.12s;
+      }
+      .doc-item:hover {
+        border-color: var(--accent);
+        background: #eff6ff;
+      }
+      .doc-meta {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 4px;
+      }
+      .doc-name {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        word-break: break-word;
+        line-height: 1.4;
+        flex: 1;
+        min-width: 0;
+      }
+      .doc-subject {
+        font-size: 0.75rem;
+        color: var(--text-2);
+        margin-bottom: 5px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      /* File-type badges */
+      .ext-badge {
+        display: inline-flex;
+        flex-shrink: 0;
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 0.6rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .ext-pdf {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .ext-doc {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .ext-xls {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .ext-other {
+        background: #f1f5f9;
+        color: #475569;
+      }
+      .doc-dl-icon {
+        flex-shrink: 0;
+        opacity: 0;
+        transition: opacity 0.12s;
+        color: var(--accent);
+      }
+      .doc-item:hover .doc-dl-icon {
+        opacity: 1;
+      }
+      .page-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .page-chip {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 2px 7px;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        color: var(--text-2);
+      }
+      .size-chip {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--text-2);
+        font-style: italic;
+      }
+
+      .rel-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        margin-bottom: 3px;
+      }
+      .rel-item:hover {
+        background: var(--surface-2);
+      }
+      .rel-name {
+        flex: 1;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .rel-pred {
+        font-size: 0.6875rem;
+        color: var(--text-2);
+        flex-shrink: 0;
+      }
+
+      /* ── Spinner ────────────────────────────────────────────────────────── */
+      .spinner {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        border: 2.5px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.75s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .placeholder {
+        padding: 28px 16px;
+        text-align: center;
+        color: var(--text-2);
+      }
+      .placeholder .spinner {
+        margin-bottom: 10px;
+      }
+
+      /* ── Map ────────────────────────────────────────────────────────────── */
+      #map-container {
+        flex: 1;
+        position: relative;
+      }
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Leaflet tooltip override */
+      .org-tooltip {
+        background: white !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 7px !important;
+        padding: 5px 11px !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.13) !important;
+        color: #0f172a !important;
+        white-space: nowrap !important;
+      }
+      .org-tooltip.leaflet-tooltip-top::before {
+        border-top-color: #e2e8f0 !important;
+      }
+      .org-tooltip.leaflet-tooltip-left::before {
+        border-left-color: #e2e8f0 !important;
+      }
+    </style>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://esm.sh/firebase@12/app",
+          "firebase/auth": "https://esm.sh/firebase@12/auth",
+          "firebase/firestore": "https://esm.sh/firebase@12/firestore",
+          "firebase/storage": "https://esm.sh/firebase@12/storage",
+          "firebase/functions": "https://esm.sh/firebase@12/functions"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Loading splash shown until auth state resolves -->
+    <div id="splash">
+      <div
+        class="spinner"
+        style="
+          width: 32px;
+          height: 32px;
+          border-top-color: white;
+          border-color: rgba(255, 255, 255, 0.3);
+        "
+      ></div>
+      Loading…
+    </div>
+
+    <!-- Login screen -->
+    <div id="login-screen" hidden>
+      <div id="login-card">
+        <h1>NEST · Organisation Map</h1>
+        <p class="sub">Sign in with your QAECY account to continue</p>
+
+        <button class="sso-btn" id="btn-google">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+            />
+            <path
+              fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+            />
+          </svg>
+          Continue with Google
+        </button>
+
+        <button class="sso-btn" id="btn-microsoft">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#F25022" d="M0 0h11.5v11.5H0z" />
+            <path fill="#7FBA00" d="M12.5 0H24v11.5H12.5z" />
+            <path fill="#00A4EF" d="M0 12.5h11.5V24H0z" />
+            <path fill="#FFB900" d="M12.5 12.5H24V24H12.5z" />
+          </svg>
+          Continue with Microsoft
+        </button>
+
+        <div class="divider">or sign in with email</div>
+
+        <div class="form-field">
+          <label for="inp-email">Email</label>
+          <input
+            type="email"
+            id="inp-email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+        </div>
+        <div class="form-field">
+          <label for="inp-password">Password</label>
+          <input
+            type="password"
+            id="inp-password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          />
+        </div>
+        <button class="btn-primary" id="btn-pw-signin">Sign in</button>
+        <p id="login-error" role="alert"></p>
+      </div>
+    </div>
+
+    <!-- Main app -->
+    <div id="app" hidden>
+      <aside id="sidebar">
+        <div id="sidebar-header">
+          <!-- Empa NEST logo -->
+          <div class="logo-area">
+            <img
+              src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+              alt="Empa"
+              class="logo"
+            />
+          </div>
+          <button id="sign-out-btn">Sign out</button>
+        </div>
+
+        <!-- Org list view -->
+        <div id="org-list">
+          <div class="placeholder">
+            <div class="spinner"></div>
+            <div>Loading…</div>
+          </div>
+        </div>
+
+        <!-- Detail panel view -->
+        <div id="detail-panel" hidden>
+          <div id="detail-header">
+            <button id="back-btn" aria-label="Back to list">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              All organisations
+            </button>
+            <div id="detail-org-name"></div>
+            <div class="badge-row" id="detail-badges"></div>
+          </div>
+          <div id="detail-body">
+            <div class="placeholder">
+              <div class="spinner"></div>
+              <div>Fetching details…</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main id="map-container" aria-label="Organisation map">
+        <div id="map"></div>
+      </main>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin=""
+    ></script>
+
+    <script type="module">
+      import {
+        Cue,
+        CueProjectDocuments,
+      } from "https://esm.sh/@qaecy/cue-sdk@0.0.16?external=firebase";
+      import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+      // ── Constants ────────────────────────────────────────────────────────────────
+      const PROJECT_ID = "aa6ac43b-d02f-43cf-9945-8d40de8e8f81";
+
+      const P = `
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX qcy:   <https://dev.qaecy.com/ont#>
+PREFIX qcy-e: <https://dev.qaecy.com/enum#>
+`;
+
+      // Firebase Storage bucket for raw uploaded files
+      const RAW_BUCKET = "gs://spaces_raw_eu_west6";
+
+      // Five distinct colours for markers (rank 1–5)
+      const RANK_COLOURS = [
+        "#2563eb",
+        "#7c3aed",
+        "#0891b2",
+        "#16a34a",
+        "#d97706",
+      ];
+
+      // ── Helpers ──────────────────────────────────────────────────────────────────
+      /** Safely HTML-escape a string. */
+      function esc(s) {
+        const d = document.createElement("div");
+        d.textContent = s ?? "";
+        return d.innerHTML;
+      }
+
+      /** Flatten SPARQL JSON bindings to plain objects. */
+      function flat(result) {
+        return result.results.bindings.map((b) =>
+          Object.fromEntries(Object.entries(b).map(([k, v]) => [k, v.value])),
+        );
+      }
+
+      /** Extract local name from an IRI, formatted as words. */
+      function localName(iri) {
+        if (!iri) return "";
+        const part = iri.includes("#")
+          ? iri.split("#").pop()
+          : iri.split("/").pop();
+        return (part ?? "").replace(/([A-Z])/g, " $1").trim();
+      }
+
+      /** Return the fragment after # in a category IRI. */
+      function catName(iri) {
+        if (!iri) return "";
+        return iri.includes("#") ? iri.split("#").pop() : iri.split("/").pop();
+      }
+
+      const CAT_COLOUR = {
+        Organization: "b-blue",
+        Person: "b-green",
+        City: "b-violet",
+        Country: "b-gray",
+        Address: "b-gray",
+        PostCode: "b-gray",
+        Location: "b-gray",
+        ContractRole: "b-orange",
+      };
+      function catColour(cat) {
+        return CAT_COLOUR[cat] ?? "b-gray";
+      }
+
+      function sleep(ms) {
+        return new Promise((r) => setTimeout(r, ms));
+      }
+
+      // ── Nominatim geocoding ──────────────────────────────────────────────────────
+      async function geocode(city, country) {
+        const url = new URL("https://nominatim.openstreetmap.org/search");
+        url.searchParams.set("city", city);
+        if (country) {
+          // Expand common ISO codes to full names for better results
+          const cname =
+            country === "CH"
+              ? "Switzerland"
+              : country === "DE"
+                ? "Germany"
+                : country === "AT"
+                  ? "Austria"
+                  : country;
+          url.searchParams.set("country", cname);
+        }
+        url.searchParams.set("format", "json");
+        url.searchParams.set("limit", "1");
+
+        try {
+          const res = await fetch(url, {
+            headers: { "Accept-Language": "en" },
+          });
+          if (!res.ok) return null;
+          const data = await res.json();
+          return data[0]
+            ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) }
+            : null;
+        } catch {
+          return null;
+        }
+      }
+
+      // ── SPARQL queries ───────────────────────────────────────────────────────────
+      async function queryTopOrgs(cue) {
+        const r = await cue.api.sparql(
+          P +
+            `
+    SELECT ?entity ?name (COUNT(DISTINCT ?mention) AS ?count) WHERE {
+      ?entity a qcy:CanonicalEntity ;
+              qcy:hasEntityCategory qcy-e:Organization ;
+              qcy:value ?name .
+      OPTIONAL { ?mention qcy:resolvesTo ?entity }
+    }
+    GROUP BY ?entity ?name
+    ORDER BY DESC(?count)
+    LIMIT 5
+  `,
+          PROJECT_ID,
+        );
+        return flat(r);
+      }
+
+      async function queryOrgLocations(cue, iris) {
+        const values = iris.map((iri) => `<${iri}>`).join(" ");
+        // Fetch all city/country rows; deduplicate per entity in JS
+        // (QLever does not support SAMPLE() aggregates)
+        const r = await cue.api.sparql(
+          P +
+            `
+    SELECT ?entity ?city ?country WHERE {
+      VALUES ?entity { ${values} }
+      OPTIONAL {
+        ?entity qcy:hasLocation ?cityEnt .
+        ?cityEnt qcy:hasEntityCategory qcy-e:City ;
+                 qcy:value ?city .
+      }
+      OPTIONAL {
+        ?entity qcy:hasLocation ?countryEnt .
+        ?countryEnt qcy:hasEntityCategory qcy-e:Country ;
+                    qcy:value ?country .
+      }
+    }
+  `,
+          PROJECT_ID,
+        );
+        // Pick first city and first country seen per entity
+        const map = new Map();
+        for (const row of flat(r)) {
+          const cur = map.get(row.entity) ?? { entity: row.entity };
+          if (!cur.city && row.city) cur.city = row.city;
+          if (!cur.country && row.country) cur.country = row.country;
+          map.set(row.entity, cur);
+        }
+        return [...map.values()];
+      }
+
+      async function queryOrgDocuments(cue, entityIri) {
+        const r = await cue.api.sparql(
+          P +
+            `
+    SELECT DISTINCT ?docName ?page ?content ?suffix WHERE {
+      ?mention qcy:resolvesTo <${entityIri}> .
+      ?content qcy:mentions ?mention ;
+               qcy:hasFileLocation ?loc .
+      ?loc qcy:value ?docName .
+      OPTIONAL { ?loc qcy:suffix ?suffix }
+      OPTIONAL {
+        ?frag qcy:mentions ?mention .
+        ?sel qcy:selectorObject ?frag ;
+             qcy:value ?page .
+      }
+    }
+    ORDER BY ?docName ?page
+    LIMIT 100
+  `,
+          PROJECT_ID,
+        );
+        return flat(r);
+      }
+
+      async function queryOrgRelated(cue, entityIri) {
+        const r = await cue.api.sparql(
+          P +
+            `
+    SELECT DISTINCT ?relName ?relCategory ?predicate WHERE {
+      <${entityIri}> ?predicate ?relEntity .
+      ?relEntity a qcy:CanonicalEntity ;
+                 qcy:value ?relName ;
+                 qcy:hasEntityCategory ?relCategory .
+      FILTER(?predicate != <https://dev.qaecy.com/ont#relatedEntity>)
+    }
+    LIMIT 30
+  `,
+          PROJECT_ID,
+        );
+        return flat(r);
+      }
+
+      // ── Storage helpers ─────────────────────────────────────────────────────────
+      let _storage;
+      function getDocDownloadUrl(uuid, suffix) {
+        if (!_storage) _storage = getStorage(cue._app, RAW_BUCKET);
+        return getDownloadURL(ref(_storage, `${PROJECT_ID}/${uuid}${suffix}`));
+      }
+
+      async function fetchDocMeta(uuids) {
+        docsApi.requestDocumentData(uuids);
+        for (let i = 0; i < 12; i++) {
+          await sleep(250);
+          const map = docsApi.documentInfoMap.get();
+          if (uuids.every((uuid) => uuid in map)) return map;
+        }
+        return docsApi.documentInfoMap.get();
+      }
+
+      function formatSize(bytes) {
+        if (!bytes) return "";
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + " KB";
+        return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+      }
+
+      // ── DOM references ───────────────────────────────────────────────────────────
+      const splash = document.getElementById("splash");
+      const loginScreen = document.getElementById("login-screen");
+      const appEl = document.getElementById("app");
+      const orgListEl = document.getElementById("org-list");
+      const detailPanel = document.getElementById("detail-panel");
+      const detailOrgName = document.getElementById("detail-org-name");
+      const detailBadges = document.getElementById("detail-badges");
+      const detailBody = document.getElementById("detail-body");
+
+      // ── App state ────────────────────────────────────────────────────────────────
+      let map = null;
+      let orgs = []; // { entity, name, count, city?, country? }
+      let markers = []; // { circleMarker, iri, latlng, colour }
+
+      // ── Map ──────────────────────────────────────────────────────────────────────
+      function initMap() {
+        map = L.map("map").setView([47.39, 8.59], 10); // Zürich/Dübendorf area
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 18,
+        }).addTo(map);
+      }
+
+      function addMapMarker(org, latlng, colour) {
+        const count = parseInt(org.count);
+        const radius = Math.max(14, Math.min(26, 9 + Math.log10(count) * 6));
+
+        const circle = L.circleMarker(latlng, {
+          radius,
+          fillColor: colour,
+          color: "white",
+          weight: 2.5,
+          fillOpacity: 0.88,
+        }).addTo(map);
+
+        circle.bindTooltip(org.name, {
+          permanent: true,
+          direction: "top",
+          className: "org-tooltip",
+          offset: [0, -(radius + 4)],
+        });
+
+        circle.on("click", () => selectOrg(org.entity));
+        markers.push({ circle, iri: org.entity, latlng, colour, radius });
+      }
+
+      function highlightMarker(iri) {
+        for (const m of markers) {
+          if (m.iri === iri) {
+            m.circle.setStyle({ color: "#1e3a5f", weight: 4, fillOpacity: 1 });
+            m.circle.setRadius(m.radius + 4);
+          } else {
+            m.circle.setStyle({
+              color: "white",
+              weight: 2.5,
+              fillOpacity: 0.88,
+            });
+            m.circle.setRadius(m.radius);
+          }
+        }
+      }
+
+      // ── Org list rendering ───────────────────────────────────────────────────────
+      function renderOrgList() {
+        let html = '<p class="list-heading">Most-mentioned organisations</p>';
+
+        for (let i = 0; i < orgs.length; i++) {
+          const org = orgs[i];
+          const count = parseInt(org.count).toLocaleString();
+          const city = org.city
+            ? esc(org.city)
+            : '<em style="font-style:normal;opacity:.6">Location unknown</em>';
+
+          html += `
+      <div class="org-card" data-iri="${esc(org.entity)}"
+           role="button" tabindex="0" aria-label="${esc(org.name)}">
+        <div class="org-rank"
+             style="border-color:${RANK_COLOURS[i]}22;background:${RANK_COLOURS[i]}18;color:${RANK_COLOURS[i]}">
+          ${i + 1}
+        </div>
+        <div class="org-info">
+          <div class="org-name">${esc(org.name)}</div>
+          <div class="org-city">${city}</div>
+        </div>
+        <div class="mention-badge">${count}</div>
+      </div>`;
+        }
+
+        orgListEl.innerHTML = html;
+
+        for (const card of orgListEl.querySelectorAll(".org-card")) {
+          card.addEventListener("click", () => selectOrg(card.dataset.iri));
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              selectOrg(card.dataset.iri);
+            }
+          });
+        }
+      }
+
+      // ── Detail panel ─────────────────────────────────────────────────────────────
+      async function selectOrg(iri) {
+        const org = orgs.find((o) => o.entity === iri);
+        if (!org) return;
+
+        // Update list card states
+        for (const card of orgListEl.querySelectorAll(".org-card")) {
+          card.classList.toggle("active", card.dataset.iri === iri);
+        }
+
+        // Highlight map marker & fly to it
+        highlightMarker(iri);
+        const m = markers.find((m) => m.iri === iri);
+        if (m) map.flyTo(m.latlng, 13, { duration: 0.9 });
+
+        // Show detail panel
+        detailOrgName.textContent = org.name;
+        detailBadges.innerHTML = `
+    <span class="badge b-blue">${parseInt(org.count).toLocaleString()} mentions</span>
+    ${org.city ? `<span class="badge b-violet">📍 ${esc(org.city)}</span>` : ""}
+  `;
+
+        orgListEl.hidden = true;
+        detailPanel.hidden = false;
+        detailBody.innerHTML =
+          '<div class="placeholder"><div class="spinner"></div><div>Fetching details…</div></div>';
+
+        try {
+          const [docs, related] = await Promise.all([
+            queryOrgDocuments(cue, iri),
+            queryOrgRelated(cue, iri),
+          ]);
+          // Fetch document metadata (subject, size) via the SDK
+          const uuids = [
+            ...new Set(
+              docs
+                .filter((d) => d.content)
+                .map((d) => d.content.split("/").pop()),
+            ),
+          ];
+          const metaMap = uuids.length > 0 ? await fetchDocMeta(uuids) : {};
+          renderDetailBody(docs, related, metaMap);
+        } catch (err) {
+          detailBody.innerHTML = `<div class="placeholder" style="color:#ef4444">Failed to load details: ${esc(err.message)}</div>`;
+        }
+      }
+
+      function renderDetailBody(docs, related, metaMap = {}) {
+        // ── Documents ──────────────────────────────────────────────────────────
+        // Group rows by docName; each entry records pages, content IRI, and suffix
+        const docMap = new Map();
+        for (const row of docs) {
+          if (!docMap.has(row.docName)) {
+            docMap.set(row.docName, {
+              pages: new Set(),
+              content: row.content ?? "",
+              suffix: row.suffix ?? "",
+            });
+          }
+          if (row.page) docMap.get(row.docName).pages.add(row.page);
+        }
+
+        let html = '<div class="detail-section">';
+        html += `<p class="section-heading">Documents (${docMap.size})</p>`;
+
+        if (docMap.size === 0) {
+          html +=
+            '<p style="color:var(--text-2);font-size:.875rem">No documents found.</p>';
+        } else {
+          for (const [docName, { pages, content, suffix }] of docMap) {
+            const uuid = content ? content.split("/").pop() : "";
+            const meta = uuid ? (metaMap[uuid] ?? null) : null;
+            const ext = suffix.replace(".", "").toUpperCase() || "?";
+            const extClass =
+              suffix === ".pdf"
+                ? "ext-pdf"
+                : suffix === ".docx" || suffix === ".doc"
+                  ? "ext-doc"
+                  : suffix === ".xlsx" || suffix === ".xls"
+                    ? "ext-xls"
+                    : "ext-other";
+            const sizeStr = formatSize(meta?.size);
+            const subject = meta?.subject ?? "";
+            const sorted = [...pages].sort((a, b) => +a - +b);
+            html += `
+        <div class="doc-item" data-uuid="${esc(uuid)}" data-suffix="${esc(suffix)}"
+             role="button" tabindex="0" title="Click to download">
+          <div class="doc-meta">
+            <span class="ext-badge ${extClass}">${esc(ext)}</span>
+            <span class="doc-name">${esc(docName)}</span>
+            <svg class="doc-dl-icon" width="14" height="14" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          ${subject ? `<div class="doc-subject">${esc(subject)}</div>` : ""}
+          <div class="page-chips">
+            ${sorted.map((p) => `<span class="page-chip">p.${esc(p)}</span>`).join("")}
+            ${pages.size === 0 ? '<span class="page-chip">—</span>' : ""}
+            ${sizeStr ? `<span class="size-chip">${esc(sizeStr)}</span>` : ""}
+          </div>
+        </div>`;
+          }
+        }
+        html += "</div>";
+
+        // ── Related entities ───────────────────────────────────────────────────
+        // Deduplicate by relName + relCategory (multiple predicates can link same entity)
+        const seen = new Set();
+        const uniqueRel = related.filter((r) => {
+          const key = r.relName + "|" + r.relCategory;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+
+        html += '<div class="detail-section">';
+        html += `<p class="section-heading">Related entities (${uniqueRel.length})</p>`;
+
+        if (uniqueRel.length === 0) {
+          html +=
+            '<p style="color:var(--text-2);font-size:.875rem">No related entities found.</p>';
+        } else {
+          for (const rel of uniqueRel) {
+            const cat = catName(rel.relCategory);
+            const pred = localName(rel.predicate);
+            html += `
+        <div class="rel-item">
+          <span class="badge ${catColour(cat)}">${esc(cat)}</span>
+          <span class="rel-name">${esc(rel.relName)}</span>
+          <span class="rel-pred">${esc(pred)}</span>
+        </div>`;
+          }
+        }
+        html += "</div>";
+
+        detailBody.innerHTML = html;
+
+        // Attach download handlers to every doc card
+        for (const el of detailBody.querySelectorAll(".doc-item[data-uuid]")) {
+          const handler = async () => {
+            const { uuid, suffix } = el.dataset;
+            if (!uuid || !suffix) return;
+            const icon = el.querySelector(".doc-dl-icon");
+            if (icon) {
+              icon.style.opacity = "1";
+              icon.style.animation = "spin .75s linear infinite";
+            }
+            try {
+              const url = await getDocDownloadUrl(uuid, suffix);
+              window.open(url, "_blank", "noopener,noreferrer");
+            } catch (e) {
+              alert("Download unavailable: " + e.message);
+            } finally {
+              if (icon) {
+                icon.style.animation = "";
+              }
+            }
+          };
+          el.addEventListener("click", handler);
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handler();
+            }
+          });
+        }
+      }
+
+      function showOrgList() {
+        detailPanel.hidden = true;
+        orgListEl.hidden = false;
+        highlightMarker(null); // reset all markers
+        for (const card of orgListEl.querySelectorAll(".org-card")) {
+          card.classList.remove("active");
+        }
+      }
+
+      // ── Auth ─────────────────────────────────────────────────────────────────────
+      const cue = new Cue();
+      const docsApi = new CueProjectDocuments(cue.api, PROJECT_ID);
+
+      function loginError(msg) {
+        document.getElementById("login-error").textContent = msg;
+      }
+      function setSigningIn(loading) {
+        const btn = document.getElementById("btn-pw-signin");
+        btn.disabled = loading;
+        btn.textContent = loading ? "Signing in…" : "Sign in";
+      }
+
+      document
+        .getElementById("btn-google")
+        .addEventListener("click", async () => {
+          loginError("");
+          try {
+            await cue.auth.signIn("google");
+          } catch (e) {
+            loginError(e.message || "Sign-in failed.");
+          }
+        });
+
+      document
+        .getElementById("btn-microsoft")
+        .addEventListener("click", async () => {
+          loginError("");
+          try {
+            await cue.auth.signIn("microsoft");
+          } catch (e) {
+            loginError(e.message || "Sign-in failed.");
+          }
+        });
+
+      document
+        .getElementById("btn-pw-signin")
+        .addEventListener("click", async () => {
+          const email = document.getElementById("inp-email").value.trim();
+          const password = document.getElementById("inp-password").value;
+          if (!email || !password) {
+            loginError("Please enter your email and password.");
+            return;
+          }
+          setSigningIn(true);
+          loginError("");
+          try {
+            await cue.auth.signIn("password", { email, password });
+          } catch (e) {
+            loginError(e.message || "Sign-in failed.");
+          } finally {
+            setSigningIn(false);
+          }
+        });
+
+      document
+        .getElementById("inp-password")
+        .addEventListener("keydown", (e) => {
+          if (e.key === "Enter")
+            document.getElementById("btn-pw-signin").click();
+        });
+
+      document
+        .getElementById("sign-out-btn")
+        .addEventListener("click", () => cue.auth.signOut());
+      document
+        .getElementById("back-btn")
+        .addEventListener("click", showOrgList);
+
+      // ── Auth state driver ─────────────────────────────────────────────────────────
+      let dataLoaded = false;
+
+      cue.auth.onAuthStateChanged(async (user) => {
+        splash.hidden = true;
+
+        if (!user) {
+          appEl.hidden = true;
+          loginScreen.hidden = false;
+          dataLoaded = false;
+          return;
+        }
+
+        loginScreen.hidden = true;
+        appEl.hidden = false;
+
+        if (!map) initMap();
+        if (dataLoaded) return; // don't reload if user was already signed in
+        dataLoaded = true;
+
+        orgListEl.innerHTML =
+          '<div class="placeholder"><div class="spinner"></div><div>Loading organisations…</div></div>';
+
+        try {
+          // 1. Top-5 orgs
+          const rawOrgs = await queryTopOrgs(cue);
+
+          // 2. Primary city/country per org
+          const locations = await queryOrgLocations(
+            cue,
+            rawOrgs.map((o) => o.entity),
+          );
+          const locMap = Object.fromEntries(
+            locations.map((l) => [l.entity, l]),
+          );
+          orgs = rawOrgs.map((o) => ({ ...o, ...(locMap[o.entity] ?? {}) }));
+
+          // 3. Render list
+          renderOrgList();
+
+          // 4. Geocode and add markers (max 1 req/s per Nominatim policy)
+          for (let i = 0; i < orgs.length; i++) {
+            const org = orgs[i];
+            if (!org.city) continue;
+            if (i > 0) await sleep(350); // respect Nominatim rate limit
+
+            const coords = await geocode(org.city, org.country);
+            if (coords)
+              addMapMarker(org, [coords.lat, coords.lng], RANK_COLOURS[i]);
+          }
+
+          // Fit map to markers if any were added
+          if (markers.length > 0) {
+            const group = L.featureGroup(markers.map((m) => m.circle));
+            map.fitBounds(group.getBounds().pad(0.3));
+          }
+        } catch (err) {
+          console.error("Data loading error:", err);
+          orgListEl.innerHTML = `<div class="placeholder" style="color:#ef4444">
+      Failed to load data: ${esc(err.message)}
+    </div>`;
+        }
+      });
+    </script>
+  </body>
+</html>
