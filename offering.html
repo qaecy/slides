@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Cue — Our Offering</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+
+    <style>
+      .cue-inline {
+        display: inline;
+        height: 1rem;
+        margin: 0 0 -0.05rem 0 !important;
+      }
+
+      /* ── Pillar overview grid ─────────────────────────────────── */
+      .pillar-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .pillar-card {
+        background: rgba(255,255,255,0.07);
+        border-radius: 0.5rem;
+        padding: 1.1rem 1.3rem;
+        text-align: left;
+      }
+      .pillar-card .pillar-number {
+        font-size: 0.7rem;
+        font-family: monospace;
+        opacity: 0.4;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+      }
+      .pillar-card .pillar-name {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+      }
+      .pillar-card p {
+        font-size: 0.9rem;
+        line-height: 1.45rem;
+        opacity: 0.75;
+        margin: 0;
+      }
+
+      /* ── Document / source type tags ──────────────────────────── */
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        justify-content: center;
+        margin-top: 1.4rem;
+      }
+      .tag {
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.3rem;
+        padding: 0.25em 0.75em;
+        font-size: 0.88rem;
+      }
+
+      /* ── Three-database cards ─────────────────────────────────── */
+      .db-row {
+        display: flex;
+        gap: 1.1rem;
+        margin-top: 1.4rem;
+        justify-content: center;
+      }
+      .db-card {
+        flex: 1;
+        background: rgba(255,255,255,0.07);
+        border-radius: 0.5rem;
+        padding: 1.1rem 1rem;
+        text-align: center;
+      }
+      .db-card .db-icon {
+        font-size: 1.7rem;
+        margin-bottom: 0.45rem;
+      }
+      .db-card .db-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+      }
+      .db-card p {
+        font-size: 0.82rem;
+        opacity: 0.68;
+        line-height: 1.35rem;
+        margin: 0;
+      }
+
+      /* ── Flow strip ───────────────────────────────────────────── */
+      .flow-strip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        margin-top: 1.8rem;
+        font-size: 1rem;
+      }
+      .flow-box {
+        background: rgba(255,255,255,0.08);
+        border-radius: 0.4rem;
+        padding: 0.6rem 1.1rem;
+        text-align: center;
+        line-height: 1.4rem;
+      }
+      .flow-box .flow-label {
+        font-size: 0.72rem;
+        opacity: 0.45;
+        font-family: monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+      }
+      .flow-box .flow-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      .flow-arrow {
+        font-size: 1.1rem;
+        opacity: 0.4;
+      }
+
+      /* ── Video placeholder ────────────────────────────────────── */
+      .video-wrap {
+        position: relative;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background: rgba(0,0,0,0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.8rem;
+      }
+      .video-wrap video {
+        max-height: 100%;
+        max-width: 100%;
+        border-radius: 0.4rem;
+      }
+      .video-placeholder {
+        width: 100%;
+        height: 55vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.35;
+        font-size: 1rem;
+        gap: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ─── Title ─────────────────────────────────────────────── -->
+        <section>
+          <img src="dist/img/logos/cue.svg" style="height: 60px;" alt="Cue" />
+          <p style="font-size: 1.9rem; margin-top: 1rem; line-height: 2.6rem;">
+            Your project knowledge.<br />
+            Structured. Connected. AI-ready.
+          </p>
+          <p style="font-size: 1rem; opacity: 0.5; margin-top: 1rem;">
+            by <img src="dist/img/logo.svg" class="cue-inline" style="height:1rem; transform:translateY(-1px);" />
+          </p>
+        </section>
+
+        <!-- ─── The problem ───────────────────────────────────────── -->
+        <section>
+          <p style="font-size: 1.5rem;">
+            Large projects generate enormous amounts of information
+          </p>
+          <p class="fragment" style="font-size: 1.4rem; margin-top: 1.4rem; opacity: 0.85;">
+            Drawings, models, contracts, schedules, correspondence —<br />
+            spread across systems, formats and teams
+          </p>
+          <p class="fragment" style="font-size: 1.4rem; margin-top: 1.4rem;">
+            Most of it is <strong>not connected</strong> and <strong>not queryable</strong>
+          </p>
+          <p class="fragment" style="font-size: 1.4rem; margin-top: 1.4rem;">
+            Cue fixes that
+          </p>
+        </section>
+
+        <!-- ─── Four pillars overview ──────────────────────────────── -->
+        <section>
+          <h4>Four pillars</h4>
+          <div class="pillar-grid">
+            <div class="pillar-card fragment">
+              <div class="pillar-number">01</div>
+              <div class="pillar-name">🗄️ Cue Index</div>
+              <p>The knowledge foundation — built from all your project documents</p>
+            </div>
+            <div class="pillar-card fragment">
+              <div class="pillar-number">02</div>
+              <div class="pillar-name">🔧 Cue Tuner</div>
+              <p>Shape the index to your business — connect your data, define your rules</p>
+            </div>
+            <div class="pillar-card fragment">
+              <div class="pillar-number">03</div>
+              <div class="pillar-name">🛠️ Cue Studio</div>
+              <p>Build project apps in hours, not months</p>
+            </div>
+            <div class="pillar-card fragment">
+              <div class="pillar-number">04</div>
+              <div class="pillar-name">🤖 Cue Agent</div>
+              <p>An AI agent that reasons across your entire project knowledge</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── Pillar 1: Cue Index ────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>01 — Cue Index</h4>
+            <p style="font-size: 1.3rem; opacity: 0.65; margin-top: 0.5rem;">
+              The knowledge foundation
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              We process your documents — whatever form they come in
+            </p>
+            <div class="tag-row fragment">
+              <span class="tag">📐 CAD drawings</span>
+              <span class="tag">🏗️ BIM models</span>
+              <span class="tag">📄 Contracts</span>
+              <span class="tag">🗺️ P&amp;ID diagrams</span>
+              <span class="tag">🖨️ Scanned drawings</span>
+              <span class="tag">📊 Schedules</span>
+              <span class="tag">📑 Reports</span>
+              <span class="tag">📧 Correspondence</span>
+            </div>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Our pipelines are purpose-built for the AEC industry
+            </p>
+            <ul style="font-size: 1.15rem; line-height: 2.2rem; margin-top: 1.2rem; width: 88%;">
+              <li class="fragment">Read a title block on a scanned drawing</li>
+              <li class="fragment">Extract obligations from a contract clause</li>
+              <li class="fragment">Pull spatial hierarchy from an IFC model</li>
+              <li class="fragment">Find valve tags and instrument loops on a P&amp;ID</li>
+            </ul>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.4rem; opacity: 0.8;">
+              Entities and relationships are resolved <strong>across all documents</strong> —
+              the same person, element or location is recognised wherever it appears
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.3rem; margin-bottom: 0.5rem;">
+              The result is a three-layer index
+            </p>
+            <div class="db-row">
+              <div class="db-card fragment">
+                <div class="db-icon">🔍</div>
+                <div class="db-name">Full-text search</div>
+                <p>Find any passage in any document, instantly</p>
+              </div>
+              <div class="db-card fragment">
+                <div class="db-icon">🧠</div>
+                <div class="db-name">Vector search</div>
+                <p>Find content by meaning, not just keywords</p>
+              </div>
+              <div class="db-card fragment">
+                <div class="db-icon">🕸️</div>
+                <div class="db-name">Knowledge graph</div>
+                <p>Navigate relationships between every entity across your project</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Every fact traces back to its source document
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1.4rem; opacity: 0.8;">
+              No black box — you can always see where an answer came from
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1.4rem; opacity: 0.8;">
+              The index is accessible from anywhere via <strong>MCP</strong>
+              (for AI tools and agents) and a <strong>CLI</strong>
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Pillar 2: Cue Tuner ───────────────────────────────── -->
+        <section>
+          <section>
+            <h4>02 — Cue Tuner</h4>
+            <p style="font-size: 1.3rem; opacity: 0.65; margin-top: 0.5rem;">
+              Shape the index to your business
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Before you start a project, the Tuner lets you define
+              <strong>exactly what you care about</strong>
+            </p>
+            <ul style="font-size: 1.15rem; line-height: 2.2rem; margin-top: 1.3rem; width: 88%;">
+              <li class="fragment">Specific entities or relationships to extract</li>
+              <li class="fragment">Internal classification codes and breakdown structures</li>
+              <li class="fragment">Business rules unique to your organisation</li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Connect your existing data to the graph
+            </p>
+            <div class="tag-row fragment">
+              <span class="tag">🏢 ERP systems</span>
+              <span class="tag">🔧 Work orders</span>
+              <span class="tag">👥 Employee directories</span>
+              <span class="tag">📦 Asset registers</span>
+            </div>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.5rem; opacity: 0.8;">
+              Define mappings once — your structured data becomes part of the knowledge graph
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Then validate what you've built
+            </p>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.3rem; opacity: 0.8;">
+              Run <strong>automated QA</strong> against the knowledge representation —
+              checking for missing data, inconsistencies and rule violations
+            </p>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.1rem; opacity: 0.8;">
+              Precise rule-based checks <em>and</em> fuzzy matching to catch
+              near-misses your team would never find manually
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── Index + Tuner = value summary ─────────────────────── -->
+        <section>
+          <p style="font-size: 1.45rem;">
+            Together, the Index and Tuner give you a knowledge representation that is:
+          </p>
+          <ul style="font-size: 1.2rem; line-height: 2.3rem; margin-top: 1.4rem; width: 82%;">
+            <li class="fragment"><strong>Complete</strong> — all document types, all disciplines</li>
+            <li class="fragment"><strong>Transparent</strong> — every fact traces to its source</li>
+            <li class="fragment"><strong>Auditable</strong> — validated against your business rules</li>
+            <li class="fragment"><strong>Extensible</strong> — enriched with your existing data</li>
+            <li class="fragment"><strong>AI-ready</strong> — consumable by agents, tools and apps</li>
+          </ul>
+        </section>
+
+        <!-- ─── Pillar 3: Cue Studio ──────────────────────────────── -->
+        <section>
+          <section>
+            <h4>03 — Cue Studio</h4>
+            <p style="font-size: 1.3rem; opacity: 0.65; margin-top: 0.5rem;">
+              Build project apps in hours, not months
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              Studio puts the index in the hands of developers and builders
+            </p>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.3rem; opacity: 0.8;">
+              A <strong>JavaScript SDK</strong> for full control —
+              and a library of <strong>ready-made components</strong>
+              for common project data views
+            </p>
+          </section>
+
+          <section>
+            <h4>Ready-made components</h4>
+            <ul style="font-size: 1.1rem; line-height: 2.1rem; width: 88%;">
+              <li class="fragment">
+                📋 <strong>Document list</strong>
+                — auto-fetches metadata when you give it a list of IDs
+              </li>
+              <li class="fragment">
+                👁️ <strong>Document viewer</strong>
+                — detects file type and picks the right viewer automatically
+              </li>
+              <li class="fragment">
+                🏢 <strong>Entity viewer</strong>
+                — shows details with a live network graph of connections
+              </li>
+              <li class="fragment">
+                📌 <strong>Related documents</strong>
+                — surfaces everything linked to an entity
+              </li>
+              <li class="fragment">
+                🗺️ <strong>Map</strong>
+                — with AEC-specific GIS features built in
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              The Cue app builder skill means any coding agent can build a Cue app
+              from a plain-English prompt
+            </p>
+            <p class="fragment" style="font-size: 1.2rem; margin-top: 1.4rem; opacity: 0.8;">
+              No deep technical knowledge required — just describe what you want
+            </p>
+            <p class="fragment" style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.6;">
+              This is "vibe coding" for project data
+            </p>
+          </section>
+
+          <!-- Demo 1 -->
+          <section>
+            <p style="font-size: 1rem; opacity: 0.65; margin-bottom: 0.8rem;">
+              <em>"Build me a Cue app where all BIM models in the project are listed
+              on project select and the document is opened when selecting a model"</em>
+            </p>
+            <div class="video-wrap" style="height: 58vh;">
+              <video data-autoplay src="dist/videos/studio-demo-1.mp4"
+                style="max-height: 100%; max-width: 100%;"></video>
+              <!-- Remove the placeholder div below when the video is ready -->
+              <div class="video-placeholder">
+                <div style="font-size: 2rem;">🎬</div>
+                <div>Video: BIM model list + viewer demo</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Demo 2 -->
+          <section>
+            <p style="font-size: 1rem; opacity: 0.65; margin-bottom: 0.8rem;">
+              <em>"Build me a Cue app that shows the 5 most prominent organizations
+              in the project on a map and displays more info when I click one"</em>
+            </p>
+            <div class="video-wrap" style="height: 58vh;">
+              <video data-autoplay src="dist/videos/studio-demo-2.mp4"
+                style="max-height: 100%; max-width: 100%;"></video>
+              <!-- Remove the placeholder div below when the video is ready -->
+              <div class="video-placeholder">
+                <div style="font-size: 2rem;">🎬</div>
+                <div>Video: Organizations on map demo</div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ─── Pillar 4: Cue Agent ────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>04 — Cue Agent</h4>
+            <p style="font-size: 1.3rem; opacity: 0.65; margin-top: 0.5rem;">
+              Ask questions. Get answers. With sources.
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem;">
+              The Cue Agent is an AI assistant purpose-built for project knowledge
+            </p>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.4rem; opacity: 0.8;">
+              It uses dedicated tools to search, query and reason across the full index —
+              combining your project knowledge with publicly available information
+            </p>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 1.2rem; opacity: 0.8;">
+              Every answer traces back to a source document
+            </p>
+          </section>
+        </section>
+
+        <!-- ─── The full picture ──────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>The full picture</h4>
+            <div class="flow-strip fragment">
+              <div class="flow-box">
+                <div class="flow-label">01</div>
+                <div class="flow-name">🗄️ Index</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">
+                <div class="flow-label">02</div>
+                <div class="flow-name">🔧 Tuner</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">
+                <div class="flow-label">03</div>
+                <div class="flow-name">🛠️ Studio</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">
+                <div class="flow-label">04</div>
+                <div class="flow-name">🤖 Agent</div>
+              </div>
+            </div>
+            <p class="fragment" style="font-size: 1.15rem; margin-top: 2rem; opacity: 0.75;">
+              From raw documents to actionable project intelligence
+            </p>
+          </section>
+
+          <section>
+            <img src="dist/img/logos/cue.svg" style="height: 60px;" alt="Cue" />
+            <p style="font-size: 1.4rem; margin-top: 1.2rem;">
+              by <img src="dist/img/logo.svg" class="cue-inline"
+                style="height:1.4rem; transform:translateY(-2px);" />
+            </p>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        scrollActivationWidth: null,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
