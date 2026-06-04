@@ -415,3 +415,23 @@ hlr{
   margin-top: 0;
   margin-bottom: 0;
 }
+
+/*********************************************
+ * DARK MODE  (body.dark)
+ *********************************************/
+body.dark {
+  --r-background-color: #121c2b;
+  --r-main-color: #fff;
+  --r-heading-color: #fff;
+  --r-link-color: #6ca0e8;
+  --r-link-color-hover: #98bdef;
+}
+
+body.dark .reveal-viewport {
+  background: #121c2b;
+  background-color: var(--r-background-color);
+}
+
+body.dark .reveal {
+  color: var(--r-main-color);
+}

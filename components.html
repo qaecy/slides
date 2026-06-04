@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Cue UI — Web Components</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/qaecy.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    <style>
+      /* ── Attribute table ──────────────────────────────────────── */
+      table.attr-table {
+        width: 90%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+        margin: 1.2rem auto 0;
+      }
+      table.attr-table th {
+        text-align: left;
+        font-size: 0.72rem;
+        font-family: monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.45;
+        padding: 0.3rem 0.7rem 0.6rem;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+      table.attr-table td {
+        padding: 0.55rem 0.7rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        vertical-align: top;
+        line-height: 1.5rem;
+      }
+      table.attr-table td:first-child {
+        font-family: monospace;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        color: #a8d8a8;
+      }
+      table.attr-table td:nth-child(2) {
+        font-family: monospace;
+        font-size: 0.8rem;
+        opacity: 0.6;
+        white-space: nowrap;
+      }
+      table.attr-table td:nth-child(3) {
+        font-family: monospace;
+        font-size: 0.8rem;
+        opacity: 0.5;
+        white-space: nowrap;
+      }
+
+      /* ── Demo row ─────────────────────────────────────────────── */
+      .demo-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+      .demo-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .demo-cell .demo-label {
+        font-size: 0.78rem;
+        font-family: monospace;
+        opacity: 0.45;
+        letter-spacing: 0.06em;
+      }
+
+      /* ── Size comparison ──────────────────────────────────────── */
+      .size-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 3.5rem;
+        margin-top: 2rem;
+      }
+      .size-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .size-cell .size-label {
+        font-size: 0.78rem;
+        font-family: monospace;
+        opacity: 0.45;
+      }
+
+      code.inline {
+        font-size: 0.85rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.25rem;
+        padding: 0.05em 0.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ─── Title ─────────────────────────────────────────────── -->
+        <section>
+          <cue-logo
+            style="display: inline-block; height: 60px;"
+          ></cue-logo>
+          <p style="font-size: 1.8rem; line-height: 2.6rem;">
+            Web Components
+          </p>
+          <p style="font-size: 1rem; opacity: 0.5; margin-top: 0.8rem;">
+            <code class="inline">@qaecy/cue-ui</code> — drop-in components, no build step
+          </p>
+        </section>
+
+        <!-- ─── Component index ───────────────────────────────────── -->
+        <section>
+          <h4>Components</h4>
+          <ul style="font-size: 1.1rem; line-height: 2.4rem; margin-top: 1rem; list-style: none; width: 85%;">
+            <li class="fragment">
+              <code class="inline">&lt;cue-logo&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Animated QAECY logo</span>
+            </li>
+            <li class="fragment" style="opacity: 0.35;">
+              <code class="inline">&lt;cue-document-viewer&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">PDF, BIM, CAD, images, spreadsheets …</span>
+            </li>
+            <li class="fragment" style="opacity: 0.35;">
+              <code class="inline">&lt;cue-document-list&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Lazy document table with metadata</span>
+            </li>
+            <li class="fragment" style="opacity: 0.35;">
+              <code class="inline">&lt;cue-entity-list&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Lazy entity table</span>
+            </li>
+            <li class="fragment" style="opacity: 0.35;">
+              <code class="inline">&lt;cue-entity-viewer&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Full entity detail — info, graph, documents, map</span>
+            </li>
+            <li class="fragment" style="opacity: 0.35;">
+              <code class="inline">&lt;cue-id-builder&gt;</code>
+              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Interactive IFC / SPARQL ID builder</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ─── cue-logo ──────────────────────────────────────────── -->
+        <section>
+
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem;">
+              Animated QAECY logo — adapts to light and dark mode
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 3rem;">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>size</td>
+                  <td>'xs' | 's' | 'm' | 'l'</td>
+                  <td>'m'</td>
+                  <td>Size preset</td>
+                </tr>
+                <tr>
+                  <td>active</td>
+                  <td>boolean</td>
+                  <td>true</td>
+                  <td>Plays the draw animation once on load. Set to <code>false</code> to skip it</td>
+                </tr>
+                <tr>
+                  <td>continuous</td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Loops the draw animation indefinitely</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Size presets -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — size presets</h4>
+            <div class="size-row">
+              <div class="size-cell">
+                <cue-logo size="s"></cue-logo>
+                <div class="size-label">size="s"</div>
+              </div>
+              <div class="size-cell">
+                <cue-logo size="m"></cue-logo>
+                <div class="size-label">size="m" (default)</div>
+              </div>
+              <div class="size-cell">
+                <cue-logo size="l"></cue-logo>
+                <div class="size-label">size="l"</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- active vs static -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — animation</h4>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem;">
+              <a href="javascript:location.reload()" style="color: inherit; text-decoration: none; cursor: pointer;">↺ refresh to replay</a>
+            </p>
+            <div class="demo-row">
+              <div class="demo-cell">
+                <cue-logo size="m" active="false"></cue-logo>
+                <div class="demo-label">active="false" — outlines once</div>
+              </div>
+              <div class="demo-cell">
+                <cue-logo size="m"></cue-logo>
+                <div class="demo-label">active (default) — draws once</div>
+              </div>
+              <div class="demo-cell">
+                <cue-logo size="m" continuous></cue-logo>
+                <div class="demo-label">continuous — loops</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Dark / light mode — live demo -->
+          <section id="dark-mode-demo">
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — dark &amp; light mode</h4>
+            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem;">
+              Colours adapt when <code class="inline">class="dark"</code> is present on <code class="inline">&lt;body&gt;</code>
+            </p>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.3rem;">
+              <a id="dark-toggle" href="javascript:void(0)" style="color: inherit; text-decoration: none; cursor: pointer;">⬤ toggle dark / light</a>
+            </p>
+            <div class="demo-row" style="margin-top: 2.5rem;">
+              <div class="demo-cell">
+                <cue-logo size="l"></cue-logo>
+              </div>
+            </div>
+            <script>
+              document.getElementById('dark-toggle').addEventListener('click', function () {
+                document.body.classList.toggle('dark');
+              });
+            </script>
+          </section>
+
+          <!-- Dark / light mode — code -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — dark &amp; light mode</h4>
+            <pre style="width: 88%; font-size: 0.78rem; margin-top: 2rem;"><code class="html">&lt;!-- Dark mode --&gt;
+&lt;body class="dark"&gt;
+  &lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
+&lt;/body&gt;
+
+&lt;!-- Light mode --&gt;
+&lt;body&gt;
+  &lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
+&lt;/body&gt;
+
+&lt;!-- Toggle at runtime --&gt;
+&lt;script&gt;
+  document.body.classList.toggle('dark');
+&lt;/script&gt;</code></pre>
+          </section>
+
+          <!-- Usage code -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Outline draw and out --&gt;
+&lt;cue-logo size="l" active="false"&gt;&lt;/cue-logo&gt;
+
+&lt;!-- Animated once on load (default behaviour) --&gt;
+&lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
+
+&lt;!-- Continuously looping --&gt;
+&lt;cue-logo size="m" continuous&gt;&lt;/cue-logo&gt;
+
+&lt;!-- Inline (scale to text size with CSS) --&gt;
+&lt;style&gt;
+  .logo-inline { display: inline-block; height: 1em; vertical-align: middle; }
+&lt;/style&gt;
+&lt;cue-logo class="logo-inline" size="s"&gt;&lt;/cue-logo&gt;</code></pre>
+          </section>
+
+          <!-- CDN loader note -->
+          <section>
+            <h4>Loading via CDN</h4>
+            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Static tags are detected automatically --&gt;
+&lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
+
+&lt;!-- Add the single loader script anywhere in the page --&gt;
+&lt;script
+  src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/index.js"
+  type="module"
+&gt;&lt;/script&gt;
+
+&lt;!-- Optional: include bundled styles --&gt;
+&lt;link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/styles.css"
+/&gt;</code></pre>
+            <p class="fragment" style="font-size: 1rem; margin-top: 1.2rem; opacity: 0.7;">
+              Components used only in JS (created dynamically) must be listed in
+              <code class="inline">data-components</code> on the script tag
+            </p>
+          </section>
+
+        </section>
+
+        <!-- ─── by-cue-logo ──────────────────────────────────────────── -->
+        <section>
+
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem;">
+              Your company logo with app credits to Cue
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 2rem;">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>src</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>URL of your logo image</td>
+                </tr>
+                <tr>
+                  <td>alt</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Alt text for the logo image</td>
+                </tr>
+                <tr>
+                  <td>active</td>
+                  <td>boolean</td>
+                  <td>true</td>
+                  <td>Plays the Cue draw animation once on load</td>
+                </tr>
+                <tr>
+                  <td>continuous</td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Loops the draw animation indefinitely</td>
+                </tr>
+                <tr>
+                  <td style="color: #a8c4e8;">--by-cue-logo-width</td>
+                  <td>CSS var</td>
+                  <td>—</td>
+                  <td>Controls the total component width</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Live demo: default / continuous / passive -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — animation</h4>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem;">
+              <a href="javascript:location.reload()" style="color: inherit; text-decoration: none; cursor: pointer;">↺ refresh to replay</a>
+            </p>
+            <div class="demo-row" style="margin-top: 2rem;">
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                ></cue-by-cue-logo>
+                <div class="demo-label">active (default) — draws once</div>
+              </div>
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                  continuous
+                ></cue-by-cue-logo>
+                <div class="demo-label">continuous — loops</div>
+              </div>
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                  active="false"
+                ></cue-by-cue-logo>
+                <div class="demo-label">active="false" — no animation</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Width variants -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — width</h4>
+            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem;">
+              Use <code class="inline">--by-cue-logo-width</code> to scale the component
+            </p>
+            <div class="demo-row" style="margin-top: 2.5rem; align-items: flex-end;">
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                  active="false"
+                  style="--by-cue-logo-width: 120px"
+                ></cue-by-cue-logo>
+                <div class="demo-label">--by-cue-logo-width: 120px</div>
+              </div>
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                  active="false"
+                  style="--by-cue-logo-width: 220px"
+                ></cue-by-cue-logo>
+                <div class="demo-label">--by-cue-logo-width: 220px</div>
+              </div>
+              <div class="demo-cell">
+                <cue-by-cue-logo
+                  src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
+                  alt="Empa logo"
+                  active="false"
+                  style="--by-cue-logo-width: 320px"
+                ></cue-by-cue-logo>
+                <div class="demo-label">--by-cue-logo-width: 320px</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Usage code -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Default (animates once on load) --&gt;
+&lt;cue-by-cue-logo
+  src="https://example.com/your-logo.svg"
+  alt="Your company"
+&gt;&lt;/cue-by-cue-logo&gt;
+
+&lt;!-- Continuously looping --&gt;
+&lt;cue-by-cue-logo src="..." alt="..." continuous&gt;&lt;/cue-by-cue-logo&gt;
+
+&lt;!-- No animation --&gt;
+&lt;cue-by-cue-logo src="..." alt="..." active="false"&gt;&lt;/cue-by-cue-logo&gt;
+
+&lt;!-- Custom width --&gt;
+&lt;cue-by-cue-logo
+  src="..."
+  alt="..."
+  style="--by-cue-logo-width: 280px"
+&gt;&lt;/cue-by-cue-logo&gt;</code></pre>
+          </section>
+
+        </section>
+
+        <!-- ─── Closing ───────────────────────────────────────────── -->
+        <section>
+          <cue-by-cue-logo size="l" style="margin-bottom: 1.5rem;"></cue-by-cue-logo>
+          <p style="font-size: 1rem; opacity: 0.5;">
+            <a href="https://www.jsdelivr.com/package/npm/@qaecy/cue-ui" target="_blank">
+              cdn.jsdelivr.net/npm/@qaecy/cue-ui
+            </a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="js/print-fallback.js"></script>
+
+    <!-- Cue UI -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/index.js"
+      type="module"
+    ></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        pdfSeparateFragments: false,
+        scrollActivationWidth: null,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>

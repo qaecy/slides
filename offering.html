@@ -23,6 +23,17 @@
         height: 1rem;
         margin: 0 0 -0.05rem 0 !important;
       }
+      cue-logo.cue-logo-inline {
+        display: inline-block !important;
+        vertical-align: middle;
+        margin-right: 0.3em;
+      }
+
+      cue-logo.cue-logo-inline svg {
+        display: inline-block;
+        vertical-align: middle;
+        transform: translateY(-8px);
+      }
 
       /* ── Pillar overview grid ─────────────────────────────────── */
       .pillar-grid {
@@ -169,7 +180,9 @@
       <div class="slides">
         <!-- ─── Title ─────────────────────────────────────────────── -->
         <section>
-          <img src="dist/img/logos/cue.svg" style="height: 60px" alt="Cue" />
+          <cue-logo
+            style="display: inline-block; height: 60px; margin-bottom: 2rem"
+          ></cue-logo>
           <p style="font-size: 1.9rem; margin-top: 1rem; line-height: 2.6rem">
             Your project knowledge.<br />
             Structured. Connected. AI-ready.
@@ -179,7 +192,7 @@
             <img
               src="dist/img/logo.svg"
               class="cue-inline"
-              style="height: 1rem; transform: translateY(-1px)"
+              style="height: 1rem"
             />
           </p>
         </section>
@@ -201,7 +214,7 @@
             <strong>not queryable</strong>
           </p>
           <p class="fragment" style="font-size: 1.4rem; margin-top: 1.4rem">
-            Cue fixes that
+            <cue-logo size="s" animate="false" class="cue-logo-inline"></cue-logo> fixes that
           </p>
         </section>
 
@@ -675,6 +688,131 @@
           </section>
         </section>
 
+        <!-- ─── Scale ──────────────────────────────────────────────── -->
+        <section>
+          <p style="font-size: 1.5rem">Built to work at project scale</p>
+          <p
+            class="fragment"
+            style="font-size: 2.8rem; font-weight: 700; margin-top: 1.6rem"
+          >
+            +1 million documents
+          </p>
+          <p
+            class="fragment"
+            style="font-size: 1.2rem; opacity: 0.75; margin-top: 0.6rem"
+          >
+            in a single knowledge graph
+          </p>
+          <p
+            class="fragment"
+            style="font-size: 1.15rem; margin-top: 1.8rem; opacity: 0.8"
+          >
+            Entity resolution, cross-document linking, provenance tracking and
+            graph traversal — all working reliably at that volume
+          </p>
+          <p
+            class="fragment"
+            style="font-size: 1.15rem; margin-top: 1.2rem; opacity: 0.7"
+          >
+            That is not a trivial engineering problem. We have solved it.
+          </p>
+        </section>
+
+        <!-- ─── When to use Cue ───────────────────────────────────── -->
+        <section>
+          <section>
+            <h4>Is Cue the right fit?</h4>
+            <p style="font-size: 1.2rem; opacity: 0.6; margin-top: 0.6rem">
+              Honest answers
+            </p>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem">
+              Cue is <strong>not</strong> the right choice when&hellip;
+            </p>
+            <ul
+              style="
+                font-size: 1.15rem;
+                line-height: 2.3rem;
+                margin-top: 1.3rem;
+                width: 90%;
+              "
+            >
+              <li class="fragment">
+                You have a <strong>single, well-defined data source</strong>
+                already available in JSON or a database — a direct API is
+                simpler and faster
+              </li>
+              <li class="fragment">
+                Your use case is a <strong>standard CRUD app</strong> with no
+                need to reason across documents or entities
+              </li>
+              <li class="fragment">
+                You need results in days and the data is already clean,
+                structured and complete
+              </li>
+              <li class="fragment">
+                You want to <strong>extract a few entities from a handful of
+                documents</strong> — a simple LLM call or a lightweight script
+                will get you there faster and cheaper
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.35rem">
+              Cue is the right choice when&hellip;
+            </p>
+            <ul
+              style="
+                font-size: 1.15rem;
+                line-height: 2.3rem;
+                margin-top: 1.3rem;
+                width: 90%;
+              "
+            >
+              <li class="fragment">
+                Knowledge is <strong>scattered across hundreds of files</strong>
+                — drawings, models, contracts, reports — and you need to work
+                across all of it
+              </li>
+              <li class="fragment">
+                You need to
+                <strong>connect entities across different sources</strong> — the
+                same asset appears in an IFC model, a P&amp;ID, a contract and a
+                maintenance log
+              </li>
+              <li class="fragment">
+                You want to build apps or run agents on top of
+                <strong>the whole landscape of project knowledge</strong>, not
+                just a slice of it
+              </li>
+              <li class="fragment">
+                Traceability matters — every answer must be
+                <strong>backed by a source document</strong>
+              </li>
+              <li class="fragment">
+                Your data volumes, document diversity or cross-referencing needs
+                are beyond what a hand-rolled solution can realistically handle
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <p style="font-size: 1.4rem">
+              The signal: are you dealing with
+              <strong>the full complexity</strong> of a large project?
+            </p>
+            <p
+              class="fragment"
+              style="font-size: 1.2rem; margin-top: 1.8rem; opacity: 0.8"
+            >
+              If yes — that is exactly what Cue was designed for
+            </p>
+          </section>
+        </section>
+
         <!-- ─── The full picture ──────────────────────────────────── -->
         <section>
           <section>
@@ -728,6 +866,13 @@
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
     <script src="js/print-fallback.js"></script>
+
+    <!-- Cue-UI -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.23/index.js"
+      type="module"
+      data-components="cue-document-viewer"
+    ></script>
 
     <script>
       Reveal.initialize({
