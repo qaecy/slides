@@ -153,8 +153,18 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   display: inline-block;
   text-align: left;
   margin: 1em 0 0 1em;
-  line-height: 3.5rem; 
+  line-height: 1.45;
   font-size: 1.7rem;
+}
+
+.reveal ul > li,
+.reveal ol > li {
+  margin-bottom: 0.7em;
+}
+
+.reveal ul > li:last-child,
+.reveal ol > li:last-child {
+  margin-bottom: 0;
 }
 
 .reveal ol {
@@ -408,12 +418,46 @@ hlr{
 
 .reveal ul{
   font-size: 1.6rem;
-  line-height: 2.4rem;
 }
 
 .reveal ul ul{
   margin-top: 0;
   margin-bottom: 0;
+}
+
+/*********************************************
+ * DATA-INFO TOOLTIP
+ *********************************************/
+[data-info] {
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+  position: relative;
+}
+
+[data-info]::after {
+  content: attr(data-info);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 91, 233, 0.93);
+  color: #fff;
+  font-family: var(--r-main-font);
+  font-size: 0.5em;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  white-space: nowrap;
+  padding: 0.4em 0.85em;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10000;
+}
+
+[data-info]:hover::after {
+  opacity: 1;
 }
 
 /*********************************************
