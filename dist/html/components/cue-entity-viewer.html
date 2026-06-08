@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cue-entity-viewer demo</title>
+
+    <!-- Importmap must appear before any module scripts -->
+    <!-- @qaecy/cue-sdk version: keep in sync with CUE_SDK_VERSION in js/cue-versions.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.26",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        background: #fff;
+        color: #222;
+        font-family: "Poppins", Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      body { display: flex; flex-direction: column; }
+
+      /* Ensure the toolbar is visible before the custom element is defined */
+      cue-sdk-toolbar { display: block; flex-shrink: 0; }
+
+      #layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        gap: 0;
+        overflow: hidden;
+      }
+
+      /* ── Category / entity sidebar ───────────────── */
+      #sidebar {
+        width: 180px;
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+        background: #f4f4f5;
+        border-right: 1px solid #e4e4e7;
+        padding: 10px 10px 8px;
+        gap: 3px;
+        overflow-y: auto;
+      }
+
+      .section-tag {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0d5be9;
+        padding: 0 0 4px;
+        font-family: ui-monospace, monospace;
+        border-bottom: 1px solid #e4e4e7;
+        margin-bottom: 4px;
+      }
+      .section-tag + .section-tag { margin-top: 8px; border-bottom: none; }
+
+      .list-btn {
+        text-align: left;
+        padding: 4px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        background: rgba(0,0,0,0.05);
+        color: #444;
+        transition: background 0.1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+      }
+      .list-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
+      .list-btn.active { background: #0d5be9; color: #fff; }
+
+      .demo-msg {
+        font-size: 0.75rem;
+        font-family: ui-monospace, monospace;
+        color: #aaa;
+        padding: 4px 0;
+      }
+
+      /* ── Viewer area ─────────────────────────────── */
+      #viewer-area {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      cue-entity-viewer {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Auth toolbar -->
+    <cue-sdk-toolbar id="toolbar"></cue-sdk-toolbar>
+
+    <div id="layout">
+      <!-- Category / entity sidebar — not part of the component -->
+      <div id="sidebar">
+        <div id="sidebar-content">
+          <p class="demo-msg">Sign in above</p>
+        </div>
+      </div>
+
+      <!-- Component area -->
+      <div id="viewer-area">
+        <div id="viewer-mount"></div>
+      </div>
+    </div>
+
+    <!-- SDK toolbar component -->
+    <script type="module" src="../../../js/components/cue-sdk-toolbar.js"></script>
+
+    <!-- Cue UI — version driven by js/cue-versions.js -->
+    <script type="module">
+      import { CUE_UI_VERSION } from '../../../js/cue-versions.js';
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/styles.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.setAttribute('data-components', 'cue-entity-viewer');
+      s.src = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/index.js`;
+      document.head.appendChild(s);
+    </script>
+
+    <script type="module">
+      import { demoParam } from '../../../js/demo-params.js';
+      import { CUE_MAPBOX_TOKEN } from '../../../js/cue-versions.js';
+      import { CueProjectEntities } from '@qaecy/cue-sdk';
+
+      const QCY     = 'https://dev.qaecy.com/ont#';
+      const variant = demoParam('variant', 'none');
+
+      const toolbar       = document.getElementById('toolbar');
+      const sidebarContent = document.getElementById('sidebar-content');
+      const mount         = document.getElementById('viewer-mount');
+
+      let _cue            = null;
+      let _projectId      = null;
+      let _projectEntities = null;
+      let _viewer         = null;
+      let _selectedCatIri = null;
+
+      // ── Viewer ──────────────────────────────────────────────────────────────
+
+      function _getOrCreateViewer(cue, projectId) {
+        if (_viewer) {
+          _viewer.cue       = cue;
+          _viewer.projectId = projectId;
+          _viewer.iri       = undefined;
+          return _viewer;
+        }
+        customElements.whenDefined('cue-entity-viewer').then(() => {
+          const el = document.createElement('cue-entity-viewer');
+          if (variant !== 'none') el.setAttribute('variant', variant);
+          // Set JS properties before inserting so Angular sees them on init
+          el.cue        = cue;
+          el.projectId  = projectId;
+          el.mapboxToken = CUE_MAPBOX_TOKEN;
+          mount.appendChild(el);
+          _viewer = el;
+        });
+      }
+
+      // ── Auth / project change ───────────────────────────────────────────────
+
+      toolbar.addEventListener('projectchange', async (e) => {
+        const { projectId, sdkState } = e.detail;
+        _cue       = sdkState?.cue ?? null;
+        _projectId = projectId;
+        _selectedCatIri = null;
+
+        if (sdkState && projectId) {
+          _projectEntities = new CueProjectEntities(_cue.api, projectId);
+          _getOrCreateViewer(_cue, projectId);
+          _renderSidebar('loading-cats');
+          _fetchCategories();
+        } else {
+          _projectEntities = null;
+          if (_viewer) { _viewer.cue = undefined; _viewer.projectId = undefined; _viewer.iri = undefined; }
+          _renderSidebar(null);
+        }
+      });
+
+      // ── Categories ──────────────────────────────────────────────────────────
+
+      async function _fetchCategories() {
+        if (!_projectEntities) return;
+        try {
+          const all = await _projectEntities.contentCategoriesInProject(true);
+          _renderSidebar({ categories: all.slice(0, 8), entities: null });
+        } catch (err) {
+          console.error('[cue-entity-viewer demo] fetch categories:', err);
+          _renderSidebar({ categories: [], entities: null });
+        }
+      }
+
+      // ── Entities by category ────────────────────────────────────────────────
+
+      async function _fetchEntities(categoryIri) {
+        if (!_cue || !_projectId) return;
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?entity ?value
+WHERE {
+  ?entity a qcy:CanonicalEntity ;
+          qcy:hasEntityCategory <${categoryIri}> ;
+          qcy:value ?value .
+}
+LIMIT 8`;
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          const items = (data.results?.bindings ?? [])
+            .map((b) => ({ iri: b['entity']?.value ?? '', label: b['value']?.value ?? '' }))
+            .filter((e) => e.iri);
+          return items;
+        } catch (err) {
+          console.error('[cue-entity-viewer demo] fetch entities:', err);
+          return [];
+        }
+      }
+
+      // ── Sidebar render ──────────────────────────────────────────────────────
+
+      function _renderSidebar(state) {
+        if (state === null) {
+          sidebarContent.innerHTML = '<p class="demo-msg">Sign in above</p>';
+          return;
+        }
+        if (state === 'loading-cats') {
+          sidebarContent.innerHTML = '<p class="demo-msg">Loading…</p>';
+          return;
+        }
+
+        const { categories, entities } = state;
+
+        let html = '<span class="section-tag">Categories</span>';
+        if (!categories.length) {
+          html += '<p class="demo-msg">No categories</p>';
+        } else {
+          html += categories.map((c) =>
+            `<button class="list-btn${c.iri === _selectedCatIri ? ' active' : ''}" data-iri="${_esc(c.iri)}" title="${_esc(c.label)}">${_esc(c.label)}</button>`
+          ).join('');
+        }
+
+        if (entities === 'loading') {
+          html += '<span class="section-tag">Entities</span><p class="demo-msg">Loading…</p>';
+        } else if (Array.isArray(entities)) {
+          html += '<span class="section-tag">Entities</span>';
+          if (!entities.length) {
+            html += '<p class="demo-msg">None found</p>';
+          } else {
+            html += entities.map((e) =>
+              `<button class="list-btn" data-entity-iri="${_esc(e.iri)}" title="${_esc(e.label || e.iri)}">${_esc(e.label || _shortIri(e.iri))}</button>`
+            ).join('');
+          }
+        }
+
+        sidebarContent.innerHTML = html;
+
+        sidebarContent.querySelectorAll('.list-btn[data-iri]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            if (btn.dataset.iri === _selectedCatIri) return;
+            _selectedCatIri = btn.dataset.iri;
+            // Re-render with loading state for entities
+            const cats = Array.from(sidebarContent.querySelectorAll('.list-btn[data-iri]'))
+              .map((b) => ({ iri: b.dataset.iri, label: b.textContent.trim() }));
+            _renderSidebar({ categories: cats, entities: 'loading' });
+            const items = await _fetchEntities(_selectedCatIri);
+            const cats2 = Array.from(sidebarContent.querySelectorAll('.list-btn[data-iri]'))
+              .map((b) => ({ iri: b.dataset.iri, label: b.textContent.trim() }));
+            _renderSidebar({ categories: cats2, entities: items });
+          });
+        });
+
+        sidebarContent.querySelectorAll('.list-btn[data-entity-iri]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            sidebarContent.querySelectorAll('.list-btn[data-entity-iri]').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (_viewer) _viewer.iri = btn.dataset.entityIri;
+          });
+        });
+      }
+
+      function _shortIri(iri) { return iri.split('/').pop() ?? iri; }
+
+      function _esc(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+    </script>
+  </body>
+</html>

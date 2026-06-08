@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cue-document-viewer demo</title>
+
+    <!-- Importmap must appear before any module scripts -->
+    <!-- @qaecy/cue-sdk version: keep in sync with CUE_SDK_VERSION in js/cue-versions.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.26",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        background: #fff;
+        color: #222;
+        font-family: "Poppins", Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      body { display: flex; flex-direction: column; }
+
+      /* Ensure the toolbar is visible before the custom element is defined */
+      cue-sdk-toolbar { display: block; flex-shrink: 0; }
+
+      #layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        gap: 0;
+        overflow: hidden;
+      }
+
+      /* ── Suffix / file sidebar ───────────────────── */
+      #sidebar {
+        width: 180px;
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+        background: #f4f4f5;
+        border-right: 1px solid #e4e4e7;
+        padding: 10px 10px 8px;
+        gap: 3px;
+        overflow-y: auto;
+      }
+
+      .section-tag {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0d5be9;
+        padding: 0 0 4px;
+        font-family: ui-monospace, monospace;
+        border-bottom: 1px solid #e4e4e7;
+        margin-bottom: 4px;
+      }
+      .section-tag + .section-tag { margin-top: 8px; border-bottom: none; }
+
+      .list-btn {
+        text-align: left;
+        padding: 4px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        background: rgba(0,0,0,0.05);
+        color: #444;
+        transition: background 0.1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+      }
+      .list-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
+      .list-btn.active { background: #0d5be9; color: #fff; }
+
+      .demo-msg {
+        font-size: 0.75rem;
+        font-family: ui-monospace, monospace;
+        color: #aaa;
+        padding: 4px 0;
+      }
+
+      /* ── Viewer area ─────────────────────────────── */
+      #viewer-area {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      #viewer-mount {
+        width: 100%;
+        height: 100%;
+      }
+
+      cue-document-viewer {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Auth toolbar -->
+    <cue-sdk-toolbar id="toolbar"></cue-sdk-toolbar>
+
+    <div id="layout">
+      <!-- Suffix / file sidebar — not part of the component -->
+      <div id="sidebar">
+        <div id="sidebar-content">
+          <p class="demo-msg">Sign in above</p>
+        </div>
+      </div>
+
+      <!-- Component area -->
+      <div id="viewer-area">
+        <div id="viewer-mount"></div>
+      </div>
+    </div>
+
+    <!-- SDK toolbar component -->
+    <script type="module" src="../../../js/components/cue-sdk-toolbar.js"></script>
+
+    <!-- Cue UI — version driven by js/cue-versions.js -->
+    <script type="module">
+      import { CUE_UI_VERSION } from '../../../js/cue-versions.js';
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/styles.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.setAttribute('data-components', 'cue-document-viewer');
+      s.src = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/index.js`;
+      document.head.appendChild(s);
+    </script>
+
+    <script type="module">
+      import { demoParam } from '../../../js/demo-params.js';
+
+      const QCY     = 'https://dev.qaecy.com/ont#';
+      const variant = demoParam('variant', 'none');
+
+      const toolbar        = document.getElementById('toolbar');
+      const sidebarContent = document.getElementById('sidebar-content');
+      const mount          = document.getElementById('viewer-mount');
+
+      let _cue             = null;
+      let _projectId       = null;
+      let _viewer          = null;
+      let _selectedSuffix  = null;
+      let _suffixes        = [];   // kept at module scope so counts survive re-renders
+
+      // ── Viewer ──────────────────────────────────────────────────────────────
+
+      function _getOrCreateViewer(cue, projectId) {
+        if (_viewer) {
+          _viewer.cue       = cue;
+          _viewer.projectId = projectId;
+          _viewer.uuid      = undefined;
+          return;
+        }
+        customElements.whenDefined('cue-document-viewer').then(() => {
+          const el = document.createElement('cue-document-viewer');
+          if (variant !== 'none') el.variant = variant;
+          el.cue             = cue;
+          el.projectId       = projectId;
+          el.showDocumentInfo = true;
+          mount.appendChild(el);
+          _viewer = el;
+        });
+      }
+
+      // ── Auth / project change ───────────────────────────────────────────────
+
+      toolbar.addEventListener('projectchange', async (e) => {
+        const { projectId, sdkState } = e.detail;
+        _cue            = sdkState?.cue ?? null;
+        _projectId      = projectId;
+        _selectedSuffix = null;
+
+        if (sdkState && projectId) {
+          _getOrCreateViewer(_cue, projectId);
+          _renderSidebar('loading');
+          _fetchSuffixes();
+        } else {
+          if (_viewer) { _viewer.cue = undefined; _viewer.projectId = undefined; _viewer.uuid = undefined; }
+          _renderSidebar(null);
+        }
+      });
+
+      // ── Suffixes ────────────────────────────────────────────────────────────
+
+      async function _fetchSuffixes() {
+        if (!_cue || !_projectId) return;
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?ext (COUNT(*) AS ?docCount)
+WHERE {
+  SELECT DISTINCT ?fc ?ext WHERE {
+    ?fc a qcy:FileContent ;
+        qcy:hasFileLocation/qcy:suffix ?ext .
+    FILTER NOT EXISTS { ?x qcy:alternativeRepresentation ?fc }
+  }
+}
+GROUP BY ?ext
+ORDER BY DESC(?docCount)`;
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          _suffixes = (data.results?.bindings ?? [])
+            .map((b) => ({ suffix: b['ext']?.value ?? '', count: parseInt(b['docCount']?.value ?? '0', 10) }))
+            .filter((i) => i.suffix);
+          _renderSidebar({ suffixes: _suffixes, files: null });
+        } catch (err) {
+          console.error('[cue-document-viewer demo] fetch suffixes:', err);
+          _renderSidebar({ suffixes: [], files: null });
+        }
+      }
+
+      // ── Files by suffix ─────────────────────────────────────────────────────
+
+      async function _fetchFiles(suffix) {
+        if (!_cue || !_projectId) return [];
+        const escaped = suffix.replace(/"/g, '\\"');
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?id (SAMPLE(?fp) AS ?path)
+WHERE {
+  ?fc a qcy:FileContent ;
+      qcy:hasFileLocation ?loc .
+  ?loc qcy:suffix "${escaped}" ;
+       qcy:filePath ?fp .
+  FILTER NOT EXISTS { ?x qcy:alternativeRepresentation ?fc }
+  BIND(REPLACE(STR(?fc), "^.*/([^/]*)$", "$1") AS ?id)
+}
+GROUP BY ?id
+LIMIT 5`;
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          return (data.results?.bindings ?? [])
+            .map((b) => ({ uuid: b['id']?.value ?? '', path: b['path']?.value ?? '' }))
+            .filter((f) => f.uuid);
+        } catch (err) {
+          console.error('[cue-document-viewer demo] fetch files:', err);
+          return [];
+        }
+      }
+
+      // ── Sidebar render ──────────────────────────────────────────────────────
+
+      function _renderSidebar(state) {
+        if (state === null) {
+          sidebarContent.innerHTML = '<p class="demo-msg">Sign in above</p>';
+          return;
+        }
+        if (state === 'loading') {
+          sidebarContent.innerHTML = '<p class="demo-msg">Loading…</p>';
+          return;
+        }
+
+        const { suffixes, files } = state;
+
+        let html = '<span class="section-tag">File types</span>';
+        if (!suffixes.length) {
+          html += '<p class="demo-msg">No files</p>';
+        } else {
+          html += suffixes.map((s) =>
+            `<button class="list-btn${s.suffix === _selectedSuffix ? ' active' : ''}" data-suffix="${_esc(s.suffix)}" title="${_esc(s.suffix)}">${_esc(s.suffix)} <span style="opacity:.55">(${s.count})</span></button>`
+          ).join('');
+        }
+
+        if (files === 'loading') {
+          html += '<span class="section-tag">Files</span><p class="demo-msg">Loading…</p>';
+        } else if (Array.isArray(files)) {
+          html += '<span class="section-tag">Files</span>';
+          if (!files.length) {
+            html += '<p class="demo-msg">None found</p>';
+          } else {
+            html += files.map((f) =>
+              `<button class="list-btn" data-uuid="${_esc(f.uuid)}" title="${_esc(f.path || f.uuid)}">${_esc(_shortPath(f.path || f.uuid))}</button>`
+            ).join('');
+          }
+        }
+
+        sidebarContent.innerHTML = html;
+
+        sidebarContent.querySelectorAll('.list-btn[data-suffix]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            if (btn.dataset.suffix === _selectedSuffix) return;
+            _selectedSuffix = btn.dataset.suffix;
+            _renderSidebar({ suffixes: _suffixes, files: 'loading' });
+            const items = await _fetchFiles(_selectedSuffix);
+            _renderSidebar({ suffixes: _suffixes, files: items });
+          });
+        });
+
+        sidebarContent.querySelectorAll('.list-btn[data-uuid]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            sidebarContent.querySelectorAll('.list-btn[data-uuid]').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (_viewer) _viewer.uuid = btn.dataset.uuid;
+          });
+        });
+      }
+
+      function _shortPath(path) {
+        return path.replace(/\\/g, '/').split('/').pop() || path;
+      }
+
+      function _esc(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+    </script>
+  </body>
+</html>

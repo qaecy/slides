@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cue-entity-list demo</title>
+
+    <!-- Importmap must appear before any module scripts -->
+    <!-- @qaecy/cue-sdk version: keep in sync with CUE_SDK_VERSION in js/cue-versions.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.26",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        background: #fff;
+        color: #222;
+        font-family: "Poppins", Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      body { display: flex; flex-direction: column; }
+
+      /* Ensure the toolbar is visible before the custom element is defined */
+      cue-sdk-toolbar { display: block; flex-shrink: 0; }
+
+      #layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        gap: 0;
+        overflow: hidden;
+      }
+
+      /* ── Category sidebar ────────────────────────── */
+      #sidebar {
+        width: 180px;
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+        background: #f4f4f5;
+        border-right: 1px solid #e4e4e7;
+        padding: 10px 10px 8px;
+        gap: 3px;
+        overflow-y: auto;
+      }
+
+      .section-tag {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0d5be9;
+        padding: 0 0 4px;
+        font-family: ui-monospace, monospace;
+        border-bottom: 1px solid #e4e4e7;
+        margin-bottom: 4px;
+      }
+
+      .list-btn {
+        text-align: left;
+        padding: 4px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        background: rgba(0,0,0,0.05);
+        color: #444;
+        transition: background 0.1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+      }
+      .list-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
+      .list-btn.active { background: #0d5be9; color: #fff; }
+
+      .demo-msg {
+        font-size: 0.75rem;
+        font-family: ui-monospace, monospace;
+        color: #aaa;
+        padding: 4px 0;
+      }
+
+      /* ── List area ───────────────────────────────── */
+      #list-area {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      cue-entity-list {
+        flex: 1;
+        min-height: 0;
+        display: block;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Auth toolbar -->
+    <cue-sdk-toolbar id="toolbar"></cue-sdk-toolbar>
+
+    <div id="layout">
+      <!-- Category sidebar — not part of the component -->
+      <div id="sidebar">
+        <div id="sidebar-content">
+          <p class="demo-msg">Sign in above</p>
+        </div>
+      </div>
+
+      <!-- Component area -->
+      <div id="list-area"></div>
+    </div>
+
+    <!-- SDK toolbar component -->
+    <script type="module" src="../../../js/components/cue-sdk-toolbar.js"></script>
+
+    <!-- Cue UI — version driven by js/cue-versions.js -->
+    <script type="module">
+      import { CUE_UI_VERSION } from '../../../js/cue-versions.js';
+      // ?local or ?local=PORT loads from a local build server instead of CDN.
+      // Run: cd /path/to/ui-components && npm run serve:webcomponents
+      const localParam = new URLSearchParams(location.search).get('local');
+      const localPort = localParam === '' || localParam === 'true' ? '4567' : localParam;
+      const baseUrl = localPort
+        ? `http://localhost:${localPort}`
+        : `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}`;
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${baseUrl}/styles.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.setAttribute('data-components', 'cue-entity-list');
+      s.src = `${baseUrl}/index.js`;
+      document.head.appendChild(s);
+    </script>
+
+    <script type="module">
+      import { demoParam } from '../../../js/demo-params.js';
+      import { CUE_MAPBOX_TOKEN } from '../../../js/cue-versions.js';
+      import { CueProjectEntities } from '@qaecy/cue-sdk';
+
+      const QCY     = 'https://dev.qaecy.com/ont#';
+      const variant = demoParam('variant', 'none');
+
+      const toolbar        = document.getElementById('toolbar');
+      const sidebarContent = document.getElementById('sidebar-content');
+      const listArea       = document.getElementById('list-area');
+
+      let _cue              = null;
+      let _projectId        = null;
+      let _projectEntities  = null;
+      let _list             = null;
+      let _selectedCatIri   = null;
+      let _categories       = [];   // kept at module scope so labels survive re-renders
+
+      // ── List element ────────────────────────────────────────────────────────
+
+      function _getOrCreateList(cue, entities) {
+        if (_list) {
+          _list.sdkState = { cue, entities };
+          _list.iris     = [];
+          return;
+        }
+        customElements.whenDefined('cue-entity-list').then(() => {
+          const el = document.createElement('cue-entity-list');
+          if (variant !== 'none') el.variant = variant;
+          el.sdkState          = { cue, entities };
+          el.iris              = [];
+          el.mapboxToken        = CUE_MAPBOX_TOKEN;
+          el.paginationPageSize = 20;
+          listArea.appendChild(el);
+          _list = el;
+        });
+      }
+
+      // ── Auth / project change ───────────────────────────────────────────────
+
+      toolbar.addEventListener('projectchange', async (e) => {
+        const { projectId, sdkState } = e.detail;
+        _cue           = sdkState?.cue ?? null;
+        _projectId     = projectId;
+        _selectedCatIri = null;
+        _categories    = [];
+
+        if (sdkState && projectId) {
+          _projectEntities = new CueProjectEntities(_cue.api, projectId);
+          _getOrCreateList(_cue, _projectEntities);
+          _renderSidebar('loading');
+          _fetchCategories();
+        } else {
+          _projectEntities = null;
+          if (_list) { _list.sdkState = undefined; _list.iris = []; }
+          _renderSidebar(null);
+        }
+      });
+
+      // ── Categories ──────────────────────────────────────────────────────────
+
+      async function _fetchCategories() {
+        if (!_projectEntities) return;
+        try {
+          const all = await _projectEntities.contentCategoriesInProject(true);
+          _categories = all.slice(0, 20);
+          _renderSidebar({ categories: _categories });
+        } catch (err) {
+          console.error('[cue-entity-list demo] fetch categories:', err);
+          _renderSidebar({ categories: [] });
+        }
+      }
+
+      // ── Entities by category ────────────────────────────────────────────────
+
+      async function _fetchIris(categoryIri) {
+        if (!_cue || !_projectId) return [];
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?entity
+WHERE {
+  ?entity a qcy:CanonicalEntity ;
+          qcy:hasEntityCategory <${categoryIri}> .
+}
+LIMIT 500`;
+        console.log(q);
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          return (data.results?.bindings ?? [])
+            .map((b) => b['entity']?.value ?? '')
+            .filter(Boolean);
+        } catch (err) {
+          console.error('[cue-entity-list demo] fetch iris:', err);
+          return [];
+        }
+      }
+
+      // ── Sidebar render ──────────────────────────────────────────────────────
+
+      function _renderSidebar(state) {
+        if (state === null) {
+          sidebarContent.innerHTML = '<p class="demo-msg">Sign in above</p>';
+          return;
+        }
+        if (state === 'loading') {
+          sidebarContent.innerHTML = '<p class="demo-msg">Loading…</p>';
+          return;
+        }
+
+        const { categories } = state;
+
+        let html = '<span class="section-tag">Categories</span>';
+        if (!categories.length) {
+          html += '<p class="demo-msg">No categories</p>';
+        } else {
+          html += categories.map((c) =>
+            `<button class="list-btn${c.iri === _selectedCatIri ? ' active' : ''}" data-iri="${_esc(c.iri)}" title="${_esc(c.label)}">${_esc(c.label)}</button>`
+          ).join('');
+        }
+
+        sidebarContent.innerHTML = html;
+
+        sidebarContent.querySelectorAll('.list-btn[data-iri]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            if (btn.dataset.iri === _selectedCatIri) return;
+            _selectedCatIri = btn.dataset.iri;
+            _renderSidebar({ categories: _categories });
+            if (_list) _list.iris = [];
+            const iris = await _fetchIris(_selectedCatIri);
+            if (_list) _list.iris = iris;
+            _renderSidebar({ categories: _categories });
+          });
+        });
+      }
+
+      function _esc(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+    </script>
+  </body>
+</html>

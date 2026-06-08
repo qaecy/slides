@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cue-document-list demo</title>
+
+    <!-- Importmap must appear before any module scripts -->
+    <!-- @qaecy/cue-sdk version: keep in sync with CUE_SDK_VERSION in js/cue-versions.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.26",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        background: #fff;
+        color: #222;
+        font-family: "Poppins", Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Ensure the toolbar is visible before the custom element is defined */
+      cue-sdk-toolbar { display: block; flex-shrink: 0; }
+
+      #layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        gap: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      /* ── Demo controls sidebar ───────────────────── */
+      #demo-controls {
+        width: 160px;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        background: #f4f4f5;
+        border-right: 1px solid #e4e4e7;
+        padding: 10px 10px 8px;
+        gap: 3px;
+        overflow-y: auto;
+      }
+
+      .controls-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0d5be9;
+        padding: 0 0 4px;
+        font-family: ui-monospace, monospace;
+        border-bottom: 1px solid #e4e4e7;
+        margin-bottom: 4px;
+      }
+
+      .controls-note {
+        font-size: 0.68rem;
+        color: #999;
+        font-style: italic;
+        margin-bottom: 6px;
+        line-height: 1.4;
+      }
+
+      .suffix-btn {
+        text-align: left;
+        padding: 4px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        background: rgba(0,0,0,0.05);
+        color: #444;
+        transition: background 0.1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+      }
+      .suffix-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
+      .suffix-btn.active { background: #0d5be9; color: #fff; }
+      .suffix-count { opacity: 0.5; margin-left: 4px; }
+
+      .section-tag {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: #aaa;
+        padding: 4px 0 2px;
+        font-family: ui-monospace, monospace;
+      }
+      /* ── Suffix filter buttons ────────────────────── */
+      #suffix-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .demo-msg {
+        font-size: 0.75rem;
+        font-family: ui-monospace, monospace;
+        color: #aaa;
+        padding: 4px 0;
+      }
+
+      /* ── Component area ──────────────────────────── */
+      #component-area {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 10px 14px 8px;
+      }
+
+      #doc-list-mount {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: 6px;
+      }
+
+      cue-document-list {
+        display: block;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Auth toolbar -->
+    <cue-sdk-toolbar id="toolbar" style="flex-shrink:0;"></cue-sdk-toolbar>
+
+    <div id="layout">
+      <!-- Demo controls — not part of the component -->
+      <div id="demo-controls">
+        <div class="controls-label">Demo controls</div>
+        <div class="controls-note">Filter by file type. This sidebar is not part of <code>&lt;cue-document-list&gt;</code>.</div>
+        <div id="suffix-sidebar">
+          <p class="demo-msg">Sign in below</p>
+        </div>
+      </div>
+
+      <!-- Component area -->
+      <div id="component-area">
+        <div id="doc-list-mount"></div>
+      </div>
+    </div>
+
+    <!-- SDK toolbar component -->
+    <script type="module" src="../../../js/components/cue-sdk-toolbar.js"></script>
+
+    <!-- Cue UI — version driven by js/cue-versions.js -->
+    <script type="module">
+      import { CUE_UI_VERSION } from '../../../js/cue-versions.js';
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/styles.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.setAttribute('data-components', 'cue-document-list');
+      s.src = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/index.js`;
+      document.head.appendChild(s);
+    </script>
+
+    <script type="module">
+      import { demoParam } from '../../../js/demo-params.js';
+
+      const QCY = 'https://dev.qaecy.com/ont#';
+
+      // ── Query params — see js/demo-params.js ─────────────────────────────
+      const pageSize = demoParam('page-size', '25');
+      const variant  = demoParam('variant',   'none');
+
+      const toolbar = document.getElementById('toolbar');
+      const sidebar = document.getElementById('suffix-sidebar');
+      const mount   = document.getElementById('doc-list-mount');
+
+      let _cue       = null;
+      let _projectId = null;
+      let _docList   = null;
+
+      function _getOrCreateDocList(projectId, sdkState) {
+        if (!_docList) {
+          const el = document.createElement('cue-document-list');
+          el.setAttribute('page-size', pageSize);
+          el.setAttribute('prefetch-pages', '2');
+          if (variant !== 'none') el.setAttribute('variant', variant);
+          // Set properties BEFORE inserting so Angular sees them on init
+          el.projectId = projectId;
+          el.sdkState  = sdkState;
+          el.uuids     = [];
+          mount.appendChild(el);
+          _docList = el;
+        } else {
+          _docList.projectId = projectId;
+          _docList.sdkState  = sdkState;
+          _docList.uuids     = [];
+        }
+        return _docList;
+      }
+
+      // ── Auth / project change ─────────────────────────────────────────────
+      toolbar.addEventListener('projectchange', async (e) => {
+        const { projectId, sdkState } = e.detail;
+        _cue       = sdkState?.cue ?? null;
+        _projectId = projectId;
+
+        if (sdkState && projectId) {
+          _getOrCreateDocList(projectId, sdkState);
+          _renderSidebar('loading');
+          _fetchSuffixes();
+        } else {
+          if (_docList) {
+            _docList.projectId = undefined;
+            _docList.sdkState  = undefined;
+            _docList.uuids     = [];
+          }
+          _renderSidebar(null);
+        }
+      });
+
+      // ── Suffix list ───────────────────────────────────────────────────────
+      async function _fetchSuffixes() {
+        if (!_cue || !_projectId) return;
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?ext (COUNT(*) AS ?docCount)
+WHERE {
+  SELECT DISTINCT ?fc ?ext WHERE {
+    ?fc a qcy:FileContent ;
+        qcy:hasFileLocation/qcy:suffix ?ext .
+    FILTER NOT EXISTS { ?x qcy:alternativeRepresentation ?fc }
+  }
+}
+GROUP BY ?ext
+ORDER BY DESC(?docCount)`;
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          const items = (data.results?.bindings ?? [])
+            .map((b) => ({ suffix: b['ext']?.value ?? '', count: parseInt(b['docCount']?.value ?? '0', 10) }))
+            .filter((i) => i.suffix);
+          _renderSidebar(items);
+        } catch (err) {
+          console.error('[cue-document-list demo] fetch suffixes:', err);
+          _renderSidebar([]);
+        }
+      }
+
+      async function _fetchByExtension(suffix) {
+        if (!_cue || !_projectId) return;
+        const esc = suffix.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        const q = `PREFIX qcy: <${QCY}>
+SELECT ?id
+WHERE {
+  ?fc a qcy:FileContent ;
+      qcy:hasFileLocation/qcy:suffix "${esc}" .
+  FILTER NOT EXISTS { ?x qcy:alternativeRepresentation ?fc }
+  BIND(REPLACE(STR(?fc), "^.*/([^/]*)$", "$1") AS ?id)
+}`;
+        try {
+          const data = await _cue.api.sparql(q, _projectId);
+          if (_docList) {
+            _docList.uuids = (data.results?.bindings ?? [])
+              .map((b) => b['id']?.value ?? '')
+              .filter(Boolean);
+          }
+        } catch (err) {
+          console.error('[cue-document-list demo] fetch uuids:', err);
+        }
+      }
+
+      // ── Sidebar render ────────────────────────────────────────────────────
+      function _renderSidebar(items) {
+        if (items === null) {
+          sidebar.innerHTML = '<p class="demo-msg">Sign in below</p>';
+          return;
+        }
+        if (items === 'loading') {
+          sidebar.innerHTML = '<p class="demo-msg">Loading…</p>';
+          return;
+        }
+        if (!items.length) {
+          sidebar.innerHTML = '<p class="demo-msg">No file types found</p>';
+          return;
+        }
+        sidebar.innerHTML =
+          '<span class="section-tag">File type</span>' +
+          items.map((item) =>
+            `<button class="suffix-btn" data-suffix="${_esc(item.suffix)}">${_esc(item.suffix)}<span class="suffix-count">(${item.count})</span></button>`
+          ).join('');
+        sidebar.querySelectorAll('.suffix-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            sidebar.querySelectorAll('.suffix-btn').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            _fetchByExtension(btn.dataset.suffix);
+          });
+        });
+      }
+
+      function _esc(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+    </script>
+  </body>
+</html>

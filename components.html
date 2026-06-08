@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -34,11 +34,11 @@
         text-transform: uppercase;
         opacity: 0.45;
         padding: 0.3rem 0.7rem 0.6rem;
-        border-bottom: 1px solid rgba(255,255,255,0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       }
       table.attr-table td {
         padding: 0.55rem 0.7rem;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         vertical-align: top;
         line-height: 1.5rem;
       }
@@ -105,74 +105,171 @@
 
       code.inline {
         font-size: 0.85rem;
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 0.25rem;
         padding: 0.05em 0.4em;
+      }
+
+      /* ── Demo control bar (above iframe demo slides) ─────────── */
+      .demo-ctrl-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 33px;
+        padding: 0 14px;
+        background: #18181b;
+        border-bottom: 1px solid #3f3f46;
+        flex-shrink: 0;
+      }
+      .demo-ctrl-label {
+        font-size: 0.68rem;
+        font-family: ui-monospace, monospace;
+        color: #71717a;
+        letter-spacing: 0.06em;
+      }
+      .demo-ctrl-sel {
+        background: #27272a;
+        color: #e4e4e7;
+        border: 1px solid #3f3f46;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        font-family: ui-monospace, monospace;
+        outline: none;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
+    <!-- ─── Cue version config ──────────────────────────────────────────────
+         Update CUE_UI_VERSION here AND in js/cue-versions.js (used by the
+         demo iframes). Search "{{CUE_UI_VERSION}}" to find code examples.
+    ─────────────────────────────────────────────────────────────────────── -->
+    <script>
+      var CUE_UI_VERSION  = "0.0.35";
+      var CUE_SDK_VERSION = "0.0.26";
+    </script>
+
     <div class="reveal">
       <div class="slides">
-
         <!-- ─── Title ─────────────────────────────────────────────── -->
         <section>
-          <cue-logo
-            style="display: inline-block; height: 60px;"
-          ></cue-logo>
-          <p style="font-size: 1.8rem; line-height: 2.6rem;">
-            Web Components
+          <cue-logo style="display: inline-block; height: 60px"></cue-logo>
+          <p style="font-size: 1.8rem; line-height: 2.6rem">Web Components</p>
+          <p style="font-size: 1rem; opacity: 0.5; margin-top: 0.8rem">
+            <code class="inline">@qaecy/cue-ui</code> — drop-in components, no
+            build step
           </p>
-          <p style="font-size: 1rem; opacity: 0.5; margin-top: 0.8rem;">
-            <code class="inline">@qaecy/cue-ui</code> — drop-in components, no build step
+          <p
+            style="
+              font-size: 0.82rem;
+              opacity: 0.28;
+              margin-top: 0.3rem;
+              font-family: monospace;
+              letter-spacing: 0.05em;
+            "
+          >
+            v<span id="ver-display"></span>
           </p>
         </section>
 
         <!-- ─── Component index ───────────────────────────────────── -->
         <section>
           <h4>Components</h4>
-          <ul style="font-size: 1.1rem; line-height: 2.4rem; margin-top: 1rem; list-style: none; width: 85%;">
+          <ul
+            style="
+              font-size: 1.1rem;
+              line-height: 2.4rem;
+              margin-top: 1rem;
+              list-style: none;
+              width: 85%;
+            "
+          >
             <li class="fragment">
-              <code class="inline">&lt;cue-logo&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Animated QAECY logo</span>
+              <a href="#/cue-logo" style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-logo&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Animated QAECY logo</span
+              >
             </li>
-            <li class="fragment" style="opacity: 0.35;">
-              <code class="inline">&lt;cue-document-viewer&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">PDF, BIM, CAD, images, spreadsheets …</span>
+            <li class="fragment" style="opacity: 0.35">
+              <a
+                href="#/cue-document-viewer"
+                style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-document-viewer&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >PDF, BIM, CAD, images, spreadsheets …</span
+              >
             </li>
-            <li class="fragment" style="opacity: 0.35;">
-              <code class="inline">&lt;cue-document-list&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Lazy document table with metadata</span>
+            <li class="fragment" style="opacity: 0.35">
+              <a
+                href="#/cue-document-list"
+                style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-document-list&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Lazy document table with metadata</span
+              >
             </li>
-            <li class="fragment" style="opacity: 0.35;">
-              <code class="inline">&lt;cue-entity-list&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Lazy entity table</span>
+            <li class="fragment" style="opacity: 0.35">
+              <a
+                href="#/cue-entity-list"
+                style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-entity-list&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Lazy entity table</span
+              >
             </li>
-            <li class="fragment" style="opacity: 0.35;">
-              <code class="inline">&lt;cue-entity-viewer&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Full entity detail — info, graph, documents, map</span>
+            <li class="fragment" style="opacity: 0.35">
+              <a
+                href="#/cue-entity-viewer"
+                style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-entity-viewer&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Full entity detail — info, graph, documents, map</span
+              >
             </li>
-            <li class="fragment" style="opacity: 0.35;">
+            <li class="fragment" style="opacity: 0.35">
               <code class="inline">&lt;cue-id-builder&gt;</code>
-              <span style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem;">Interactive IFC / SPARQL ID builder</span>
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Interactive IFC / SPARQL ID builder</span
+              >
             </li>
           </ul>
         </section>
 
         <!-- ─── cue-logo ──────────────────────────────────────────── -->
-        <section>
-
+        <section id="cue-logo">
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code></h4>
-            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem;">
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
               Animated QAECY logo — adapts to light and dark mode
             </p>
           </section>
 
           <!-- API table -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — API</h4>
-            <table class="attr-table" style="margin-top: 3rem;">
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — API
+            </h4>
+            <table class="attr-table" style="margin-top: 3rem">
               <thead>
                 <tr>
                   <th>Attribute</th>
@@ -192,7 +289,10 @@
                   <td>active</td>
                   <td>boolean</td>
                   <td>true</td>
-                  <td>Plays the draw animation once on load. Set to <code>false</code> to skip it</td>
+                  <td>
+                    Plays the draw animation once on load. Set to
+                    <code>false</code> to skip it
+                  </td>
                 </tr>
                 <tr>
                   <td>continuous</td>
@@ -200,13 +300,28 @@
                   <td>false</td>
                   <td>Loops the draw animation indefinitely</td>
                 </tr>
+                <tr>
+                  <td>mode</td>
+                  <td>'default' | 'glow'</td>
+                  <td>'default'</td>
+                  <td>
+                    <code>'glow'</code> — only the teal tip traverses the path
+                    in an infinite loop. <code>active</code> and
+                    <code>continuous</code> are ignored in this mode
+                  </td>
+                </tr>
               </tbody>
             </table>
           </section>
 
           <!-- Size presets -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — size presets</h4>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — size presets
+            </h4>
             <div class="size-row">
               <div class="size-cell">
                 <cue-logo size="s"></cue-logo>
@@ -225,9 +340,18 @@
 
           <!-- active vs static -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — animation</h4>
-            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem;">
-              <a href="javascript:location.reload()" style="color: inherit; text-decoration: none; cursor: pointer;">↺ refresh to replay</a>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — animation
+            </h4>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem">
+              <a
+                href="javascript:location.reload()"
+                style="color: inherit; text-decoration: none; cursor: pointer"
+                >↺ refresh to replay</a
+              >
             </p>
             <div class="demo-row">
               <div class="demo-cell">
@@ -245,31 +369,77 @@
             </div>
           </section>
 
+          <!-- Glow mode -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — glow mode
+            </h4>
+            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem">
+              <code class="inline">mode="glow"</code> shows only the teal tip
+              traversing the path — ideal as a subtle ambient loader.
+              <code class="inline">active</code> and
+              <code class="inline">continuous</code> are ignored.
+            </p>
+            <div class="demo-row" style="margin-top: 2.5rem">
+              <div class="demo-cell">
+                <cue-logo size="m" mode="default" continuous></cue-logo>
+                <div class="demo-label">mode="default" continuous</div>
+              </div>
+              <div class="demo-cell">
+                <cue-logo size="m" mode="glow"></cue-logo>
+                <div class="demo-label">mode="glow"</div>
+              </div>
+            </div>
+          </section>
+
           <!-- Dark / light mode — live demo -->
           <section id="dark-mode-demo">
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — dark &amp; light mode</h4>
-            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem;">
-              Colours adapt when <code class="inline">class="dark"</code> is present on <code class="inline">&lt;body&gt;</code>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — dark &amp; light mode
+            </h4>
+            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem">
+              Colours adapt when <code class="inline">class="dark"</code> is
+              present on <code class="inline">&lt;body&gt;</code>
             </p>
-            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.3rem;">
-              <a id="dark-toggle" href="javascript:void(0)" style="color: inherit; text-decoration: none; cursor: pointer;">⬤ toggle dark / light</a>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.3rem">
+              <a
+                id="dark-toggle"
+                href="javascript:void(0)"
+                style="color: inherit; text-decoration: none; cursor: pointer"
+                >⬤ toggle dark / light</a
+              >
             </p>
-            <div class="demo-row" style="margin-top: 2.5rem;">
+            <div class="demo-row" style="margin-top: 2.5rem">
               <div class="demo-cell">
                 <cue-logo size="l"></cue-logo>
               </div>
             </div>
             <script>
-              document.getElementById('dark-toggle').addEventListener('click', function () {
-                document.body.classList.toggle('dark');
-              });
+              document
+                .getElementById("dark-toggle")
+                .addEventListener("click", function () {
+                  document.body.classList.toggle("dark");
+                });
             </script>
           </section>
 
           <!-- Dark / light mode — code -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — dark &amp; light mode</h4>
-            <pre style="width: 88%; font-size: 0.78rem; margin-top: 2rem;"><code class="html">&lt;!-- Dark mode --&gt;
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — dark &amp; light mode
+            </h4>
+            <pre
+              style="width: 88%; font-size: 0.78rem; margin-top: 2rem"
+            ><code class="html">&lt;!-- Dark mode --&gt;
 &lt;body class="dark"&gt;
   &lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
 &lt;/body&gt;
@@ -287,8 +457,15 @@
 
           <!-- Usage code -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-logo&gt;</code> — usage</h4>
-            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Outline draw and out --&gt;
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-logo&gt;</code
+              >
+              — usage
+            </h4>
+            <pre
+              style="width: 88%; font-size: 0.78rem"
+            ><code class="html">&lt;!-- Outline draw and out --&gt;
 &lt;cue-logo size="l" active="false"&gt;&lt;/cue-logo&gt;
 
 &lt;!-- Animated once on load (default behaviour) --&gt;
@@ -296,6 +473,9 @@
 
 &lt;!-- Continuously looping --&gt;
 &lt;cue-logo size="m" continuous&gt;&lt;/cue-logo&gt;
+
+&lt;!-- Glow mode — teal tip loops infinitely, no draw stroke --&gt;
+&lt;cue-logo size="m" mode="glow"&gt;&lt;/cue-logo&gt;
 
 &lt;!-- Inline (scale to text size with CSS) --&gt;
 &lt;style&gt;
@@ -307,42 +487,54 @@
           <!-- CDN loader note -->
           <section>
             <h4>Loading via CDN</h4>
-            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Static tags are detected automatically --&gt;
+            <pre
+              style="width: 88%; font-size: 0.78rem"
+            ><code class="html">&lt;!-- Static tags are detected automatically --&gt;
 &lt;cue-logo size="m"&gt;&lt;/cue-logo&gt;
 
 &lt;!-- Add the single loader script anywhere in the page --&gt;
 &lt;script
-  src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/index.js"
+  src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js"
   type="module"
 &gt;&lt;/script&gt;
 
 &lt;!-- Optional: include bundled styles --&gt;
 &lt;link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/styles.css"
+  href="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/styles.css"
 /&gt;</code></pre>
-            <p class="fragment" style="font-size: 1rem; margin-top: 1.2rem; opacity: 0.7;">
+            <p
+              class="fragment"
+              style="font-size: 1rem; margin-top: 1.2rem; opacity: 0.7"
+            >
               Components used only in JS (created dynamically) must be listed in
               <code class="inline">data-components</code> on the script tag
             </p>
           </section>
-
         </section>
 
         <!-- ─── by-cue-logo ──────────────────────────────────────────── -->
-        <section>
-
+        <section id="cue-by-cue-logo">
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code></h4>
-            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem;">
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-by-cue-logo&gt;</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
               Your company logo with app credits to Cue
             </p>
           </section>
 
           <!-- API table -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — API</h4>
-            <table class="attr-table" style="margin-top: 2rem;">
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-by-cue-logo&gt;</code
+              >
+              — API
+            </h4>
+            <table class="attr-table" style="margin-top: 2rem">
               <thead>
                 <tr>
                   <th>Attribute</th>
@@ -377,7 +569,7 @@
                   <td>Loops the draw animation indefinitely</td>
                 </tr>
                 <tr>
-                  <td style="color: #a8c4e8;">--by-cue-logo-width</td>
+                  <td style="color: #a8c4e8">--by-cue-logo-width</td>
                   <td>CSS var</td>
                   <td>—</td>
                   <td>Controls the total component width</td>
@@ -388,11 +580,20 @@
 
           <!-- Live demo: default / continuous / passive -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — animation</h4>
-            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem;">
-              <a href="javascript:location.reload()" style="color: inherit; text-decoration: none; cursor: pointer;">↺ refresh to replay</a>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-by-cue-logo&gt;</code
+              >
+              — animation
+            </h4>
+            <p style="font-size: 0.75rem; opacity: 0.35; margin-top: 0.5rem">
+              <a
+                href="javascript:location.reload()"
+                style="color: inherit; text-decoration: none; cursor: pointer"
+                >↺ refresh to replay</a
+              >
             </p>
-            <div class="demo-row" style="margin-top: 2rem;">
+            <div class="demo-row" style="margin-top: 2rem">
               <div class="demo-cell">
                 <cue-by-cue-logo
                   src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
@@ -421,11 +622,20 @@
 
           <!-- Width variants -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — width</h4>
-            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem;">
-              Use <code class="inline">--by-cue-logo-width</code> to scale the component
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-by-cue-logo&gt;</code
+              >
+              — width
+            </h4>
+            <p style="font-size: 0.95rem; opacity: 0.55; margin-top: 0.5rem">
+              Use <code class="inline">--by-cue-logo-width</code> to scale the
+              component
             </p>
-            <div class="demo-row" style="margin-top: 2.5rem; align-items: flex-end;">
+            <div
+              class="demo-row"
+              style="margin-top: 2.5rem; align-items: flex-end"
+            >
               <div class="demo-cell">
                 <cue-by-cue-logo
                   src="https://hightechzentrum.ch/fileadmin/partner/empa_thun/logo_empa_rgb.svg"
@@ -458,8 +668,15 @@
 
           <!-- Usage code -->
           <section>
-            <h4><code class="inline" style="font-size: 1.8rem;">&lt;cue-by-cue-logo&gt;</code> — usage</h4>
-            <pre style="width: 88%; font-size: 0.78rem;"><code class="html">&lt;!-- Default (animates once on load) --&gt;
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-by-cue-logo&gt;</code
+              >
+              — usage
+            </h4>
+            <pre
+              style="width: 88%; font-size: 0.78rem"
+            ><code class="html">&lt;!-- Default (animates once on load) --&gt;
 &lt;cue-by-cue-logo
   src="https://example.com/your-logo.svg"
   alt="Your company"
@@ -478,19 +695,799 @@
   style="--by-cue-logo-width: 280px"
 &gt;&lt;/cue-by-cue-logo&gt;</code></pre>
           </section>
+        </section>
+
+        <!-- ─── cue-document-viewer ─────────────────────────────────── -->
+        <section id="cue-document-viewer">
+
+          <!-- Intro -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-document-viewer&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              In-browser viewer for PDF, BIM, CAD, images, spreadsheets, and more
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-document-viewer&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 1.5rem">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cue</td>
+                  <td>Cue</td>
+                  <td>—</td>
+                  <td>Authenticated Cue SDK instance. Set via JS property after sign-in</td>
+                </tr>
+                <tr>
+                  <td>uuid</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Document UUID. Optionally append <code>?page=N</code> to open at a specific page</td>
+                </tr>
+                <tr>
+                  <td>projectId</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Cue project ID the document belongs to</td>
+                </tr>
+                <tr>
+                  <td>showDocumentInfo</td>
+                  <td>boolean</td>
+                  <td>true</td>
+                  <td>Shows a document info header with name, download, and context menu</td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>'none' | 'default' | …</td>
+                  <td>'none'</td>
+                  <td>Card wrapper style (same values as <code>&lt;cue-document-list&gt;</code>)</td>
+                </tr>
+                <tr>
+                  <td>portalBaseURL</td>
+                  <td>string</td>
+                  <td>'https://cue.qaecy.com'</td>
+                  <td>Base URL used for the "Open in Cue" context-menu link</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Live demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <iframe src="dist/html/components/cue-document-viewer.html" style="display: block; width: 100%; height: 100%; border: none;" allow="storage-access"></iframe>
+          </section>
+
+          <!-- variant — description -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-viewer&gt; — variant</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Wraps the viewer in a styled card. Defaults to
+              <code class="inline">none</code> (borderless).
+            </p>
+            <table class="attr-table" style="margin-top: 2rem">
+              <thead>
+                <tr>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>none</td>
+                  <td>No wrapper — component fills its container directly</td>
+                </tr>
+                <tr>
+                  <td>default</td>
+                  <td>Neutral card with border and subtle background</td>
+                </tr>
+                <tr>
+                  <td>primary</td>
+                  <td>Card with primary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>secondary</td>
+                  <td>Card with secondary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>accent</td>
+                  <td>Card with accent colour highlight</td>
+                </tr>
+                <tr>
+                  <td>fade</td>
+                  <td>Soft, low-contrast card</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- variant demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span class="demo-ctrl-label">variant=</span>
+              <select id="dv-variant-sel" class="demo-ctrl-sel">
+                <option value="none">none</option>
+                <option value="default" selected>default</option>
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="accent">accent</option>
+                <option value="fade">fade</option>
+              </select>
+            </div>
+            <iframe id="dv-variant-iframe" src="dist/html/components/cue-document-viewer.html?variant=default" style="display: block; width: 100%; height: calc(100% - 40px); border: none;" allow="storage-access"></iframe>
+            <script>
+              (function () {
+                var sel = document.getElementById("dv-variant-sel");
+                var ifr = document.getElementById("dv-variant-iframe");
+                sel.addEventListener("change", function () {
+                  ifr.src = "dist/html/components/cue-document-viewer.html?variant=" + sel.value;
+                });
+              })();
+            </script>
+          </section>
+
+          <!-- Usage -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-document-viewer&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.73rem"><code class="html">&lt;!-- 1. Include the cue-ui loader --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js"
+  type="module" data-components="cue-document-viewer"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the viewer element --&gt;
+&lt;cue-document-viewer-wc id="dv" style="display:block; height:600px;"&gt;&lt;/cue-document-viewer-wc&gt;
+
+&lt;!-- 3. Wire up after auth --&gt;
+&lt;script type="module"&gt;
+  import { Cue } from 'https://esm.sh/@qaecy/cue-sdk@{{CUE_SDK_VERSION}}';
+
+  const cue = new Cue();
+  await cue.auth.signIn('google');
+
+  await customElements.whenDefined('cue-document-viewer-wc');
+  const dv = document.getElementById('dv');
+  dv.cue       = cue;
+  dv.projectId = 'my-project-id';
+  dv.uuid      = 'document-uuid';
+&lt;/script&gt;</code></pre>
+          </section>
+
+        </section>
+
+        <!-- ─── cue-document-list ───────────────────────────────────── -->
+        <section id="cue-document-list">
+          <!-- Intro -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-list&gt;</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Paginated, sortable table of Cue project documents
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-list&gt;</code
+              >
+              — API
+            </h4>
+            <table class="attr-table" style="margin-top: 1.5rem">
+              <thead>
+                <tr>
+                  <th>Attribute / Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>project-id</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>
+                    Cue project ID (required alongside <code>sdk-state</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td>uuids</td>
+                  <td>string[]</td>
+                  <td>[]</td>
+                  <td>Document UUIDs to display. Set via JS property</td>
+                </tr>
+                <tr>
+                  <td>sdk-state</td>
+                  <td>object</td>
+                  <td>—</td>
+                  <td>
+                    <code>{ cue, documents }</code> — set via JS property after
+                    auth
+                  </td>
+                </tr>
+                <tr>
+                  <td>page-size</td>
+                  <td>number</td>
+                  <td>10</td>
+                  <td>Rows per page</td>
+                </tr>
+                <tr>
+                  <td>prefetch-pages</td>
+                  <td>number</td>
+                  <td>3</td>
+                  <td>Pages to prefetch in background</td>
+                </tr>
+                <tr>
+                  <td>simple</td>
+                  <td>boolean</td>
+                  <td>false</td>
+                  <td>Use lightweight metadata fetch</td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>'none' | 'default' | …</td>
+                  <td>'none'</td>
+                  <td>Card wrapper style</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Default demo -->
+          <section
+            id="doc-list-demo-slide"
+            style="padding: 0; overflow: hidden; height: 100%"
+          >
+            <iframe
+              src="dist/html/components/cue-document-list.html"
+              style="width: 100%; height: 100%; border: none; display: block"
+              allow="storage-access"
+            ></iframe>
+          </section>
+
+          <!-- variant — description -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-list&gt; — variant</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Wraps the list in a styled card. Defaults to
+              <code class="inline">none</code> (borderless).
+            </p>
+            <table class="attr-table" style="margin-top: 2rem">
+              <thead>
+                <tr>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>none</td>
+                  <td>No wrapper — component fills its container directly</td>
+                </tr>
+                <tr>
+                  <td>default</td>
+                  <td>Neutral card with border and subtle background</td>
+                </tr>
+                <tr>
+                  <td>primary</td>
+                  <td>Card with primary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>secondary</td>
+                  <td>Card with secondary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>accent</td>
+                  <td>Card with accent colour highlight</td>
+                </tr>
+                <tr>
+                  <td>fade</td>
+                  <td>Soft, low-contrast card</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Variant demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span class="demo-ctrl-label">variant=</span>
+              <select id="variant-sel" class="demo-ctrl-sel">
+                <option value="none">none</option>
+                <option value="default" selected>default</option>
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="accent">accent</option>
+                <option value="fade">fade</option>
+              </select>
+            </div>
+            <iframe id="variant-iframe" src="dist/html/components/cue-document-list.html?variant=default" style="display: block; width: 100%; height: calc(100% - 40px); border: none;" allow="storage-access"></iframe>
+            <script>
+              (function () {
+                var sel = document.getElementById("variant-sel");
+                var ifr = document.getElementById("variant-iframe");
+                sel.addEventListener("change", function () {
+                  ifr.src = "dist/html/components/cue-document-list.html?variant=" + sel.value;
+                });
+              })();
+            </script>
+          </section>
+
+          <!-- page-size — description -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-list&gt; — page-size</code
+              >
+              
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Controls how many rows are shown per page.
+            </p>
+            <table class="attr-table" style="margin-top: 2rem">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>page-size</td>
+                  <td>number</td>
+                  <td>10</td>
+                  <td>
+                    Rows visible on each page. Smaller values show the paginator
+                    sooner; larger values reduce page-turn frequency for dense
+                    datasets.
+                  </td>
+                </tr>
+                <tr>
+                  <td>prefetch-pages</td>
+                  <td>number</td>
+                  <td>3</td>
+                  <td>
+                    Pages fetched ahead in the background so navigation feels
+                    instant.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- page-size demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span class="demo-ctrl-label">page-size=</span>
+              <select id="page-size-sel" class="demo-ctrl-sel">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+              </select>
+            </div>
+            <iframe id="page-size-iframe" src="dist/html/components/cue-document-list.html?page-size=5" style="display: block; width: 100%; height: calc(100% - 40px); border: none;" allow="storage-access"></iframe>
+            <script>
+              (function () {
+                var sel = document.getElementById("page-size-sel");
+                var ifr = document.getElementById("page-size-iframe");
+                sel.addEventListener("change", function () {
+                  ifr.src = "dist/html/components/cue-document-list.html?page-size=" + sel.value;
+                });
+              })();
+            </script>
+          </section>
+
+          <!-- Usage -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-document-list&gt;</code
+              >
+              — usage
+            </h4>
+            <pre
+              style="width: 88%; font-size: 0.73rem"
+            ><code class="html">&lt;!-- 1. Include the cue-ui loader --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js" type="module"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the toolbar (handles auth + project select) --&gt;
+&lt;script type="module" src="js/components/cue-sdk-toolbar.js"&gt;&lt;/script&gt;
+&lt;cue-sdk-toolbar id="tb"&gt;&lt;/cue-sdk-toolbar&gt;
+
+&lt;!-- 3. Add the document list --&gt;
+&lt;cue-document-list id="dl" page-size="25"&gt;&lt;/cue-document-list&gt;
+
+&lt;!-- 4. Wire them up in JS --&gt;
+&lt;script type="module"&gt;
+  const QCY = 'https://dev.qaecy.com/ont#';
+  const tb = document.getElementById('tb');
+  const dl = document.getElementById('dl');
+
+  tb.addEventListener('projectchange', async ({ detail: { projectId, sdkState } }) =&gt; {
+    dl.projectId = projectId;
+    dl.sdkState  = sdkState;
+
+    if (projectId &amp;&amp; sdkState) {
+      // Optional: filter by file type via SPARQL
+      const data = await sdkState.cue.api.sparql(
+        `SELECT ?id WHERE { ?fc a &lt;${QCY}FileContent&gt; }
+         BIND(REPLACE(STR(?fc),"^.*/([^/]*)$","$1") AS ?id)`,
+        projectId
+      );
+      dl.uuids = data.results.bindings.map(b =&gt; b.id.value);
+    }
+  });
+&lt;/script&gt;</code></pre>
+          </section>
+        </section>
+
+        <!-- ─── cue-entity-list ─────────────────────────────────── -->
+        <section id="cue-entity-list">
+
+          <!-- Intro -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-list&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Paginated, sortable table of Cue project entities
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-list&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 1.5rem">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>iris</td>
+                  <td>string[]</td>
+                  <td>[]</td>
+                  <td>Full RDF IRIs of entities to display. Set via JS property</td>
+                </tr>
+                <tr>
+                  <td>sdkState</td>
+                  <td>object</td>
+                  <td>—</td>
+                  <td><code>{ cue, entities }</code> — set via JS property after auth</td>
+                </tr>
+                <tr>
+                  <td>paginationPageSize</td>
+                  <td>number</td>
+                  <td>10</td>
+                  <td>Rows per page</td>
+                </tr>
+                <tr>
+                  <td>mapboxToken</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Mapbox access token. When provided, map locations are shown</td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>'none' | 'default' | …</td>
+                  <td>'none'</td>
+                  <td>Card wrapper style</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Live demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <iframe src="dist/html/components/cue-entity-list.html" style="display: block; width: 100%; height: 100%; border: none;" allow="storage-access"></iframe>
+          </section>
+
+          <!-- variant — description -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-entity-list&gt; — variant</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Wraps the list in a styled card. Defaults to
+              <code class="inline">none</code> (borderless).
+            </p>
+            <table class="attr-table" style="margin-top: 2rem">
+              <thead>
+                <tr>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>none</td>
+                  <td>No wrapper — component fills its container directly</td>
+                </tr>
+                <tr>
+                  <td>default</td>
+                  <td>Neutral card with border and subtle background</td>
+                </tr>
+                <tr>
+                  <td>primary</td>
+                  <td>Card with primary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>secondary</td>
+                  <td>Card with secondary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>accent</td>
+                  <td>Card with accent colour highlight</td>
+                </tr>
+                <tr>
+                  <td>fade</td>
+                  <td>Soft, low-contrast card</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- variant demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span class="demo-ctrl-label">variant=</span>
+              <select id="el-variant-sel" class="demo-ctrl-sel">
+                <option value="none">none</option>
+                <option value="default" selected>default</option>
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="accent">accent</option>
+                <option value="fade">fade</option>
+              </select>
+            </div>
+            <iframe id="el-variant-iframe" src="dist/html/components/cue-entity-list.html?variant=default" style="display: block; width: 100%; height: calc(100% - 40px); border: none;" allow="storage-access"></iframe>
+            <script>
+              (function () {
+                var sel = document.getElementById("el-variant-sel");
+                var ifr = document.getElementById("el-variant-iframe");
+                sel.addEventListener("change", function () {
+                  ifr.src = "dist/html/components/cue-entity-list.html?variant=" + sel.value;
+                });
+              })();
+            </script>
+          </section>
+
+          <!-- Usage -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-list&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.73rem"><code class="html">&lt;!-- 1. Include the cue-ui loader --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js"
+  type="module" data-components="cue-entity-list"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the list element --&gt;
+&lt;cue-ent-list id="el" style="display:block; height:600px;"&gt;&lt;/cue-ent-list&gt;
+
+&lt;!-- 3. Wire up after auth --&gt;
+&lt;script type="module"&gt;
+  import { Cue, CueProjectEntities } from 'https://esm.sh/@qaecy/cue-sdk@{{CUE_SDK_VERSION}}';
+
+  const cue = new Cue();
+  await cue.auth.signIn('google');
+
+  const projectId = 'my-project-id';
+  const entities  = new CueProjectEntities(cue.api, projectId);
+
+  await customElements.whenDefined('cue-ent-list');
+  const el = document.getElementById('el');
+  el.sdkState = { cue, entities };
+
+  // Set entity IRIs to display (e.g. from a SPARQL query)
+  const data = await cue.api.sparql(
+    `SELECT ?e WHERE { ?e a &lt;https://dev.qaecy.com/ont#CanonicalEntity&gt; } LIMIT 50`,
+    projectId
+  );
+  el.iris = data.results.bindings.map(b =&gt; b.e.value);
+&lt;/script&gt;</code></pre>
+          </section>
+
+        </section>
+
+        <!-- ─── cue-entity-viewer ─────────────────────────────────── -->
+        <section id="cue-entity-viewer">
+
+          <!-- Intro -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-viewer&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Full entity detail — info panel, relationship graph, documents, and map
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-viewer&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 1.5rem">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>cue</td>
+                  <td>Cue</td>
+                  <td>—</td>
+                  <td>Authenticated Cue SDK instance. Set via JS property after sign-in</td>
+                </tr>
+                <tr>
+                  <td>projectId</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Cue project ID the entity belongs to</td>
+                </tr>
+                <tr>
+                  <td>iri</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Full RDF IRI of the entity to display. Update at any time to navigate</td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>'none' | 'default' | …</td>
+                  <td>'none'</td>
+                  <td>Card wrapper style (same values as <code>&lt;cue-document-list&gt;</code>)</td>
+                </tr>
+                <tr>
+                  <td>mapboxToken</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Mapbox access token. When provided, a location map tab is shown</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Live demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <iframe src="dist/html/components/cue-entity-viewer.html" style="display: block; width: 100%; height: 100%; border: none;" allow="storage-access"></iframe>
+          </section>
+
+          <!-- variant — description -->
+          <section>
+            <h4>
+              <code class="inline" style="font-size: 1.8rem"
+                >&lt;cue-entity-viewer&gt; — variant</code
+              >
+            </h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Wraps the viewer in a styled card. Defaults to
+              <code class="inline">none</code> (borderless).
+            </p>
+            <table class="attr-table" style="margin-top: 2rem">
+              <thead>
+                <tr>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>none</td>
+                  <td>No wrapper — component fills its container directly</td>
+                </tr>
+                <tr>
+                  <td>default</td>
+                  <td>Neutral card with border and subtle background</td>
+                </tr>
+                <tr>
+                  <td>primary</td>
+                  <td>Card with primary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>secondary</td>
+                  <td>Card with secondary brand colour accent</td>
+                </tr>
+                <tr>
+                  <td>accent</td>
+                  <td>Card with accent colour highlight</td>
+                </tr>
+                <tr>
+                  <td>fade</td>
+                  <td>Soft, low-contrast card</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- variant demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span class="demo-ctrl-label">variant=</span>
+              <select id="ev-variant-sel" class="demo-ctrl-sel">
+                <option value="none">none</option>
+                <option value="default" selected>default</option>
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="accent">accent</option>
+                <option value="fade">fade</option>
+              </select>
+            </div>
+            <iframe id="ev-variant-iframe" src="dist/html/components/cue-entity-viewer.html?variant=default" style="display: block; width: 100%; height: calc(100% - 40px); border: none;" allow="storage-access"></iframe>
+            <script>
+              (function () {
+                var sel = document.getElementById("ev-variant-sel");
+                var ifr = document.getElementById("ev-variant-iframe");
+                sel.addEventListener("change", function () {
+                  ifr.src = "dist/html/components/cue-entity-viewer.html?variant=" + sel.value;
+                });
+              })();
+            </script>
+          </section>
+
+          <!-- Usage -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-entity-viewer&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.73rem"><code class="html">&lt;!-- 1. Include the cue-ui loader --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js"
+  type="module" data-components="cue-entity-viewer"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the viewer element --&gt;
+&lt;cue-entity-viewer id="ev" style="display:block; height:600px;"&gt;&lt;/cue-entity-viewer&gt;
+
+&lt;!-- 3. Wire up after auth --&gt;
+&lt;script type="module"&gt;
+  import { Cue } from 'https://esm.sh/@qaecy/cue-sdk@{{CUE_SDK_VERSION}}';
+
+  const cue = new Cue();
+  await cue.auth.signIn('google');
+
+  await customElements.whenDefined('cue-entity-viewer');
+  const ev = document.getElementById('ev');
+  ev.cue       = cue;
+  ev.projectId = 'my-project-id';
+  ev.iri       = 'https://cue.qaecy.com/r/my-project-id/entity-uuid';
+&lt;/script&gt;</code></pre>
+          </section>
 
         </section>
 
         <!-- ─── Closing ───────────────────────────────────────────── -->
         <section>
-          <cue-by-cue-logo size="l" style="margin-bottom: 1.5rem;"></cue-by-cue-logo>
-          <p style="font-size: 1rem; opacity: 0.5;">
-            <a href="https://www.jsdelivr.com/package/npm/@qaecy/cue-ui" target="_blank">
+          <cue-logo size="l" style="margin-bottom: 1.5rem"></cue-logo>
+          <p style="font-size: 1rem; opacity: 0.5">
+            <a
+              href="https://www.jsdelivr.com/package/npm/@qaecy/cue-ui"
+              target="_blank"
+            >
               cdn.jsdelivr.net/npm/@qaecy/cue-ui
             </a>
           </p>
         </section>
-
       </div>
     </div>
 
@@ -500,11 +1497,26 @@
     <script src="plugin/highlight/highlight.js"></script>
     <script src="js/print-fallback.js"></script>
 
-    <!-- Cue UI -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@0.0.25/index.js"
-      type="module"
-    ></script>
+    <!-- Cue UI — version driven by CUE_UI_VERSION at top of body -->
+    <script>
+      (function () {
+        var s = document.createElement("script");
+        s.type = "module";
+        s.src =
+          "https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@" +
+          CUE_UI_VERSION +
+          "/index.js";
+        document.head.appendChild(s);
+      })();
+
+      // Populate {{CUE_UI_VERSION}} and {{CUE_SDK_VERSION}} placeholders in code examples
+      document.querySelectorAll("code").forEach(function (el) {
+        el.innerHTML = el.innerHTML
+          .replace(/\{\{CUE_UI_VERSION\}\}/g, CUE_UI_VERSION)
+          .replace(/\{\{CUE_SDK_VERSION\}\}/g, CUE_SDK_VERSION);
+      });
+      document.getElementById("ver-display").textContent = CUE_UI_VERSION;
+    </script>
 
     <script>
       Reveal.initialize({
