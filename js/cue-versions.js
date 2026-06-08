@@ -12,4 +12,4 @@
 
 export const CUE_UI_VERSION   = '0.0.35';
 export const CUE_SDK_VERSION  = '0.0.26';
-export const CUE_MAPBOX_TOKEN = 'pk.eyJ1IjoibWFkc2hvbHRlbiIsImEiOiJjbWFiMTYyc3EwOXM5MmtzYzRqcWJ0N2dzIn0.cPH3wfmHY6LbquPWzH5zdQ';
+export const CUE_MAPBOX_TOKEN = 'pk.eyJ1IjoibWFkc2hvbHRlbiIsImEiOiJjbXE0eXN2YWkxNndkMnFzNjhvenNkdDQzIn0.OSdYdOHcOzRdfk7qry6r1Q'; // Restricted to localhost and slides.qaecy.com
