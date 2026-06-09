@@ -146,7 +146,7 @@
          demo iframes). Search "{{CUE_UI_VERSION}}" to find code examples.
     ─────────────────────────────────────────────────────────────────────── -->
     <script>
-      var CUE_UI_VERSION  = "0.0.35";
+      var CUE_UI_VERSION  = "0.0.37";
       var CUE_SDK_VERSION = "0.0.26";
     </script>
 
@@ -194,7 +194,7 @@
                 >Animated QAECY logo</span
               >
             </li>
-            <li class="fragment" style="opacity: 0.35">
+            <li class="fragment">
               <a
                 href="#/cue-document-viewer"
                 style="text-decoration: none; color: inherit"
@@ -205,7 +205,7 @@
                 >PDF, BIM, CAD, images, spreadsheets …</span
               >
             </li>
-            <li class="fragment" style="opacity: 0.35">
+            <li class="fragment">
               <a
                 href="#/cue-document-list"
                 style="text-decoration: none; color: inherit"
@@ -216,7 +216,7 @@
                 >Lazy document table with metadata</span
               >
             </li>
-            <li class="fragment" style="opacity: 0.35">
+            <li class="fragment">
               <a
                 href="#/cue-entity-list"
                 style="text-decoration: none; color: inherit"
@@ -227,7 +227,7 @@
                 >Lazy entity table</span
               >
             </li>
-            <li class="fragment" style="opacity: 0.35">
+            <li class="fragment">
               <a
                 href="#/cue-entity-viewer"
                 style="text-decoration: none; color: inherit"
@@ -238,7 +238,18 @@
                 >Full entity detail — info, graph, documents, map</span
               >
             </li>
-            <li class="fragment" style="opacity: 0.35">
+            <li class="fragment">
+              <a
+                href="#/cue-project-list"
+                style="text-decoration: none; color: inherit"
+                ><code class="inline">&lt;cue-project-list&gt;</code></a
+              >
+              <span
+                style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
+                >Browsable list of all accessible Cue projects</span
+              >
+            </li>
+            <li class="fragment">
               <code class="inline">&lt;cue-id-builder&gt;</code>
               <span
                 style="opacity: 0.55; margin-left: 0.7rem; font-size: 0.9rem"
@@ -1476,8 +1487,97 @@
 
         </section>
 
+        <!-- ─── cue-project-list ───────────────────────────────────── -->
+        <section id="cue-project-list">
+
+          <!-- Intro -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-project-list&gt;</code></h4>
+            <p style="font-size: 1.15rem; opacity: 0.65; margin-top: 0.5rem">
+              Browsable list of all Cue projects accessible to the signed-in user
+            </p>
+            <p style="font-size: 0.95rem; opacity: 0.5; margin-top: 0.8rem">
+              No <code class="inline">projectId</code> required — just sign in and projects appear automatically
+            </p>
+          </section>
+
+          <!-- API table -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-project-list&gt;</code> — API</h4>
+            <table class="attr-table" style="margin-top: 1.5rem">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>sdkState</td>
+                  <td>object</td>
+                  <td>—</td>
+                  <td><code>{ cue }</code> — set via JS property after auth. No <code>projectId</code> needed</td>
+                </tr>
+                <tr>
+                  <td>mapboxToken</td>
+                  <td>string</td>
+                  <td>—</td>
+                  <td>Mapbox access token. When provided, project location maps are shown</td>
+                </tr>
+                <tr>
+                  <td>page-size</td>
+                  <td>number</td>
+                  <td>25</td>
+                  <td>Rows per page</td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>'none' | 'default' | …</td>
+                  <td>'none'</td>
+                  <td>Card wrapper style</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Live demo -->
+          <section style="padding: 0; overflow: hidden; height: 100%;">
+            <iframe src="dist/html/components/cue-project-list.html" style="display: block; width: 100%; height: 100%; border: none;" allow="storage-access"></iframe>
+          </section>
+
+          <!-- Usage -->
+          <section>
+            <h4><code class="inline" style="font-size: 1.8rem">&lt;cue-project-list&gt;</code> — usage</h4>
+            <pre style="width: 88%; font-size: 0.73rem"><code class="html">&lt;!-- 1. Include the cue-ui loader --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@{{CUE_UI_VERSION}}/index.js"
+  type="module" data-components="cue-project-list"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Add the toolbar (handles auth — no project select needed) --&gt;
+&lt;script type="module" src="js/components/cue-sdk-toolbar.js"&gt;&lt;/script&gt;
+&lt;cue-sdk-toolbar id="tb"&gt;&lt;/cue-sdk-toolbar&gt;
+
+&lt;!-- 3. Add the project list --&gt;
+&lt;cue-project-list id="pl" page-size="25"&gt;&lt;/cue-project-list&gt;
+
+&lt;!-- 4. Wire up in JS — sdkState only, no projectId required --&gt;
+&lt;script type="module"&gt;
+  const tb = document.getElementById('tb');
+  const pl = document.getElementById('pl');
+
+  tb.addEventListener('projectchange', ({ detail: { sdkState } }) =&gt; {
+    pl.sdkState    = sdkState;          // { cue } — available right after sign-in
+    pl.mapboxToken = 'pk.your_token';   // optional: enables location maps
+  });
+&lt;/script&gt;</code></pre>
+          </section>
+
+        </section>
+
         <!-- ─── Closing ───────────────────────────────────────────── -->
         <section>
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
           <cue-logo size="l" style="margin-bottom: 1.5rem"></cue-logo>
           <p style="font-size: 1rem; opacity: 0.5">
             <a
@@ -1487,6 +1587,7 @@
               cdn.jsdelivr.net/npm/@qaecy/cue-ui
             </a>
           </p>
+          </div>
         </section>
       </div>
     </div>

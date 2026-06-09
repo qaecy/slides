@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cue-project-list demo</title>
+
+    <!-- Importmap must appear before any module scripts -->
+    <!-- @qaecy/cue-sdk version: keep in sync with CUE_SDK_VERSION in js/cue-versions.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@qaecy/cue-sdk": "https://esm.sh/@qaecy/cue-sdk@0.0.26",
+          "firebase/": "https://esm.sh/firebase@12/"
+        }
+      }
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        height: 100%;
+        color: #222;
+        font-family: "Poppins", Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        background: transparent !important;
+      }
+
+      /* Ensure the toolbar is visible before the custom element is defined */
+      cue-sdk-toolbar { display: block; flex-shrink: 0; }
+
+      #layout {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        overflow: hidden;
+        padding: 10px 14px 8px;
+      }
+
+      #project-list-mount {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: 6px;
+      }
+
+      cue-project-list {
+        display: block;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Auth toolbar — project selector hidden; cue-project-list handles project browsing -->
+    <cue-sdk-toolbar id="toolbar" hide-project-select style="flex-shrink:0;"></cue-sdk-toolbar>
+
+    <div id="layout">
+      <div id="project-list-mount"></div>
+    </div>
+
+    <!-- SDK toolbar component -->
+    <script type="module" src="../../../js/components/cue-sdk-toolbar.js"></script>
+
+    <!-- Cue UI — version driven by js/cue-versions.js -->
+    <script type="module">
+      import { CUE_UI_VERSION } from '../../../js/cue-versions.js';
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/styles.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.setAttribute('data-components', 'cue-project-list');
+      s.src = `https://cdn.jsdelivr.net/npm/@qaecy/cue-ui@${CUE_UI_VERSION}/index.js`;
+      document.head.appendChild(s);
+    </script>
+
+    <script type="module">
+      import { demoParam } from '../../../js/demo-params.js';
+      import { CUE_MAPBOX_TOKEN } from '../../../js/cue-versions.js';
+
+      const pageSize = demoParam('page-size', '25');
+      const variant  = demoParam('variant',   'none');
+
+      const toolbar = document.getElementById('toolbar');
+      const mount   = document.getElementById('project-list-mount');
+
+      let _projectList = null;
+
+      function _getOrCreateProjectList(sdkState) {
+        if (!_projectList) {
+          const el = document.createElement('cue-project-list');
+          el.setAttribute('page-size', pageSize);
+          if (variant !== 'none') el.setAttribute('variant', variant);
+          // Set properties BEFORE inserting so Angular sees them on init
+          el.sdkState    = sdkState;
+          el.mapboxToken = CUE_MAPBOX_TOKEN;
+          mount.appendChild(el);
+          _projectList = el;
+        } else {
+          _projectList.sdkState    = sdkState;
+          _projectList.mapboxToken = CUE_MAPBOX_TOKEN;
+        }
+        return _projectList;
+      }
+
+      // ── Auth change ───────────────────────────────────────────────────────
+      toolbar.addEventListener('projectchange', (e) => {
+        const { sdkState } = e.detail;
+
+        if (sdkState) {
+          _getOrCreateProjectList(sdkState);
+        } else {
+          if (_projectList) {
+            _projectList.sdkState = undefined;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

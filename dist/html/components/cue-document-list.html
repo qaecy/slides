@@ -26,7 +26,6 @@
 
       html, body {
         height: 100%;
-        background: #fff;
         color: #222;
         font-family: "Poppins", Helvetica, sans-serif;
         font-size: 14px;
@@ -37,111 +36,62 @@
       body {
         display: flex;
         flex-direction: column;
+        background: transparent !important;
       }
 
       /* Ensure the toolbar is visible before the custom element is defined */
       cue-sdk-toolbar { display: block; flex-shrink: 0; }
 
+      /* ── File type bar (demo control, not part of component) ── */
+      #filetype-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 12px;
+        background: #18181b;
+        border-top: 1px solid #3f3f46;
+        border-radius: 6px;
+        flex-shrink: 0;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        font-size: 11px;
+        color: #71717a;
+      }
+
+      #filetype-bar .sep {
+        color: #3f3f46;
+        user-select: none;
+        margin: 0 1px;
+      }
+
+      #filetype-bar select {
+        background: #27272a;
+        color: #e4e4e7;
+        border: 1px solid #3f3f46;
+        border-radius: 5px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-family: inherit;
+        cursor: pointer;
+        min-width: 160px;
+        max-width: 300px;
+        outline: none;
+      }
+      #filetype-bar select:focus    { border-color: #6366f1; }
+      #filetype-bar select:disabled { opacity: 0.4; cursor: default; }
+
       #layout {
         flex: 1;
         min-height: 0;
-        display: flex;
-        gap: 0;
-        padding: 0;
         overflow: hidden;
-      }
-
-      /* ── Demo controls sidebar ───────────────────── */
-      #demo-controls {
-        width: 160px;
-        min-width: 160px;
         display: flex;
         flex-direction: column;
-        background: #f4f4f5;
-        border-right: 1px solid #e4e4e7;
-        padding: 10px 10px 8px;
-        gap: 3px;
-        overflow-y: auto;
-      }
-
-      .controls-label {
-        font-size: 0.62rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #0d5be9;
-        padding: 0 0 4px;
-        font-family: ui-monospace, monospace;
-        border-bottom: 1px solid #e4e4e7;
-        margin-bottom: 4px;
-      }
-
-      .controls-note {
-        font-size: 0.68rem;
-        color: #999;
-        font-style: italic;
-        margin-bottom: 6px;
-        line-height: 1.4;
-      }
-
-      .suffix-btn {
-        text-align: left;
-        padding: 4px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.78rem;
-        font-family: ui-monospace, 'Cascadia Code', monospace;
-        background: rgba(0,0,0,0.05);
-        color: #444;
-        transition: background 0.1s;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-      }
-      .suffix-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
-      .suffix-btn.active { background: #0d5be9; color: #fff; }
-      .suffix-count { opacity: 0.5; margin-left: 4px; }
-
-      .section-tag {
-        font-size: 0.65rem;
-        font-weight: 600;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        color: #aaa;
-        padding: 4px 0 2px;
-        font-family: ui-monospace, monospace;
-      }
-      /* ── Suffix filter buttons ────────────────────── */
-      #suffix-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-      }
-
-      .demo-msg {
-        font-size: 0.75rem;
-        font-family: ui-monospace, monospace;
-        color: #aaa;
-        padding: 4px 0;
-      }
-
-      /* ── Component area ──────────────────────────── */
-      #component-area {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        padding: 10px 14px 8px;
+        padding-top: 8px;
       }
 
       #doc-list-mount {
         flex: 1;
         min-height: 0;
         overflow: hidden;
-        border-radius: 6px;
       }
 
       cue-document-list {
@@ -155,20 +105,17 @@
     <!-- Auth toolbar -->
     <cue-sdk-toolbar id="toolbar" style="flex-shrink:0;"></cue-sdk-toolbar>
 
-    <div id="layout">
-      <!-- Demo controls — not part of the component -->
-      <div id="demo-controls">
-        <div class="controls-label">Demo controls</div>
-        <div class="controls-note">Filter by file type. This sidebar is not part of <code>&lt;cue-document-list&gt;</code>.</div>
-        <div id="suffix-sidebar">
-          <p class="demo-msg">Sign in below</p>
-        </div>
-      </div>
+    <!-- File type filter bar — demo control, not part of cue-document-list -->
+    <div id="filetype-bar">
+      <span>File type</span>
+      <span class="sep">|</span>
+      <select id="suffix-select" disabled>
+        <option value="">— sign in —</option>
+      </select>
+    </div>
 
-      <!-- Component area -->
-      <div id="component-area">
-        <div id="doc-list-mount"></div>
-      </div>
+    <div id="layout">
+      <div id="doc-list-mount"></div>
     </div>
 
     <!-- SDK toolbar component -->
@@ -193,17 +140,18 @@
 
       const QCY = 'https://dev.qaecy.com/ont#';
 
-      // ── Query params — see js/demo-params.js ─────────────────────────────
-      const pageSize = demoParam('page-size', '25');
-      const variant  = demoParam('variant',   'none');
+      const pageSize     = demoParam('page-size', '25');
+      const variant      = demoParam('variant',   'none');
 
-      const toolbar = document.getElementById('toolbar');
-      const sidebar = document.getElementById('suffix-sidebar');
-      const mount   = document.getElementById('doc-list-mount');
+      const toolbar      = document.getElementById('toolbar');
+      const suffixSelect = document.getElementById('suffix-select');
+      const mount        = document.getElementById('doc-list-mount');
 
       let _cue       = null;
       let _projectId = null;
       let _docList   = null;
+
+      // ── Doc list element ──────────────────────────────────────────────────
 
       function _getOrCreateDocList(projectId, sdkState) {
         if (!_docList) {
@@ -211,7 +159,6 @@
           el.setAttribute('page-size', pageSize);
           el.setAttribute('prefetch-pages', '2');
           if (variant !== 'none') el.setAttribute('variant', variant);
-          // Set properties BEFORE inserting so Angular sees them on init
           el.projectId = projectId;
           el.sdkState  = sdkState;
           el.uuids     = [];
@@ -226,26 +173,25 @@
       }
 
       // ── Auth / project change ─────────────────────────────────────────────
+
       toolbar.addEventListener('projectchange', async (e) => {
         const { projectId, sdkState } = e.detail;
         _cue       = sdkState?.cue ?? null;
         _projectId = projectId;
 
+        _resetSelect('Loading…', true);
+
         if (sdkState && projectId) {
           _getOrCreateDocList(projectId, sdkState);
-          _renderSidebar('loading');
           _fetchSuffixes();
         } else {
-          if (_docList) {
-            _docList.projectId = undefined;
-            _docList.sdkState  = undefined;
-            _docList.uuids     = [];
-          }
-          _renderSidebar(null);
+          if (_docList) { _docList.projectId = undefined; _docList.sdkState = undefined; _docList.uuids = []; }
+          _resetSelect('— sign in —', true);
         }
       });
 
-      // ── Suffix list ───────────────────────────────────────────────────────
+      // ── Suffixes ──────────────────────────────────────────────────────────
+
       async function _fetchSuffixes() {
         if (!_cue || !_projectId) return;
         const q = `PREFIX qcy: <${QCY}>
@@ -264,12 +210,21 @@ ORDER BY DESC(?docCount)`;
           const items = (data.results?.bindings ?? [])
             .map((b) => ({ suffix: b['ext']?.value ?? '', count: parseInt(b['docCount']?.value ?? '0', 10) }))
             .filter((i) => i.suffix);
-          _renderSidebar(items);
+          suffixSelect.innerHTML =
+            '<option value="">— all files —</option>' +
+            items.map((i) => `<option value="${_esc(i.suffix)}">${_esc(i.suffix)} (${i.count})</option>`).join('');
+          suffixSelect.disabled = false;
         } catch (err) {
           console.error('[cue-document-list demo] fetch suffixes:', err);
-          _renderSidebar([]);
+          _resetSelect('— no file types —', true);
         }
       }
+
+      suffixSelect.addEventListener('change', async () => {
+        const suffix = suffixSelect.value;
+        if (!suffix) { if (_docList) _docList.uuids = []; return; }
+        await _fetchByExtension(suffix);
+      });
 
       async function _fetchByExtension(suffix) {
         if (!_cue || !_projectId) return;
@@ -294,32 +249,11 @@ WHERE {
         }
       }
 
-      // ── Sidebar render ────────────────────────────────────────────────────
-      function _renderSidebar(items) {
-        if (items === null) {
-          sidebar.innerHTML = '<p class="demo-msg">Sign in below</p>';
-          return;
-        }
-        if (items === 'loading') {
-          sidebar.innerHTML = '<p class="demo-msg">Loading…</p>';
-          return;
-        }
-        if (!items.length) {
-          sidebar.innerHTML = '<p class="demo-msg">No file types found</p>';
-          return;
-        }
-        sidebar.innerHTML =
-          '<span class="section-tag">File type</span>' +
-          items.map((item) =>
-            `<button class="suffix-btn" data-suffix="${_esc(item.suffix)}">${_esc(item.suffix)}<span class="suffix-count">(${item.count})</span></button>`
-          ).join('');
-        sidebar.querySelectorAll('.suffix-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            sidebar.querySelectorAll('.suffix-btn').forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            _fetchByExtension(btn.dataset.suffix);
-          });
-        });
+      // ── Helpers ───────────────────────────────────────────────────────────
+
+      function _resetSelect(label, disabled) {
+        suffixSelect.innerHTML = `<option value="">${_esc(label)}</option>`;
+        suffixSelect.disabled  = disabled;
       }
 
       function _esc(str) {

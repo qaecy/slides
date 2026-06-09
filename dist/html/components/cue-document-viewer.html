@@ -26,7 +26,6 @@
 
       html, body {
         height: 100%;
-        background: #fff;
         color: #222;
         font-family: "Poppins", Helvetica, sans-serif;
         font-size: 14px;
@@ -34,81 +33,61 @@
         overflow: hidden;
       }
 
-      body { display: flex; flex-direction: column; }
+      body { display: flex; flex-direction: column; background: transparent !important; }
 
       /* Ensure the toolbar is visible before the custom element is defined */
       cue-sdk-toolbar { display: block; flex-shrink: 0; }
 
+      /* ── Document selector bar (demo control, not part of component) ── */
+      #doc-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 12px;
+        background: #18181b;
+        border-top: 1px solid #3f3f46;
+        border-radius: 6px;
+        flex-shrink: 0;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        font-size: 11px;
+        color: #71717a;
+      }
+
+      #doc-bar .sep {
+        color: #3f3f46;
+        user-select: none;
+        margin: 0 1px;
+      }
+
+      #doc-bar select {
+        background: #27272a;
+        color: #e4e4e7;
+        border: 1px solid #3f3f46;
+        border-radius: 5px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-family: inherit;
+        cursor: pointer;
+        min-width: 160px;
+        max-width: 300px;
+        outline: none;
+      }
+      #doc-bar select:focus    { border-color: #6366f1; }
+      #doc-bar select:disabled { opacity: 0.4; cursor: default; }
+
       #layout {
         flex: 1;
         min-height: 0;
-        display: flex;
-        gap: 0;
         overflow: hidden;
-      }
-
-      /* ── Suffix / file sidebar ───────────────────── */
-      #sidebar {
-        width: 180px;
-        min-width: 180px;
         display: flex;
         flex-direction: column;
-        background: #f4f4f5;
-        border-right: 1px solid #e4e4e7;
-        padding: 10px 10px 8px;
-        gap: 3px;
-        overflow-y: auto;
+        padding-top: 8px;
       }
 
-      .section-tag {
-        font-size: 0.62rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #0d5be9;
-        padding: 0 0 4px;
-        font-family: ui-monospace, monospace;
-        border-bottom: 1px solid #e4e4e7;
-        margin-bottom: 4px;
-      }
-      .section-tag + .section-tag { margin-top: 8px; border-bottom: none; }
-
-      .list-btn {
-        text-align: left;
-        padding: 4px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.78rem;
-        font-family: ui-monospace, 'Cascadia Code', monospace;
-        background: rgba(0,0,0,0.05);
-        color: #444;
-        transition: background 0.1s;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-      }
-      .list-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
-      .list-btn.active { background: #0d5be9; color: #fff; }
-
-      .demo-msg {
-        font-size: 0.75rem;
-        font-family: ui-monospace, monospace;
-        color: #aaa;
-        padding: 4px 0;
-      }
-
-      /* ── Viewer area ─────────────────────────────── */
       #viewer-area {
         flex: 1;
-        min-width: 0;
+        min-height: 0;
         overflow: hidden;
-      }
-
-      #viewer-mount {
-        width: 100%;
-        height: 100%;
       }
 
       cue-document-viewer {
@@ -123,18 +102,23 @@
     <!-- Auth toolbar -->
     <cue-sdk-toolbar id="toolbar"></cue-sdk-toolbar>
 
-    <div id="layout">
-      <!-- Suffix / file sidebar — not part of the component -->
-      <div id="sidebar">
-        <div id="sidebar-content">
-          <p class="demo-msg">Sign in above</p>
-        </div>
-      </div>
+    <!-- Document selector bar — demo control, not part of cue-document-viewer -->
+    <div id="doc-bar">
+      <span>File type</span>
+      <span class="sep">|</span>
+      <select id="suffix-select" disabled>
+        <option value="">— sign in —</option>
+      </select>
+      <span class="sep">|</span>
+      <span>File</span>
+      <span class="sep">|</span>
+      <select id="file-select" disabled>
+        <option value="">— select file type —</option>
+      </select>
+    </div>
 
-      <!-- Component area -->
-      <div id="viewer-area">
-        <div id="viewer-mount"></div>
-      </div>
+    <div id="layout">
+      <div id="viewer-area"></div>
     </div>
 
     <!-- SDK toolbar component -->
@@ -160,55 +144,54 @@
       const QCY     = 'https://dev.qaecy.com/ont#';
       const variant = demoParam('variant', 'none');
 
-      const toolbar        = document.getElementById('toolbar');
-      const sidebarContent = document.getElementById('sidebar-content');
-      const mount          = document.getElementById('viewer-mount');
+      const toolbar      = document.getElementById('toolbar');
+      const suffixSelect = document.getElementById('suffix-select');
+      const fileSelect   = document.getElementById('file-select');
+      const viewerArea   = document.getElementById('viewer-area');
 
-      let _cue             = null;
-      let _projectId       = null;
-      let _viewer          = null;
-      let _selectedSuffix  = null;
-      let _suffixes        = [];   // kept at module scope so counts survive re-renders
+      let _cue       = null;
+      let _projectId = null;
+      let _viewer    = null;
 
-      // ── Viewer ──────────────────────────────────────────────────────────────
+      // ── Viewer element ────────────────────────────────────────────────────
 
-      function _getOrCreateViewer(cue, projectId) {
+      async function _getOrCreateViewer(cue, projectId) {
         if (_viewer) {
           _viewer.cue       = cue;
           _viewer.projectId = projectId;
           _viewer.uuid      = undefined;
           return;
         }
-        customElements.whenDefined('cue-document-viewer').then(() => {
-          const el = document.createElement('cue-document-viewer');
-          if (variant !== 'none') el.variant = variant;
-          el.cue             = cue;
-          el.projectId       = projectId;
-          el.showDocumentInfo = true;
-          mount.appendChild(el);
-          _viewer = el;
-        });
+        await customElements.whenDefined('cue-document-viewer');
+        const el = document.createElement('cue-document-viewer');
+        if (variant !== 'none') el.variant = variant;
+        el.cue             = cue;
+        el.projectId       = projectId;
+        el.showDocumentInfo = true;
+        viewerArea.appendChild(el);
+        _viewer = el;
       }
 
-      // ── Auth / project change ───────────────────────────────────────────────
+      // ── Auth / project change ─────────────────────────────────────────────
 
       toolbar.addEventListener('projectchange', async (e) => {
         const { projectId, sdkState } = e.detail;
-        _cue            = sdkState?.cue ?? null;
-        _projectId      = projectId;
-        _selectedSuffix = null;
+        _cue       = sdkState?.cue ?? null;
+        _projectId = projectId;
+
+        _resetSelect(suffixSelect, 'Loading…', true);
+        _resetSelect(fileSelect,   '— select file type —', true);
 
         if (sdkState && projectId) {
-          _getOrCreateViewer(_cue, projectId);
-          _renderSidebar('loading');
+          await _getOrCreateViewer(_cue, projectId);
           _fetchSuffixes();
         } else {
           if (_viewer) { _viewer.cue = undefined; _viewer.projectId = undefined; _viewer.uuid = undefined; }
-          _renderSidebar(null);
+          _resetSelect(suffixSelect, '— sign in —', true);
         }
       });
 
-      // ── Suffixes ────────────────────────────────────────────────────────────
+      // ── Suffixes ──────────────────────────────────────────────────────────
 
       async function _fetchSuffixes() {
         if (!_cue || !_projectId) return;
@@ -225,17 +208,32 @@ GROUP BY ?ext
 ORDER BY DESC(?docCount)`;
         try {
           const data = await _cue.api.sparql(q, _projectId);
-          _suffixes = (data.results?.bindings ?? [])
+          const items = (data.results?.bindings ?? [])
             .map((b) => ({ suffix: b['ext']?.value ?? '', count: parseInt(b['docCount']?.value ?? '0', 10) }))
             .filter((i) => i.suffix);
-          _renderSidebar({ suffixes: _suffixes, files: null });
+          suffixSelect.innerHTML =
+            '<option value="">— select file type —</option>' +
+            items.map((i) => `<option value="${_esc(i.suffix)}">${_esc(i.suffix)} (${i.count})</option>`).join('');
+          suffixSelect.disabled = false;
         } catch (err) {
           console.error('[cue-document-viewer demo] fetch suffixes:', err);
-          _renderSidebar({ suffixes: [], files: null });
+          _resetSelect(suffixSelect, '— no file types —', true);
         }
       }
 
-      // ── Files by suffix ─────────────────────────────────────────────────────
+      suffixSelect.addEventListener('change', async () => {
+        const suffix = suffixSelect.value;
+        _resetSelect(fileSelect, suffix ? '— loading… —' : '— select file type —', true);
+        if (!suffix) return;
+        const files = await _fetchFiles(suffix);
+        if (!files.length) { _resetSelect(fileSelect, '— none found —', true); return; }
+        fileSelect.innerHTML =
+          '<option value="">— select file —</option>' +
+          files.map((f) => `<option value="${_esc(f.uuid)}">${_esc(_shortPath(f.path || f.uuid))}</option>`).join('');
+        fileSelect.disabled = false;
+      });
+
+      // ── Files by suffix ───────────────────────────────────────────────────
 
       async function _fetchFiles(suffix) {
         if (!_cue || !_projectId) return [];
@@ -251,7 +249,7 @@ WHERE {
   BIND(REPLACE(STR(?fc), "^.*/([^/]*)$", "$1") AS ?id)
 }
 GROUP BY ?id
-LIMIT 5`;
+LIMIT 30`;
         try {
           const data = await _cue.api.sparql(q, _projectId);
           return (data.results?.bindings ?? [])
@@ -263,61 +261,16 @@ LIMIT 5`;
         }
       }
 
-      // ── Sidebar render ──────────────────────────────────────────────────────
+      fileSelect.addEventListener('change', () => {
+        const uuid = fileSelect.value;
+        if (_viewer && uuid) _viewer.uuid = uuid;
+      });
 
-      function _renderSidebar(state) {
-        if (state === null) {
-          sidebarContent.innerHTML = '<p class="demo-msg">Sign in above</p>';
-          return;
-        }
-        if (state === 'loading') {
-          sidebarContent.innerHTML = '<p class="demo-msg">Loading…</p>';
-          return;
-        }
+      // ── Helpers ───────────────────────────────────────────────────────────
 
-        const { suffixes, files } = state;
-
-        let html = '<span class="section-tag">File types</span>';
-        if (!suffixes.length) {
-          html += '<p class="demo-msg">No files</p>';
-        } else {
-          html += suffixes.map((s) =>
-            `<button class="list-btn${s.suffix === _selectedSuffix ? ' active' : ''}" data-suffix="${_esc(s.suffix)}" title="${_esc(s.suffix)}">${_esc(s.suffix)} <span style="opacity:.55">(${s.count})</span></button>`
-          ).join('');
-        }
-
-        if (files === 'loading') {
-          html += '<span class="section-tag">Files</span><p class="demo-msg">Loading…</p>';
-        } else if (Array.isArray(files)) {
-          html += '<span class="section-tag">Files</span>';
-          if (!files.length) {
-            html += '<p class="demo-msg">None found</p>';
-          } else {
-            html += files.map((f) =>
-              `<button class="list-btn" data-uuid="${_esc(f.uuid)}" title="${_esc(f.path || f.uuid)}">${_esc(_shortPath(f.path || f.uuid))}</button>`
-            ).join('');
-          }
-        }
-
-        sidebarContent.innerHTML = html;
-
-        sidebarContent.querySelectorAll('.list-btn[data-suffix]').forEach((btn) => {
-          btn.addEventListener('click', async () => {
-            if (btn.dataset.suffix === _selectedSuffix) return;
-            _selectedSuffix = btn.dataset.suffix;
-            _renderSidebar({ suffixes: _suffixes, files: 'loading' });
-            const items = await _fetchFiles(_selectedSuffix);
-            _renderSidebar({ suffixes: _suffixes, files: items });
-          });
-        });
-
-        sidebarContent.querySelectorAll('.list-btn[data-uuid]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            sidebarContent.querySelectorAll('.list-btn[data-uuid]').forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            if (_viewer) _viewer.uuid = btn.dataset.uuid;
-          });
-        });
+      function _resetSelect(sel, label, disabled) {
+        sel.innerHTML = `<option value="">${_esc(label)}</option>`;
+        sel.disabled  = disabled;
       }
 
       function _shortPath(path) {

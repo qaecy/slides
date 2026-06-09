@@ -31,6 +31,7 @@ const STYLES = /* css */ `
     box-sizing: border-box;
     background: #18181b;
     border-top: 1px solid #3f3f46;
+    border-radius: 6px;
     font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
     font-size: 12px;
     color: #a1a1aa;
@@ -39,7 +40,7 @@ const STYLES = /* css */ `
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 16px;
+    padding: 4px 12px;
     flex-wrap: nowrap;
     overflow: hidden;
     white-space: nowrap;
@@ -99,6 +100,8 @@ const STYLES = /* css */ `
 // ── Component ─────────────────────────────────────────────────────────────────
 
 class CueSdkToolbar extends HTMLElement {
+  static get observedAttributes() { return ["hide-project-select"]; }
+
   constructor() {
     super();
     this._root = this.attachShadow({ mode: "open" });
@@ -110,6 +113,14 @@ class CueSdkToolbar extends HTMLElement {
     this._unsubAuth = null;
     this._render();
     this._init();
+  }
+
+  attributeChangedCallback() {
+    this._render();
+  }
+
+  get _hideProjectSelect() {
+    return this.hasAttribute("hide-project-select");
   }
 
   disconnectedCallback() {
@@ -178,6 +189,8 @@ class CueSdkToolbar extends HTMLElement {
         this._selectedProjectId = cached;
         this._render();
         this._emit(cached);
+      } else {
+        this._emit(null);
       }
     } catch (err) {
       this._state = "error";
@@ -205,6 +218,8 @@ class CueSdkToolbar extends HTMLElement {
     if (projectId) {
       const documents = new CueProjectDocuments(cue.api, projectId);
       sdkState = { cue, documents };
+    } else if (this._state !== "signed-out") {
+      sdkState = { cue };
     }
     this.dispatchEvent(
       new CustomEvent("projectchange", {
@@ -234,19 +249,22 @@ class CueSdkToolbar extends HTMLElement {
               <span class="sep">|</span>
               <span class="status">Loading projects…</span>`;
     } else if (s === "ready") {
-      const opts = this._projects
-        .map(
-          (p) =>
-            `<option value="${this._esc(p.id)}"${p.id === this._selectedProjectId ? " selected" : ""}>${this._esc(p.name)}</option>`,
-        )
-        .join("");
-      body = `
-        <span class="user">${this._esc(this._userName)}</span>
-        <span class="sep">|</span>
+      const projectSelect = this._hideProjectSelect ? "" : (() => {
+        const opts = this._projects
+          .map(
+            (p) =>
+              `<option value="${this._esc(p.id)}"${p.id === this._selectedProjectId ? " selected" : ""}>${this._esc(p.name)}</option>`,
+          )
+          .join("");
+        return `<span class="sep">|</span>
         <select id="sel-project">
           <option value="">— select project —</option>
           ${opts}
-        </select>
+        </select>`;
+      })();
+      body = `
+        <span class="user">${this._esc(this._userName)}</span>
+        ${projectSelect}
         <span class="sep">|</span>
         <button id="btn-signout">Sign out</button>`;
     } else if (s === "error") {

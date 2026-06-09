@@ -26,7 +26,6 @@
 
       html, body {
         height: 100%;
-        background: #fff;
         color: #222;
         font-family: "Poppins", Helvetica, sans-serif;
         font-size: 14px;
@@ -34,75 +33,60 @@
         overflow: hidden;
       }
 
-      body { display: flex; flex-direction: column; }
+      body { display: flex; flex-direction: column; background: transparent !important; }
 
       /* Ensure the toolbar is visible before the custom element is defined */
       cue-sdk-toolbar { display: block; flex-shrink: 0; }
 
+      /* ── Entity selector bar (demo control, not part of component) ── */
+      #entity-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 12px;
+        background: #18181b;
+        border-top: 1px solid #3f3f46;
+        border-radius: 6px;
+        flex-shrink: 0;
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        font-size: 11px;
+        color: #71717a;
+      }
+
+      #entity-bar .sep {
+        color: #3f3f46;
+        user-select: none;
+        margin: 0 1px;
+      }
+
+      #entity-bar select {
+        background: #27272a;
+        color: #e4e4e7;
+        border: 1px solid #3f3f46;
+        border-radius: 5px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-family: inherit;
+        cursor: pointer;
+        min-width: 160px;
+        max-width: 300px;
+        outline: none;
+      }
+      #entity-bar select:focus   { border-color: #6366f1; }
+      #entity-bar select:disabled { opacity: 0.4; cursor: default; }
+
       #layout {
         flex: 1;
         min-height: 0;
-        display: flex;
-        gap: 0;
         overflow: hidden;
-      }
-
-      /* ── Category / entity sidebar ───────────────── */
-      #sidebar {
-        width: 180px;
-        min-width: 180px;
         display: flex;
         flex-direction: column;
-        background: #f4f4f5;
-        border-right: 1px solid #e4e4e7;
-        padding: 10px 10px 8px;
-        gap: 3px;
-        overflow-y: auto;
+        padding-top: 8px;
       }
 
-      .section-tag {
-        font-size: 0.62rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #0d5be9;
-        padding: 0 0 4px;
-        font-family: ui-monospace, monospace;
-        border-bottom: 1px solid #e4e4e7;
-        margin-bottom: 4px;
-      }
-      .section-tag + .section-tag { margin-top: 8px; border-bottom: none; }
-
-      .list-btn {
-        text-align: left;
-        padding: 4px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.78rem;
-        font-family: ui-monospace, 'Cascadia Code', monospace;
-        background: rgba(0,0,0,0.05);
-        color: #444;
-        transition: background 0.1s;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-      }
-      .list-btn:hover  { background: rgba(13,91,233,0.1); color: #0d5be9; }
-      .list-btn.active { background: #0d5be9; color: #fff; }
-
-      .demo-msg {
-        font-size: 0.75rem;
-        font-family: ui-monospace, monospace;
-        color: #aaa;
-        padding: 4px 0;
-      }
-
-      /* ── Viewer area ─────────────────────────────── */
       #viewer-area {
         flex: 1;
-        min-width: 0;
+        min-height: 0;
         overflow: hidden;
       }
 
@@ -118,18 +102,23 @@
     <!-- Auth toolbar -->
     <cue-sdk-toolbar id="toolbar"></cue-sdk-toolbar>
 
-    <div id="layout">
-      <!-- Category / entity sidebar — not part of the component -->
-      <div id="sidebar">
-        <div id="sidebar-content">
-          <p class="demo-msg">Sign in above</p>
-        </div>
-      </div>
+    <!-- Entity selector bar — demo control, not part of cue-entity-viewer -->
+    <div id="entity-bar">
+      <span>Category</span>
+      <span class="sep">|</span>
+      <select id="cat-select" disabled>
+        <option value="">— sign in —</option>
+      </select>
+      <span class="sep">|</span>
+      <span>Entity</span>
+      <span class="sep">|</span>
+      <select id="entity-select" disabled>
+        <option value="">— select category —</option>
+      </select>
+    </div>
 
-      <!-- Component area -->
-      <div id="viewer-area">
-        <div id="viewer-mount"></div>
-      </div>
+    <div id="layout">
+      <div id="viewer-area"></div>
     </div>
 
     <!-- SDK toolbar component -->
@@ -157,74 +146,91 @@
       const QCY     = 'https://dev.qaecy.com/ont#';
       const variant = demoParam('variant', 'none');
 
-      const toolbar       = document.getElementById('toolbar');
-      const sidebarContent = document.getElementById('sidebar-content');
-      const mount         = document.getElementById('viewer-mount');
+      const toolbar      = document.getElementById('toolbar');
+      const catSelect    = document.getElementById('cat-select');
+      const entitySelect = document.getElementById('entity-select');
+      const viewerArea   = document.getElementById('viewer-area');
 
-      let _cue            = null;
-      let _projectId      = null;
+      let _cue             = null;
+      let _projectId       = null;
       let _projectEntities = null;
-      let _viewer         = null;
-      let _selectedCatIri = null;
+      let _viewer          = null;
 
-      // ── Viewer ──────────────────────────────────────────────────────────────
+      // ── Viewer element ────────────────────────────────────────────────────
 
-      function _getOrCreateViewer(cue, projectId) {
+      async function _getOrCreateViewer(cue, projectId) {
         if (_viewer) {
           _viewer.cue       = cue;
           _viewer.projectId = projectId;
           _viewer.iri       = undefined;
-          return _viewer;
+          return;
         }
-        customElements.whenDefined('cue-entity-viewer').then(() => {
-          const el = document.createElement('cue-entity-viewer');
-          if (variant !== 'none') el.setAttribute('variant', variant);
-          // Set JS properties before inserting so Angular sees them on init
-          el.cue        = cue;
-          el.projectId  = projectId;
-          el.mapboxToken = CUE_MAPBOX_TOKEN;
-          mount.appendChild(el);
-          _viewer = el;
-        });
+        await customElements.whenDefined('cue-entity-viewer');
+        const el = document.createElement('cue-entity-viewer');
+        if (variant !== 'none') el.setAttribute('variant', variant);
+        el.cue        = cue;
+        el.projectId  = projectId;
+        el.mapboxToken = CUE_MAPBOX_TOKEN;
+        viewerArea.appendChild(el);
+        _viewer = el;
       }
 
-      // ── Auth / project change ───────────────────────────────────────────────
+      // ── Auth / project change ─────────────────────────────────────────────
 
       toolbar.addEventListener('projectchange', async (e) => {
         const { projectId, sdkState } = e.detail;
         _cue       = sdkState?.cue ?? null;
         _projectId = projectId;
-        _selectedCatIri = null;
+
+        _resetSelect(catSelect,    '— loading… —', true);
+        _resetSelect(entitySelect, '— select category —', true);
 
         if (sdkState && projectId) {
           _projectEntities = new CueProjectEntities(_cue.api, projectId);
-          _getOrCreateViewer(_cue, projectId);
-          _renderSidebar('loading-cats');
+          await _getOrCreateViewer(_cue, projectId);
           _fetchCategories();
         } else {
           _projectEntities = null;
           if (_viewer) { _viewer.cue = undefined; _viewer.projectId = undefined; _viewer.iri = undefined; }
-          _renderSidebar(null);
+          _resetSelect(catSelect, '— sign in —', true);
         }
       });
 
-      // ── Categories ──────────────────────────────────────────────────────────
+      // ── Categories ────────────────────────────────────────────────────────
 
       async function _fetchCategories() {
-        if (!_projectEntities) return;
         try {
           const all = await _projectEntities.contentCategoriesInProject(true);
-          _renderSidebar({ categories: all.slice(0, 8), entities: null });
+          const cats = all.slice(0, 30);
+          catSelect.innerHTML =
+            '<option value="">— select category —</option>' +
+            cats.map((c) => `<option value="${_esc(c.iri)}">${_esc(c.label)}</option>`).join('');
+          catSelect.disabled = false;
         } catch (err) {
           console.error('[cue-entity-viewer demo] fetch categories:', err);
-          _renderSidebar({ categories: [], entities: null });
+          _resetSelect(catSelect, '— no categories —', true);
         }
       }
 
-      // ── Entities by category ────────────────────────────────────────────────
+      catSelect.addEventListener('change', async () => {
+        const iri = catSelect.value;
+        _resetSelect(entitySelect, iri ? '— loading… —' : '— select category —', true);
+        if (!iri) return;
+        const items = await _fetchEntities(iri);
+        if (!items.length) {
+          _resetSelect(entitySelect, '— none found —', true);
+          return;
+        }
+        entitySelect.innerHTML =
+          '<option value="">— select entity —</option>' +
+          items.map((e) => `<option value="${_esc(e.iri)}">${_esc(e.label || _shortIri(e.iri))}</option>`).join('');
+        entitySelect.disabled = false;
+      });
+
+      // ── Entities by category ──────────────────────────────────────────────
 
       async function _fetchEntities(categoryIri) {
-        if (!_cue || !_projectId) return;
+        if (!_cue || !_projectId) return [];
         const q = `PREFIX qcy: <${QCY}>
 SELECT ?entity ?value
 WHERE {
@@ -232,79 +238,28 @@ WHERE {
           qcy:hasEntityCategory <${categoryIri}> ;
           qcy:value ?value .
 }
-LIMIT 8`;
+LIMIT 30`;
         try {
           const data = await _cue.api.sparql(q, _projectId);
-          const items = (data.results?.bindings ?? [])
+          return (data.results?.bindings ?? [])
             .map((b) => ({ iri: b['entity']?.value ?? '', label: b['value']?.value ?? '' }))
             .filter((e) => e.iri);
-          return items;
         } catch (err) {
           console.error('[cue-entity-viewer demo] fetch entities:', err);
           return [];
         }
       }
 
-      // ── Sidebar render ──────────────────────────────────────────────────────
+      entitySelect.addEventListener('change', () => {
+        const iri = entitySelect.value;
+        if (_viewer && iri) _viewer.iri = iri;
+      });
 
-      function _renderSidebar(state) {
-        if (state === null) {
-          sidebarContent.innerHTML = '<p class="demo-msg">Sign in above</p>';
-          return;
-        }
-        if (state === 'loading-cats') {
-          sidebarContent.innerHTML = '<p class="demo-msg">Loading…</p>';
-          return;
-        }
+      // ── Helpers ───────────────────────────────────────────────────────────
 
-        const { categories, entities } = state;
-
-        let html = '<span class="section-tag">Categories</span>';
-        if (!categories.length) {
-          html += '<p class="demo-msg">No categories</p>';
-        } else {
-          html += categories.map((c) =>
-            `<button class="list-btn${c.iri === _selectedCatIri ? ' active' : ''}" data-iri="${_esc(c.iri)}" title="${_esc(c.label)}">${_esc(c.label)}</button>`
-          ).join('');
-        }
-
-        if (entities === 'loading') {
-          html += '<span class="section-tag">Entities</span><p class="demo-msg">Loading…</p>';
-        } else if (Array.isArray(entities)) {
-          html += '<span class="section-tag">Entities</span>';
-          if (!entities.length) {
-            html += '<p class="demo-msg">None found</p>';
-          } else {
-            html += entities.map((e) =>
-              `<button class="list-btn" data-entity-iri="${_esc(e.iri)}" title="${_esc(e.label || e.iri)}">${_esc(e.label || _shortIri(e.iri))}</button>`
-            ).join('');
-          }
-        }
-
-        sidebarContent.innerHTML = html;
-
-        sidebarContent.querySelectorAll('.list-btn[data-iri]').forEach((btn) => {
-          btn.addEventListener('click', async () => {
-            if (btn.dataset.iri === _selectedCatIri) return;
-            _selectedCatIri = btn.dataset.iri;
-            // Re-render with loading state for entities
-            const cats = Array.from(sidebarContent.querySelectorAll('.list-btn[data-iri]'))
-              .map((b) => ({ iri: b.dataset.iri, label: b.textContent.trim() }));
-            _renderSidebar({ categories: cats, entities: 'loading' });
-            const items = await _fetchEntities(_selectedCatIri);
-            const cats2 = Array.from(sidebarContent.querySelectorAll('.list-btn[data-iri]'))
-              .map((b) => ({ iri: b.dataset.iri, label: b.textContent.trim() }));
-            _renderSidebar({ categories: cats2, entities: items });
-          });
-        });
-
-        sidebarContent.querySelectorAll('.list-btn[data-entity-iri]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            sidebarContent.querySelectorAll('.list-btn[data-entity-iri]').forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            if (_viewer) _viewer.iri = btn.dataset.entityIri;
-          });
-        });
+      function _resetSelect(sel, label, disabled) {
+        sel.innerHTML = `<option value="">${_esc(label)}</option>`;
+        sel.disabled  = disabled;
       }
 
       function _shortIri(iri) { return iri.split('/').pop() ?? iri; }
