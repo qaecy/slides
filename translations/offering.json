@@ -1,6 +1,7 @@
 {
   "da": {
-    "title.tagline": "Din projektviden.<br />\n            Struktureret. Forbundet. AI-klar.",
+    "title.tagline": "Agentplatformen for projektviden",
+    "title.sub": "Struktureret. Forbundet. AI-klar.",
     "problem.intro": "Store projekter genererer enorme mængder information",
     "problem.spread": "Tegninger, modeller, kontrakter, tidsplaner, korrespondance \u2014<br />\n            spredt på tværs af systemer, formater og teams",
     "problem.disconnected": "Det meste er <strong>ikke forbundet</strong> og\n            <strong>ikke søgbart</strong>",
@@ -121,7 +122,8 @@
     "fullpicture.tagline": "Fra rå dokumenter til handlingsbar projektintelligens"
   },
   "de": {
-    "title.tagline": "Ihr Projektwissen.<br />\n            Strukturiert. Vernetzt. Aufbereitet für KI.",
+    "title.tagline": "Die Agenten-Plattform für Projektwissen",
+    "title.sub": "Strukturiert. Vernetzt. Aufbereitet für KI.",
     "problem.intro": "Große Projekte erzeugen enorme Mengen an Informationen",
     "problem.spread": "Zeichnungen, Modelle, Verträge, Terminpläne, Korrespondenz \u2014<br />\n            verteilt über Systeme, Formate und Teams",
     "problem.disconnected": "Das meiste davon ist <strong>nicht vernetzt</strong> und\n            <strong>nicht abfragbar</strong>",
